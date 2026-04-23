@@ -1,0 +1,20 @@
+{
+  "name": "mem-plugins",
+  "interface": {
+    "displayName": "Memory Store Plugins"
+  },
+  "plugins": [
+    {
+      "name": "content-lead",
+      "source": {
+        "source": "local",
+        "path": "./plugins/content-lead"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

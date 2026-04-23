@@ -1,0 +1,29 @@
+{
+  "name": "content-lead",
+  "version": "0.1.0",
+  "description": "Draft LinkedIn posts from Memory Store and learn from edits.",
+  "author": {
+    "name": "Memory Store",
+    "email": "shubham@memory.store",
+    "url": "https://memory.store"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Content Lead",
+    "shortDescription": "Memory-backed LinkedIn drafts",
+    "longDescription": "Draft LinkedIn posts from Memory Store and record feedback.",
+    "developerName": "Memory Store",
+    "category": "Productivity",
+    "capabilities": [
+      "Write"
+    ],
+    "websiteURL": "https://memory.store",
+    "privacyPolicyURL": "https://memory.store",
+    "termsOfServiceURL": "https://memory.store",
+    "defaultPrompt": [
+      "Draft today's LinkedIn posts."
+    ],
+    "brandColor": "#0F766E",
+    "screenshots": []
+  }
+}
