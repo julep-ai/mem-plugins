@@ -8,6 +8,7 @@
     "url": "https://memory.store"
   },
   "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Content Lead",
     "shortDescription": "Memory-backed LinkedIn drafts",

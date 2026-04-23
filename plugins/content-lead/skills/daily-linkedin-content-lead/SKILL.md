@@ -7,7 +7,7 @@ description: "Use when creating LinkedIn drafts from Memory Store context, inclu
 
 ## Overview
 
-Write LinkedIn drafts from company memory. Start with `checkin`, use `recall` to find brand voice and story material, draft from sourced memories, then use `record` when the user gives feedback, approves, rejects, or posts a draft.
+Write LinkedIn drafts from company memory. This skill requires Memory Store MCP for product-mode runs. Start with `checkin`, use `recall` to find brand voice and story material, draft from sourced memories, then use `record` when the user gives feedback, approves, rejects, or posts a draft.
 
 ## Operating loop
 
@@ -19,7 +19,7 @@ Write LinkedIn drafts from company memory. Start with `checkin`, use `recall` to
 6. Ask for feedback, approval, rejection, or posting status.
 7. Record the editorial outcome back into Memory Store when the user gives it.
 
-If Memory Store is unavailable, say so and ask for pasted source context. Mark those drafts as ungrounded.
+If Memory Store MCP is unavailable, say so and ask for pasted source context. Mark those drafts as ungrounded and do not claim the system learned from them unless the user later records feedback.
 
 ## What to recall
 

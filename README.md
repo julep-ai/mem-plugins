@@ -6,6 +6,16 @@ The first plugin is `content-lead`. It writes LinkedIn drafts from company memor
 
 This repo is private for now.
 
+## Required MCP
+
+`content-lead` requires Memory Store MCP for normal use. The plugin declares:
+
+```text
+https://memory.store/mcp
+```
+
+Without Memory Store MCP, the agent can only draft from pasted context. It cannot recall brand memory, find company stories, or record feedback for the next run.
+
 ## Current plugin
 
 `plugins/content-lead` is a Codex plugin with one skill:
