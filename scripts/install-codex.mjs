@@ -10,7 +10,7 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, "..");
 const pluginSource = path.join(repoRoot, "plugins", pluginName);
 const home = os.homedir();
-const userPluginsDir = path.join(home, "plugins");
+const userPluginsDir = path.join(home, ".codex", "plugins");
 const userAgentsPluginsDir = path.join(home, ".agents", "plugins");
 const pluginTarget = path.join(userPluginsDir, pluginName);
 const marketplacePath = path.join(userAgentsPluginsDir, "marketplace.json");
@@ -69,7 +69,7 @@ function installMarketplaceEntry() {
     name: pluginName,
     source: {
       source: "local",
-      path: `./plugins/${pluginName}`,
+      path: `./.codex/plugins/${pluginName}`,
     },
     policy: {
       installation: "AVAILABLE",

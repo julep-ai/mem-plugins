@@ -4,9 +4,10 @@ This repo is agent-native. Treat README instructions as executable installation 
 
 ## Start here
 
-1. For Codex installation, run `node scripts/install-codex.mjs` from the repo root.
-2. If the user only wants to preview the install, run `node scripts/install-codex.mjs --dry-run`.
-3. After installation, tell the user to restart Codex and complete Memory Store MCP auth when prompted.
+1. For Codex installation from a cloned repo, prefer `codex plugin marketplace add "$(pwd)"`.
+2. If that command is unavailable, run `node scripts/install-codex.mjs` from the repo root.
+3. If the user only wants to preview the direct-file install, run `node scripts/install-codex.mjs --dry-run`.
+4. After installation, tell the user to restart Codex and complete Memory Store MCP auth when prompted.
 
 ## Product contract
 
@@ -19,6 +20,12 @@ Do not claim the system learned from a draft unless feedback was recorded throug
 Codex is the supported install target in this repo today.
 
 Claude Code, Claude cowork, and opencode should use the skill instructions as the canonical workflow until their adapters are tested and documented.
+
+## Adding plugins
+
+Use `$plugin-creator` for new Codex plugins when available. Add new plugins under `plugins/<plugin-name>/` and add one entry to `.agents/plugins/marketplace.json`.
+
+Keep a single marketplace for the repo. Do not create one marketplace per plugin.
 
 ## Editing
 

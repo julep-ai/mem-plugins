@@ -8,7 +8,15 @@ This repo is private for now.
 
 ## Install for agents
 
-If you are an LLM agent installing this repo for a user, do this from the repo root:
+If you are an LLM agent installing this repo for a user, prefer the Codex marketplace command:
+
+```bash
+codex plugin marketplace add "$(pwd)"
+```
+
+Use this when the repo is already cloned locally. It lets Codex track the repo marketplace instead of manually editing `~/.agents/plugins/marketplace.json`.
+
+If the `codex plugin marketplace` command is unavailable, use the local installer:
 
 ```bash
 node scripts/install-codex.mjs
@@ -30,14 +38,31 @@ Do not say Content Lead is fully installed until the plugin is registered and Me
 
 ## Install for humans
 
-Clone the repo:
+### Option 1: Add this marketplace with Codex
+
+Use this when you have access to `julep-ai/mem-plugins` from your GitHub account:
+
+```bash
+codex plugin marketplace add julep-ai/mem-plugins --ref main
+```
+
+Then restart Codex, open the plugin directory, select `Memory Store Plugins`, and install `Content Lead`.
+
+### Option 2: Clone the repo and add the local marketplace
+
+Use this while the repo is private or while you are editing the plugin:
 
 ```bash
 git clone https://github.com/julep-ai/mem-plugins.git
 cd mem-plugins
+codex plugin marketplace add "$(pwd)"
 ```
 
-Run the installer:
+Then restart Codex, open the plugin directory, select `Memory Store Plugins`, and install `Content Lead`.
+
+### Option 3: Local installer
+
+Use this when you want the repo to wire the personal marketplace file directly:
 
 ```bash
 node scripts/install-codex.mjs
@@ -47,11 +72,11 @@ Restart Codex after the installer finishes.
 
 ### Manual Codex install
 
-If you do not want to use the installer, symlink the plugin:
+If you do not want to use the marketplace command or installer, symlink the plugin:
 
 ```bash
-mkdir -p ~/plugins ~/.agents/plugins
-ln -sfn "$(pwd)/plugins/content-lead" ~/plugins/content-lead
+mkdir -p ~/.codex/plugins ~/.agents/plugins
+ln -sfn "$(pwd)/plugins/content-lead" ~/.codex/plugins/content-lead
 ```
 
 Create or update `~/.agents/plugins/marketplace.json`:
@@ -67,7 +92,7 @@ Create or update `~/.agents/plugins/marketplace.json`:
       "name": "content-lead",
       "source": {
         "source": "local",
-        "path": "./plugins/content-lead"
+        "path": "./.codex/plugins/content-lead"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -98,6 +123,65 @@ The user installing the plugin must have access to Memory Store MCP and must com
 Codex is supported today.
 
 Claude Code, Claude cowork, and opencode can use the skill as workflow source material, but their install adapters are not documented here yet.
+
+## Build another plugin
+
+Use one marketplace for this repo. Do not create a new marketplace per plugin.
+
+For a new Codex plugin, ask Codex to use `$plugin-creator`:
+
+```text
+Use $plugin-creator to create a repo-local plugin named <plugin-name> with skills and a marketplace entry.
+```
+
+The plugin should live at:
+
+```text
+plugins/<plugin-name>/
+```
+
+Required structure:
+
+```text
+plugins/<plugin-name>/
+  .codex-plugin/plugin.json
+  skills/
+```
+
+If the plugin needs Memory Store, add:
+
+```text
+plugins/<plugin-name>/.mcp.json
+```
+
+Then add one entry to:
+
+```text
+.agents/plugins/marketplace.json
+```
+
+Use this shape:
+
+```json
+{
+  "name": "<plugin-name>",
+  "source": {
+    "source": "local",
+    "path": "./plugins/<plugin-name>"
+  },
+  "policy": {
+    "installation": "AVAILABLE",
+    "authentication": "ON_INSTALL"
+  },
+  "category": "Productivity"
+}
+```
+
+Run Plugin Eval before committing plugin changes:
+
+```bash
+node /Users/a3fckx/.codex/plugins/cache/openai-curated/plugin-eval/f09cfd210e21e96a0031f4d247be5f2e416d23b1/scripts/plugin-eval.js analyze plugins/<plugin-name> --format markdown
+```
 
 ## Current plugin
 
