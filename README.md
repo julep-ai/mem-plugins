@@ -1,12 +1,34 @@
 # mem-plugins
 
-Installable Memory Store plugins.
+Agent-native Memory Store plugins.
 
 The first plugin is `content-lead`. It writes LinkedIn drafts from company memory: Slack threads, Granola notes, shipped work, customer conversations, prior posts, and editorial feedback.
 
 This repo is private for now.
 
-## Install
+## Install for agents
+
+If you are an LLM agent installing this repo for a user, do this from the repo root:
+
+```bash
+node scripts/install-codex.mjs
+```
+
+For a preview:
+
+```bash
+node scripts/install-codex.mjs --dry-run
+```
+
+Then tell the user:
+
+```text
+Restart Codex and complete Memory Store MCP auth when prompted.
+```
+
+Do not say Content Lead is fully installed until the plugin is registered and Memory Store MCP is available.
+
+## Install for humans
 
 Clone the repo:
 
@@ -15,7 +37,17 @@ git clone https://github.com/julep-ai/mem-plugins.git
 cd mem-plugins
 ```
 
-Install the Codex plugin for your user account:
+Run the installer:
+
+```bash
+node scripts/install-codex.mjs
+```
+
+Restart Codex after the installer finishes.
+
+### Manual Codex install
+
+If you do not want to use the installer, symlink the plugin:
 
 ```bash
 mkdir -p ~/plugins ~/.agents/plugins
@@ -60,6 +92,12 @@ https://memory.store/mcp
 Without Memory Store MCP, the agent can only draft from pasted context. It cannot recall brand memory, find company stories, or record feedback for the next run.
 
 The user installing the plugin must have access to Memory Store MCP and must complete the host's MCP auth flow when prompted.
+
+## Supported targets
+
+Codex is supported today.
+
+Claude Code, Claude cowork, and opencode can use the skill as workflow source material, but their install adapters are not documented here yet.
 
 ## Current plugin
 
