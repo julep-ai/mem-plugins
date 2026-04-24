@@ -136,6 +136,49 @@ Adapt these to the situation; the angle brackets are placeholders. Replace `<aut
 
 > Customer "`<name or memory ID>`" approved by `<who confirmed it, when>` for public mention in `<author>`'s LinkedIn posts. Scope: `<all posts | this pillar only | this specific piece>`. Future drafts may name this customer without anonymization.
 
+### Brand profile created
+
+Record when a company brand profile is bootstrapped from scratch. See [brand-bootstrap.md](brand-bootstrap.md) for the extraction flow.
+
+`content`:
+
+> Brand profile created for `<company>` via `<assets | interview | hybrid>`. Source memory IDs: `<ids or "none — pasted text only">`. Profile:
+>
+> - Company name: `<name>`
+> - One-line positioning: `<one falsifiable sentence>`
+> - ICP: `<role + company size + industry + pain>`
+> - Pillars this quarter: `<comma-separated list of 3–5>`
+> - Defensible category view: `<one line — the thing the company argues about the category>`
+> - Anti-positioning: `<one line — what the company refuses to be compared to>`
+> - Approved claims: `<list of customer names, metrics, and category claims cleared for public mention>`
+> - Taboo topics: `<list of topics off-limits for public posts>`
+>
+> Confirmed by user: yes. Profile completeness: `<full | partial>`. Missing dimensions: `<list or "none">`.
+
+### Brand pillar update
+
+Record when a pillar is added, removed, or reframed.
+
+`content`:
+
+> Brand pillar update for `<company>`: `<change — "added pillar X", "dropped pillar Y", "reframed Z as …">`. Reason: `<one line>`. Previous pillars: `<list>`. New pillars: `<list>`. Effective for future drafts starting: `<date or "immediately">`.
+
+### Approved claim added
+
+Record when a specific metric, customer name, quote, or category claim is cleared for public mention.
+
+`content`:
+
+> New approved public claim for `<company>`: "`<exact claim or wording>`". Evidence or source: `<memory ID, document, or person who confirmed>`. Scope: `<all posts | specific pillar | one-time for piece <piece_id>>`. Future drafts may use this claim without flagging for approval.
+
+### Taboo topic added
+
+Record when a topic is placed off-limits for public posts.
+
+`content`:
+
+> New taboo topic for `<company>` posts: `<topic or named entity>`. Reason: `<one line — legal, competitive, customer sensitivity, internal-only, etc.>`. Scope: `<all posts | LinkedIn only>`. Applies until: `<date or "until revoked">`.
+
 ### Voice DNA created
 
 `content`:

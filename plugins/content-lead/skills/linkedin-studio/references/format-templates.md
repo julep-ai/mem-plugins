@@ -42,7 +42,11 @@ What is the last alert you dismissed that mattered?
 
 ## 2. User insight
 
-**When:** a repeated pattern shows up across customer memories — a pain, a workaround, a question.
+User-insight posts consistently earn the highest Depth Score in this skill's test runs. Prefer this format when memory carries multiple customer signals that share a shape. Four sub-patterns, each with its own trigger.
+
+### 2a. Multi-signal insight (default — strongest pattern)
+
+**When:** three or more customer memories from different contexts share the same shape (same pain, same workaround, same ask).
 
 **Structure:**
 
@@ -56,6 +60,64 @@ What this says about [category]: [one-line category-level takeaway]
 What [company] is doing about it: [one line — shipped work, in-progress change, or stance]
 
 [CTA: ask readers in the same role for their version]
+```
+
+### 2b. Outlier insight
+
+**When:** one customer said something that cracks the category open — a framing nobody else has used, or an observation that explains what every other customer has been hinting at.
+
+**Structure:**
+
+```
+[Dramatic-moment hook: the customer's line, or the moment they said it]
+
+[Who the customer is, anonymized unless approved]
+
+[What they said, in their words or close paraphrase]
+
+Why it matters: [one or two lines — the pattern this one customer saw that everyone else was circling around]
+
+What this means for [the category / your company]: [one line]
+
+[CTA: ask readers if they have seen the same thing]
+```
+
+### 2c. Category reframe
+
+**When:** customers thought X was the problem; experience revealed the real problem was Y.
+
+**Structure:**
+
+```
+[Contrarian hook: the reframe stated directly]
+
+[Two or three lines showing the old framing — what customers asked for, what the category promised]
+
+[Two or three lines showing the reframe — what customers actually needed, observed in use]
+
+Why this matters: [one line — what changes if you buy the reframe]
+
+[CTA: ask readers which framing they are currently running on]
+```
+
+### 2d. Before-and-after insight
+
+**When:** the shape of customer asks has evolved over a measurable period — e.g. six months ago customers asked for X, now they ask for Y.
+
+**Structure:**
+
+```
+[Time-bound transformation hook]
+
+Six months ago: [what customers were asking for, one or two concrete examples]
+
+Now: [what customers are asking for, one or two concrete examples]
+
+What changed: [one line — the underlying shift that explains the ask evolution]
+
+What this means for [the category]: [one line]
+
+[CTA: ask readers what their customers were asking six months ago vs. now]
 ```
 
 **Filled example:**

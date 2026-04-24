@@ -22,21 +22,23 @@ Do not trigger for generic copywriting, non-LinkedIn channels, or drafts that do
 
 ## Operating loop
 
-1. **Checkin.** Call Memory Store `checkin` with the author (whose voice is used), the pillar or topic intent, and the date range. Capture `thread_id` and pass it to every subsequent `record` call in the session.
+1. **Checkin.** Call Memory Store `checkin` with the company, the author (whose voice is used), the pillar or topic intent, and the date range. Capture `thread_id` and pass it to every subsequent `record` call in the session.
 
-2. **Recall voice; bootstrap if missing.** Pull the author's voice DNA — approved posts, signature phrases, banned words, positioning, audience, claim boundaries. See [references/recall-cues.md](references/recall-cues.md) for cues and the ranking heuristic. If recall returns no voice memories, or only thin one-dimensional signal, do not fall back to generic writing. Follow [references/voice-bootstrap.md](references/voice-bootstrap.md): gather 3–5 writing samples or run the short interview, extract a voice profile, confirm with the user, and call `record` with a `voice_dna_created` event before drafting. Then resume the loop.
+2. **Recall brand; bootstrap if missing.** Pull the company's brand profile — positioning, ICP, current pillars, defensible category view, approved claims, taboo topics. See [references/recall-cues.md](references/recall-cues.md) for brand cues. If recall returns nothing or only thin signal, follow [references/brand-bootstrap.md](references/brand-bootstrap.md): gather existing brand assets or run the short interview, extract a profile, confirm with the user, and call `record` with a `brand_profile_created` event before drafting. Voice without brand produces posts that sound like the author but could be about any company.
 
-3. **Recall sources.** Pull source material relevant to today's intent: customer conversations, shipped work, support themes, docs, prior posts, performance notes. Memory Store abstracts upstreams — do not assume any specific source tool.
+3. **Recall voice; bootstrap if missing.** Pull the author's voice DNA — approved posts, signature phrases, banned words, rhythm, positioning, claim boundaries. See [references/recall-cues.md](references/recall-cues.md) for cues and the ranking heuristic. If recall returns no voice memories, or only thin one-dimensional signal, follow [references/voice-bootstrap.md](references/voice-bootstrap.md): gather 3–5 writing samples or run the short interview, extract a voice profile, confirm with the user, and call `record` with a `voice_dna_created` event before drafting. Then resume the loop.
 
-4. **Shortlist.** Extract 5–10 candidates. Keep only ones with (a) a concrete source memory ID, (b) a named audience, (c) a reason a reader would stop scrolling. Drop anything fuzzy.
+4. **Recall sources.** Pull source material relevant to today's pillar and intent: customer conversations, shipped work, support themes, docs, prior posts, performance notes. Memory Store abstracts upstreams — do not assume any specific source tool.
 
-5. **Draft.** For each of 2–3 picked candidates, apply the craft in [references/linkedin-craft.md](references/linkedin-craft.md) and the structure in [references/format-templates.md](references/format-templates.md). Write three hook variants per draft; keep the strongest. Study [references/examples.md](references/examples.md) for shape.
+5. **Shortlist.** Extract 5–10 candidates. Keep only ones with (a) a concrete source memory ID, (b) a named audience on the ICP, (c) a fit with a current pillar or a defensible reason to add a new one, (d) a reason a reader would stop scrolling. Drop anything that fails brand checks (off-pillar, unsourced claim, taboo topic).
 
-6. **Self-check.** Validate each draft against the invariants below and the checklist at the end of [references/linkedin-craft.md](references/linkedin-craft.md). Flag unsourced claims for approval.
+6. **Draft.** For each of 2–3 picked candidates, apply the craft in [references/linkedin-craft.md](references/linkedin-craft.md) and the structure in [references/format-templates.md](references/format-templates.md). Prefer `user_insight` when the memory carries multiple customer signals that share a shape — this format consistently earns Depth Score. Write three hook variants per draft; keep the strongest. Study [references/examples.md](references/examples.md) for shape.
 
-7. **Present.** Return the draft package (see Output contract).
+7. **Self-check.** Validate each draft against the invariants below, the craft checklist in [references/linkedin-craft.md](references/linkedin-craft.md), and the brand checks in [references/brand-bootstrap.md](references/brand-bootstrap.md). Flag unsourced claims for approval.
 
-8. **Record.** When the user approves, rejects, edits, or posts, call `record` using the prose templates in [references/record-templates.md](references/record-templates.md). `record` is a quick-jot — natural-language prose, not JSON. Always pass the active `thread_id`.
+8. **Present.** Return the draft package (see Output contract).
+
+9. **Record.** When the user approves, rejects, edits, or posts, call `record` using the prose templates in [references/record-templates.md](references/record-templates.md). `record` is a quick-jot — natural-language prose, not JSON. Always pass the active `thread_id`.
 
 ## Output contract
 
@@ -62,11 +64,12 @@ Do not end the run silently if the user gave feedback and nothing was recorded.
 
 If recall does not surface the basics, ask once for:
 
+- **the company** — whose brand the post speaks for. This is not the author; it is the business the post represents. For solo creators, author and company often map to the same person but remain distinct fields.
 - **the author** — yourself if you are a solo creator, a client if you are ghostwriting, or a colleague whose account you are drafting for
-- **the target audience** — role, context, and the frustration they sit in
+- **the target audience** — role, context, and the frustration they sit in (this usually comes from the brand's ICP once brand is recalled)
 - **the date range** for source material
 
-If this is the first run and Memory Store has no voice memory for the author yet, proceed straight to the voice bootstrap flow in step 2. Do not draft without identifying an author — voice grounding fails otherwise.
+If this is the first run and Memory Store has no brand memory for the company, proceed to the brand bootstrap flow in step 2. If no voice memory exists for the author, proceed to the voice bootstrap in step 3. Do not draft without identifying both a company and an author — brand and voice grounding fail otherwise.
 
 ## Invariants
 
@@ -84,6 +87,7 @@ If this is the first run and Memory Store has no voice memory for the author yet
 - [references/format-templates.md](references/format-templates.md) — filled templates for the five content formats, plus the anonymization convention.
 - [references/examples.md](references/examples.md) — annotated good and bad drafts.
 - [references/recall-cues.md](references/recall-cues.md) — recall cue catalog, ranking heuristic, empty-recall fallback.
-- [references/voice-bootstrap.md](references/voice-bootstrap.md) — how to create a voice profile when recall returns nothing.
+- [references/brand-bootstrap.md](references/brand-bootstrap.md) — how to create a company brand profile when recall returns nothing, and the three brand checks every draft must pass.
+- [references/voice-bootstrap.md](references/voice-bootstrap.md) — how to create an author voice profile when recall returns nothing.
 - [references/record-templates.md](references/record-templates.md) — prose `record()` jot templates for every editorial outcome.
 - [references/failure-modes.md](references/failure-modes.md) — MCP down, empty recall, contradictory voice rules, claim-flag policy, missing thread_id.

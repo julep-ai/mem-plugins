@@ -6,11 +6,20 @@ Memory Store abstracts upstreams. Treat `recall` as the sole interface to compan
 
 Use narrow, concrete cues. Each recall call should aim at one thing, not five. Combine cues across two or three calls rather than stuffing one.
 
-### Voice cues (always call first)
+### Brand cues (call first — brand grounds the draft's subject and boundaries)
+
+- `<company> brand positioning one-line ICP customer profile`
+- `<company> pillars narrative themes this quarter focus`
+- `<company> defensible category view belief thesis argument`
+- `<company> anti-positioning what we are not refuse compared`
+- `<company> approved claims public metrics customer names quotes`
+- `<company> taboo topics competitors off-limits claim boundaries`
+
+### Voice cues (call after brand — voice is how the author writes within that brand)
 
 - `<author> LinkedIn voice approved posts signature phrases`
 - `<author> LinkedIn banned words banned phrases voice rules`
-- `<author> positioning target audience primary_goal`
+- `<author> rhythm sentence length em-dash parentheses fragments`
 - `<author> LinkedIn feedback editorial notes claim boundaries`
 
 ### Source-material cues (scoped to today's intent)
