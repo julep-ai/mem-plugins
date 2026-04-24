@@ -10,14 +10,18 @@ Use this when `recall` for an author's voice returns nothing, or returns only we
 
 Do not bootstrap if a rich voice profile already exists. Improve it incrementally via `voice_rule_update` and `banned_phrase_added` events instead.
 
-## Inputs needed
+## Inputs needed (in priority order)
 
-Ask the user for (A), (B), or both:
+Try these before asking the user anything:
 
-- **(A) Writing samples.** 3–5 pieces the author thinks sound like them. LinkedIn posts, internal Slack threads, blog drafts, product copy — any medium where the author was deliberate about voice. Paste text or pass memory IDs.
+- **(A0) Infer from Memory Store.** Before any interview, synthesize a voice profile from the author's existing writing already in the store: published LinkedIn posts, Slack messages, blog drafts, internal docs, email drafts, edit diffs showing before/after preferences. Use the inferential voice cues in [recall-cues.md](recall-cues.md). Present the inferred profile to the user for a one-shot confirmation. For any author with even a small footprint in Memory Store, inference is usually enough to start.
+
+Only if inference fails or covers fewer than four of the seven dimensions:
+
+- **(A) Writing samples.** Ask for 3–5 pieces the author thinks sound like them. LinkedIn posts, internal Slack threads, blog drafts, product copy — any medium where the author was deliberate about voice. Paste text or pass memory IDs.
 - **(B) Short interview.** If samples are not available, ask the five questions below and work from the answers.
 
-Samples are higher fidelity than interview answers. Prefer (A) when you can get it; combine both for the strongest profile.
+Samples are higher fidelity than interview answers. Inference from existing memory is faster than both and should be the default on any run where Memory Store has any history of the author's writing.
 
 ## Interview questions
 

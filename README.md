@@ -1,8 +1,10 @@
 # mem-plugins
 
-Public Memory Store plugins for agent-native workflows.
+Public Memory Store plugin marketplace for agent-native workflows.
 
-The first plugin is `content-lead`. It turns Memory Store insights into engagement-driving LinkedIn drafts and learns per-author voice from edits, approvals, and post performance. Sources are abstracted behind Memory Store — the skill operates on memories, not on specific upstreams.
+Add this marketplace once, then install the Memory Store plugins that are relevant for your agent. Today the marketplace exposes `content-lead`; future plugins should be added to the same marketplace instead of creating new marketplace repos.
+
+`content-lead` turns Memory Store insights into engagement-driving LinkedIn drafts and learns per-author voice from edits, approvals, and post performance. Sources are abstracted behind Memory Store — the skill operates on memories, not on specific upstreams.
 
 ## Install In Codex
 
@@ -18,15 +20,17 @@ Codex should run:
 codex plugin marketplace add julep-ai/mem-plugins --ref main
 ```
 
-Then restart Codex, open the plugin directory, select `Memory Store Plugins`, and install `Content Lead`.
+Then restart Codex, open the plugin directory, select `Memory Store Plugins`, and install the plugins you want. Today that means installing `Content Lead`.
 
-Update later with:
+To get new plugins or newer plugin versions later, refresh the marketplace:
 
 ```bash
 codex plugin marketplace upgrade mem-plugins
 ```
 
-Do not say Content Lead is fully installed until the marketplace is added, `Content Lead` is installed, and Memory Store MCP auth is complete.
+Then restart or reload Codex, open `Memory Store Plugins` again, and install or update any relevant plugins shown there.
+
+Do not say a Memory Store plugin is fully installed until the marketplace is added or upgraded, the specific plugin is installed/enabled, and Memory Store MCP auth is complete.
 
 ## Install In Claude Code
 
@@ -45,11 +49,17 @@ claude plugin install content-lead@mem-plugins
 
 Then run `/reload-plugins` or restart Claude Code. Use `/mcp` if Claude asks you to authenticate the Memory Store MCP server.
 
-Update later with:
+To get new plugins or newer plugin versions later:
 
 ```bash
 claude plugin marketplace update mem-plugins
 claude plugin update content-lead@mem-plugins
+```
+
+If more plugins are added to this marketplace, install each relevant one with:
+
+```bash
+claude plugin install <plugin-name>@mem-plugins
 ```
 
 For local testing from a cloned checkout:
@@ -76,11 +86,17 @@ Codex and Claude Code have marketplace metadata in this repo.
 
 Claude Cowork and OpenCode can use `plugins/content-lead/skills/linkedin-studio/SKILL.md` as the canonical workflow when Memory Store MCP is configured in that host. Do not call those installs verified until they are tested in those hosts.
 
-## Current Plugin
+## Available Plugins
 
-`plugins/content-lead` includes one skill:
+### `content-lead`
 
-- `linkedin-studio`: starts with Memory Store `checkin`, recalls per-author voice and source material, drafts 2–3 grounded LinkedIn posts optimized for Depth Score (saves, dwell, meaningful comments), and records structured feedback — approvals, edits, rejections, published text, and 24h/7d performance — against a content-lineage schema so voice improves per author over time. Craft rules, format templates, annotated examples, recall cues, record schemas, and failure modes live in `references/` under the skill.
+Path: `plugins/content-lead`
+
+Includes one skill:
+
+- `linkedin-studio`: starts with Memory Store `checkin`, recalls per-author voice, brand context, and source material, drafts 2–3 grounded LinkedIn posts optimized for Depth Score (saves, dwell, meaningful comments), and records feedback — approvals, edits, rejections, published text, and 24h/7d performance — so future runs improve per author. Craft rules, format templates, examples, recall cues, voice/brand bootstrap, record templates, and failure modes live in `references/` under the skill.
+
+**First-run experience.** If Memory Store has no explicit brand or voice profile for the company/author, the skill infers both from existing memories (recent posts, shipped work, customer conversations, founder threads, edit diffs) and asks the user for a one-shot confirmation. A short interview bootstrap only runs when inference cannot cover enough dimensions. For teams with even a few weeks of Memory Store history, first-run setup is usually a confirmation, not a questionnaire.
 
 Product loop:
 

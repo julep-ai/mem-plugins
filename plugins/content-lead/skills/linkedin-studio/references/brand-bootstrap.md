@@ -17,14 +17,18 @@ For a solo creator writing under their own brand, the two overlap but should sti
 
 Do not bootstrap if rich brand memory already exists. Update it incrementally via `brand_pillar_update`, `approved_claim_added`, and `taboo_topic_added` events instead.
 
-## Inputs needed
+## Inputs needed (in priority order)
 
-Ask the user for (A), (B), or both:
+Try these before asking the user anything:
 
-- **(A) Existing brand assets.** A positioning doc, a sales deck, a homepage, a recent launch post, a manifesto, or approved customer-story copy. Paste text or pass memory IDs.
+- **(A0) Infer from Memory Store.** Before any interview, synthesize the brand profile from what the store already has: recent posts, shipped features, customer conversations, founder Slack threads, homepage copy, support themes. Use the inferential brand cues in [recall-cues.md](recall-cues.md). Present the inferred profile to the user for a one-shot confirmation. For most teams with a few weeks of Memory Store usage this is enough — no interview needed.
+
+Only if inference fails or covers fewer than four of the eight dimensions:
+
+- **(A) Existing brand assets.** Ask for a positioning doc, sales deck, homepage, recent launch post, manifesto, or approved customer-story copy. Paste text or pass memory IDs.
 - **(B) Short interview.** If assets are not available or are out of date, ask the six questions below.
 
-Assets are higher fidelity than interview answers. Prefer (A) when you can get it; combine both for the strongest profile.
+Assets are higher fidelity than interview answers. Inference from existing memory is faster than both and should be the default on any run where Memory Store is not freshly empty.
 
 ## Interview questions
 
