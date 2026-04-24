@@ -4,10 +4,14 @@ This repo is agent-native. Treat README instructions as executable installation 
 
 ## Start here
 
-1. For Codex installation from a cloned repo, prefer `codex plugin marketplace add "$(pwd)"`.
-2. If that command is unavailable, run `node scripts/install-codex.mjs` from the repo root.
-3. If the user only wants to preview the direct-file install, run `node scripts/install-codex.mjs --dry-run`.
-4. After installation, tell the user to restart Codex and complete Memory Store MCP auth when prompted.
+1. For user installation, run `codex plugin marketplace add julep-ai/mem-plugins --ref main`.
+2. For local development from a cloned checkout, run `codex plugin marketplace add "$(pwd)"`.
+3. To update an existing install, run `codex plugin marketplace upgrade mem-plugins`.
+4. After installation, tell the user to restart Codex, install `Content Lead` from the plugin directory, and complete Memory Store MCP auth when prompted.
+
+Do not use a custom installer script for normal installs. Codex marketplace commands keep the source trackable and updateable.
+
+For private repo installs, GitHub access is not enough by itself. Git must have non-interactive credentials available, such as `gh auth login`, an authorized PAT, or SSH.
 
 ## Product contract
 

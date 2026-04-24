@@ -8,24 +8,10 @@ This repo is private for now.
 
 ## Install for agents
 
-If you are an LLM agent installing this repo for a user, prefer the Codex marketplace command:
+If a user asks you to install Memory Store plugins in Codex, run:
 
 ```bash
-codex plugin marketplace add "$(pwd)"
-```
-
-Use this when the repo is already cloned locally. It lets Codex track the repo marketplace instead of manually editing `~/.agents/plugins/marketplace.json`.
-
-If the `codex plugin marketplace` command is unavailable, use the local installer:
-
-```bash
-node scripts/install-codex.mjs
-```
-
-For a preview:
-
-```bash
-node scripts/install-codex.mjs --dry-run
+codex plugin marketplace add julep-ai/mem-plugins --ref main
 ```
 
 Then tell the user:
@@ -34,13 +20,31 @@ Then tell the user:
 Restart Codex and complete Memory Store MCP auth when prompted.
 ```
 
-Do not say Content Lead is fully installed until the plugin is registered and Memory Store MCP is available.
+Do not edit `~/.agents/plugins/marketplace.json` by hand unless the Codex marketplace command is unavailable.
+
+For local development from a cloned checkout, run:
+
+```bash
+codex plugin marketplace add "$(pwd)"
+```
+
+To refresh a configured marketplace:
+
+```bash
+codex plugin marketplace upgrade mem-plugins
+```
+
+Do not say Content Lead is fully installed until the marketplace is added, `Content Lead` is installed from the plugin directory, and Memory Store MCP is available.
 
 ## Install for humans
 
-### Option 1: Add this marketplace with Codex
+Ask Codex:
 
-Use this when you have access to `julep-ai/mem-plugins` from your GitHub account:
+```text
+Install Memory Store Plugins from julep-ai/mem-plugins.
+```
+
+Codex should add the marketplace:
 
 ```bash
 codex plugin marketplace add julep-ai/mem-plugins --ref main
@@ -48,63 +52,21 @@ codex plugin marketplace add julep-ai/mem-plugins --ref main
 
 Then restart Codex, open the plugin directory, select `Memory Store Plugins`, and install `Content Lead`.
 
-### Option 2: Clone the repo and add the local marketplace
+This marketplace is updateable. To pull the latest plugin definitions later:
 
-Use this while the repo is private or while you are editing the plugin:
+```bash
+codex plugin marketplace upgrade mem-plugins
+```
+
+Because this repo is private right now, your GitHub account must have access to `julep-ai/mem-plugins`, and Git must be able to clone private GitHub repos without an interactive password prompt. If the command cannot read GitHub credentials, run `gh auth login` or use your normal SSH/PAT setup first.
+
+For local development, clone the repo and add the checkout as the marketplace:
 
 ```bash
 git clone https://github.com/julep-ai/mem-plugins.git
 cd mem-plugins
 codex plugin marketplace add "$(pwd)"
 ```
-
-Then restart Codex, open the plugin directory, select `Memory Store Plugins`, and install `Content Lead`.
-
-### Option 3: Local installer
-
-Use this when you want the repo to wire the personal marketplace file directly:
-
-```bash
-node scripts/install-codex.mjs
-```
-
-Restart Codex after the installer finishes.
-
-### Manual Codex install
-
-If you do not want to use the marketplace command or installer, symlink the plugin:
-
-```bash
-mkdir -p ~/.codex/plugins ~/.agents/plugins
-ln -sfn "$(pwd)/plugins/content-lead" ~/.codex/plugins/content-lead
-```
-
-Create or update `~/.agents/plugins/marketplace.json`:
-
-```json
-{
-  "name": "local",
-  "interface": {
-    "displayName": "Local Plugins"
-  },
-  "plugins": [
-    {
-      "name": "content-lead",
-      "source": {
-        "source": "local",
-        "path": "./.codex/plugins/content-lead"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Productivity"
-    }
-  ]
-}
-```
-
-Restart Codex after changing the marketplace file.
 
 ## Required MCP
 
@@ -181,6 +143,12 @@ Run Plugin Eval before committing plugin changes:
 
 ```bash
 node /Users/a3fckx/.codex/plugins/cache/openai-curated/plugin-eval/f09cfd210e21e96a0031f4d247be5f2e416d23b1/scripts/plugin-eval.js analyze plugins/<plugin-name> --format markdown
+```
+
+After the change is merged, users update with:
+
+```bash
+codex plugin marketplace upgrade mem-plugins
 ```
 
 ## Current plugin
