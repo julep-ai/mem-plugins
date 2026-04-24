@@ -98,7 +98,7 @@ Signals a minority position, primes the reader to evaluate the argument. Works w
 
 - Prefer specific questions that invite a story ("What changed for you between week 2 and week 6?") over open prompts ("Thoughts?").
 - One CTA per post. Do not stack "save this, follow me, and comment below".
-- If the primary_goal of the post is saves (see [record-schemas.md](record-schemas.md)), consider closing with a line that names the save ("Save this for your next onboarding review").
+- If the post's primary goal is saves, consider closing with a line that names the save ("Save this for your next onboarding review"). See [record-templates.md](record-templates.md) for how to record the goal so future runs can judge what worked.
 
 ## Formatting conventions
 
@@ -111,7 +111,7 @@ Signals a minority position, primes the reader to evaluate the argument. Works w
 
 Five formats that perform consistently. Filled templates for each are in [format-templates.md](format-templates.md).
 
-- **Customer story** — problem → old workflow → Memory Store moment → result → lesson.
+- **Customer story** — problem → old workflow → turning point → result → lesson.
 - **User insight** — pattern from calls or conversations → what it says about the category → what the company learned.
 - **Shipped work** — what shipped → why it exists → who asked for it → what changes for users.
 - **Founder POV** — belief → observed evidence → practical implication.

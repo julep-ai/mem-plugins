@@ -15,9 +15,9 @@ Every template ends with the same anonymization convention for customer referenc
 
 [One-line setup: who the customer is, anonymized if needed]
 
-Before: [old workflow, what hurt about it]
-Turning point: [the moment something changed — a conversation, a shipped feature, a new process]
-After: [new state, ideally with a specific outcome]
+Before: [the old workflow or state, and what hurt about it]
+Turning point: [the specific moment something changed — a conversation, a shipped feature, a new process, a decision]
+After: [the new state, ideally with a specific outcome]
 
 The lesson: [one sentence; why this matters beyond the customer]
 
@@ -32,7 +32,7 @@ The lesson: [one sentence; why this matters beyond the customer]
 That was the subject line at 2:13 AM on a Tuesday.
 
 Before: a B2B infra team was piping errors into three dashboards and still missing the ones that mattered.
-Turning point: they started recording every false-positive back into one memory — what fired, why, who dismissed it.
+Turning point: they started logging every false-positive in one shared place — what fired, why, who dismissed it.
 After: their on-call noise dropped 63% in eight weeks. No new tool. One feedback loop.
 
 The lesson: the signal you need is already in your team's dismissals. You just have to write it down.
@@ -100,22 +100,22 @@ What we are watching next: [one line — the next question this opens]
 **Filled example:**
 
 ```
-We shipped memory-scoped access control this week. A customer onboarded their sales team in 47 minutes after three weeks of waiting.
+We shipped team-capacity views this week. A 40-person agency onboarded their project managers in 35 minutes after three weeks of workarounds.
 
-What shipped: per-department memory scopes with role-based access.
+What shipped: one page that shows who has bandwidth this week, next week, and the week after — color-coded by booked vs. available.
 
-Why it exists: teams were either over-sharing every memory or hiding everything and losing the value.
+Why it exists: PMs were rebuilding this in a spreadsheet every Monday morning. The data was already in our system; the view was not.
 
-Who asked for it: a YC-backed team where Sales and Engineering needed the same memory store but could not legally see each other's customer notes.
+Who asked for it: a services agency where the PMs were flagging the gap weekly and the founder had stopped waiting for us to notice.
 
 What changes for you:
-- Memories can belong to a department, not just a person.
-- Access is role-first; onboarding is one config.
-- Cross-department recall is explicit, not accidental.
+- One screen answers the Monday-morning question — no spreadsheet rebuild.
+- Capacity is tied to booked work, not self-reported status.
+- Managers see the same view as ICs, so handoffs stop needing a meeting.
 
-What we are watching next: whether this pushes teams toward department-specific agents instead of one global one.
+What we are watching next: whether this pushes agencies toward holding more bench capacity on purpose, now that they can see it.
 
-If you have a team memory store, how are you handling cross-department access today?
+If you are running a services team, how are you forecasting capacity this week?
 ```
 
 ## 4. Founder POV

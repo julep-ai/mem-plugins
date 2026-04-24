@@ -24,7 +24,7 @@ Do not trigger for generic copywriting, non-LinkedIn channels, or drafts that do
 
 1. **Checkin.** Call Memory Store `checkin` with the author (whose voice is used), the pillar or topic intent, and the date range. Capture `thread_id` and pass it to every subsequent `record` call in the session.
 
-2. **Recall voice.** Pull the author's voice DNA: approved posts, signature phrases, banned words, positioning, audience, claim boundaries. See [references/recall-cues.md](references/recall-cues.md) for cues and the ranking heuristic.
+2. **Recall voice; bootstrap if missing.** Pull the author's voice DNA — approved posts, signature phrases, banned words, positioning, audience, claim boundaries. See [references/recall-cues.md](references/recall-cues.md) for cues and the ranking heuristic. If recall returns no voice memories, or only thin one-dimensional signal, do not fall back to generic writing. Follow [references/voice-bootstrap.md](references/voice-bootstrap.md): gather 3–5 writing samples or run the short interview, extract a voice profile, confirm with the user, and call `record` with a `voice_dna_created` event before drafting. Then resume the loop.
 
 3. **Recall sources.** Pull source material relevant to today's intent: customer conversations, shipped work, support themes, docs, prior posts, performance notes. Memory Store abstracts upstreams — do not assume any specific source tool.
 
@@ -36,7 +36,7 @@ Do not trigger for generic copywriting, non-LinkedIn channels, or drafts that do
 
 7. **Present.** Return the draft package (see Output contract).
 
-8. **Record.** When the user approves, rejects, edits, or posts, call `record` with the structured templates in [references/record-schemas.md](references/record-schemas.md). Always record with the active `thread_id`.
+8. **Record.** When the user approves, rejects, edits, or posts, call `record` using the prose templates in [references/record-templates.md](references/record-templates.md). `record` is a quick-jot — natural-language prose, not JSON. Always pass the active `thread_id`.
 
 ## Output contract
 
@@ -44,7 +44,7 @@ Return in this order:
 
 1. **content read** — one short paragraph: what Memory Store suggests today and why.
 2. **story candidates** — 5–10 lines. Each line: format · angle · source (memory ID) · risk.
-3. **drafts** — 2–3 polished posts. Each draft includes: the post text ready to paste, format label, hook framework used, source memory IDs, flagged claims (if any), primary_goal (see [references/record-schemas.md](references/record-schemas.md)).
+3. **drafts** — 2–3 polished posts. Each draft includes: the post text ready to paste, format label, hook framework used, source memory IDs, flagged claims (if any), and the post's intended primary goal (saves, meaningful comments, inbound DM, profile visits, named awareness).
 4. **source notes** — memory IDs and any quoted internal context behind each draft.
 5. **feedback prompt** — one short prompt asking the user which outcome to record: approve, reject (+ why), edit, post (+ URL).
 
@@ -60,7 +60,13 @@ Do not end the run silently if the user gave feedback and nothing was recorded.
 
 ## Minimum inputs
 
-If recall does not surface the basics, ask once for: the author, the target audience, and the date range. Do not proceed without an author — voice grounding fails otherwise.
+If recall does not surface the basics, ask once for:
+
+- **the author** — yourself if you are a solo creator, a client if you are ghostwriting, or a colleague whose account you are drafting for
+- **the target audience** — role, context, and the frustration they sit in
+- **the date range** for source material
+
+If this is the first run and Memory Store has no voice memory for the author yet, proceed straight to the voice bootstrap flow in step 2. Do not draft without identifying an author — voice grounding fails otherwise.
 
 ## Invariants
 
@@ -78,5 +84,6 @@ If recall does not surface the basics, ask once for: the author, the target audi
 - [references/format-templates.md](references/format-templates.md) — filled templates for the five content formats, plus the anonymization convention.
 - [references/examples.md](references/examples.md) — annotated good and bad drafts.
 - [references/recall-cues.md](references/recall-cues.md) — recall cue catalog, ranking heuristic, empty-recall fallback.
-- [references/record-schemas.md](references/record-schemas.md) — structured `record()` templates matching the content-lineage schema.
+- [references/voice-bootstrap.md](references/voice-bootstrap.md) — how to create a voice profile when recall returns nothing.
+- [references/record-templates.md](references/record-templates.md) — prose `record()` jot templates for every editorial outcome.
 - [references/failure-modes.md](references/failure-modes.md) — MCP down, empty recall, contradictory voice rules, claim-flag policy, missing thread_id.
