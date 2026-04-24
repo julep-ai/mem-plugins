@@ -6,6 +6,49 @@ The first plugin is `content-lead`. It writes LinkedIn drafts from company memor
 
 This repo is private for now.
 
+## Install
+
+Clone the repo:
+
+```bash
+git clone https://github.com/julep-ai/mem-plugins.git
+cd mem-plugins
+```
+
+Install the Codex plugin for your user account:
+
+```bash
+mkdir -p ~/plugins ~/.agents/plugins
+ln -sfn "$(pwd)/plugins/content-lead" ~/plugins/content-lead
+```
+
+Create or update `~/.agents/plugins/marketplace.json`:
+
+```json
+{
+  "name": "local",
+  "interface": {
+    "displayName": "Local Plugins"
+  },
+  "plugins": [
+    {
+      "name": "content-lead",
+      "source": {
+        "source": "local",
+        "path": "./plugins/content-lead"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
+```
+
+Restart Codex after changing the marketplace file.
+
 ## Required MCP
 
 `content-lead` requires Memory Store MCP for normal use. The plugin declares:
@@ -15,6 +58,8 @@ https://memory.store/mcp
 ```
 
 Without Memory Store MCP, the agent can only draft from pasted context. It cannot recall brand memory, find company stories, or record feedback for the next run.
+
+The user installing the plugin must have access to Memory Store MCP and must complete the host's MCP auth flow when prompted.
 
 ## Current plugin
 
@@ -29,6 +74,16 @@ checkin -> recall -> draft -> feedback -> record -> better recall
 ```
 
 The important part is the last step. Content Lead should get better because Memory Store remembers the edits, final posts, and rejected angles.
+
+## Use
+
+Try:
+
+```text
+Draft today's LinkedIn posts from Memory Store.
+```
+
+The agent should start with `checkin`, recall brand and story context, draft sourced posts, and ask what feedback to record.
 
 ## Local evaluation
 
