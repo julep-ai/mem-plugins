@@ -1,42 +1,10 @@
 # mem-plugins
 
-Agent-native Memory Store plugins.
+Public Memory Store plugins for agent-native workflows.
 
-The first plugin is `content-lead`. It writes LinkedIn drafts from company memory: Slack threads, Granola notes, shipped work, customer conversations, prior posts, and editorial feedback.
+The first plugin is `content-lead`. It turns Memory Store insights into engagement-driving LinkedIn drafts and learns per-author voice from edits, approvals, and post performance. Sources are abstracted behind Memory Store — the skill operates on memories, not on specific upstreams.
 
-This repo is private for now.
-
-## Install for agents
-
-If a user asks you to install Memory Store plugins in Codex, run:
-
-```bash
-codex plugin marketplace add julep-ai/mem-plugins --ref main
-```
-
-Then tell the user:
-
-```text
-Restart Codex and complete Memory Store MCP auth when prompted.
-```
-
-Do not edit `~/.agents/plugins/marketplace.json` by hand unless the Codex marketplace command is unavailable.
-
-For local development from a cloned checkout, run:
-
-```bash
-codex plugin marketplace add "$(pwd)"
-```
-
-To refresh a configured marketplace:
-
-```bash
-codex plugin marketplace upgrade mem-plugins
-```
-
-Do not say Content Lead is fully installed until the marketplace is added, `Content Lead` is installed from the plugin directory, and Memory Store MCP is available.
-
-## Install for humans
+## Install In Codex
 
 Ask Codex:
 
@@ -44,7 +12,7 @@ Ask Codex:
 Install Memory Store Plugins from julep-ai/mem-plugins.
 ```
 
-Codex should add the marketplace:
+Codex should run:
 
 ```bash
 codex plugin marketplace add julep-ai/mem-plugins --ref main
@@ -52,20 +20,42 @@ codex plugin marketplace add julep-ai/mem-plugins --ref main
 
 Then restart Codex, open the plugin directory, select `Memory Store Plugins`, and install `Content Lead`.
 
-This marketplace is updateable. To pull the latest plugin definitions later:
+Update later with:
 
 ```bash
 codex plugin marketplace upgrade mem-plugins
 ```
 
-Because this repo is private right now, your GitHub account must have access to `julep-ai/mem-plugins`, and Git must be able to clone private GitHub repos without an interactive password prompt. If the command cannot read GitHub credentials, run `gh auth login` or use your normal SSH/PAT setup first.
+Do not say Content Lead is fully installed until the marketplace is added, `Content Lead` is installed, and Memory Store MCP auth is complete.
 
-For local development, clone the repo and add the checkout as the marketplace:
+## Install In Claude Code
+
+Ask Claude Code:
+
+```text
+Install the Content Lead plugin from the julep-ai/mem-plugins marketplace.
+```
+
+Claude Code should run:
 
 ```bash
-git clone https://github.com/julep-ai/mem-plugins.git
-cd mem-plugins
-codex plugin marketplace add "$(pwd)"
+claude plugin marketplace add julep-ai/mem-plugins@main
+claude plugin install content-lead@mem-plugins
+```
+
+Then run `/reload-plugins` or restart Claude Code. Use `/mcp` if Claude asks you to authenticate the Memory Store MCP server.
+
+Update later with:
+
+```bash
+claude plugin marketplace update mem-plugins
+claude plugin update content-lead@mem-plugins
+```
+
+For local testing from a cloned checkout:
+
+```bash
+claude --plugin-dir ./plugins/content-lead
 ```
 
 ## Required MCP
@@ -76,17 +66,35 @@ codex plugin marketplace add "$(pwd)"
 https://memory.store/mcp
 ```
 
+The MCP server provides the required `checkin`, `recall`, `record`, and `report-issue` operations. Tool names may be namespaced by the host, but those operations must be available.
+
 Without Memory Store MCP, the agent can only draft from pasted context. It cannot recall brand memory, find company stories, or record feedback for the next run.
 
-The user installing the plugin must have access to Memory Store MCP and must complete the host's MCP auth flow when prompted.
+## Supported Targets
 
-## Supported targets
+Codex and Claude Code have marketplace metadata in this repo.
 
-Codex is supported today.
+Claude Cowork and OpenCode can use `plugins/content-lead/skills/linkedin-studio/SKILL.md` as the canonical workflow when Memory Store MCP is configured in that host. Do not call those installs verified until they are tested in those hosts.
 
-Claude Code, Claude cowork, and opencode can use the skill as workflow source material, but their install adapters are not documented here yet.
+## Current Plugin
 
-## Build another plugin
+`plugins/content-lead` includes one skill:
+
+- `linkedin-studio`: starts with Memory Store `checkin`, recalls per-author voice and source material, drafts 2–3 grounded LinkedIn posts optimized for Depth Score (saves, dwell, meaningful comments), and records structured feedback — approvals, edits, rejections, published text, and 24h/7d performance — against a content-lineage schema so voice improves per author over time. Craft rules, format templates, annotated examples, recall cues, record schemas, and failure modes live in `references/` under the skill.
+
+Product loop:
+
+```text
+checkin -> recall -> draft -> feedback -> record -> better recall
+```
+
+Try:
+
+```text
+Draft today's LinkedIn posts from Memory Store.
+```
+
+## Build Another Plugin
 
 Use one marketplace for this repo. Do not create a new marketplace per plugin.
 
@@ -122,69 +130,8 @@ Then add one entry to:
 .agents/plugins/marketplace.json
 ```
 
-Use this shape:
-
-```json
-{
-  "name": "<plugin-name>",
-  "source": {
-    "source": "local",
-    "path": "./plugins/<plugin-name>"
-  },
-  "policy": {
-    "installation": "AVAILABLE",
-    "authentication": "ON_INSTALL"
-  },
-  "category": "Productivity"
-}
-```
-
-Run Plugin Eval before committing plugin changes:
-
-```bash
-node /Users/a3fckx/.codex/plugins/cache/openai-curated/plugin-eval/f09cfd210e21e96a0031f4d247be5f2e416d23b1/scripts/plugin-eval.js analyze plugins/<plugin-name> --format markdown
-```
-
-After the change is merged, users update with:
-
-```bash
-codex plugin marketplace upgrade mem-plugins
-```
-
-## Current plugin
-
-`plugins/content-lead` is a Codex plugin with one skill:
-
-- `daily-linkedin-content-lead`: starts with Memory Store `checkin`, recalls brand voice and recent source material, drafts LinkedIn posts, and records feedback when the user approves, rejects, edits, or posts a draft.
-
-## Product loop
+Use Plugin Eval before committing plugin changes:
 
 ```text
-checkin -> recall -> draft -> feedback -> record -> better recall
-```
-
-The important part is the last step. Content Lead should get better because Memory Store remembers the edits, final posts, and rejected angles.
-
-## Use
-
-Try:
-
-```text
-Draft today's LinkedIn posts from Memory Store.
-```
-
-The agent should start with `checkin`, recall brand and story context, draft sourced posts, and ask what feedback to record.
-
-## Local evaluation
-
-Use Plugin Eval against the skill:
-
-```bash
-node /Users/a3fckx/.codex/plugins/cache/openai-curated/plugin-eval/f09cfd210e21e96a0031f4d247be5f2e416d23b1/scripts/plugin-eval.js analyze plugins/content-lead/skills/daily-linkedin-content-lead --format markdown
-```
-
-Use the improvement workflow when the report shows what to fix first:
-
-```bash
-node /Users/a3fckx/.codex/plugins/cache/openai-curated/plugin-eval/f09cfd210e21e96a0031f4d247be5f2e416d23b1/scripts/plugin-eval.js analyze plugins/content-lead/skills/daily-linkedin-content-lead --brief-out .plugin-eval/content-lead-brief.json
+Use $plugin-eval to evaluate plugins/<plugin-name>.
 ```

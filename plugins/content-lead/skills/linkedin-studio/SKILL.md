@@ -1,0 +1,82 @@
+---
+name: linkedin-studio
+description: "Drafts engagement-driving LinkedIn posts from company memory in Memory Store. Use when the user asks to write LinkedIn content, turn shipped work or customer insights into posts, generate post variants for a pillar piece, or capture edits, approvals, rejections, and final posted text so per-author voice improves over time. Requires the Memory Store MCP (checkin, recall, record)."
+---
+
+# LinkedIn Studio
+
+Turn Memory Store insights into LinkedIn posts that earn Depth Score — dwell time, saves, meaningful comments — not just likes.
+
+This file is the orchestrator. Craft rules, templates, examples, cue catalog, record schemas, and failure handling live under `references/`. Consult them when the run calls for them rather than inlining their content.
+
+## When to use
+
+Trigger this skill when the user asks to:
+
+- draft LinkedIn posts for today, this week, or a specific pillar piece
+- turn a shipped feature, customer conversation, or internal artifact into public content
+- generate post variants grounded in company memory (voice, customer stories, shipped work, prior posts)
+- capture edits, approvals, rejections, or posted text so the system learns
+
+Do not trigger for generic copywriting, non-LinkedIn channels, or drafts that do not need grounding in memory.
+
+## Operating loop
+
+1. **Checkin.** Call Memory Store `checkin` with the author (whose voice is used), the pillar or topic intent, and the date range. Capture `thread_id` and pass it to every subsequent `record` call in the session.
+
+2. **Recall voice.** Pull the author's voice DNA: approved posts, signature phrases, banned words, positioning, audience, claim boundaries. See [references/recall-cues.md](references/recall-cues.md) for cues and the ranking heuristic.
+
+3. **Recall sources.** Pull source material relevant to today's intent: customer conversations, shipped work, support themes, docs, prior posts, performance notes. Memory Store abstracts upstreams — do not assume any specific source tool.
+
+4. **Shortlist.** Extract 5–10 candidates. Keep only ones with (a) a concrete source memory ID, (b) a named audience, (c) a reason a reader would stop scrolling. Drop anything fuzzy.
+
+5. **Draft.** For each of 2–3 picked candidates, apply the craft in [references/linkedin-craft.md](references/linkedin-craft.md) and the structure in [references/format-templates.md](references/format-templates.md). Write three hook variants per draft; keep the strongest. Study [references/examples.md](references/examples.md) for shape.
+
+6. **Self-check.** Validate each draft against the invariants below and the checklist at the end of [references/linkedin-craft.md](references/linkedin-craft.md). Flag unsourced claims for approval.
+
+7. **Present.** Return the draft package (see Output contract).
+
+8. **Record.** When the user approves, rejects, edits, or posts, call `record` with the structured templates in [references/record-schemas.md](references/record-schemas.md). Always record with the active `thread_id`.
+
+## Output contract
+
+Return in this order:
+
+1. **content read** — one short paragraph: what Memory Store suggests today and why.
+2. **story candidates** — 5–10 lines. Each line: format · angle · source (memory ID) · risk.
+3. **drafts** — 2–3 polished posts. Each draft includes: the post text ready to paste, format label, hook framework used, source memory IDs, flagged claims (if any), primary_goal (see [references/record-schemas.md](references/record-schemas.md)).
+4. **source notes** — memory IDs and any quoted internal context behind each draft.
+5. **feedback prompt** — one short prompt asking the user which outcome to record: approve, reject (+ why), edit, post (+ URL).
+
+## Stop condition
+
+A run is done when all three are true:
+
+- drafts satisfy every invariant below and the craft checklist
+- the user has seen the draft package and the feedback prompt
+- any feedback the user gave has been recorded with the active `thread_id`
+
+Do not end the run silently if the user gave feedback and nothing was recorded.
+
+## Minimum inputs
+
+If recall does not surface the basics, ask once for: the author, the target audience, and the date range. Do not proceed without an author — voice grounding fails otherwise.
+
+## Invariants
+
+- No invented customer names, metrics, quotes, or usage claims. Every non-obvious claim traces to a memory ID or is flagged as needing approval.
+- Anonymize customers unless a memory explicitly says the name is approved for public use. Use the fallback naming convention in [references/format-templates.md](references/format-templates.md).
+- Banned phrases from voice memory are hard constraints, not style nudges.
+- First two lines must earn the scroll. No preamble, no "in today's world", no throat-clearing. Use a hook framework from [references/linkedin-craft.md](references/linkedin-craft.md).
+- One idea per line. Line breaks between beats. LinkedIn is scanned, not read.
+- Specific over abstract. If a post could be about any company, rewrite until it could only be about this one.
+- If Memory Store MCP is unavailable, follow [references/failure-modes.md](references/failure-modes.md). Do not claim the system learned from an ungrounded draft.
+
+## Reference files
+
+- [references/linkedin-craft.md](references/linkedin-craft.md) — hook frameworks, length targets, 2026 algorithm signals, line-break rules, the draft checklist.
+- [references/format-templates.md](references/format-templates.md) — filled templates for the five content formats, plus the anonymization convention.
+- [references/examples.md](references/examples.md) — annotated good and bad drafts.
+- [references/recall-cues.md](references/recall-cues.md) — recall cue catalog, ranking heuristic, empty-recall fallback.
+- [references/record-schemas.md](references/record-schemas.md) — structured `record()` templates matching the content-lineage schema.
+- [references/failure-modes.md](references/failure-modes.md) — MCP down, empty recall, contradictory voice rules, claim-flag policy, missing thread_id.

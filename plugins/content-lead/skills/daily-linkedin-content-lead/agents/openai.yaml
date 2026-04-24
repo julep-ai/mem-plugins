@@ -1,4 +1,0 @@
-interface:
-  display_name: "Daily LinkedIn Content Lead"
-  short_description: "Draft grounded LinkedIn content from company memory"
-  default_prompt: "Create today's LinkedIn draft package from Memory Store."

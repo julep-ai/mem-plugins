@@ -2,8 +2,7 @@
   "mcpServers": {
     "memory-store": {
       "type": "http",
-      "url": "https://memory.store/mcp",
-      "note": "Required for Content Lead. Provides checkin, recall, record, and report-issue so drafts can use company memory and learn from feedback."
+      "url": "https://memory.store/mcp"
     }
   }
 }

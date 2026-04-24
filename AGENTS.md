@@ -2,41 +2,56 @@
 
 This repo is agent-native. Treat README instructions as executable installation guidance, not just prose.
 
-## Start here
+## Start Here
 
-1. For user installation, run `codex plugin marketplace add julep-ai/mem-plugins --ref main`.
-2. For local development from a cloned checkout, run `codex plugin marketplace add "$(pwd)"`.
-3. To update an existing install, run `codex plugin marketplace upgrade mem-plugins`.
-4. After installation, tell the user to restart Codex, install `Content Lead` from the plugin directory, and complete Memory Store MCP auth when prompted.
+1. Codex install: `codex plugin marketplace add julep-ai/mem-plugins --ref main`.
+2. Claude Code install: `claude plugin marketplace add julep-ai/mem-plugins@main` then `claude plugin install content-lead@mem-plugins`.
+3. Codex update: `codex plugin marketplace upgrade mem-plugins`.
+4. Claude update: `claude plugin marketplace update mem-plugins` then `claude plugin update content-lead@mem-plugins`.
+5. After install, tell the user to restart or reload plugins and complete Memory Store MCP auth.
 
-Do not use a custom installer script for normal installs. Codex marketplace commands keep the source trackable and updateable.
+Do not use a custom installer script for normal installs. Marketplace commands keep the source trackable and updateable.
 
-For private repo installs, GitHub access is not enough by itself. Git must have non-interactive credentials available, such as `gh auth login`, an authorized PAT, or SSH.
-
-## Product contract
+## Product Contract
 
 `content-lead` requires Memory Store MCP for normal use. Without Memory Store MCP, the plugin can draft from pasted context, but it cannot recall company memory or record feedback.
 
+Required Memory Store operations are `checkin`, `recall`, `record`, and `report-issue`. Tool names may be namespaced by the host.
+
 Do not claim the system learned from a draft unless feedback was recorded through Memory Store.
 
-## Supported targets
+## Supported Targets
 
-Codex is the supported install target in this repo today.
+Codex and Claude Code have marketplace metadata in this repo today.
 
-Claude Code, Claude cowork, and opencode should use the skill instructions as the canonical workflow until their adapters are tested and documented.
+Claude Cowork and OpenCode should use `plugins/content-lead/skills/linkedin-studio/SKILL.md` as the canonical workflow until their adapters are tested and documented.
 
-## Adding plugins
+## Marketplace Metadata Contract
 
-Use `$plugin-creator` for new Codex plugins when available. Add new plugins under `plugins/<plugin-name>/` and add one entry to `.agents/plugins/marketplace.json`.
+Every Codex plugin must have:
+
+- `.codex-plugin/plugin.json`
+- `skills/`
+- an entry in `.agents/plugins/marketplace.json` with `policy.installation`, `policy.authentication`, and `category`
+- `.mcp.json` when the plugin needs Memory Store or another MCP server
+
+Every Claude Code plugin must have:
+
+- `.claude-plugin/plugin.json`
+- `skills/`
+- an entry in `.claude-plugin/marketplace.json`
+- `.mcp.json` when the plugin needs Memory Store or another MCP server
 
 Keep a single marketplace for the repo. Do not create one marketplace per plugin.
 
 ## Editing
 
-Keep install instructions concrete. Prefer runnable commands over descriptions.
+Use `$plugin-creator` for new Codex plugins when available. Add new plugins under `plugins/<plugin-name>/`.
 
-Before changing plugin files, run:
+Keep install instructions concrete. Prefer runnable marketplace commands over prose.
 
-```bash
-node /Users/a3fckx/.codex/plugins/cache/openai-curated/plugin-eval/f09cfd210e21e96a0031f4d247be5f2e416d23b1/scripts/plugin-eval.js analyze plugins/content-lead --format markdown
+Use `$plugin-eval` before committing plugin changes:
+
+```text
+Use $plugin-eval to evaluate plugins/content-lead.
 ```

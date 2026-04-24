@@ -1,0 +1,23 @@
+{
+  "name": "content-lead",
+  "version": "0.3.0",
+  "description": "Turn Memory Store insights into engagement-driving LinkedIn posts; learn per-author voice from edits and post performance.",
+  "author": {
+    "name": "Memory Store",
+    "email": "support@memory.store",
+    "url": "https://memory.store"
+  },
+  "homepage": "https://memory.store",
+  "repository": "https://github.com/julep-ai/mem-plugins",
+  "license": "UNLICENSED",
+  "keywords": [
+    "memory-store",
+    "linkedin",
+    "content",
+    "brand-voice",
+    "mcp",
+    "customer-stories"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}
