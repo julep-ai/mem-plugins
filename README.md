@@ -6,67 +6,108 @@ Add this marketplace once, then install the Memory Store plugins that are releva
 
 `content-lead` turns Memory Store insights into engagement-driving LinkedIn drafts and learns per-author voice from edits, approvals, and post performance. Sources are abstracted behind Memory Store — the skill operates on memories, not on specific upstreams.
 
-## Install In Codex
+## Quick Install
 
-Ask Codex:
-
-```text
-Install Memory Store Plugins from julep-ai/mem-plugins.
-```
-
-Codex should run:
+### Claude Code — one-liner
 
 ```bash
-codex plugin marketplace add julep-ai/mem-plugins --ref main
+claude plugin marketplace add julep-ai/mem-plugins@main && claude plugin install content-lead@mem-plugins
 ```
 
-Then restart Codex, open the plugin directory, select `Memory Store Plugins`, and install the plugins you want. Today that means installing `Content Lead`.
+Then `/reload-plugins` (or restart). If prompted, authenticate the Memory Store MCP server with `/mcp`.
 
-To get new plugins or newer plugin versions later, refresh the marketplace:
+### Codex CLI — one-liner
 
 ```bash
-codex plugin marketplace upgrade mem-plugins
+codex plugin marketplace add julep-ai/mem-plugins && codex plugin install content-lead@mem-plugins
 ```
 
-Then restart or reload Codex, open `Memory Store Plugins` again, and install or update any relevant plugins shown there.
+Then restart Codex. If your Codex build does not yet expose `plugin install` on the CLI, the `marketplace add` half still works — open the plugin directory, select `Memory Store Plugins`, and install `Content Lead` from the UI.
 
-Do not say a Memory Store plugin is fully installed until the marketplace is added or upgraded, the specific plugin is installed/enabled, and Memory Store MCP auth is complete.
+### Claude Cowork — UI install
 
-## Install In Claude Code
+Cowork has no CLI. Install via the plugin directory:
 
-Ask Claude Code:
+1. Click the **+** icon in the chat input bar
+2. Hover **Plugins** → click **Add plugin** (or **Manage plugins** to open the Directory directly)
 
-```text
-Install the Content Lead plugin from the julep-ai/mem-plugins marketplace.
-```
+   ![Cowork: + menu → Plugins → Add plugin](docs/images/cowork-add-plugin-menu.png)
 
-Claude Code should run:
+3. In the **Directory** modal, switch to the **Plugins** tab, then the **Personal** sub-tab
+4. Click the **+** next to **Local uploads** and add the marketplace: `julep-ai/mem-plugins`
+5. The `Content lead` plugin appears in the list — click to install
+
+   ![Cowork: Directory showing mem-plugins + sync controls](docs/images/cowork-directory-mem-plugins.png)
+
+Once added, the `mem-plugins` chip has a **⋯** menu with:
+
+- **Synced commit** — the current git SHA Cowork is running
+- **Sync automatically** — toggle this **on** so Cowork pulls new commits without asking
+- **Check for updates** — manual refresh
+- **Remove** — disconnect the marketplace
+
+Connect Memory Store MCP in Cowork's MCP settings if it is not already configured.
+
+## Keep Up To Date
+
+### Claude Code — one-liner
 
 ```bash
-claude plugin marketplace add julep-ai/mem-plugins@main
-claude plugin install content-lead@mem-plugins
+claude plugin marketplace update mem-plugins && claude plugin update content-lead@mem-plugins
 ```
 
-Then run `/reload-plugins` or restart Claude Code. Use `/mcp` if Claude asks you to authenticate the Memory Store MCP server.
-
-To get new plugins or newer plugin versions later:
+### Codex CLI — one-liner
 
 ```bash
-claude plugin marketplace update mem-plugins
-claude plugin update content-lead@mem-plugins
+codex plugin marketplace upgrade mem-plugins && codex plugin update content-lead@mem-plugins
 ```
 
-If more plugins are added to this marketplace, install each relevant one with:
+## Auto-Updates
+
+Claude Code runs background auto-updates at startup against every registered marketplace. Once you've added `julep-ai/mem-plugins@main`, new plugin versions flow in automatically — no action required from installed users.
+
+Because this marketplace is public, no token is needed. If you ever install against a private fork or mirror, export a token so the background update path can authenticate non-interactively:
 
 ```bash
-claude plugin install <plugin-name>@mem-plugins
+export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
+# or: export GH_TOKEN=...
 ```
 
-For local testing from a cloned checkout:
+Without this on a private source, interactive updates still work via your keychain or `gh auth`, but the silent startup auto-update path cannot prompt and will skip.
 
-```bash
-claude --plugin-dir ./plugins/content-lead
+**Cowork tracks commits, not versions.** Claude Cowork's Directory shows the synced commit SHA and has a **Sync automatically** toggle on each marketplace chip. When that toggle is on, Cowork pulls every new `main` commit automatically — no `version` bump required. The notes below about the `version` field only apply to Claude Code (and Codex CLI if you use the marketplace UI there).
+
+**How versioning controls auto-updates in Claude Code.** Claude Code only treats a commit as a new plugin version when the declared `version` field changes. This marketplace pins `version` on each plugin, so Claude Code clients pull updates only when that string is bumped. To ship a release:
+
+1. Bump `version` in `plugins/<plugin-name>/.claude-plugin/plugin.json`
+2. Bump the matching entry in `.claude-plugin/marketplace.json`
+3. Commit and push to `main`
+
+Background auto-updates at every client startup will pick up the bump. Manual refresh is still available with the update one-liners above.
+
+**Auto-register the marketplace in your team repo.** If you want teammates to be prompted to install `mem-plugins` when they open your project in Claude Code, drop this into that repo's `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "mem-plugins": {
+      "source": { "source": "github", "repo": "julep-ai/mem-plugins" }
+    }
+  }
+}
 ```
+
+When a teammate trusts the folder, Claude Code prompts them to add the marketplace — one less manual step.
+
+Restart or reload your host after manual updates. To run update commands on a cadence, wrap either line in a cron job, a launchd plist, or a shell alias you run at session start — both commands are idempotent and safe to re-run.
+
+## Claude Desktop (Not Supported)
+
+Claude Desktop (the claude.ai app) does not have a plugin system. It supports MCP connectors only. Installing this marketplace from Claude Desktop by asking it to "install Memory Store Plugins from julep-ai/mem-plugins" will not work — the app will try to fetch the repo and stop there.
+
+If you are on Claude Desktop, connect the Memory Store MCP server at `https://memory.store/mcp` as a connector. The agent can then drive the memory loop (`checkin`, `recall`, `record`, `report-issue`), but the `content-lead` skill files are not loaded — drafting quality will be lower than in Claude Code or Codex.
+
+For the full plugin experience, use Claude Code or Codex CLI.
 
 ## Required MCP
 
@@ -82,9 +123,15 @@ Without Memory Store MCP, the agent can only draft from pasted context. It canno
 
 ## Supported Targets
 
-Codex and Claude Code have marketplace metadata in this repo.
+| Host | Install primitive | Status |
+|------|-------------------|--------|
+| Claude Code | `claude plugin install` CLI | verified |
+| Codex CLI | `codex plugin install` CLI (or marketplace UI) | verified |
+| Claude Cowork | marketplace UI (Add a plug-in → Personal → add marketplace) | verified |
+| Claude Desktop | MCP connector only, no plugin install | not supported |
+| OpenCode | skill files via MCP configuration | not verified |
 
-Claude Cowork and OpenCode can use `plugins/content-lead/skills/linkedin-studio/SKILL.md` as the canonical workflow when Memory Store MCP is configured in that host. Do not call those installs verified until they are tested in those hosts.
+OpenCode can in principle use `plugins/content-lead/skills/linkedin-studio/SKILL.md` as the canonical workflow when Memory Store MCP is configured in that host, but the install path is not tested and not recommended yet.
 
 ## Available Plugins
 
@@ -104,10 +151,24 @@ Product loop:
 checkin -> recall -> draft -> feedback -> record -> better recall
 ```
 
-Try:
+Run it:
+
+```text
+/content-lead:linkedin-studio
+```
+
+Or in free text:
 
 ```text
 Draft today's LinkedIn posts from Memory Store.
+```
+
+## Local Testing
+
+For local testing from a cloned checkout without installing via marketplace:
+
+```bash
+claude --plugin-dir ./plugins/content-lead
 ```
 
 ## Build Another Plugin
@@ -151,3 +212,9 @@ Use Plugin Eval before committing plugin changes:
 ```text
 Use $plugin-eval to evaluate plugins/<plugin-name>.
 ```
+
+## License
+
+Apache License 2.0. See [LICENSE](LICENSE) for full text.
+
+Copyright 2026 Julep AI, Inc.
