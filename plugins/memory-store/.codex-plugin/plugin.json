@@ -1,0 +1,46 @@
+{
+  "name": "memory-store",
+  "version": "0.5.0",
+  "description": "Memory Store skill pack for agent-native company-memory workflows. Includes LinkedIn Studio, a memory-native content strategist and copywriter for turning company memory into public posts.",
+  "author": {
+    "name": "Memory Store",
+    "email": "support@memory.store",
+    "url": "https://memory.store"
+  },
+  "homepage": "https://memory.store",
+  "repository": "https://github.com/julep-ai/mem-plugins",
+  "license": "Apache-2.0",
+  "keywords": [
+    "memory-store",
+    "linkedin",
+    "content",
+    "brand-voice",
+    "mcp",
+    "customer-stories"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Memory Store",
+    "shortDescription": "Memory-native content studio",
+    "longDescription": "Use Memory Store MCP as the context layer for agent-native workflows. Today this includes LinkedIn Studio: a memory-native content strategist and copywriter that mines company memory for publishable opportunities, shapes them through brand, author voice, prior performance, and LinkedIn craft, then records editorial feedback so future runs improve.",
+    "developerName": "Memory Store",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://memory.store",
+    "privacyPolicyURL": "https://memory.store/privacy",
+    "termsOfServiceURL": "https://memory.store/terms",
+    "defaultPrompt": [
+      "Act as our LinkedIn Studio. Find memory-backed post ideas and draft them in our voice.",
+      "Mine company memory for customer language, shipped work, team learnings, and post ideas.",
+      "Record feedback on these drafts so Memory Store learns our brand voice, taste, and what performs."
+    ],
+    "brandColor": "#0F766E",
+    "composerIcon": "./assets/memory-store-icon.png",
+    "logo": "./assets/memory-store-icon.png",
+    "screenshots": []
+  }
+}

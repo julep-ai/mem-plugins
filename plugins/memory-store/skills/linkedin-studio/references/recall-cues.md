@@ -47,7 +47,7 @@ Even when no voice profile was recorded, the author's writing is usually somewhe
 
 Synthesize: signature phrases surface as repeats across samples; banned phrases surface as edit diffs where a word is removed; rhythm appears in sentence length distribution; positioning surfaces in how the author describes the product/self in their own words; claim boundaries surface in what the author refuses to speak to.
 
-### Source-material cues (scoped to today's intent)
+### Publishable opportunity cues (scoped to today's intent)
 
 Customer and user signal:
 
@@ -55,23 +55,30 @@ Customer and user signal:
 - `<company> customer objection concern pushback repeated`
 - `<company> user pattern role workflow pain anonymized`
 - `<company> sales-call quote customer exact language`
+- `<company> support theme repeated issue user mental model`
 
 Shipped work:
 
 - `<company> shipped this week launch integration fix product change`
 - `<company> roadmap commit who asked for it motivation`
 - `<company> product decision tradeoff reasoning`
+- `<company> pull request implementation note changelog launch note`
 
 Founder / category:
 
 - `<author> founder POV belief defensible view evidence`
 - `<company> category argument positioning thesis`
+- `<company> internal debate tradeoff disagreement decision`
+- `<company> manifesto fragment belief phrase worldview`
+- `<company> team learning retrospective failed attempt lesson`
 
 Performance and learning:
 
 - `<author> LinkedIn post performance saves comments dwell`
 - `<author> draft rejected reason edit final-text diff`
 - `<author> high-performing post format hook framework`
+- `<company> brand post worked previously CTA topic format`
+- `<author> LinkedIn CTA comments saves replies pattern`
 
 ## Ranking heuristic
 

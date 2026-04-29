@@ -1,14 +1,14 @@
 {
   "name": "mem-plugins",
   "interface": {
-    "displayName": "Memory Store Plugins"
+    "displayName": "Memory Store"
   },
   "plugins": [
     {
-      "name": "content-lead",
+      "name": "memory-store",
       "source": {
         "source": "local",
-        "path": "./plugins/content-lead"
+        "path": "./plugins/memory-store"
       },
       "policy": {
         "installation": "AVAILABLE",

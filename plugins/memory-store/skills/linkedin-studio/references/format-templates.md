@@ -1,6 +1,6 @@
 # Format templates
 
-Five formats that perform on LinkedIn. Each template shows the structure and a filled example. Use these as scaffolding, not fill-in-the-blank output — the post must sound like the author, not the template.
+Five formats that perform on LinkedIn. Each template shows the structure and a filled example. Use these as hidden scaffolding, not fill-in-the-blank output. The final post must sound like the author, not like a template.
 
 Every template ends with the same anonymization convention for customer references.
 
@@ -269,9 +269,11 @@ Unless a memory says a customer name is approved for public use:
 | The memory contains... | Use this format |
 | --- | --- |
 | A specific customer arc with a turning point | Customer story |
-| A repeated pattern across several customer memories | User insight |
+| A repeated pattern across customer, support, sales, usage, or team memories | User insight |
 | Something the team just shipped or updated | Shipped work |
-| A founder-held belief with evidence | Founder POV |
+| A founder-held belief, internal debate, or category argument with evidence | Founder POV |
 | A customer concern that keeps coming back | Objection |
 
 If a candidate does not cleanly fit one of the five, it probably is not sharp enough to post. Drop it.
+
+Do not expose labels like "Before", "Turning point", "The concern", or "What shipped" unless the author's own prior writing uses that explicit structure. Most final drafts should absorb the structure into natural prose.

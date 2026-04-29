@@ -1,23 +1,23 @@
 # LinkedIn craft reference
 
-Grounded in what the 2026 LinkedIn algorithm rewards and what drives the Depth Score ranking signal. Consult this file before drafting.
+Use this after a publishable memory opportunity has been selected. The job is to make the opportunity readable, specific, and worth responding to on LinkedIn. Treat platform notes as working heuristics, not as a substitute for audience fit, proof, and author credibility.
 
-## What the 2026 algorithm rewards
+## What LinkedIn tends to reward
 
-The ranking signal is **Depth Score**, not reach. Five things move it:
+Optimize for useful attention, not raw reach. Five signals usually matter:
 
-1. **Dwell time.** Posts with 61+ seconds of dwell outperform posts under 3 seconds by large margins. Long-enough-to-read-through-once is a hard floor.
-2. **Saves.** The strongest single signal. A post that gets saved gets extended distribution. Reference value beats reaction value.
-3. **Meaningful comments.** Comments over 15 words carry far more weight than short reactions. Comments are weighted roughly 15× a like.
-4. **Knowledge and advice framing.** The algorithm downranks generic engagement-bait ("agree?", "thoughts?"). Posts that teach, analyze, or take a defensible position get distributed.
-5. **Early engagement in the first 60–90 minutes.** Not a reason to spam tags; a reason to make the post good enough that real readers react fast.
+1. **Read-through.** The post has enough tension, proof, or story that the right reader keeps going.
+2. **Saves.** Reference value beats reaction value. Practical artifacts, checklists, and sharp reframes are saveable.
+3. **Meaningful comments.** Specific questions and defensible claims invite better replies than "thoughts?"
+4. **Knowledge and advice framing.** Teach, analyze, or take a position. Avoid generic engagement bait.
+5. **Early real engagement.** Not a reason to tag-spam; a reason to publish things real readers can respond to quickly.
 
-Do not optimize for likes or raw reach. Optimize for the post being saved, being read to the end, and drawing a substantive comment.
+Do not optimize for likes alone. Optimize for the post being read, saved, forwarded, argued with, or used.
 
 ## Length targets
 
 - **First-line hook:** under 200 characters. LinkedIn truncates around 210 characters with "See more" — everything before that has to carry the post.
-- **Full post:** 1,300–2,000 characters is the working range for text posts. Do not pad to hit the upper end.
+- **Full post:** let the opportunity decide. Sharp observations can be 500-900 characters; pattern posts, customer stories, and decision archaeology often need 1,100-2,000. Do not pad and do not compress away the proof.
 - **Hard platform limit:** 3,000 characters. Almost never the right choice.
 - **Line length:** 8–12 words per line maximum. One idea per line.
 
@@ -109,10 +109,10 @@ Signals a minority position, primes the reader to evaluate the argument. Works w
 
 ## Formats worth using first
 
-Five formats that perform consistently. Filled templates for each are in [format-templates.md](format-templates.md).
+Choose the format after classifying the publishable memory opportunity in [memory-opportunities.md](memory-opportunities.md). Filled templates are in [format-templates.md](format-templates.md).
 
 - **Customer story** — problem → old workflow → turning point → result → lesson.
-- **User insight** — pattern from calls or conversations → what it says about the category → what the company learned.
+- **User insight** — pattern from calls, support, sales, usage, or team memory → what it says about the category → what the company learned.
 - **Shipped work** — what shipped → why it exists → who asked for it → what changes for users.
 - **Founder POV** — belief → observed evidence → practical implication.
 - **Objection** — common concern → why it is reasonable → how the company thinks about it.
@@ -122,9 +122,11 @@ Five formats that perform consistently. Filled templates for each are in [format
 Run this against every draft before presenting. If any check fails, fix before shipping.
 
 - [ ] First two lines under 200 characters and use one of the eight hook frameworks.
-- [ ] Body is 1,300–2,000 characters.
+- [ ] Length fits the opportunity: concise when the angle is self-contained, longer when proof or narrative earns the space.
 - [ ] One idea per line; line breaks between beats.
 - [ ] Two concrete insights or takeaways, not abstractions.
+- [ ] The draft preserves the strongest memory detail: phrase, artifact, decision trail, customer moment, or repeated pattern.
+- [ ] The CTA matches the opportunity's job: save, story reply, disagreement, diagnostic, try it, DM, or no CTA.
 - [ ] Every non-obvious claim traces to a memory ID or is flagged as needing approval.
 - [ ] No banned phrases from the author's voice memory.
 - [ ] Customer names anonymized unless memory marks the name as publicly approved.

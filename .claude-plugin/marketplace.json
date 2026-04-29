@@ -12,10 +12,10 @@
   },
   "plugins": [
     {
-      "name": "content-lead",
-      "source": "./plugins/content-lead",
-      "version": "0.4.1",
-      "description": "Turn Memory Store insights into engagement-driving LinkedIn posts; learn per-author voice from edits and post performance.",
+      "name": "memory-store",
+      "source": "./plugins/memory-store",
+      "version": "0.5.0",
+      "description": "Memory Store skill pack for agent-native company-memory workflows. Includes LinkedIn Studio, a memory-native content strategist and copywriter for turning company memory into public posts.",
       "author": {
         "name": "Memory Store",
         "email": "support@memory.store",

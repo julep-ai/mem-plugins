@@ -1,4 +1,0 @@
-interface:
-  display_name: "LinkedIn Studio"
-  short_description: "Draft LinkedIn posts from Memory Store and learn from edits"
-  default_prompt: "Create today's LinkedIn draft package from Memory Store."

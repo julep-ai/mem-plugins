@@ -1,17 +1,17 @@
-# mem-plugins
+# Memory Store
 
 Public Memory Store plugin marketplace for agent-native workflows.
 
-Add this marketplace once, then install the Memory Store plugins that are relevant for your agent. Today the marketplace exposes `content-lead`; future plugins should be added to the same marketplace instead of creating new marketplace repos.
+Add this marketplace once, then install the `memory-store` plugin. The source repo remains `julep-ai/mem-plugins`, but the installed plugin surface is Memory Store.
 
-`content-lead` turns Memory Store insights into engagement-driving LinkedIn drafts and learns per-author voice from edits, approvals, and post performance. Sources are abstracted behind Memory Store — the skill operates on memories, not on specific upstreams.
+`memory-store` is the Memory Store skill pack. Today it includes `linkedin-studio`, a memory-native content strategist and copywriter that helps any company turn its existing Memory Store context into publishable LinkedIn posts, then learns from edits, approvals, and post performance. Future workflows should be added as additional skills under the same plugin when they share the Memory Store MCP surface.
 
 ## Quick Install
 
 ### Claude Code — one-liner
 
 ```bash
-claude plugin marketplace add julep-ai/mem-plugins@main && claude plugin install content-lead@mem-plugins
+claude plugin marketplace add julep-ai/mem-plugins@main && claude plugin install memory-store@mem-plugins
 ```
 
 Then `/reload-plugins` (or restart). If prompted, authenticate the Memory Store MCP server with `/mcp`.
@@ -19,10 +19,10 @@ Then `/reload-plugins` (or restart). If prompted, authenticate the Memory Store 
 ### Codex CLI — one-liner
 
 ```bash
-codex plugin marketplace add julep-ai/mem-plugins && codex plugin install content-lead@mem-plugins
+codex plugin marketplace add julep-ai/mem-plugins && codex plugin install memory-store@mem-plugins
 ```
 
-Then restart Codex. If your Codex build does not yet expose `plugin install` on the CLI, the `marketplace add` half still works — open the plugin directory, select `Memory Store Plugins`, and install `Content Lead` from the UI.
+Then restart Codex. If your Codex build does not yet expose `plugin install` on the CLI, the `marketplace add` half still works — open the plugin directory, select `Memory Store`, and install `Memory Store` from the UI.
 
 ### Claude Cowork — UI install
 
@@ -35,11 +35,11 @@ Cowork has no CLI. Install via the plugin directory:
 
 3. In the **Directory** modal, switch to the **Plugins** tab, then the **Personal** sub-tab
 4. Click the **+** next to **Local uploads** and add the marketplace: `julep-ai/mem-plugins`
-5. The `Content lead` plugin appears in the list — click to install
+5. The `Memory Store` plugin appears in the list — click to install
 
    ![Cowork: Directory showing mem-plugins + sync controls](docs/images/cowork-directory-mem-plugins.png)
 
-Once added, the `mem-plugins` chip has a **⋯** menu with:
+Once added, the marketplace chip has a **⋯** menu with:
 
 - **Synced commit** — the current git SHA Cowork is running
 - **Sync automatically** — toggle this **on** so Cowork pulls new commits without asking
@@ -53,13 +53,13 @@ Connect Memory Store MCP in Cowork's MCP settings if it is not already configure
 ### Claude Code — one-liner
 
 ```bash
-claude plugin marketplace update mem-plugins && claude plugin update content-lead@mem-plugins
+claude plugin marketplace update mem-plugins && claude plugin update memory-store@mem-plugins
 ```
 
 ### Codex CLI — one-liner
 
 ```bash
-codex plugin marketplace upgrade mem-plugins && codex plugin update content-lead@mem-plugins
+codex plugin marketplace upgrade mem-plugins && codex plugin update memory-store@mem-plugins
 ```
 
 ## Auto-Updates
@@ -103,15 +103,15 @@ Restart or reload your host after manual updates. To run update commands on a ca
 
 ## Claude Desktop (Not Supported)
 
-Claude Desktop (the claude.ai app) does not have a plugin system. It supports MCP connectors only. Installing this marketplace from Claude Desktop by asking it to "install Memory Store Plugins from julep-ai/mem-plugins" will not work — the app will try to fetch the repo and stop there.
+Claude Desktop (the claude.ai app) does not have a plugin system. It supports MCP connectors only. Installing this marketplace from Claude Desktop by asking it to "install Memory Store from julep-ai/mem-plugins" will not work — the app will try to fetch the repo and stop there.
 
-If you are on Claude Desktop, connect the Memory Store MCP server at `https://memory.store/mcp` as a connector. The agent can then drive the memory loop (`checkin`, `recall`, `record`, `report-issue`), but the `content-lead` skill files are not loaded — drafting quality will be lower than in Claude Code or Codex.
+If you are on Claude Desktop, connect the Memory Store MCP server at `https://memory.store/mcp` as a connector. The agent can then drive the memory loop (`checkin`, `recall`, `record`, `report-issue`), but the `memory-store` plugin skills are not loaded — drafting quality will be lower than in Claude Code or Codex.
 
 For the full plugin experience, use Claude Code or Codex CLI.
 
 ## Required MCP
 
-`content-lead` requires Memory Store MCP for normal use. The plugin declares:
+`memory-store` requires Memory Store MCP for normal use. The plugin declares:
 
 ```text
 https://memory.store/mcp
@@ -131,17 +131,17 @@ Without Memory Store MCP, the agent can only draft from pasted context. It canno
 | Claude Desktop | MCP connector only, no plugin install | not supported |
 | OpenCode | skill files via MCP configuration | not verified |
 
-OpenCode can in principle use `plugins/content-lead/skills/linkedin-studio/SKILL.md` as the canonical workflow when Memory Store MCP is configured in that host, but the install path is not tested and not recommended yet.
+OpenCode can in principle use `plugins/memory-store/skills/linkedin-studio/SKILL.md` as the canonical workflow when Memory Store MCP is configured in that host, but the install path is not tested and not recommended yet.
 
-## Available Plugins
+## Available Plugin
 
-### `content-lead`
+### `memory-store`
 
-Path: `plugins/content-lead`
+Path: `plugins/memory-store`
 
-Includes one skill:
+Includes these skills:
 
-- `linkedin-studio`: starts with Memory Store `checkin`, recalls per-author voice, brand context, and source material, drafts 2–3 grounded LinkedIn posts optimized for Depth Score (saves, dwell, meaningful comments), and records feedback — approvals, edits, rejections, published text, and 24h/7d performance — so future runs improve per author. Craft rules, format templates, examples, recall cues, voice/brand bootstrap, record templates, and failure modes live in `references/` under the skill.
+- `linkedin-studio`: acts as a Memory Store-powered content strategist and copywriter. It starts with Memory Store `checkin`, recalls brand voice, author voice, prior performance, and source material, identifies publishable memory opportunities from customer context, shipped work, team discussions, internal artifacts, and prior content learnings, drafts grounded LinkedIn posts with a fitting CTA, and records feedback — approvals, edits, rejections, published text, and 24h/7d performance — so future runs improve.
 
 **First-run experience.** If Memory Store has no explicit brand or voice profile for the company/author, the skill infers both from existing memories (recent posts, shipped work, customer conversations, founder threads, edit diffs) and asks the user for a one-shot confirmation. A short interview bootstrap only runs when inference cannot cover enough dimensions. For teams with even a few weeks of Memory Store history, first-run setup is usually a confirmation, not a questionnaire.
 
@@ -154,7 +154,7 @@ checkin -> recall -> draft -> feedback -> record -> better recall
 Run it:
 
 ```text
-/content-lead:linkedin-studio
+/memory-store:linkedin-studio
 ```
 
 Or in free text:
@@ -168,12 +168,20 @@ Draft today's LinkedIn posts from Memory Store.
 For local testing from a cloned checkout without installing via marketplace:
 
 ```bash
-claude --plugin-dir ./plugins/content-lead
+claude --plugin-dir ./plugins/memory-store
 ```
 
-## Build Another Plugin
+## Build Another Skill Or Plugin
 
 Use one marketplace for this repo. Do not create a new marketplace per plugin.
+
+For a new Memory Store workflow that belongs under the same product surface, add it as a skill under:
+
+```text
+plugins/memory-store/skills/<skill-name>/
+```
+
+Create a separate plugin only when it should be installed, authorized, or presented as a distinct product.
 
 For a new Codex plugin, ask Codex to use `$plugin-creator`:
 

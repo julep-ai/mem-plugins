@@ -4,17 +4,19 @@ This repo is agent-native. Treat README instructions as executable installation 
 
 ## Start Here
 
-1. Codex install: `codex plugin marketplace add julep-ai/mem-plugins --ref main`.
-2. Claude Code install: `claude plugin marketplace add julep-ai/mem-plugins@main` then `claude plugin install content-lead@mem-plugins`.
-3. Codex update: `codex plugin marketplace upgrade mem-plugins`.
-4. Claude update: `claude plugin marketplace update mem-plugins` then `claude plugin update content-lead@mem-plugins`.
+1. Codex install: `codex plugin marketplace add julep-ai/mem-plugins --ref main` then `codex plugin install memory-store@mem-plugins`.
+2. Claude Code install: `claude plugin marketplace add julep-ai/mem-plugins@main` then `claude plugin install memory-store@mem-plugins`.
+3. Codex update: `codex plugin marketplace upgrade mem-plugins` then `codex plugin update memory-store@mem-plugins`.
+4. Claude update: `claude plugin marketplace update mem-plugins` then `claude plugin update memory-store@mem-plugins`.
 5. After install, tell the user to restart or reload plugins and complete Memory Store MCP auth.
 
 Do not use a custom installer script for normal installs. Marketplace commands keep the source trackable and updateable.
 
 ## Product Contract
 
-`content-lead` requires Memory Store MCP for normal use. Without Memory Store MCP, the plugin can draft from pasted context, but it cannot recall company memory or record feedback.
+`memory-store` requires Memory Store MCP for normal use. Without Memory Store MCP, the plugin can draft from pasted context, but it cannot recall company memory or record feedback.
+
+`memory-store` is the installable Memory Store plugin surface. Add Memory Store workflows such as LinkedIn Studio or X as skills under `plugins/memory-store/skills/` unless they need a distinct installable product surface.
 
 Required Memory Store operations are `checkin`, `recall`, `record`, and `report-issue`. Tool names may be namespaced by the host.
 
@@ -24,7 +26,7 @@ Do not claim the system learned from a draft unless feedback was recorded throug
 
 Codex and Claude Code have marketplace metadata in this repo today.
 
-Claude Cowork and OpenCode should use `plugins/content-lead/skills/linkedin-studio/SKILL.md` as the canonical workflow until their adapters are tested and documented.
+Claude Cowork and OpenCode should use `plugins/memory-store/skills/linkedin-studio/SKILL.md` as the canonical workflow until their adapters are tested and documented.
 
 ## Marketplace Metadata Contract
 
@@ -53,5 +55,5 @@ Keep install instructions concrete. Prefer runnable marketplace commands over pr
 Use `$plugin-eval` before committing plugin changes:
 
 ```text
-Use $plugin-eval to evaluate plugins/content-lead.
+Use $plugin-eval to evaluate plugins/memory-store.
 ```
