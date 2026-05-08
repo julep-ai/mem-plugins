@@ -5,12 +5,23 @@ This repo is agent-native. Treat README instructions as executable installation 
 ## Start Here
 
 1. Codex install: `codex plugin marketplace add julep-ai/mem-plugins --ref main`, then install/enable `memory-store` or `gtm-agent` from the Codex plugin UI.
-2. Claude Code install: `claude plugin marketplace add julep-ai/mem-plugins@main` then `claude plugin install memory-store@mem-plugins`.
+2. Claude Code first install: `claude plugin marketplace add julep-ai/mem-plugins@main`, `claude plugin marketplace update mem-plugins`, then `claude plugin install memory-store@mem-plugins` and/or `claude plugin install gtm-agent@mem-plugins`.
 3. Codex update: `codex plugin marketplace upgrade mem-plugins`, then restart/reload Codex and install/enable the desired plugin from the Codex plugin UI if needed.
-4. Claude update: `claude plugin marketplace update mem-plugins` then `claude plugin update <plugin-name>@mem-plugins`.
+4. Claude update: `claude plugin marketplace update mem-plugins`, then run `claude plugin update <plugin-name>@mem-plugins` only if `claude plugin list` shows that plugin is already installed. If Claude says the plugin is not installed, use `claude plugin install <plugin-name>@mem-plugins`.
 5. After install, tell the user to restart or reload plugins and complete Memory Store MCP auth.
 
-Do not use a custom installer script for normal installs. Marketplace commands keep the source trackable and updateable.
+Do not use a custom installer script for normal installs. Marketplace commands keep the source trackable and updateable. Keep `README.md` and `docs/INSTALLATION.md` in sync for human-facing installation guidance.
+
+## Agent Install Checklist
+
+Before giving install/update commands:
+
+1. Identify the host: Claude Code, Codex, Cowork, Claude Desktop, or another MCP host.
+2. For Claude Code, run or recommend `claude plugin marketplace list` and `claude plugin list` when diagnosing state.
+3. For Claude Code, use `install` for absent plugins and `update` only for installed plugins.
+4. For Codex, use only `codex plugin marketplace add` and `codex plugin marketplace upgrade` in CLI docs unless `codex plugin --help` shows more subcommands. Plugin install/enable is currently UI-driven.
+5. After install/update, tell the user to restart/reload plugins and complete Memory Store MCP auth.
+6. If the user is adding GTM Agent, mention that Exa/Websets/Gmail are optional execution connectors but Memory Store MCP is required for normal use.
 
 ## Product Contract
 

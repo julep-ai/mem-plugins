@@ -33,29 +33,45 @@ plugins/<next-memory-store-backed-product>
 
 Each plugin should read as built by Memory Store. Do not create a new marketplace for every plugin, and do not present public marketplace metadata under any local workspace or agency identity. The local checkout path is an implementation detail, not the marketplace publisher.
 
-## Quick Install
+## Installation
 
-### Claude Code — one-liner
+Full installation and troubleshooting details are in [docs/INSTALLATION.md](docs/INSTALLATION.md).
+
+The short version:
+
+- Add/update the marketplace first.
+- Install the plugin if it is not installed.
+- Update the plugin only after it is installed.
+- Restart/reload the host and authenticate Memory Store MCP.
+
+If you see `Plugin "gtm-agent" is not installed`, run `claude plugin install gtm-agent@mem-plugins`; do not run `claude plugin update gtm-agent@mem-plugins` yet.
+
+## Quick Install For Humans
+
+### Claude Code
 
 ```bash
-claude plugin marketplace add julep-ai/mem-plugins@main && claude plugin install memory-store@mem-plugins
+claude plugin marketplace add julep-ai/mem-plugins@main
+claude plugin marketplace update mem-plugins
+claude plugin install memory-store@mem-plugins
+claude plugin install gtm-agent@mem-plugins
 ```
 
 Then `/reload-plugins` (or restart). If prompted, authenticate the Memory Store MCP server with `/mcp`.
 
-Install GTM Agent after Memory Store MCP is connected:
+To verify:
 
 ```bash
-claude plugin install gtm-agent@mem-plugins
+claude plugin list
 ```
 
 ### Codex CLI
 
 ```bash
-codex plugin marketplace add julep-ai/mem-plugins
+codex plugin marketplace add julep-ai/mem-plugins --ref main
 ```
 
-Then restart Codex or reload plugins. Current Codex CLI builds expose marketplace management from the terminal, but plugin install/enable happens in the Codex plugin UI. Open the plugin directory, select the `Memory Store` marketplace, then install or enable `Memory Store`.
+Then restart Codex or reload plugins. Current Codex CLI builds expose marketplace management from the terminal, but plugin install/enable happens in the Codex plugin UI. Open the plugin directory, select the `Memory Store` marketplace, then install or enable `Memory Store` and `GTM Agent`.
 
 Install GTM Agent after Memory Store MCP is connected by selecting `GTM Agent` from the same marketplace in the Codex plugin UI.
 
@@ -87,16 +103,25 @@ Connect Memory Store MCP in Cowork's MCP settings if it is not already configure
 
 ## Keep Up To Date
 
-### Claude Code — one-liner
+### Claude Code
+
+First refresh the marketplace:
 
 ```bash
-claude plugin marketplace update mem-plugins && claude plugin update memory-store@mem-plugins
+claude plugin marketplace update mem-plugins
 ```
 
-For GTM Agent:
+Then update only the plugins that are already installed:
 
 ```bash
-claude plugin marketplace update mem-plugins && claude plugin update gtm-agent@mem-plugins
+claude plugin update memory-store@mem-plugins
+claude plugin update gtm-agent@mem-plugins
+```
+
+If `gtm-agent` is not installed yet:
+
+```bash
+claude plugin install gtm-agent@mem-plugins
 ```
 
 ### Codex CLI
@@ -128,7 +153,7 @@ Without this on a private source, interactive updates still work via your keycha
 2. Bump the matching entry in `.claude-plugin/marketplace.json`
 3. Commit and push to `main`
 
-Background auto-updates at every client startup will pick up the bump. Manual refresh is still available with the update one-liners above.
+Background auto-updates at every client startup will pick up the bump. Manual refresh is still available with the update commands above.
 
 **Auto-register the marketplace in your team repo.** If you want teammates to be prompted to install `mem-plugins` when they open your project in Claude Code, drop this into that repo's `.claude/settings.json`:
 
