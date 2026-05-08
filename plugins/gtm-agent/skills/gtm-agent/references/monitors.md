@@ -2,6 +2,8 @@
 
 Use this reference when the campaign needs an always-on signal stream — new accounts entering an ICP, fresh launches in a category, recurring hiring/funding/news triggers, or competitor watch.
 
+Monitors are a first-class production layer for GTM Agent. A campaign without monitors can still run one-off sourcing, but it is not always-on GTM. Mark it `monitoring_degraded` until monitor specs are approved and attached through the Exa dashboard/API or an approved host automation.
+
 Monitors are **not exposed as MCP tools yet**. They run on the underlying Websets API. GTM Agent's job is to output a monitor spec, route the user to create it, and record the resulting `monitor_id` to Memory Store so the routine compounds.
 
 ## What a Monitor does

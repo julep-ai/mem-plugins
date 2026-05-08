@@ -5,7 +5,9 @@ description: Use when onboarding GTM Agent, creating setup packets, or approving
 
 # Campaign Setup
 
-Set up GTM Agent so campaigns can run continuously from Memory Store, uploaded/pasted context, public signals, Gmail, Calendar, Exa/Websets, and host automations. Infer first, ask only blockers, then produce the approved operating profile used by `gtm-agent`.
+Set up GTM Agent so campaigns can run continuously from Memory Store, uploaded/pasted context, public signals, Gmail, Calendar, Exa Search, Websets, Exa Monitors, and host automations. Infer first, ask only blockers, then produce the approved operating profile used by `gtm-agent`.
+
+Setup can start before every connector is active, but the setup packet must separate **planning fallback** from **production readiness**. Memory Store is required for normal GTM Agent operation. Exa Search, Websets, and Exa Monitors are first-class production layers for live research, structured sourcing, and always-on signals; if missing, mark the campaign degraded and output the exact setup steps/specs needed.
 
 ## Use For
 
@@ -18,7 +20,7 @@ Set up GTM Agent so campaigns can run continuously from Memory Store, uploaded/p
 
 1. Start with Memory Store `checkin` and recall.
 2. Load `../gtm-agent/references/campaign-engineering.md`; classify campaign mode, context sources, funnel stage, ICP system, signal system, proof system, execution system, and learning system.
-3. Discover website/demo CTA and research public proof with Exa/Web fetch when available.
+3. Discover website/demo CTA and research public proof with Exa/Web fetch when available; if Exa is missing, output exact research queries and mark public research degraded.
 4. Learn bounded sender voice, objections, suppressions, and warm paths from Gmail when available.
 5. Use Calendar only for booking context after qualified replies unless policy says otherwise.
 6. Ask unresolved blockers from `references/onboarding-questions.md`.
@@ -33,6 +35,7 @@ Set up GTM Agent so campaigns can run continuously from Memory Store, uploaded/p
 company_profile:
 campaign_mode:
 context_sources:
+connector_status:
 offer_profiles:
 sender_voice:
 website_findings:
@@ -51,7 +54,7 @@ Group unresolved items as `inferred`, `needs_confirmation`, and `unknown_blocker
 
 ## Rules
 
-- Missing Exa/Websets/Gmail/Calendar should not block setup; mark the gap and provide manual/import-ready fallback.
+- Missing Exa/Websets/Monitors/Gmail/Calendar should not block setup planning; mark the exact degraded mode and provide setup steps plus manual/import-ready fallback. Do not call a campaign production-ready until Exa, Websets, and the relevant monitor specs are available.
 - Do not send during setup.
 - Do not use a discovered demo link until confirmed once.
 - Do not claim uploaded or pasted context was learned until it is recorded through Memory Store after approval.

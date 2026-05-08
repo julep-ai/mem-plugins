@@ -10,6 +10,7 @@ Return these keys in this order:
 company_profile:
 campaign_mode:
 context_sources:
+connector_status:
 offer_profiles:
 sender_voice:
 website_findings:
@@ -31,6 +32,7 @@ Do not rename keys. If a value is unavailable, mark it as `unknown`, `missing_co
 - `company_profile`: company name, website, one-line product read, market category, confidence, and missing facts.
 - `campaign_mode`: `new_campaign`, `build_on_previous`, `refresh_existing`, `expand_winner`, `rescue_underperformer`, `reactivation`, or `event_or_launch`; include evidence and policy implications.
 - `context_sources`: Memory Store, uploaded/pasted docs, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets, and what each source is allowed to influence.
+- `connector_status`: production/degraded mode for Memory Store, Exa Search, Websets, Exa Monitors, Gmail, Calendar, and host automations. Mark missing Exa as `research_degraded`, missing Websets as `sourcing_degraded`, missing Monitors as `monitoring_degraded`, missing Gmail as `sending_disabled`, and missing Calendar as `booking_context_disabled`.
 - `offer_profiles`: active offer, alternate sellable offers, core claim, do-not-pitch list, proof path, and conversion action.
 - `sender_voice`: sender identity, tone, phrases to use, phrases to avoid, and whether it came from Memory Store, Gmail, website, or user input.
 - `website_findings`: website pages checked, claims found, proof assets, screenshots/assets worth collecting, and risky or unsupported claims.

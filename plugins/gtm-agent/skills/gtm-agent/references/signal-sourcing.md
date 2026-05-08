@@ -4,7 +4,7 @@ Use this reference when defining ICP cells, sourcing accounts, using Exa/Websets
 
 ## Tool Strategy
 
-Use the lightest tool that can prove the current step:
+Use the lightest tool that can prove the current step, but do not downgrade the production stack into "optional extras." The hierarchy is:
 
 - **Memory Store recall** for product positioning, customer language, ICP hypotheses, prior objections, approved claims, exclusions, and account history.
 - **Exa Search MCP** at `https://mcp.exa.ai/mcp` for exploratory web research, market maps, account pages, news, docs, people pages, advanced searches, and source fetches. Active tools: `web_search_exa`, `web_fetch_exa`, and `web_search_advanced_exa` (category, domain, date range, highlights, summaries, subpage crawling). Deprecated but callable for backwards compat: `company_research_exa`, `people_search_exa`, `crawling_exa`, `linkedin_search_exa`, `deep_search_exa`, `get_code_context_exa`.
@@ -12,9 +12,17 @@ Use the lightest tool that can prove the current step:
 - **Exa Monitors REST API** at `https://api.exa.ai/websets/v0/monitors` for cron-scheduled Webset refresh. Not exposed as MCP tools yet — output a monitor spec and let the user attach it via dashboard or API.
 - **Gmail connector** only after the account/copy review gate, and only for draft, send, or followup actions the user explicitly asked for.
 
+Production meaning:
+
+- Memory Store is the required brain.
+- Exa Search is the required live research and source-discovery layer.
+- Websets is the required production sourcing, verification, enrichment, import, refresh, and export layer.
+- Exa Monitors are the required always-on signal layer.
+- Manual CSVs and pasted lists are valid fallback/import paths, not the primary production loop.
+
 A website, generic company description, funding database row, or founder title is not a signal. It is only context. The sourcing job is to find a current reason to engage and the persona-specific workflow that reason maps to.
 
-If Exa Search MCP is missing, tell the user to connect it and continue with query design:
+If Exa Search MCP is missing, tell the user to connect it and continue with setup/query design only. Mark live public research and signal discovery `research_degraded`:
 
 ```bash
 claude mcp add --transport http exa https://mcp.exa.ai/mcp --header "x-api-key: YOUR_EXA_API_KEY"
@@ -23,7 +31,7 @@ codex mcp add exa --url https://mcp.exa.ai/mcp
 
 Current Codex CLI builds do not support arbitrary `x-api-key` headers through `codex mcp add`. Configure the header in host MCP settings for production limits, or use the free-plan URL above.
 
-If Websets MCP is missing and the task requires structured lead sourcing, tell the user to connect it with their Exa key (Bearer token preferred, query-param fallback for older hosts):
+If Websets MCP is missing and the task requires structured lead sourcing, tell the user to connect it with their Exa key (Bearer token preferred, query-param fallback for older hosts). Continue by producing Webset queries, criteria, enrichment schemas, and `accounts.csv` import shape, but mark production sourcing `sourcing_degraded`:
 
 ```bash
 claude mcp add --transport http websets https://websetsmcp.exa.ai/mcp --header "Authorization: Bearer YOUR_EXA_API_KEY"
@@ -32,6 +40,8 @@ codex mcp add websets --url https://websetsmcp.exa.ai/mcp --bearer-token-env-var
 ```
 
 Get the API key at `https://dashboard.exa.ai/api-keys`. Both MCPs use the same key.
+
+If Exa Monitors are not configured, the agent may still run one-off sourcing, but it must mark always-on GTM `monitoring_degraded` and output monitor specs from [monitors.md](monitors.md). Do not claim the campaign is continuously watching signals until a monitor or approved host automation exists.
 
 ## Campaign Math
 

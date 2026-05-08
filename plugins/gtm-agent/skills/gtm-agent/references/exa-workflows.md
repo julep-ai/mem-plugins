@@ -6,12 +6,16 @@ Use this reference when deciding which Exa surface should do which GTM job.
 
 Do not collapse Exa into one "lead search" step.
 
+Do not treat Exa, Websets, and Monitors as optional product extras. They are separate production layers:
+
 - **Exa Company Research** answers: "What is this company/space/account and why might it matter?"
 - **Exa Lead Generation** answers: "Which companies match this ICP and what structured fields should we extract?"
 - **Exa People Search** answers: "Which likely buyers or experts match these accounts and personas?"
 - **Websets** answers: "What verified set of companies/people should we persist, enrich, revisit, and export?"
 - **Monitors** answer: "What should we keep watching so new high-intent triggers enter the workflow automatically?"
 - **Memory Store** answers: "What have we already learned internally, and how should that change this search, copy, or next step?"
+
+Manual CSVs, pasted lists, and one-off queries are fallback or import surfaces. They should preserve momentum during setup, but they are not the full GTM Agent loop.
 
 ## Company Research Worker
 

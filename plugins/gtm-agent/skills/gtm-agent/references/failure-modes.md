@@ -23,13 +23,16 @@ If recall lacks product, ICP, customer language, or approved claims:
 - Ask for the smallest missing blocker: product, ICP, existing customers, exclusions, sender, or send policy.
 - Prefer a small pilot batch over a 1000-recipient plan.
 
-## Exa Or Websets Missing
+## Exa, Websets, Or Monitors Missing
 
-If Exa/Websets tools are missing:
+If Exa/Websets/Monitor support is missing, setup can continue but production GTM is degraded:
 
 - Produce exact search queries, Websets criteria, enrichments, and batching plan.
 - Tell the user which MCP to connect.
+- Output monitor specs when always-on signal detection is part of the plan.
 - Do not fabricate lead lists.
+- Do not claim production sourcing, verified enrichment, refresh, or always-on monitoring happened.
+- Use explicit status labels: `research_degraded`, `sourcing_degraded`, `monitoring_degraded`.
 - If only `web_search_exa` appears, treat the Exa surface as exploratory research only. Execution-grade lead generation and source fetching need `web_search_advanced_exa` and `web_fetch_exa`. Use deprecated tools such as `deep_search_exa` only when the host still exposes them.
 
 For Exa Search MCP:
@@ -45,6 +48,8 @@ codex mcp add websets --url "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_AP
 ```
 
 GTM Agent also declares Websets in `plugins/gtm-agent/.mcp.json` with a `YOUR_EXA_API_KEY` placeholder; the user still has to replace it in host MCP settings because the plugin cannot safely ship a real Exa key.
+
+For Exa Monitors, use [monitors.md](monitors.md) to output the REST/dashboard spec. Monitors are not currently exposed as MCP tools, but they are still the production path for recurring signal streams.
 
 ## Gmail Missing
 
