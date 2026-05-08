@@ -1,0 +1,4 @@
+interface:
+  display_name: "Exa People Search"
+  short_description: "Find likely buyers and public professional profiles"
+  default_prompt: "Find likely buyers for these accounts using Exa People Search and Memory Store context."

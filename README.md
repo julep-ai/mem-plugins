@@ -1,10 +1,37 @@
-# Memory Store
+# Memory Store Marketplace
 
-Public Memory Store plugin marketplace for agent-native workflows.
+Public Memory Store plugin marketplace for agent-native workflows built by Memory Store.
 
-Add this marketplace once, then install the `memory-store` plugin. The source repo remains `julep-ai/mem-plugins`, but the installed plugin surface is Memory Store.
+Add this marketplace once, then install the plugin you need. The source repo is `julep-ai/mem-plugins`, but the marketplace identity is Memory Store. The repo exposes multiple installable Memory Store-built plugins from one marketplace.
 
-`memory-store` is the Memory Store skill pack. Today it includes `linkedin-studio`, a memory-native content strategist and copywriter that helps any company turn its existing Memory Store context into publishable LinkedIn posts, then learns from edits, approvals, and post performance. Future workflows should be added as additional skills under the same plugin when they share the Memory Store MCP surface.
+The core `memory-store` plugin provides Memory Store-native workflows such as LinkedIn Studio. `gtm-agent` is a separate installable plugin for ICP discovery, Exa/Websets sourcing, signal monitors, personalized Gmail outreach, and campaign learning. It still requires Memory Store MCP so GTM work can recall company context and record what worked.
+
+## Marketplace Model
+
+There is one marketplace:
+
+```text
+mem-plugins -> displayed as Memory Store
+```
+
+The repo has two marketplace metadata files because Codex and Claude Code use different formats:
+
+```text
+.agents/plugins/marketplace.json
+.claude-plugin/marketplace.json
+```
+
+Those are host adapters for the same Memory Store marketplace, not two separate marketplaces.
+
+Inside that marketplace there can be many plugins:
+
+```text
+plugins/memory-store
+plugins/gtm-agent
+plugins/<next-memory-store-backed-product>
+```
+
+Each plugin should read as built by Memory Store. Do not create a new marketplace for every plugin, and do not present public marketplace metadata under any local workspace or agency identity. The local checkout path is an implementation detail, not the marketplace publisher.
 
 ## Quick Install
 
@@ -16,6 +43,12 @@ claude plugin marketplace add julep-ai/mem-plugins@main && claude plugin install
 
 Then `/reload-plugins` (or restart). If prompted, authenticate the Memory Store MCP server with `/mcp`.
 
+Install GTM Agent after Memory Store MCP is connected:
+
+```bash
+claude plugin install gtm-agent@mem-plugins
+```
+
 ### Codex CLI — one-liner
 
 ```bash
@@ -23,6 +56,12 @@ codex plugin marketplace add julep-ai/mem-plugins && codex plugin install memory
 ```
 
 Then restart Codex. If your Codex build does not yet expose `plugin install` on the CLI, the `marketplace add` half still works — open the plugin directory, select `Memory Store`, and install `Memory Store` from the UI.
+
+Install GTM Agent after Memory Store MCP is connected:
+
+```bash
+codex plugin install gtm-agent@mem-plugins
+```
 
 ### Claude Cowork — UI install
 
@@ -56,10 +95,22 @@ Connect Memory Store MCP in Cowork's MCP settings if it is not already configure
 claude plugin marketplace update mem-plugins && claude plugin update memory-store@mem-plugins
 ```
 
+For GTM Agent:
+
+```bash
+claude plugin marketplace update mem-plugins && claude plugin update gtm-agent@mem-plugins
+```
+
 ### Codex CLI — one-liner
 
 ```bash
 codex plugin marketplace upgrade mem-plugins && codex plugin update memory-store@mem-plugins
+```
+
+For GTM Agent:
+
+```bash
+codex plugin marketplace upgrade mem-plugins && codex plugin update gtm-agent@mem-plugins
 ```
 
 ## Auto-Updates
@@ -101,6 +152,30 @@ When a teammate trusts the folder, Claude Code prompts them to add the marketpla
 
 Restart or reload your host after manual updates. To run update commands on a cadence, wrap either line in a cron job, a launchd plist, or a shell alias you run at session start — both commands are idempotent and safe to re-run.
 
+## Marketplace Upgrade Routine
+
+Use the core `memory-store` plugin's `marketplace-operator` skill to audit whether the marketplace, a plugin, or a skill needs an update.
+
+Run it:
+
+```text
+/memory-store:marketplace-operator
+```
+
+Or in free text:
+
+```text
+Check the Memory Store marketplace for new plugin opportunities, stale skills, manifest drift, and upgrade work.
+```
+
+The intended recurring loop is:
+
+```text
+checkin -> recall marketplace context -> inspect manifests/docs/skills -> scan requested market references -> identify upgrade needs -> validate -> record decisions
+```
+
+This can be run manually before releases or scheduled as a Codex automation. The automation should report recommended updates first; it should not publish releases, push changes, or send external messages without explicit approval.
+
 ## Claude Desktop (Not Supported)
 
 Claude Desktop (the claude.ai app) does not have a plugin system. It supports MCP connectors only. Installing this marketplace from Claude Desktop by asking it to "install Memory Store from julep-ai/mem-plugins" will not work — the app will try to fetch the repo and stop there.
@@ -121,6 +196,8 @@ The MCP server provides the required `checkin`, `recall`, `record`, and `report-
 
 Without Memory Store MCP, the agent can only draft from pasted context. It cannot recall brand memory, find company stories, or record feedback for the next run.
 
+`gtm-agent` is a separate plugin but still requires Memory Store MCP. It can plan from Memory Store context, but high-quality sourcing expects Exa MCP and/or Websets MCP when available. Exa company research and people search use `web_search_advanced_exa`; Exa lead generation expects `deep_search_exa` with an Exa API key configured in the host MCP config; Websets expects `https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY` configured outside the repo. Monitors use Exa's Monitors API and require an Exa API key in the runtime. Gmail outreach and followups require the host's Gmail connector. If those tools are missing, the skill outputs queries, Websets criteria, monitor specs, and draft/import-ready copy instead of pretending actions happened.
+
 ## Supported Targets
 
 | Host | Install primitive | Status |
@@ -131,9 +208,9 @@ Without Memory Store MCP, the agent can only draft from pasted context. It canno
 | Claude Desktop | MCP connector only, no plugin install | not supported |
 | OpenCode | skill files via MCP configuration | not verified |
 
-OpenCode can in principle use `plugins/memory-store/skills/linkedin-studio/SKILL.md` as the canonical workflow when Memory Store MCP is configured in that host, but the install path is not tested and not recommended yet.
+OpenCode can in principle use the skill files under `plugins/<plugin-name>/skills/` when the required MCP servers are configured in that host, but the install path is not tested and not recommended yet.
 
-## Available Plugin
+## Available Plugins
 
 ### `memory-store`
 
@@ -142,8 +219,9 @@ Path: `plugins/memory-store`
 Includes these skills:
 
 - `linkedin-studio`: acts as a Memory Store-powered content strategist and copywriter. It starts with Memory Store `checkin`, recalls brand voice, author voice, prior performance, and source material, identifies publishable memory opportunities from customer context, shipped work, team discussions, internal artifacts, and prior content learnings, drafts grounded LinkedIn posts with a fitting CTA, and records feedback — approvals, edits, rejections, published text, and 24h/7d performance — so future runs improve.
+- `marketplace-operator`: maintains the Memory Store marketplace. It starts with Memory Store `checkin`, recalls marketplace decisions and plugin feedback, inspects manifests/docs/skills, scouts new Memory Store-backed plugin opportunities, audits upgrade needs, recommends file-level changes, and records confirmed marketplace decisions.
 
-**First-run experience.** If Memory Store has no explicit brand or voice profile for the company/author, the skill infers both from existing memories (recent posts, shipped work, customer conversations, founder threads, edit diffs) and asks the user for a one-shot confirmation. A short interview bootstrap only runs when inference cannot cover enough dimensions. For teams with even a few weeks of Memory Store history, first-run setup is usually a confirmation, not a questionnaire.
+**LinkedIn Studio first-run experience.** If Memory Store has no explicit brand or voice profile for the company/author, the skill infers both from existing memories (recent posts, shipped work, customer conversations, founder threads, edit diffs) and asks the user for a one-shot confirmation. A short interview bootstrap only runs when inference cannot cover enough dimensions. For teams with even a few weeks of Memory Store history, first-run setup is usually a confirmation, not a questionnaire.
 
 Product loop:
 
@@ -155,6 +233,7 @@ Run it:
 
 ```text
 /memory-store:linkedin-studio
+/memory-store:marketplace-operator
 ```
 
 Or in free text:
@@ -163,22 +242,59 @@ Or in free text:
 Draft today's LinkedIn posts from Memory Store.
 ```
 
+### `gtm-agent`
+
+Path: `plugins/gtm-agent`
+
+Includes these skills:
+
+- `gtm-agent`: orchestrates the full Memory Store-powered GTM campaign loop: ICP design, Exa/Websets sourcing, people search, Gmail drafts/followups, review gates, engagement capture, and learning records.
+- `exa-company-research`: researches companies, competitors, market categories, account context, public profiles, news, and company lists with Exa Company Research plus Memory Store context.
+- `exa-lead-generation`: generates enriched account lists from a confirmed ICP with Exa deep search, micro-vertical batching, structured schemas, dedupe, scoring, and CSV/import-ready output.
+- `exa-people-search`: finds likely buyers, public professional profiles, experts, and team members for already-qualified accounts.
+- `websets-sourcing`: creates, previews, enriches, imports, refreshes, and inspects persistent Exa Websets for GTM account and people sourcing.
+
+GTM loop:
+
+```text
+checkin -> recall -> ICP hypotheses -> Exa company research -> Exa lead generation -> Websets/enrichments -> Exa people search -> Monitors -> reviewed copy -> Gmail followups -> engagement -> record -> better targeting
+```
+
+Run it:
+
+```text
+/gtm-agent:gtm-agent
+/gtm-agent:exa-company-research
+/gtm-agent:exa-lead-generation
+/gtm-agent:exa-people-search
+/gtm-agent:websets-sourcing
+```
+
+Or in free text:
+
+```text
+Build a 1000-recipient GTM campaign with 20 ICPs, 50 targets each, Exa/Websets sourcing, monitors, and personalized Gmail drafts.
+```
+
+GTM Agent expects Memory Store MCP first. Exa, Websets, Exa Monitors, and Gmail make it operational: Exa researches companies and people, Exa deep search generates structured lead pools, Websets persists verified lists, Monitors keep new signals flowing, Gmail drafts/sends approved outreach, and Memory Store records the learning loop.
+
 ## Local Testing
 
 For local testing from a cloned checkout without installing via marketplace:
 
 ```bash
 claude --plugin-dir ./plugins/memory-store
+claude --plugin-dir ./plugins/gtm-agent
 ```
 
 ## Build Another Skill Or Plugin
 
-Use one marketplace for this repo. Do not create a new marketplace per plugin.
+Use one marketplace for this repo. Do not create a new marketplace per plugin. The Codex and Claude marketplace files are host adapters for the same marketplace. New products go inside the Memory Store marketplace as plugins built by Memory Store.
 
-For a new Memory Store workflow that belongs under the same product surface, add it as a skill under:
+For a new workflow that belongs under an existing plugin surface, add it as a skill under:
 
 ```text
-plugins/memory-store/skills/<skill-name>/
+plugins/<plugin-name>/skills/<skill-name>/
 ```
 
 Create a separate plugin only when it should be installed, authorized, or presented as a distinct product.

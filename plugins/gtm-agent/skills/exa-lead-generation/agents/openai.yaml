@@ -1,0 +1,4 @@
+interface:
+  display_name: "Exa Lead Generation"
+  short_description: "Generate enriched ICP-matched account lists"
+  default_prompt: "Generate an Exa-backed lead list from this ICP and Memory Store context."

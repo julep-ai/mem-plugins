@@ -1,0 +1,52 @@
+{
+  "name": "gtm-agent",
+  "version": "0.2.0",
+  "description": "Memory Store-powered GTM agent with Exa company research, Exa lead generation, Exa people search, Websets sourcing, signal monitors, Gmail outreach, and campaign learning.",
+  "author": {
+    "name": "Memory Store",
+    "email": "support@memory.store",
+    "url": "https://memory.store"
+  },
+  "homepage": "https://memory.store",
+  "repository": "https://github.com/julep-ai/mem-plugins",
+  "license": "Apache-2.0",
+  "keywords": [
+    "gtm",
+    "outbound",
+    "sales",
+    "icp",
+    "lead-generation",
+    "exa",
+    "websets",
+    "people-search",
+    "company-research",
+    "monitors",
+    "gmail",
+    "memory-store"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "GTM Agent",
+    "shortDescription": "Self-improving GTM campaigns",
+    "longDescription": "Build evidence-backed GTM campaigns with Memory Store context, Exa company research, Exa lead generation, Exa people search, Websets lead sets, Exa Monitors, Gmail drafts and followups, and durable learning loops. GTM Agent turns ICP hypotheses into sourced accounts, reviewed personalized outreach, engagement capture, and better next batches.",
+    "developerName": "Memory Store",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://memory.store",
+    "privacyPolicyURL": "https://memory.store/privacy",
+    "termsOfServiceURL": "https://memory.store/terms",
+    "defaultPrompt": [
+      "Build a GTM campaign with ICPs, Exa/Websets sourcing, and Gmail drafts.",
+      "Run Exa company research, lead generation, people search, and Websets sourcing for this campaign.",
+      "Turn campaign replies and objections into Memory Store GTM learnings."
+    ],
+    "brandColor": "#0F766E",
+    "composerIcon": "./assets/gtm-agent-icon.png",
+    "logo": "./assets/gtm-agent-icon.png",
+    "screenshots": []
+  }
+}

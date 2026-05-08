@@ -1,0 +1,4 @@
+interface:
+  display_name: "Websets Sourcing"
+  short_description: "Create and enrich persistent Exa Websets"
+  default_prompt: "Create or inspect a Webset for this GTM sourcing workflow."

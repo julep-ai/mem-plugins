@@ -1,0 +1,4 @@
+interface:
+  display_name: "Exa Company Research"
+  short_description: "Source-backed company and market research for GTM"
+  default_prompt: "Research these companies or this market with Exa and Memory Store context."

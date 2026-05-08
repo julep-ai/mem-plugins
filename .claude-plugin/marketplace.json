@@ -6,7 +6,7 @@
     "url": "https://memory.store"
   },
   "metadata": {
-    "description": "Memory Store plugins for agent-native company memory workflows.",
+    "description": "Memory Store-built plugins for agent-native company memory workflows.",
     "homepage": "https://memory.store",
     "repository": "https://github.com/julep-ai/mem-plugins"
   },
@@ -14,8 +14,8 @@
     {
       "name": "memory-store",
       "source": "./plugins/memory-store",
-      "version": "0.5.0",
-      "description": "Memory Store skill pack for agent-native company-memory workflows. Includes LinkedIn Studio, a memory-native content strategist and copywriter for turning company memory into public posts.",
+      "version": "0.6.0",
+      "description": "Memory Store skill pack for agent-native company-memory workflows. Includes LinkedIn Studio and Marketplace Operator.",
       "author": {
         "name": "Memory Store",
         "email": "support@memory.store",
@@ -30,7 +30,39 @@
         "content",
         "brand-voice",
         "mcp",
-        "customer-stories"
+        "customer-stories",
+        "marketplace",
+        "plugin-ops",
+        "upgrades"
+      ],
+      "category": "Productivity"
+    },
+    {
+      "name": "gtm-agent",
+      "source": "./plugins/gtm-agent",
+      "version": "0.2.0",
+      "description": "Memory Store-powered GTM agent with Exa company research, Exa lead generation, Exa people search, Websets sourcing, signal monitors, Gmail outreach, and campaign learning.",
+      "author": {
+        "name": "Memory Store",
+        "email": "support@memory.store",
+        "url": "https://memory.store"
+      },
+      "homepage": "https://memory.store",
+      "repository": "https://github.com/julep-ai/mem-plugins",
+      "license": "Apache-2.0",
+      "keywords": [
+        "gtm",
+        "outbound",
+        "sales",
+        "icp",
+        "lead-generation",
+        "exa",
+        "websets",
+        "people-search",
+        "company-research",
+        "monitors",
+        "gmail",
+        "memory-store"
       ],
       "category": "Productivity"
     }

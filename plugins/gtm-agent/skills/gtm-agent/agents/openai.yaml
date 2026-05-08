@@ -1,0 +1,4 @@
+interface:
+  display_name: "GTM Agent"
+  short_description: "Memory-native ICP sourcing and outbound"
+  default_prompt: "Build a Memory Store-powered GTM campaign with ICPs, signals, personalized email, and followups."

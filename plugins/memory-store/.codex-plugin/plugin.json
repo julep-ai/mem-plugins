@@ -1,7 +1,7 @@
 {
   "name": "memory-store",
-  "version": "0.5.0",
-  "description": "Memory Store skill pack for agent-native company-memory workflows. Includes LinkedIn Studio, a memory-native content strategist and copywriter for turning company memory into public posts.",
+  "version": "0.6.0",
+  "description": "Memory Store skill pack for agent-native company-memory workflows. Includes LinkedIn Studio and Marketplace Operator.",
   "author": {
     "name": "Memory Store",
     "email": "support@memory.store",
@@ -16,14 +16,17 @@
     "content",
     "brand-voice",
     "mcp",
-    "customer-stories"
+    "customer-stories",
+    "marketplace",
+    "plugin-ops",
+    "upgrades"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Memory Store",
-    "shortDescription": "Memory-native content studio",
-    "longDescription": "Use Memory Store MCP as the context layer for agent-native workflows. Today this includes LinkedIn Studio: a memory-native content strategist and copywriter that mines company memory for publishable opportunities, shapes them through brand, author voice, prior performance, and LinkedIn craft, then records editorial feedback so future runs improve.",
+    "shortDescription": "Memory-native workflow hub",
+    "longDescription": "Use Memory Store MCP as the context layer for agent-native workflows built by Memory Store. Includes LinkedIn Studio for turning company memory into public posts, and Marketplace Operator for maintaining the Memory Store plugin marketplace, scouting new Memory Store-backed plugin opportunities, and auditing whether skills or plugins need upgrades.",
     "developerName": "Memory Store",
     "category": "Productivity",
     "capabilities": [
@@ -35,7 +38,7 @@
     "termsOfServiceURL": "https://memory.store/terms",
     "defaultPrompt": [
       "Act as our LinkedIn Studio. Find memory-backed post ideas and draft them in our voice.",
-      "Mine company memory for customer language, shipped work, team learnings, and post ideas.",
+      "Audit the Memory Store plugin marketplace and tell me what needs updating.",
       "Record feedback on these drafts so Memory Store learns our brand voice, taste, and what performs."
     ],
     "brandColor": "#0F766E",
