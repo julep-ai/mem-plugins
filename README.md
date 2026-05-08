@@ -49,19 +49,17 @@ Install GTM Agent after Memory Store MCP is connected:
 claude plugin install gtm-agent@mem-plugins
 ```
 
-### Codex CLI — one-liner
+### Codex CLI
 
 ```bash
-codex plugin marketplace add julep-ai/mem-plugins && codex plugin install memory-store@mem-plugins
+codex plugin marketplace add julep-ai/mem-plugins
 ```
 
-Then restart Codex. If your Codex build does not yet expose `plugin install` on the CLI, the `marketplace add` half still works — open the plugin directory, select `Memory Store`, and install `Memory Store` from the UI.
+Then restart Codex or reload plugins. Current Codex CLI builds expose marketplace management from the terminal, but plugin install/enable happens in the Codex plugin UI. Open the plugin directory, select the `Memory Store` marketplace, then install or enable `Memory Store`.
 
-Install GTM Agent after Memory Store MCP is connected:
+Install GTM Agent after Memory Store MCP is connected by selecting `GTM Agent` from the same marketplace in the Codex plugin UI.
 
-```bash
-codex plugin install gtm-agent@mem-plugins
-```
+If a future Codex build adds plugin-level CLI commands, prefer the CLI help shown by `codex plugin --help` over older README snippets.
 
 ### Claude Cowork — UI install
 
@@ -101,17 +99,13 @@ For GTM Agent:
 claude plugin marketplace update mem-plugins && claude plugin update gtm-agent@mem-plugins
 ```
 
-### Codex CLI — one-liner
+### Codex CLI
 
 ```bash
-codex plugin marketplace upgrade mem-plugins && codex plugin update memory-store@mem-plugins
+codex plugin marketplace upgrade mem-plugins
 ```
 
-For GTM Agent:
-
-```bash
-codex plugin marketplace upgrade mem-plugins && codex plugin update gtm-agent@mem-plugins
-```
+Then restart/reload Codex. The upgraded marketplace root will contain the latest plugin metadata; plugin install/enable still happens in the Codex plugin UI on current CLI builds.
 
 ## Auto-Updates
 
@@ -203,7 +197,7 @@ Without Memory Store MCP, the agent can only draft from pasted context. It canno
 | Host | Install primitive | Status |
 |------|-------------------|--------|
 | Claude Code | `claude plugin install` CLI | verified |
-| Codex CLI | `codex plugin install` CLI (or marketplace UI) | verified |
+| Codex CLI | `codex plugin marketplace add/upgrade` plus plugin UI install/enable | verified |
 | Claude Cowork | marketplace UI (Add a plug-in → Personal → add marketplace) | verified |
 | Claude Desktop | MCP connector only, no plugin install | not supported |
 | OpenCode | skill files via MCP configuration | not verified |

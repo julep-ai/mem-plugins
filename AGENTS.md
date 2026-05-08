@@ -4,9 +4,9 @@ This repo is agent-native. Treat README instructions as executable installation 
 
 ## Start Here
 
-1. Codex install: `codex plugin marketplace add julep-ai/mem-plugins --ref main` then `codex plugin install memory-store@mem-plugins`.
+1. Codex install: `codex plugin marketplace add julep-ai/mem-plugins --ref main`, then install/enable `memory-store` or `gtm-agent` from the Codex plugin UI.
 2. Claude Code install: `claude plugin marketplace add julep-ai/mem-plugins@main` then `claude plugin install memory-store@mem-plugins`.
-3. Codex update: `codex plugin marketplace upgrade mem-plugins` then `codex plugin update <plugin-name>@mem-plugins`.
+3. Codex update: `codex plugin marketplace upgrade mem-plugins`, then restart/reload Codex and install/enable the desired plugin from the Codex plugin UI if needed.
 4. Claude update: `claude plugin marketplace update mem-plugins` then `claude plugin update <plugin-name>@mem-plugins`.
 5. After install, tell the user to restart or reload plugins and complete Memory Store MCP auth.
 
