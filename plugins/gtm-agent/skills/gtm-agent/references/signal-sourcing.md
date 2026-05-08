@@ -57,7 +57,13 @@ Each ICP cell should have:
 - **Exclusions** - competitors, current customers, low-fit segments, regulated edges, or do-not-contact categories.
 - **Target count** - usually 50 for the user's 1000-recipient plan.
 
-For Memory Store-built offers, start from these persona families unless recalled context says otherwise:
+Persona families are seller-specific. The planner does not import a default list — it derives families from the seller's Memory Store recall (customer base, prior campaigns, lived empathy). At least one ICP cell per campaign should be unconventional (see [campaign-planner.md](campaign-planner.md) Persona Discovery), sourced through Memory Store pain recall, not firmographic templates.
+
+The lists below are **illustrative for one kind of seller** (software/AI infrastructure). For other sellers — real estate, legal services, consumer goods, agencies, services, vertical SaaS — recall produces entirely different families. Use these as a structural example only.
+
+### Illustrative families (software/AI seller)
+
+Conventional:
 
 - **Devtools/community teams** with Discord, Slack, GitHub issues, docs gaps, or repeated support answers.
 - **Coding-agent teams** using Cursor, Codex, Claude, repo conventions, PR context, and repeated fix attempts.
@@ -68,7 +74,38 @@ For Memory Store-built offers, start from these persona families unless recalled
 - **Product/customer-insight teams** where feedback, support language, interviews, objections, docs gaps, and churn risks scatter across tools.
 - **Internal AI/platform teams** trying to make agents usable across company workflows, approvals, handoffs, and execution context.
 
-Do not classify someone only as a founder. Classify the operating role: technical operator, community/support owner, coding-agent owner, GTM owner, CS/FDE owner, product/customer-insight owner, internal AI/platform owner, or vertical app builder.
+Unconventional (recall prompts, not a fixed list):
+
+- **AI researchers, scientists, mathematicians** — context loss across papers, notebooks, reasoning chains, and prior proofs.
+- **Indie / solo AI builders** — running 4 side projects with no team to absorb context loss.
+- **Knowledge workers outside tech adopting AI** — lawyers, doctors, journalists, traders, consultants. Higher-stakes amnesia.
+- **Cognition-system power users** — Obsidian, Logseq, Tana, Roam users graduating to agent-native thinking.
+
+### How families look for other sellers (illustrative)
+
+- **Real estate seller**: regional architects on additions, probate attorneys with inherited-property clients, divorce mediators, commercial-to-residential conversion specialists, first-time buyers via permit-pull data, contractors with chronic supply-chain pain.
+- **Legal services seller**: solo founders pre-counsel, freelance creators with IP disputes, scaling DTC brands hitting interstate compliance, nonprofits hitting governance pain.
+- **Consumer-goods / pet seller**: rescue coordinators routing diet-sensitive dogs, breeders with line-specific feeding history, vet techs with chronic-condition caseloads, multi-pet households with conflicting needs.
+- **Agency / services seller**: post-funding teams hiring their first GTM body, founders trying to outsource a function, in-house teams that want to learn-by-watching, agencies servicing other agencies.
+
+Pattern in every case: under-served buyer × specific timing trigger × pain the seller actually understands and can speak to honestly.
+
+Do not classify someone only as a founder. Classify the operating role at the seller's level of abstraction — technical operator, community/support owner, GTM owner, CS/FDE owner, product/customer-insight owner, internal AI/platform owner, vertical app builder, researcher/scientist, indie builder, knowledge worker, cognition-system user, regional architect, probate attorney, solo founder, rescue coordinator, founder-led GTM team, etc. The list is not closed.
+
+## Competitor Intelligence as a Signal Source
+
+Competitors are one of the highest-leverage signal sources in any GTM system. Their public surface — customer logos, case studies, changelogs, hiring, reviews, press, complaints — leaks ICPs, objections, positioning gaps, and timing triggers better than firmographic databases.
+
+Treat competitor watching as recurring routine, not a one-off:
+
+- **Competitor map** — direct, indirect, and adjacent. Maintain in Memory Store. Update when the seller's positioning shifts or new entrants emerge.
+- **Competitor customer scrape** — Webset of named customers from each competitor's site, case studies, and public testimonials. Refresh monthly.
+- **Competitor changelog/launch monitor** — Exa Monitor per competitor on blog/changelog/release-notes URLs. Cron weekly or daily depending on competitor velocity. New launches and pricing changes are direct timing triggers.
+- **Competitor hiring monitor** — what they hire reveals what they think they need next. A competitor hiring "Director of Customer Marketing" tells you they are about to push case studies; a competitor hiring "Solutions Engineer for Enterprise" tells you they are climbing market.
+- **Competitor review/complaint monitor** — G2, Capterra, Trustpilot, Yelp, Reddit, HN, Glassdoor depending on category. Public negative reviews are the best objection-handling and copy-hook source you have.
+- **Ex-customer signal** — people who publicly switch away from a competitor are pre-qualified leads if the seller honestly does it better.
+
+Competitor signals feed three planner outputs: ICP cell design (their customers as a target pool), signal sourcing (their changelog/news drives outreach timing), and copy proof paths (their gaps are your wedges). See [campaign-planner.md](campaign-planner.md) Competitor Intelligence section for the planner-side requirements.
 
 ## Signal Catalog
 

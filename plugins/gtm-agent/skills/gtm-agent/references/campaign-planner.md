@@ -26,22 +26,43 @@ If any field is missing, output a planner gap and the exact research query or Me
 
 ## Offer Profile
 
-The planner is product-agnostic. Memory Store is the context and learning substrate; the campaign may sell Memory Store core, GTM Agent, briefs, context engineering, customer insights, a distribution plugin, a consulting motion, or any other product.
+The planner is **seller-agnostic**. Memory Store is the context and learning substrate, but the seller can be any business — software, infrastructure, services, real estate, consumer goods, vertical SaaS, agencies, consulting. The planner shape is identical; only the contents change.
 
 Before sourcing, define the active offer profile:
 
 - **campaign mode** - whether this is new, building on previous work, refresh, expansion, rescue, reactivation, or launch/event-driven.
 - **context source base** - Memory Store, uploaded/pasted docs, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets.
-- **offer being sold** - exact product, plugin, workflow, service, or thesis.
+- **offer being sold** - exact product, service, package, listing, or thesis.
+- **seller identity** - what the seller is, what motion they run (sales-led, product-led, founder-led, agency, broker, services), and what kind of credibility they bring.
 - **sender persona** - who is speaking and why they have credibility.
 - **core claim** - one sentence the campaign is testing.
 - **do-not-pitch list** - labels, claims, and categories that flatten the offer.
 - **buyer/persona map** - who owns the pain.
 - **signal sources** - where timing or pain will be proven.
-- **proof path** - demo, teardown, brief, customer example, workflow audit, benchmark, or artifact.
-- **conversion action** - reply, call, install, pilot, teardown, brief review, or intro.
+- **proof path** - demo, teardown, brief, customer example, workflow audit, listing comp, case study, benchmark, or artifact.
+- **conversion action** - reply, call, install, pilot, teardown, brief review, intro, viewing, consult, sample, quote.
 
 If the offer is ambiguous, infer from Memory Store first. If more than one offer is plausible, show the likely options and ask the user to choose before drafting.
+
+## Competitor Intelligence
+
+Every campaign needs a live competitor map. Competitors are not just exclusion fodder — they are signal-rich, learnable opponents whose customer pages, case studies, hiring, launches, reviews, and complaints reveal the buyer landscape better than any firmographic database.
+
+Before sourcing, define:
+
+- **named competitors** - direct, indirect, and category-adjacent. Direct = same buyer, same pain. Indirect = same buyer, different pain, fights for the same budget. Adjacent = different buyer, related category.
+- **competitor watchlist** - URLs to monitor: homepage, customers/case studies, pricing, changelog/release notes, hiring page, blog, public reviews (G2/Capterra/Trustpilot/Yelp/Zillow/etc), press mentions.
+- **competitor customer signals** - who shows up on competitor case studies; who endorses them publicly; who left them and posted about it. These are the most leakable ICP signals you have.
+- **competitor objections and complaints** - what reviewers, ex-customers, and Reddit/HN/community threads complain about. These are your strongest copy hooks if the seller honestly does it better.
+- **competitor positioning gaps** - what they do not say, do not promise, do not cover. The seller's wedge usually hides in those gaps.
+
+Operationalize competitor intelligence as a routine, not a one-shot:
+
+- weekly Exa Monitor on each competitor's blog, pricing, and changelog (one monitor per competitor; cron-anchored to a buyer-friendly timezone).
+- Webset of competitor customers refreshed on a slow cadence.
+- Memory Store record of every confirmed competitor positioning shift, customer churn signal, or objection pattern.
+
+Competitor intelligence feeds three downstream things: ICP cell design (use their customers as a target pool), signal sources (their changelog/news drives outreach timing), and copy proof paths (their gaps are your wedges). Without competitor intelligence the campaign reverts to firmographic spam.
 
 ## First-Run Setup Contract
 
@@ -59,15 +80,15 @@ When GTM Agent has no approved setup packet, route setup to `campaign-setup` bef
 - suppression policy.
 - autopilot routine specs.
 
-Default Memory Store-built ICP range is AI/devtools/startup-to-midmarket teams with roughly 10-500 employees and active product, GTM, support, or agent motion. Fortune and enterprise campaigns require an explicit user choice.
+Default ICP range is whatever the seller's Memory Store recall produces — there is no universal default size or category. Recall against the seller's customer base before the planner picks ranges. (As an illustrative reference: a software/AI seller might default to 10-500 employee teams with active product/GTM motion. A real-estate seller might default to a metro-area + property-type filter. A legal-services seller might default to industry × growth-stage. The planner names defaults from Memory Store, not from this file.)
 
 Default same-company rule: max 2 contacts per company, only when personas are meaningfully different. Keep one primary active thread per company unless a referral happens.
 
 Default media policy: text-first outreach, no screenshot attachment by default, but discovered screenshots/assets may be collected as proof options.
 
-## Memory Store Offer Profiles
+## Example Offer Profiles (Memory Store seller)
 
-Use these only when Memory Store or a Memory Store-built plugin is the seller. For other sellers, infer equivalent profiles from their memories and public evidence.
+The profiles below are illustrative — they show how the planner shape gets filled when Memory Store itself is the seller. They are not the default for every campaign. For any other seller, infer equivalent profiles from that seller's memories, customer language, and public evidence. Use these as a structural template, not a content template.
 
 ### Memory Store Core
 
@@ -128,9 +149,32 @@ Useful offer angles:
 
 **Proof path:** show the plugin's input context, output artifact, feedback loop, and what it records for the next run.
 
-## ICP Personas
+## Persona Discovery
 
-Use these as the default persona map for Memory Store-built offers. Pick the narrowest persona that explains why the person would care.
+ICPs are not a static template, and they are never seller-agnostic. The same planner method runs whether the seller is selling AI infrastructure, houses, legal services, or dog food — but the personas produced are entirely a function of the seller's offer and Memory Store's recall about that seller's customers, prior objections, and lived empathy.
+
+Three rules for every campaign, every seller:
+
+1. **Start from pain, not category.** Recall pain language from Memory Store first — the seller's customer notes, prior objections, support transcripts, founder threads, sales call notes, public complaints in the seller's space. Cluster the pain. Then ask which roles or workflows own that pain. Category/firmographic fit comes last, not first.
+
+2. **Empathy gate.** The seller must be able to speak to this persona honestly because the seller has lived an adjacent version of the pain. If the planner cannot answer "why are *we* (this specific seller) the right person to write to *them*", drop the persona. This is what makes campaigns sound true and stops them from sounding like cold spam.
+
+3. **One unconventional ICP per campaign, mandatory.** At least one ICP cell must be a persona no one else is targeting for this offer. Found through Memory Store recall, not firmographic templates. The other cells can be conventional. Examples of how unconventional looks in practice:
+
+   - Software/AI seller: AI researchers, indie builders, knowledge workers outside tech adopting AI, cognition-system power users.
+   - Real-estate seller (houses, bricks, fixtures): probate attorneys with inherited-property clients, divorce mediators, regional architects working on additions, commercial-to-residential conversion specialists.
+   - Legal services seller: solo founders without house counsel facing first-time contract pain, freelance creators with IP disputes, scaling DTC brands hitting interstate compliance.
+   - Dog food / pet seller: rescue coordinators routing diet-sensitive dogs, breeders with line-specific feeding history, vet techs with chronic-condition caseloads.
+
+   Pattern: under-served buyer × specific timing trigger × pain the seller actually understands.
+
+These are recall prompts, not fixed lists. Run Memory Store recall on the seller's pain language and customer history; let new personas surface; record approved unconventional personas back so the next campaign starts smarter.
+
+## ICP Personas (illustrative, software/AI seller)
+
+The list below is an illustrative persona map for one kind of seller — software/AI infrastructure. For other sellers, the families look entirely different. Recall against the seller's own Memory Store first; do not import this list as a default.
+
+Pick the narrowest persona that explains why the person would care. Combine with at least one unconventional ICP from Persona Discovery above.
 
 - **Devtools/community teams:** Discord, Slack, GitHub issues, docs gaps, and repeated support answers.
 - **Coding-agent teams:** Cursor/Codex/Claude workflows, repo conventions, repeated bugs, failed fixes, and PR context.

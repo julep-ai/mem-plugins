@@ -21,6 +21,38 @@ A Monitor is the wrong tool when:
 - the search will fire more than once per day (Monitors hard-cap at one run per day).
 - the cadence is event-triggered, not time-triggered (use webhooks on an existing Webset instead).
 
+## High-Leverage Monitor Patterns
+
+Apply these patterns to whatever the seller actually cares about; the categories are stable across sellers, the queries are not.
+
+**ICP / target-pool monitors:**
+
+- new entrants matching ICP cell criteria (e.g., new companies posting jobs that match a buyer profile, new properties matching a listing thesis, new public filings matching a vertical).
+- buyer role changes — new VPs, founders, owners, decision-makers entering accounts on the watchlist.
+- expansion signals — funding, hiring surges, new locations, geographic moves.
+
+**Competitor monitors** (one per named competitor):
+
+- changelog / release-notes / pricing page changes.
+- new customer logos or case studies appearing on the competitor's site.
+- competitor's public hiring page (what they hire reveals what they think they need next).
+- public reviews on G2, Capterra, Trustpilot, Yelp, Reddit, HN, Glassdoor depending on category — flag negative reviews as objection-handling and copy-hook source.
+- press mentions and conference appearances.
+
+**Pain / objection monitors:**
+
+- public complaints in forums, subreddits, review sites, or community Slack/Discord channels mentioning the pain the seller solves.
+- "how do I" / "why does X keep" / "we tried X but" pattern monitors targeting buyer pain language.
+- ex-customer signals — people publicly switching away from a competitor are pre-qualified leads if the seller honestly does it better.
+
+**Channel / event monitors:**
+
+- launch / event / sponsor lists for relevant industry events.
+- newsletter or podcast guest lists overlapping the seller's ICP.
+- regulatory or policy changes that create timing in the seller's vertical.
+
+For each monitor: document the parent Webset ID, the cron + timezone, the entity type, the query, the count, the behavior (`append` vs `override`), the webhook destination if any, and the Memory Store thread the monitor reports into. Recurring competitor and pain monitors should usually run weekly anchored to a buyer-friendly timezone; ICP / target-pool monitors usually run daily in fast-moving categories and weekly in slow-moving ones.
+
 ## Required inputs
 
 Before the user creates a Monitor, GTM Agent must know:

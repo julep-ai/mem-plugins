@@ -69,40 +69,59 @@ Use this matrix when building the work plan:
 | Monitor design | signal family | monitor spec, cadence, schema, destination | monitor name | yes |
 | Learning synthesis | batch or routine | confirmed learnings and record proposals | Memory Store thread | yes |
 
-## Worker Prompt Contract
+## Worker Contract
 
-Every spawned worker should receive:
+Worker contract is elastic. Tier the shape to the work, not the other way around.
+
+### Prompt (main agent → worker)
+
+Minimum required:
 
 ```text
 role:
 scope:
-campaign_context:
-approved_policy:
 inputs:
 tools_allowed:
-tools_forbidden:
 output_schema:
-quality_gate:
-stop_conditions:
 ```
 
-The worker must return:
+Add when work crosses approval boundaries, batch processes large volumes, or interacts with external connectors:
+
+```text
+campaign_context:        # active campaign thread, ICP cell, prior learnings
+approved_policy:         # send ramp, exclusions, taboo claims, suppression rules
+tools_forbidden:         # tools the worker must not call
+quality_gate:            # signal card requirements, scoring thresholds
+stop_conditions:         # when to abort and return partial results
+```
+
+### Return (worker → main agent)
+
+Minimum required, all workers:
 
 ```text
 scope:
+top_findings:
+output_artifact:
+recommended_next_action:
+```
+
+Add when work is a batch (Websets, lead-gen, evidence cards, copy variants):
+
+```text
 sources_used:
 count_processed:
 accepted:
 rejected:
-top_findings:
 risks:
 dedupe_keys:
-output_artifact:
-recommended_next_action:
-memory_store_record_candidate:
 ```
 
-No raw dumps unless explicitly requested. If a worker writes a file or creates a Webset/monitor/draft, it must return the path or external ID.
+`output_artifact` is a path inside the campaign folder (`campaigns/<slug>/...`), a Webset/search/enrichment ID, a Gmail draft ID, or a monitor ID. No raw dumps in the return. The main agent reads from the artifact, not from the worker's text.
+
+### Recording is the main agent's job
+
+Workers do not flag what to record to Memory Store. The main agent decides what is durable learning **after** merge — which ICP confidence shifted, which copy angle won, which signal source paid off, which objection pattern repeated. Then it calls Memory Store `record` with the active campaign `thread_id`. Use Memory Store comprehensively; just record from the layer that sees the whole picture.
 
 ## Merge Protocol
 

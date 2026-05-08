@@ -129,17 +129,7 @@ imports:    create_import, get_import, list_imports, list_events
 
 If only Exa Search shows up, the Websets header is still set to the placeholder or your host did not reload. If neither shows up, the plugin is disabled or your host is offline.
 
-## 7. (Optional) Try a Webset from the dashboard
-
-The fastest sanity check is to build one Webset manually. Open the playground and submit a query:
-
-```text
-https://dashboard.exa.ai/playground/create-websets?q=AI+GTM+teams+hiring+a+sales+engineer
-```
-
-Pick `company` as the entity, set criteria, run. Once you see verified rows, the same Webset ID can be reused from the MCP via `get_webset` and enriched with `create_enrichment`.
-
-## 8. (Optional) Attach an Exa Monitor
+## 7. (Optional) Attach an Exa Monitor
 
 Monitors keep a Webset fresh. They are not exposed as MCP tools yet — use the REST API or dashboard.
 
@@ -180,7 +170,7 @@ To react to monitor output, attach a webhook to the parent Webset:
 
 Webhook secrets are shown once on creation. Save them immediately for signature verification.
 
-## 9. Connect Gmail and Google Calendar
+## 8. Connect Gmail and Google Calendar
 
 Exa handles research and sourcing. Outreach and booking context need separate connectors authorized in your host:
 
@@ -189,7 +179,7 @@ Exa handles research and sourcing. Outreach and booking context need separate co
 
 Both are account-scoped; the plugin cannot ship them ready-to-run.
 
-## 10. Run campaign setup
+## 9. Run campaign setup
 
 ```text
 /gtm-agent:campaign-setup
