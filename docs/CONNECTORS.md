@@ -19,53 +19,102 @@ GTM Agent expects the Memory Store MCP tools from that core plugin:
 
 GTM Agent does **not** redeclare Memory Store MCP in its own `.mcp.json`. That avoids a second Memory Store auth prompt when `memory-store` is already installed.
 
-## Exa Search MCP
+## Get an Exa API key
 
-GTM Agent declares Exa Search MCP for general company, people, and web research:
+Both Exa Search MCP and Websets MCP use the same key.
 
 ```text
-https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,web_fetch_exa,deep_search_exa
+https://dashboard.exa.ai/api-keys
 ```
 
-For Claude Code, add or override Exa with an API key when you need production limits or lead generation:
+The free plan works without a key but is rate-limited and lacks Websets access. For any real campaign, create a key and configure it in both Exa Search and Websets server entries before expecting execution-grade sourcing.
+
+## Exa Search MCP
+
+GTM Agent declares Exa Search MCP for company, people, and web research. The plugin's bundled `.mcp.json` ships with `YOUR_EXA_API_KEY` placeholders in headers; replace them in host MCP settings.
+
+Server URL:
+
+```text
+https://mcp.exa.ai/mcp
+```
+
+Active tools:
+
+- `web_search_exa` (default on) - clean web search results.
+- `web_fetch_exa` (default on) - full webpage content as markdown.
+- `web_search_advanced_exa` (optional) - category, domain, date range, highlights, summaries, subpage crawling.
+
+Deprecated but still callable for backwards compat:
+`company_research_exa`, `people_search_exa`, `crawling_exa`, `linkedin_search_exa`, `get_code_context_exa`, `deep_search_exa`. GTM Agent skills should prefer `web_search_advanced_exa` and treat deprecated tools as host/backward-compatibility fallbacks only.
+
+Manual host configuration (if not relying on the plugin's `.mcp.json`):
 
 ```bash
-claude mcp add --transport http exa "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,web_fetch_exa,deep_search_exa" --header "x-api-key: YOUR_EXA_API_KEY"
+# Claude Code
+claude mcp add --transport http exa https://mcp.exa.ai/mcp --header "x-api-key: YOUR_EXA_API_KEY"
+
+# Codex
+codex mcp add exa --url https://mcp.exa.ai/mcp
 ```
 
-For Codex:
+Current Codex CLI builds support `--url` and `--bearer-token-env-var`, not arbitrary `x-api-key` headers. If you need Exa Search production limits in Codex, configure the `x-api-key` header in the host MCP settings or config file; otherwise the URL above runs on Exa's free plan.
+
+Free-plan usage (no key, rate-limited):
 
 ```bash
-codex mcp add exa --url "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,web_fetch_exa,deep_search_exa"
+claude mcp add --transport http exa https://mcp.exa.ai/mcp
+codex mcp add exa --url https://mcp.exa.ai/mcp
 ```
-
-Codex supports bearer-token environment variables for remote MCP auth. If your Exa setup requires API-key auth, configure the key in host MCP settings rather than committing it to this repo.
 
 ## Websets MCP
 
-Websets needs an Exa API key in the server URL, so GTM Agent declares a placeholder Websets MCP entry but cannot ship a ready-to-run secret. Replace `YOUR_EXA_API_KEY` in host MCP settings before expecting Websets tools to appear.
+Websets is the persistent sourcing layer: criteria-verified company/person lists with enrichments, imports, webhooks, and async events. It is where reusable GTM account/person pools live between asynchronous automation runs. Authentication is usually either a Bearer token in the `Authorization` header or the hosted MCP URL with `?exaApiKey=YOUR_EXA_API_KEY`; use the form your host supports.
 
-Declared placeholder:
+Server URL:
 
 ```text
-https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY
+https://websetsmcp.exa.ai/mcp
 ```
 
-For Claude Code:
+Manual host configuration:
 
 ```bash
+# Claude Code
+claude mcp add --transport http websets https://websetsmcp.exa.ai/mcp --header "Authorization: Bearer YOUR_EXA_API_KEY"
+
+# Codex
+export EXA_API_KEY=YOUR_EXA_API_KEY
+codex mcp add websets --url https://websetsmcp.exa.ai/mcp --bearer-token-env-var EXA_API_KEY
+
+# Header-less fallback (older hosts)
 claude mcp add --transport http websets "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY"
-```
-
-For Codex:
-
-```bash
 codex mcp add websets --url "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY"
 ```
 
-After Websets is connected, GTM Agent can use `websets-sourcing` for persistent company/person sets, enrichments, imports, and async sourcing.
+Direct dashboard playground for previewing or building Websets without code:
 
-If Websets is not exposed in the tool list, check the host MCP list first. The usual cause is that the placeholder URL was never replaced with a real key, or the host needs a plugin reload after the MCP config changed.
+```text
+https://dashboard.exa.ai/playground/create-websets?q=<your+query>
+```
+
+If Websets tools do not appear after install, the usual causes: API key still set to placeholder, host did not reload after MCP config change, or the host scoped Websets auth to the wrong plugin.
+
+## Exa Monitors
+
+Monitors keep an existing Webset fresh by re-running a search on a cron schedule and appending or overriding results. Monitors are **not currently exposed as MCP tools**. Use one of:
+
+- Dashboard UI: https://dashboard.exa.ai (open the Webset, attach a Monitor).
+- REST API: `POST https://api.exa.ai/websets/v0/monitors` with `{ websetId, cadence: { cron, timezone }, behavior: { type: "search", config: { query, count, behavior: "append" | "override" } } }`. Cron must be a valid 5-field expression that triggers at most once per day; timezone is IANA (defaults to `Etc/UTC`).
+- Webhook events: `webset.item.created`, `webset.item.enriched`, `webset.idle`.
+
+GTM Agent's `websets-sourcing` skill outputs a Monitor spec when a monitor is needed; the user creates the monitor through the dashboard or REST API and pastes the resulting `monitor_id` back when recording the routine to Memory Store.
+
+## Automation Hosts
+
+Autopilot is a host-level automation pattern, not an uncontrolled background daemon hidden inside the plugin. In Codex, use recurring automations for daily digests, Websets refresh checks, monitor reviews, Gmail reply scans, and weekly learning summaries. In Claude Code, Claude Cowork, or OpenCode, use the host's scheduled-task or recurring-agent mechanism when available, or run the same routine prompt manually until that host exposes scheduling.
+
+Each automation should have one precise goal, one cadence, one Memory Store thread/context, required connectors, allowed actions, forbidden actions, stop conditions, and expected output. The GTM Agent skill should record approved routine specs to Memory Store so future runs know what they are allowed to do.
 
 ## Gmail
 

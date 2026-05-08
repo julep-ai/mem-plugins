@@ -1,7 +1,7 @@
 {
   "name": "gtm-agent",
-  "version": "0.3.0",
-  "description": "Memory Store-powered GTM agent with campaign setup, Exa research, Websets sourcing, signal monitors, Gmail outreach, Google Calendar booking context, autopilot routines, and campaign learning.",
+  "version": "0.3.1",
+  "description": "Memory Store-powered GTM autopilot for engineering signal-based campaigns, Exa/Websets sourcing, Gmail execution, recurring routines, and campaign learning.",
   "author": {
     "name": "Memory Store",
     "email": "support@memory.store",
@@ -29,10 +29,10 @@
   "apps": "./.app.json",
   "interface": {
     "displayName": "GTM Agent",
-    "shortDescription": "Self-improving GTM campaigns",
-    "longDescription": "Build evidence-backed GTM campaigns with Memory Store context, first-run campaign setup, website and demo CTA discovery, Exa company research, Exa lead generation, Exa people search, Websets lead sets, Exa Monitors, Gmail outreach, Google Calendar booking context, autopilot routines, and durable learning loops. GTM Agent turns ICP hypotheses into sourced accounts, signal cards, autonomous outreach inside approved send policy, engagement capture, and better next batches.",
+    "shortDescription": "Sales/GTM autopilot routines",
+    "longDescription": "Engineer evidence-backed GTM campaigns once, then run goal-scoped asynchronous routines with Memory Store context, first-run campaign setup, website and demo CTA discovery, Exa company research, Exa lead generation, Exa people search, Websets lead sets, Exa Monitors, Gmail outreach, Google Calendar booking context, and durable learning loops. GTM Agent turns ICP hypotheses into sourced accounts, signal cards, autonomous outreach inside approved send policy, engagement capture, daily/weekly automation runs, and better next batches.",
     "developerName": "Memory Store",
-    "category": "Productivity",
+    "category": "Sales",
     "capabilities": [
       "Interactive",
       "Write"
@@ -41,7 +41,7 @@
     "privacyPolicyURL": "https://memory.store/privacy",
     "termsOfServiceURL": "https://memory.store/terms",
     "defaultPrompt": [
-      "Set up GTM Agent autopilot from Memory Store, website, Gmail, and Calendar.",
+      "Set up GTM Agent autopilot from Memory Store, website, Gmail, Calendar, and recurring routines.",
       "Set up the campaign planner before drafting emails.",
       "Build an ICP campaign with Exa/Websets sourcing and signal cards."
     ],

@@ -4,7 +4,7 @@ Use this reference when creating the first setup packet or turning an approved s
 
 ## Setup Approval
 
-Setup approval is the one-time gate that replaces per-batch approval. Before approval, do not send. After approval, GTM Agent may source, draft, send, follow up, inspect replies, and record learnings inside the approved policy.
+Setup approval is the one-time gate that replaces per-batch approval. Before approval, do not send. After approval, GTM Agent may source, draft, send, follow up, inspect replies, run host automations, and record learnings inside the approved policy.
 
 The approval must cover:
 
@@ -16,6 +16,26 @@ The approval must cover:
 - send ramp and followup cadence.
 - suppression and stop conditions.
 - connector gaps and manual fallbacks.
+- routine specs for any asynchronous automation.
+
+## Autopilot Mode
+
+Autopilot is the core product behavior: the user engineers the campaign once, approves the policy, and the host keeps running precise routines toward the campaign goal.
+
+Approved routines may run daily, weekly, every few hours, or on monitor/reply events. Each routine needs:
+
+- one explicit goal.
+- cadence or trigger.
+- Memory Store thread/context.
+- required connectors.
+- allowed actions.
+- forbidden actions.
+- send policy and ramp limits.
+- stop conditions.
+- expected output.
+- what to record back to Memory Store.
+
+If the current host cannot schedule routines, output the exact routine specs and mark them `manual_until_scheduled`. Do not weaken the autopilot claim; surface the missing host capability.
 
 ## Send Ramp
 
@@ -78,6 +98,10 @@ Default routines:
 - monitor review for approved Exa monitor specs.
 
 Learning records should explain what changed about ICP, signal quality, copy angle, objection handling, proof path, or suppression policy.
+
+## Automation Specs
+
+Use `../../gtm-agent/references/automation-routines.md` when converting any of these routines into a host automation. Do not schedule a vague "do GTM" job. The automation prompt should name the exact routine, goal, cadence, approved campaign context, required tools, allowed actions, forbidden actions, stop conditions, and output.
 
 ## Stop Conditions
 

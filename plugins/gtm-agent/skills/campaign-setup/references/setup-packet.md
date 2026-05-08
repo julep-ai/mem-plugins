@@ -8,10 +8,13 @@ Return these keys in this order:
 
 ```text
 company_profile:
+campaign_mode:
+context_sources:
 offer_profiles:
 sender_voice:
 website_findings:
 demo_cta:
+funnel_system:
 icp_matrix:
 signal_sources:
 gmail_learnings:
@@ -26,16 +29,19 @@ Do not rename keys. If a value is unavailable, mark it as `unknown`, `missing_co
 ## Field Requirements
 
 - `company_profile`: company name, website, one-line product read, market category, confidence, and missing facts.
+- `campaign_mode`: `new_campaign`, `build_on_previous`, `refresh_existing`, `expand_winner`, `rescue_underperformer`, `reactivation`, or `event_or_launch`; include evidence and policy implications.
+- `context_sources`: Memory Store, uploaded/pasted docs, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets, and what each source is allowed to influence.
 - `offer_profiles`: active offer, alternate sellable offers, core claim, do-not-pitch list, proof path, and conversion action.
 - `sender_voice`: sender identity, tone, phrases to use, phrases to avoid, and whether it came from Memory Store, Gmail, website, or user input.
 - `website_findings`: website pages checked, claims found, proof assets, screenshots/assets worth collecting, and risky or unsupported claims.
 - `demo_cta`: discovered link candidates, chosen link, confirmation status, CTA style, and fallback CTA.
+- `funnel_system`: funnel stages being engineered, current stage strengths/gaps, and which stages can be filled by background workers or automations.
 - `icp_matrix`: ICP cells, buyer/persona, company size, trigger signals, exclusions, target count, and confidence.
 - `signal_sources`: Memory Store, Exa/Websets, website, GitHub/docs/changelog, LinkedIn, Reddit/HN, Product Hunt/YC/events, Gmail replies, and monitor candidates.
 - `gmail_learnings`: search scope, warm paths, objections, reply language, suppressions, prior touches, and confidence.
 - `calendar_policy`: Google Calendar availability use, booking-link policy, meeting duration if known, timezone if known, and unavailable fallback.
 - `send_ramp_policy`: day 1 max 10 sends, days 2-3 max 20/day, then max 50/day until changed; pause conditions; same-company rule.
-- `autopilot_routines`: Gmail reply scan every 2 hours, daily campaign digest, weekly ICP/signal/copy learning summary, Websets refreshes, and monitor specs.
+- `autopilot_routines`: approved or proposed routine specs for Gmail reply scans, followup checks, daily campaign digest, weekly ICP/signal/copy learning summary, Websets refreshes, monitor reviews, host automation cadence, background-worker graph, allowed actions, forbidden actions, stop conditions, and expected output.
 - `approval_needed_before_start`: demo link confirmation, sender identity, send ramp, ICP cells, claims, exclusions, connector gaps, and any unresolved high-risk ambiguity.
 
 ## Setup Decision Groups
@@ -50,4 +56,4 @@ Keep this grouping compact. The packet fields remain the canonical output.
 
 ## Approval Rule
 
-The setup packet can be used for planning before approval, but not for autonomous sending. After the user approves or edits it, record the confirmed decisions to Memory Store and treat the packet as the active campaign operating policy.
+The setup packet can be used for planning before approval, but not for autonomous sending or scheduled host automations. After the user approves or edits it, record the confirmed decisions to Memory Store and treat the packet as the active campaign operating policy.

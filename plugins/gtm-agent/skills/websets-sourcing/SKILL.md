@@ -1,77 +1,29 @@
 ---
 name: websets-sourcing
-description: Use when creating Exa Websets for company/person sourcing, previews, enrichments, imports, refreshes, or persistent GTM lists.
+description: Use when creating Exa Websets sourcing, previews, enrichments, imports, or refreshes.
 ---
 
 # Websets Sourcing
 
 Use Exa Websets as the persistent sourcing and enrichment layer for GTM Agent.
 
-Sources:
+## Loop
 
-- https://exa.ai/docs/reference/websets-mcp
+1. Start with Memory Store `checkin` and recall campaign, ICP, exclusions, seed accounts, suppressions, and prior Webset IDs.
+2. Use Websets when a list should persist, refresh, enrich, export, import, or be reused across campaigns.
+3. Preview before broad creation when available.
+4. Separate criteria from enrichments: criteria filter inclusion; enrichments add action fields.
+5. Pick entity type: `company`, `person`, `article`, `research_paper`, or `custom`.
+6. Use imports for seed accounts, customers, competitors, suppressions, or CSV scope.
+7. Add only enrichments that improve GTM action: buyer/persona, recent signal, source URL, offer angle, proof path, next action, confidence, and exclusion risk.
+8. Track async IDs and status; record approved Webset/search/enrichment/import IDs to Memory Store.
 
-## Requirements
+Websets MCP is separate from Exa Monitors. For monitors, use `../gtm-agent/references/monitors.md` and record returned monitor IDs after approval.
 
-- Memory Store MCP for campaign context and learning.
-- Websets MCP configured with an Exa API key.
-- Do not commit real Exa API keys. Use host-level MCP config or environment setup.
+## Output
 
-## Operating Loop
+Return: webset read, spec, status, quality notes, Memory Store mapping, and next action.
 
-1. **Checkin and recall.** Start with Memory Store `checkin`, then recall the campaign, ICP, exclusions, existing customers, seed accounts, enrichment requirements, and prior Webset IDs.
+## Rules
 
-2. **Choose whether Websets is warranted.** Create or update a Webset when the list should persist, be enriched, refreshed, exported, monitored, imported into downstream tools, or reused across campaigns.
-
-3. **Preview first.** Use preview behavior when available before creating expensive or broad Websets. Tighten the natural-language search query and criteria until the result class is clear.
-
-4. **Separate criteria from enrichments.**
-   - Criteria are hard filters every result must satisfy.
-   - Enrichments are columns extracted after results pass criteria.
-
-5. **Use the right entity type.**
-   - `company` for target accounts
-   - `person` for people or buyer lists
-   - `article` for signal sources
-   - `research_paper` only for research workflows
-   - `custom` only when the entity does not fit standard types
-
-6. **Use imports for scoping and exclusions.** Import seed accounts, existing customers, competitors, suppression lists, or CSVs when they should constrain the Webset.
-
-7. **Add enrichments that improve action quality.** Favor buyer title, persona/job-to-be-done, employee count, funding, hiring, tech stack, recent signal, source URL, public pain language, offer angle, proof path, next action, contact URL, confidence, and exclusion risk. Do not let "CEO/founder" become the persona by itself.
-
-8. **Track async state.** Websets searches and enrichments are async. Return IDs, status, event/webhook notes, and next polling or review action.
-
-9. **Record durable IDs.** Record Webset IDs, search IDs, enrichment IDs, import IDs, webhook/event routes, and campaign/thread mapping in Memory Store after the user approves.
-
-## Tool Surface
-
-Use Websets MCP operations when available:
-
-- webset management: create, list, get, update, delete, preview
-- items: list and inspect webset items
-- searches: create, inspect, cancel
-- enrichments: create, inspect, cancel
-- webhooks/events: subscribe, inspect, update, delete, list events
-- imports: create and inspect imports
-
-Scheduled monitors may exist in the underlying Websets/API/dashboard surface but are not currently exposed as Websets MCP tools. When a monitor is needed, output a monitor spec and route it through the Exa Monitors/API workflow.
-
-## Output Contract
-
-Return:
-
-1. **webset read** - why this should be a Webset or why it should stay a one-off search.
-2. **spec** - entity type, query, criteria, enrichments, imports, exclusions.
-3. **status** - created/previewed/refreshed IDs and async state.
-4. **quality notes** - likely false positives, missing planner fields, stale/weak signals, enrichment risk.
-5. **memory mapping** - campaign thread, ICP thread, Webset IDs, and next record.
-6. **next action** - wait, enrich, export, people search, copy, monitor, or discard.
-
-## Do Not
-
-- Do not create broad reusable Websets without approval.
-- Do not put secrets in repo files.
-- Do not delete Websets unless explicitly asked.
-- Do not confuse Websets MCP with Exa Monitors API availability.
-- Do not mark Webset rows draft-ready unless they include persona, live signal, source, offer angle, proof path, next action, confidence, and exclusion risk.
+Do not create broad reusable Websets without approval. Do not commit secrets. Do not delete Websets unless explicitly asked. Do not mark rows draft-ready without complete planner fields.

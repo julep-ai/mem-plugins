@@ -30,7 +30,7 @@ If Exa/Websets tools are missing:
 - Produce exact search queries, Websets criteria, enrichments, and batching plan.
 - Tell the user which MCP to connect.
 - Do not fabricate lead lists.
-- If only `web_search_exa` appears, treat the Exa surface as exploratory research only. Deep lead generation and source fetching still require `deep_search_exa`, `web_search_advanced_exa`, or `web_fetch_exa` to be exposed by the host.
+- If only `web_search_exa` appears, treat the Exa surface as exploratory research only. Execution-grade lead generation and source fetching need `web_search_advanced_exa` and `web_fetch_exa`. Use deprecated tools such as `deep_search_exa` only when the host still exposes them.
 
 For Exa Search MCP:
 
@@ -44,7 +44,7 @@ For Websets MCP:
 codex mcp add websets --url "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY"
 ```
 
-GTM Agent also declares this Websets placeholder in `plugins/gtm-agent/.mcp.json`; the user still has to replace `YOUR_EXA_API_KEY` in host MCP settings because the plugin cannot safely ship a real Exa key.
+GTM Agent also declares Websets in `plugins/gtm-agent/.mcp.json` with a `YOUR_EXA_API_KEY` placeholder; the user still has to replace it in host MCP settings because the plugin cannot safely ship a real Exa key.
 
 ## Gmail Missing
 

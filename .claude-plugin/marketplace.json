@@ -40,8 +40,8 @@
     {
       "name": "gtm-agent",
       "source": "./plugins/gtm-agent",
-      "version": "0.3.0",
-      "description": "Memory Store-powered GTM agent with campaign setup, Exa research, Websets sourcing, signal monitors, Gmail outreach, Google Calendar booking context, autopilot routines, and campaign learning.",
+      "version": "0.3.1",
+      "description": "Memory Store-powered GTM autopilot for engineering signal-based campaigns, Exa/Websets sourcing, Gmail execution, recurring routines, and campaign learning.",
       "author": {
         "name": "Memory Store",
         "email": "support@memory.store",
@@ -64,7 +64,7 @@
         "gmail",
         "memory-store"
       ],
-      "category": "Productivity"
+      "category": "Sales"
     }
   ]
 }

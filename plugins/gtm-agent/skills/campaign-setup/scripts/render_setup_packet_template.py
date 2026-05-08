@@ -6,10 +6,13 @@ needs_confirmation:
 unknown_blocker:
 
 company_profile:
+campaign_mode:
+context_sources:
 offer_profiles:
 sender_voice:
 website_findings:
 demo_cta:
+funnel_system:
 icp_matrix:
 signal_sources:
 gmail_learnings:

@@ -2,13 +2,19 @@
   "mcpServers": {
     "exa": {
       "type": "http",
-      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,web_fetch_exa,deep_search_exa",
-      "note": "Recommended for company research, people search, public-web source discovery, evidence fetches, and structured lead generation. Add an x-api-key header in host MCP config for production limits. GTM Agent intentionally does not redeclare Memory Store MCP; install memory-store@mem-plugins once for that."
+      "url": "https://mcp.exa.ai/mcp",
+      "headers": {
+        "x-api-key": "YOUR_EXA_API_KEY"
+      },
+      "note": "Exa Search MCP. Default-on tools: web_search_exa, web_fetch_exa. Optional: web_search_advanced_exa (category/domain/date/highlights/subpage filters). GTM Agent should prefer web_search_advanced_exa for company, people, and lead-generation research. Deprecated but still callable for backward compatibility: company_research_exa, people_search_exa, crawling_exa, linkedin_search_exa, get_code_context_exa, deep_search_exa. Free plan works without a key (rate-limited). Get an API key at https://dashboard.exa.ai/api-keys and replace YOUR_EXA_API_KEY in host MCP settings before production runs."
     },
     "websets": {
       "type": "http",
-      "url": "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY",
-      "note": "Recommended for persistent company/person sourcing, criteria verification, enrichments, imports, refreshes, and exports. Replace YOUR_EXA_API_KEY in host MCP settings with a real Exa API key before expecting Websets tools to connect."
+      "url": "https://websetsmcp.exa.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_EXA_API_KEY"
+      },
+      "note": "Exa Websets MCP. Persistent company/person sourcing with criteria verification, enrichments, imports, webhooks, async events, and reusable GTM pools for recurring routines. 22 tools across 6 groups: webset (create/list/get/update/delete/preview), items (list/get), search (create/get/cancel), enrichment (create/get/cancel), webhook (create/list/get/update/delete), imports (create/get/list/list_events). Get an API key at https://dashboard.exa.ai/api-keys and replace YOUR_EXA_API_KEY before tools appear. If the host cannot pass Authorization headers, configure the URL as https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY. Monitors are NOT exposed via MCP yet; use the REST API at https://api.exa.ai/websets/v0/monitors or the dashboard at https://dashboard.exa.ai/playground/create-websets."
     }
   }
 }

@@ -7,7 +7,7 @@ Use this reference when designing the campaign workflow, review gates, followup 
 Do not design this as "Exa finds leads, Gmail sends emails." Design it as an experiment system:
 
 ```text
-setup approval -> ICP hypotheses -> evidence-backed accounts -> controlled sends -> engagement capture -> Memory Store learning -> next batch
+setup approval -> ICP hypotheses -> evidence-backed accounts -> approved automation routines -> controlled sends -> engagement capture -> Memory Store learning -> next batch
 ```
 
 ## Campaign Entities
@@ -25,6 +25,7 @@ Track these concepts in the working output even if the host does not have a data
 - **engagement event** - reply, meeting, objection, bounce, unsubscribe, referral, qualitative note.
 - **learning** - what changed about ICP, signal, copy, channel, account, or objection handling.
 - **suppression** - email/domain/reason/source for no-contact and future exclusion.
+- **routine** - goal, cadence, host, tools, allowed actions, forbidden actions, stop conditions, output, and Memory Store record target.
 
 ## Review Gates
 
@@ -36,6 +37,7 @@ Minimum gates before autopilot starts:
 - ICP list and company-size range approved.
 - Representative copy approved.
 - Send ramp, same-company rule, followup cadence, and stop conditions approved.
+- Routine specs approved for any asynchronous host automation.
 - Claims, taboo claims, private-memory policy, and suppressions approved.
 
 After setup approval, per-batch approval is not required by default. Full autopilot may send and follow up inside the approved policy. If the user chooses draft-first mode, preserve per-batch approval.
@@ -57,7 +59,7 @@ Hard blocks:
 Use clear states when reporting campaign progress:
 
 ```text
-setup_needed -> setup_review -> approved -> sourcing -> sourced -> qualified -> drafted -> sent -> replied -> next_action -> learned
+setup_needed -> setup_review -> approved -> routine_ready -> sourcing -> sourced -> qualified -> drafted -> sent -> replied -> next_action -> learned
 ```
 
 Terminal or suppressing states:
@@ -121,6 +123,7 @@ V1 is a plugin-level autopilot, not a separate dashboard:
 - one primary channel: email/Gmail
 - one sender identity unless the user says otherwise
 - full autopilot after setup approval
+- approved routine specs for asynchronous daily/weekly work
 - representative samples during setup before autopilot starts
 - ramped sends with hard stop conditions
 - Google Calendar context for qualified replies

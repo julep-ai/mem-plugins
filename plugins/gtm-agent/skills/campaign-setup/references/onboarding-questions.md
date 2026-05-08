@@ -19,31 +19,40 @@ Ask or infer these in order:
 1. **What are we selling?**
    - active offer, alternate offers, core claim, proof path, taboo positioning.
 
-2. **Who is the sender?**
+2. **What kind of campaign is this?**
+   - new campaign, build on previous campaign, refresh existing campaign, expand winner, rescue underperformer, reactivation, event/launch campaign.
+
+3. **What context should the agent ingest?**
+   - Memory Store, uploaded docs, pasted notes, positioning docs, prior campaign exports, CSV/account lists, website, Gmail, Calendar, Exa/Websets.
+
+4. **What funnel system are we engineering?**
+   - market definition, ICP hypotheses, signal discovery, account sourcing, buyer discovery, evidence cards, copy, review, send/followup, reply classification, meeting/next action, learning.
+
+5. **Who is the sender?**
    - sender identity, relationship to offer, human voice, phrases to use, phrases to avoid.
 
-3. **What should happen if the campaign works?**
+6. **What should happen if the campaign works?**
    - reply, demo, teardown, install, pilot, brief review, intro, or other conversion event.
 
-4. **What is the demo or next-action path?**
+7. **What is the demo or next-action path?**
    - discovered demo/Cal link, confirmation status, fallback CTA, meeting length, timezone.
 
-5. **Who should we target first?**
+8. **Who should we target first?**
    - ICP cells, company size, stage, geography, buyer persona, pain, triggers, exclusions.
 
-6. **Which signals count as live enough?**
+9. **Which signals count as live enough?**
    - hiring, launch, docs/changelog, support/community load, GitHub activity, public complaint, reply history, warm path, or other trigger.
 
-7. **What should we never say or do?**
+10. **What should we never say or do?**
    - taboo claims, competitor exclusions, current customers, sensitive proof, screenshots, attachments, regulated segments, do-not-contact rules.
 
-8. **How autonomous should this campaign be?**
-   - default is full autopilot after setup approval with ramped limits and stop conditions.
+11. **How autonomous should this campaign be?**
+   - default is full autopilot after setup approval with ramped limits, precise daily/weekly routine specs, background-worker graphs, and stop conditions.
 
-9. **How should Gmail be used?**
+12. **How should Gmail be used?**
    - sender voice, sent-mail examples, inbox replies, objections, warm paths, suppressions, followups, and active threads.
 
-10. **How should Calendar be used?**
+13. **How should Calendar be used?**
     - default is booking context after qualified replies; do not create or move events without explicit policy.
 
 ## Question Output
@@ -75,10 +84,13 @@ Use these defaults unless recalled context or the user overrides them:
 Every setup answer should map to the setup packet:
 
 - `company_profile`
+- `campaign_mode`
+- `context_sources`
 - `offer_profiles`
 - `sender_voice`
 - `website_findings`
 - `demo_cta`
+- `funnel_system`
 - `icp_matrix`
 - `signal_sources`
 - `gmail_learnings`

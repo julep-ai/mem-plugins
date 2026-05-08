@@ -12,6 +12,8 @@ Record confirmed events:
 
 - Campaign or ICP plan approved.
 - First-run setup packet approved or changed.
+- Campaign mode or context-source base approved or changed.
+- Uploaded/pasted docs approved as campaign source context.
 - ICP cell added, removed, or reframed.
 - Account/source signal accepted or rejected.
 - Copy variant approved, edited, rejected, sent, or scheduled.
@@ -21,6 +23,7 @@ Record confirmed events:
 - Bounce, unsubscribe, or do-not-contact event.
 - Performance update from the user or mailbox/campaign system.
 - Approved claim, customer name, metric, or taboo topic update.
+- Automation routine approved, paused, changed, or retired.
 
 Do not record drafts the user never saw, outcomes inferred from silence, guessed metrics, or private claims that were not approved.
 
@@ -38,6 +41,16 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 
 > Exclusions, sender policy, and approval constraints: `<one paragraph>`.
 
+### Campaign system approved
+
+`content`:
+
+> The user approved the GTM campaign system for `<company>` today. Campaign mode: `<new_campaign | build_on_previous | refresh_existing | expand_winner | rescue_underperformer | reactivation | event_or_launch>`. Context sources approved: `<Memory Store, uploaded docs, pasted notes, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets>`. Funnel stages being engineered: `<summary>`. ICP system: `<summary>`. Signal system: `<summary>`. Learning system: `<summary>`.
+
+`background`:
+
+> Source context and constraints: `<doc names, memory IDs, URLs, Gmail scope, calendar policy, exclusions, open decisions>`.
+
 ### Setup packet approved
 
 `content`:
@@ -47,6 +60,16 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 `background`:
 
 > Setup packet sources and gaps: website `<URL>`, Gmail scope `<scope>`, Google Calendar policy `<policy>`, exclusions `<summary>`, connector gaps `<summary>`.
+
+### Automation routine approved
+
+`content`:
+
+> The user approved a GTM Agent automation routine for `<company>` today. Routine: `<routine_name>`. Goal: `<goal>`. Cadence: `<cadence>`. Host: `<Codex | Claude Code | Claude Cowork | OpenCode | manual>`. Allowed actions: `<summary>`. Forbidden actions: `<summary>`. Stop conditions: `<summary>`. Expected output: `<digest | draft queue | send summary | followup queue | monitor review | learning summary>`.
+
+`background`:
+
+> Campaign context: `<campaign/thread/ICP>`. Required tools: `<Memory Store, Exa, Websets, Gmail, Calendar, host automation>`. Record policy: `<what gets recorded>`. Owner review needed when: `<conditions>`.
 
 ### ICP refined
 

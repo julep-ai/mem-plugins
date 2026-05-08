@@ -1,58 +1,28 @@
 ---
 name: exa-company-research
-description: Use when researching companies, markets, competitors, accounts, news, or public profiles with Exa and Memory Store context.
+description: Use when doing Exa-backed company, market, competitor, news, or account research.
 ---
 
 # Exa Company Research
 
-Research companies and markets for GTM decisions. This skill adapts Exa's Company Research pattern to Memory Store-backed campaigns.
+Research companies and markets for Memory Store-backed GTM decisions.
 
-Sources:
+## Loop
 
-- https://exa.ai/docs/reference/company-research-claude-skill
+1. Start with Memory Store `checkin` and recall ICPs, exclusions, prior account history, approved claims, and campaign goal.
+2. Classify the request: company deep dive, market scan, competitor map, target-account research, news/timing, or profile/team discovery.
+3. Prefer active Exa Search MCP tools at `https://mcp.exa.ai/mcp`: `web_search_advanced_exa`, `web_search_exa`, and `web_fetch_exa`.
+4. Use `web_search_advanced_exa` categories deliberately: `company` for company metadata, `news` for timing, `people` for public profiles.
+5. Run query variants in parallel when possible; return distilled rows, source URLs, confidence, and uncertainty notes.
+6. If outbound-bound, include planner fields: why this account/person, why now, persona, offer angle, proof path, next action, remember-after-touch, confidence, and exclusion risk.
+7. Record only confirmed research learnings to Memory Store.
 
-## Operating Loop
+Deprecated Exa tools such as `company_research_exa`, `linkedin_search_exa`, `crawling_exa`, and `deep_search_exa` are backward-compatible fallbacks only.
 
-1. **Checkin and recall.** Start with Memory Store `checkin`, then recall the company/product being sold, target ICPs, customer language, exclusions, competitors, prior account history, and approved outbound claims.
+## Output
 
-2. **Define the research question.** Classify the ask:
-   - company deep dive
-   - competitor map
-   - market/category scan
-   - target account list
-   - news/timing research
-   - public profile/team discovery
+Return: research read, company/account rows, market notes, Memory Store impact, and next action.
 
-3. **Use Exa as a worker, not the main context.** Never dump raw search results into the main thread. Run searches in background workers when available, and return only distilled briefs, structured rows, source URLs, and uncertainty notes.
+## Rules
 
-4. **Use the right Exa category.**
-   - `company` for company discovery and company metadata
-   - `news` for announcements and timing
-   - `people` for public professional profiles
-   - no category with `type: "auto"` or `type: "deep"` for broader investigation
-
-5. **Vary queries.** Generate 2-3 query variations, run them in parallel when possible, merge, dedupe, and score.
-
-6. **Respect filter restrictions.** With `category: "company"`, do not use domain/date filters. With broad web or news searches, domain/date filters are allowed. `includeText` and `excludeText` should stay single-item arrays.
-
-7. **Build account briefs.** For each company, return fit, timing, trigger, source URLs, confidence, and what Memory Store context changes about the angle. If the result is meant for outbound, include the campaign-planner fields: why this person/account, why now, persona, offer angle, proof path, next action, remember-after-touch, and exclusion risk.
-
-8. **Record only confirmed learnings.** If the user confirms a market thesis, competitor map, account fit rule, or exclusion rule, record it to Memory Store with the active `thread_id`.
-
-## Output Contract
-
-Return:
-
-1. **research read** - one paragraph with the strongest finding and biggest uncertainty.
-2. **company/account rows** - company, website, ICP fit, signal, source URL, persona, offer angle, proof path, next action, confidence, exclusion risk.
-3. **market notes** - competitors, trends, timing, buying triggers.
-4. **memory impact** - what prior Memory Store context changed.
-5. **next action** - lead-gen, people search, Websets, monitor, copy, or discard.
-
-## Do Not
-
-- Do not invent funding, customers, headcount, metrics, or buyer names.
-- Do not use Exa results without source URLs.
-- Do not treat a website, category fit, or founder title as a draft-ready signal.
-- Do not put private Memory Store context into public outbound copy.
-- Do not treat an auth-gated LinkedIn result as verified unless fetched through an approved browser workflow.
+No invented funding, customers, headcount, metrics, buyer names, or source-less claims. A website, category fit, or founder title is not enough for draft-ready outreach.

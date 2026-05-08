@@ -41,6 +41,8 @@ Use lead generation for large ICP pools:
 4. Run batches in parallel.
 5. Deduplicate, score, and trim.
 
+Use `web_search_advanced_exa` for current Exa MCP lead-generation work. If a host still exposes deprecated tools such as `deep_search_exa`, treat them as backward-compatible helpers, not the primary path.
+
 For the user's default scale:
 
 ```text
@@ -76,7 +78,7 @@ Use Exa Monitors for recurring signal streams:
 - conference/event pages
 - pain-point language in public posts, forums, or blogs
 
-Monitors are scheduled recurring searches. They dedupe across runs and can deliver structured output to webhooks. Minimum schedule interval is one hour. Store monitor IDs, names, query, cadence, schema, webhook route, and related Memory Store thread IDs.
+Monitors are scheduled recurring searches that re-run a query against an existing Webset and append (or override) verified results. They are not currently exposed as MCP tools — create them via the dashboard at `https://dashboard.exa.ai` or the REST API at `POST https://api.exa.ai/websets/v0/monitors` (see [monitors.md](monitors.md)). Cadence uses a 5-field Unix cron expression that triggers at most once per day, anchored to an IANA timezone. Webhook events `webset.item.created`, `webset.item.enriched`, and `webset.idle` deliver structured output downstream. Store monitor IDs, parent Webset IDs, query, cadence, behavior, webhook route, and related Memory Store thread IDs.
 
 ## Routing Rule
 

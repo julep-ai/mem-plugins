@@ -1,6 +1,6 @@
 # Campaign Planner
 
-Use this reference before sourcing at scale or drafting copy. The planner exists because generic outreach usually fails upstream: the agent treats a website as a signal, a founder title as a persona, and a category fit as enough reason to write.
+Use this reference before sourcing at scale or drafting copy. Load [campaign-engineering.md](campaign-engineering.md) first when campaign mode, context sources, funnel stage, or ICP system are unclear. The planner exists because generic outreach usually fails upstream: the agent treats a website as a signal, a founder title as a persona, and a category fit as enough reason to write.
 
 ## Planner Rule
 
@@ -30,6 +30,8 @@ The planner is product-agnostic. Memory Store is the context and learning substr
 
 Before sourcing, define the active offer profile:
 
+- **campaign mode** - whether this is new, building on previous work, refresh, expansion, rescue, reactivation, or launch/event-driven.
+- **context source base** - Memory Store, uploaded/pasted docs, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets.
 - **offer being sold** - exact product, plugin, workflow, service, or thesis.
 - **sender persona** - who is speaking and why they have credibility.
 - **core claim** - one sentence the campaign is testing.
@@ -46,6 +48,8 @@ If the offer is ambiguous, infer from Memory Store first. If more than one offer
 When GTM Agent has no approved setup packet, route setup to `campaign-setup` before sourcing or drafting. Campaign Setup owns the repeatable onboarding questions and exact setup packet schema. The approved setup packet must define:
 
 - active offer profile.
+- campaign mode and context source base.
+- funnel system and current stage gaps.
 - sender persona and brand voice.
 - ICP cells and company-size range.
 - demo CTA policy.
@@ -53,7 +57,7 @@ When GTM Agent has no approved setup packet, route setup to `campaign-setup` bef
 - send policy and ramp limits.
 - followup cadence.
 - suppression policy.
-- autopilot routines.
+- autopilot routine specs.
 
 Default Memory Store-built ICP range is AI/devtools/startup-to-midmarket teams with roughly 10-500 employees and active product, GTM, support, or agent motion. Fortune and enterprise campaigns require an explicit user choice.
 
@@ -86,13 +90,13 @@ Useful offer angles:
 
 ### GTM Agent Plugin
 
-**Core claim:** GTM does not fail at the email sentence first; it fails when ICP, signal, proof, replies, and learnings are not remembered. GTM Agent uses Memory Store plus Exa/Websets/Gmail to make campaign learning compound.
+**Core claim:** GTM does not fail at the email sentence first; it fails when ICP, signal, proof, replies, and learnings are not remembered or turned into recurring execution. GTM Agent uses Memory Store plus Exa/Websets/Gmail/host automations to engineer a campaign once, then keep it running inside approved policy.
 
 **Best buyers:** AI GTM teams, founder-led GTM teams, growth engineers, sales engineers, agencies, and technical operators running signal-based outbound.
 
-**Useful offer angles:** campaign planner, signal-card quality gate, Websets sourcing, Exa research, Gmail followups, reply learning, and campaign routines.
+**Useful offer angles:** campaign planner, signal-card quality gate, Websets sourcing, Exa research, Gmail followups, reply learning, daily/weekly automation routines, and campaign compounding.
 
-**Proof path:** show a campaign planner, a few high-quality signal cards, and how approved replies/objections would be recorded into Memory Store for the next batch.
+**Proof path:** show a campaign planner, a few high-quality signal cards, the exact routine specs, and how approved replies/objections would be recorded into Memory Store for the next batch.
 
 ### Briefs
 
