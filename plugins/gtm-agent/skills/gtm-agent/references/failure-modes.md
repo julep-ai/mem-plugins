@@ -30,6 +30,7 @@ If Exa/Websets tools are missing:
 - Produce exact search queries, Websets criteria, enrichments, and batching plan.
 - Tell the user which MCP to connect.
 - Do not fabricate lead lists.
+- If only `web_search_exa` appears, treat the Exa surface as exploratory research only. Deep lead generation and source fetching still require `deep_search_exa`, `web_search_advanced_exa`, or `web_fetch_exa` to be exposed by the host.
 
 For Exa Search MCP:
 
@@ -43,6 +44,8 @@ For Websets MCP:
 codex mcp add websets --url "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY"
 ```
 
+GTM Agent also declares this Websets placeholder in `plugins/gtm-agent/.mcp.json`; the user still has to replace `YOUR_EXA_API_KEY` in host MCP settings because the plugin cannot safely ship a real Exa key.
+
 ## Gmail Missing
 
 If Gmail is missing:
@@ -50,14 +53,25 @@ If Gmail is missing:
 - Output ready-to-import drafts and followup timing.
 - Do not claim emails were sent, scheduled, labeled, or threaded.
 - Keep recipient data in a reviewable table or CSV-shaped output.
+- Mark full autopilot sending disabled until Gmail is connected.
 
-## No Explicit Send Approval
+## Google Calendar Missing
 
-If the user asks for a campaign but does not explicitly approve sending:
+If Google Calendar is missing:
 
-- Stop at draft/review queue.
-- Show representative copy.
-- Ask for approval before any external action.
+- Keep the confirmed demo link usable.
+- Mark scheduling automation disabled.
+- Do not claim availability was checked or events were created.
+
+## Setup Not Approved
+
+If the user asks for autonomous GTM but the setup packet is not approved:
+
+- Route to `campaign-setup`.
+- Show representative copy and send criteria.
+- Do not send until setup approval covers sender, CTA, ICPs, claims, ramp, stop conditions, and connector gaps.
+
+After setup approval, per-batch approval is not required unless the approved policy says draft-first.
 
 ## Low Signal Quality
 
@@ -66,6 +80,18 @@ If most accounts only match static firmographics:
 - Mark the batch as research-only.
 - Recommend more precise ICP cells or stronger trigger sources.
 - Do not move the batch to send-ready.
+
+## Generic Email Drift
+
+If drafts sound generic, diagnose upstream before rewriting:
+
+- Did the agent treat a homepage or category as a live signal?
+- Did the agent treat "founder" or "CEO" as the persona instead of classifying the job-to-be-done?
+- Is the offer angle mapped to the recipient's actual workflow?
+- Is there a proof path, or is the copy hiding an unsupported claim?
+- Is the next action specific enough to learn from?
+
+If any answer is weak, rebuild the campaign planner and signal cards. Do not iterate copy on top of a bad planner.
 
 ## Stale Or Conflicting Evidence
 
@@ -79,7 +105,7 @@ If sources conflict or are stale:
 
 For 1000-recipient campaigns:
 
-- Require representative samples before send.
+- Require representative samples during setup before autopilot starts.
 - Batch by ICP cell and sender.
 - Keep exclusions and unsubscribes explicit.
 - Record outcomes by batch before expanding.

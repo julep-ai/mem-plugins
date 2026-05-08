@@ -1,6 +1,6 @@
 ---
 name: websets-sourcing
-description: Use when creating, previewing, enriching, importing, refreshing, or inspecting persistent Exa Websets for companies, people, account lists, exclusions, enrichments, and async GTM sourcing.
+description: Use when creating Exa Websets for company/person sourcing, previews, enrichments, imports, refreshes, or persistent GTM lists.
 ---
 
 # Websets Sourcing
@@ -38,7 +38,7 @@ Sources:
 
 6. **Use imports for scoping and exclusions.** Import seed accounts, existing customers, competitors, suppression lists, or CSVs when they should constrain the Webset.
 
-7. **Add enrichments that improve action quality.** Favor CEO/buyer title, employee count, funding, hiring, tech stack, recent signal, public pain language, contact URL, and exclusion risk.
+7. **Add enrichments that improve action quality.** Favor buyer title, persona/job-to-be-done, employee count, funding, hiring, tech stack, recent signal, source URL, public pain language, offer angle, proof path, next action, contact URL, confidence, and exclusion risk. Do not let "CEO/founder" become the persona by itself.
 
 8. **Track async state.** Websets searches and enrichments are async. Return IDs, status, event/webhook notes, and next polling or review action.
 
@@ -64,7 +64,7 @@ Return:
 1. **webset read** - why this should be a Webset or why it should stay a one-off search.
 2. **spec** - entity type, query, criteria, enrichments, imports, exclusions.
 3. **status** - created/previewed/refreshed IDs and async state.
-4. **quality notes** - likely false positives, missing fields, enrichment risk.
+4. **quality notes** - likely false positives, missing planner fields, stale/weak signals, enrichment risk.
 5. **memory mapping** - campaign thread, ICP thread, Webset IDs, and next record.
 6. **next action** - wait, enrich, export, people search, copy, monitor, or discard.
 
@@ -74,3 +74,4 @@ Return:
 - Do not put secrets in repo files.
 - Do not delete Websets unless explicitly asked.
 - Do not confuse Websets MCP with Exa Monitors API availability.
+- Do not mark Webset rows draft-ready unless they include persona, live signal, source, offer angle, proof path, next action, confidence, and exclusion risk.

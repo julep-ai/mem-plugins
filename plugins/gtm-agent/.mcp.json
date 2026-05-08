@@ -4,6 +4,11 @@
       "type": "http",
       "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,web_fetch_exa,deep_search_exa",
       "note": "Recommended for company research, people search, public-web source discovery, evidence fetches, and structured lead generation. Add an x-api-key header in host MCP config for production limits. GTM Agent intentionally does not redeclare Memory Store MCP; install memory-store@mem-plugins once for that."
+    },
+    "websets": {
+      "type": "http",
+      "url": "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY",
+      "note": "Recommended for persistent company/person sourcing, criteria verification, enrichments, imports, refreshes, and exports. Replace YOUR_EXA_API_KEY in host MCP settings with a real Exa API key before expecting Websets tools to connect."
     }
   }
 }

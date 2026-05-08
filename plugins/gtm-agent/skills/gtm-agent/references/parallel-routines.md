@@ -12,6 +12,7 @@ Split independent work aggressively:
 - one worker per account batch for evidence cards
 - one worker per copy angle for variant generation
 - one worker for Gmail reply/followup inspection
+- one worker for Google Calendar availability and booking-context checks after qualified replies
 - one worker for Memory Store learning synthesis
 
 The main agent should orchestrate and merge. It should not ingest raw search dumps or 1000 account rows into main context.
@@ -58,12 +59,18 @@ Promote repeated work into routines:
 - competitor-changelog monitor
 - GitHub/docs activity monitor
 - Websets enrichment refresh
+- Gmail reply scan every 2 hours
 - Gmail followup check
+- Google Calendar booking-context check for qualified replies
+- daily campaign digest
+- weekly ICP/signal/copy learning summary
 - reply/objection learning summary
 - suppression list update
 - campaign postmortem
 
 For Exa Monitors, create or propose monitors only after the user approves query, cadence, output schema, and destination. Use manual-only monitors first when uncertain.
+
+For full autopilot, create routines only after the setup packet is approved. Autopilot routines may keep researching while paused, but they must not send if a stop condition is active.
 
 ## Self-Evolving Loop
 

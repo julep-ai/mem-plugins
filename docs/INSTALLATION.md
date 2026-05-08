@@ -143,9 +143,10 @@ Required Memory Store operations:
 
 - Exa MCP with `web_search_advanced_exa` for company and people research.
 - Exa MCP with `deep_search_exa` for lead generation.
-- Websets MCP for persistent account and people sets.
+- Websets MCP for persistent account and people sets. The plugin declares a placeholder Websets URL; replace `YOUR_EXA_API_KEY` in host MCP settings before expecting Websets tools to connect.
 - Exa Monitors API for recurring signal monitoring.
-- Gmail connector for approved drafts, sends, and followups.
+- Gmail connector for current inbox learning, approved setup/autopilot sends, replies, and followups.
+- Google Calendar connector for booking context after qualified replies.
 
 Do not commit Exa API keys. Configure Exa and Websets keys in the host MCP settings. See [CONNECTORS.md](CONNECTORS.md).
 
@@ -154,11 +155,28 @@ Do not commit Exa API keys. Configure Exa and Websets keys in the host MCP setti
 After GTM Agent is installed, these skills are available:
 
 ```text
+/gtm-agent:campaign-setup
 /gtm-agent:gtm-agent
 /gtm-agent:exa-company-research
 /gtm-agent:exa-lead-generation
 /gtm-agent:exa-people-search
 /gtm-agent:websets-sourcing
+```
+
+Recommended first run:
+
+```text
+/gtm-agent:campaign-setup
+
+Set up GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, build the setup packet, and ask for setup approval before sending.
+```
+
+GTM Agent should send only after campaign setup is approved. The planner still needs a complete campaign unit: `persona + live signal + offer angle + proof path + next action`.
+
+The setup flow is reusable, not ad hoc. Campaign Setup should infer from Memory Store, website research, Gmail, and Google Calendar first, then ask only unresolved blockers. The onboarding questions live in `plugins/gtm-agent/skills/campaign-setup/references/onboarding-questions.md`, the packet contract lives in `plugins/gtm-agent/skills/campaign-setup/references/setup-packet.md`, and the setup packet skeleton can be printed with:
+
+```bash
+python3 plugins/gtm-agent/skills/campaign-setup/scripts/render_setup_packet_template.py
 ```
 
 After Memory Store is installed, these skills are available:

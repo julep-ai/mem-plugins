@@ -1,6 +1,6 @@
 ---
 name: exa-company-research
-description: Use when researching companies, competitors, market categories, account context, company lists, news, public LinkedIn-style profiles, or source-backed account briefs with Exa Company Research plus Memory Store context.
+description: Use when researching companies, markets, competitors, accounts, news, or public profiles with Exa and Memory Store context.
 ---
 
 # Exa Company Research
@@ -35,7 +35,7 @@ Sources:
 
 6. **Respect filter restrictions.** With `category: "company"`, do not use domain/date filters. With broad web or news searches, domain/date filters are allowed. `includeText` and `excludeText` should stay single-item arrays.
 
-7. **Build account briefs.** For each company, return fit, timing, trigger, source URLs, confidence, and what Memory Store context changes about the angle.
+7. **Build account briefs.** For each company, return fit, timing, trigger, source URLs, confidence, and what Memory Store context changes about the angle. If the result is meant for outbound, include the campaign-planner fields: why this person/account, why now, persona, offer angle, proof path, next action, remember-after-touch, and exclusion risk.
 
 8. **Record only confirmed learnings.** If the user confirms a market thesis, competitor map, account fit rule, or exclusion rule, record it to Memory Store with the active `thread_id`.
 
@@ -44,7 +44,7 @@ Sources:
 Return:
 
 1. **research read** - one paragraph with the strongest finding and biggest uncertainty.
-2. **company/account rows** - company, website, ICP fit, signal, source URL, confidence.
+2. **company/account rows** - company, website, ICP fit, signal, source URL, persona, offer angle, proof path, next action, confidence, exclusion risk.
 3. **market notes** - competitors, trends, timing, buying triggers.
 4. **memory impact** - what prior Memory Store context changed.
 5. **next action** - lead-gen, people search, Websets, monitor, copy, or discard.
@@ -53,5 +53,6 @@ Return:
 
 - Do not invent funding, customers, headcount, metrics, or buyer names.
 - Do not use Exa results without source URLs.
+- Do not treat a website, category fit, or founder title as a draft-ready signal.
 - Do not put private Memory Store context into public outbound copy.
 - Do not treat an auth-gated LinkedIn result as verified unless fetched through an approved browser workflow.

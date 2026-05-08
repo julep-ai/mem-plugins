@@ -11,6 +11,7 @@ Always pass the active `thread_id` from `checkin`.
 Record confirmed events:
 
 - Campaign or ICP plan approved.
+- First-run setup packet approved or changed.
 - ICP cell added, removed, or reframed.
 - Account/source signal accepted or rejected.
 - Copy variant approved, edited, rejected, sent, or scheduled.
@@ -36,6 +37,16 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 `background`:
 
 > Exclusions, sender policy, and approval constraints: `<one paragraph>`.
+
+### Setup packet approved
+
+`content`:
+
+> The user approved GTM Agent setup for `<company>` today. Active offer: `<offer>`. Sender: `<sender>`. Demo CTA: `<confirmed link or fallback>`. Autopilot: `<full autopilot | draft-first>` with ramp `<limits>`. Approved ICP cells: `<list>`. Same-company rule: `<rule>`. Followups: `<cadence>`. Stop conditions: `<summary>`.
+
+`background`:
+
+> Setup packet sources and gaps: website `<URL>`, Gmail scope `<scope>`, Google Calendar policy `<policy>`, exclusions `<summary>`, connector gaps `<summary>`.
 
 ### ICP refined
 

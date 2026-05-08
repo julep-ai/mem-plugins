@@ -4,7 +4,7 @@ Public Memory Store plugin marketplace for agent-native workflows built by Memor
 
 Add this marketplace once, then install the plugin you need. The source repo is `julep-ai/mem-plugins`, but the marketplace identity is Memory Store. The repo exposes multiple installable Memory Store-built plugins from one marketplace.
 
-The core `memory-store` plugin provides Memory Store-native workflows such as LinkedIn Studio and owns Memory Store MCP auth. `gtm-agent` is a separate installable plugin for ICP discovery, Exa/Websets sourcing, signal monitors, personalized Gmail outreach, and campaign learning. Install `memory-store` once, then GTM Agent can use that Memory Store context instead of asking for a second Memory Store auth.
+The core `memory-store` plugin provides Memory Store-native workflows such as LinkedIn Studio and owns Memory Store MCP auth. `gtm-agent` is a separate installable plugin for campaign setup, ICP discovery, Exa/Websets sourcing, signal monitors, Gmail outreach, Google Calendar booking context, autopilot routines, and campaign learning. Install `memory-store` once, then GTM Agent can use that Memory Store context instead of asking for a second Memory Store auth.
 
 ## Marketplace Model
 
@@ -35,7 +35,7 @@ Each plugin should read as built by Memory Store. Do not create a new marketplac
 
 ## Installation
 
-Full installation and troubleshooting details are in [docs/INSTALLATION.md](docs/INSTALLATION.md). Connector setup for Memory Store, Exa, Websets, and Gmail is in [docs/CONNECTORS.md](docs/CONNECTORS.md).
+Full installation and troubleshooting details are in [docs/INSTALLATION.md](docs/INSTALLATION.md). Connector setup for Memory Store, Exa, Websets, Gmail, and Google Calendar is in [docs/CONNECTORS.md](docs/CONNECTORS.md).
 
 The short version:
 
@@ -215,7 +215,7 @@ The MCP server provides the required `checkin`, `recall`, `record`, and `report-
 
 Without Memory Store MCP, the agent can only draft from pasted context. It cannot recall brand memory, find company stories, or record feedback for the next run.
 
-`gtm-agent` requires the core `memory-store` plugin to be installed and authenticated, but it does not redeclare Memory Store MCP in its own `.mcp.json`. That avoids duplicate Memory Store auth prompts in hosts that scope MCP auth per plugin. High-quality sourcing expects Exa MCP and/or Websets MCP when available. Exa company research and people search use `web_search_advanced_exa`; Exa lead generation expects `deep_search_exa` with an Exa API key configured in the host MCP config; Websets expects `https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY` configured outside the repo. Monitors use Exa's Monitors API and require an Exa API key in the runtime. Gmail outreach and followups require the host's Gmail connector. If those tools are missing, the skill outputs queries, Websets criteria, monitor specs, and draft/import-ready copy instead of pretending actions happened.
+`gtm-agent` requires the core `memory-store` plugin to be installed and authenticated, but it does not redeclare Memory Store MCP in its own `.mcp.json`. That avoids duplicate Memory Store auth prompts in hosts that scope MCP auth per plugin. High-quality sourcing expects Exa MCP and Websets MCP when available. Exa company research and people search use `web_search_advanced_exa`; Exa lead generation expects `deep_search_exa` with an Exa API key configured in the host MCP config. GTM Agent declares a Websets MCP entry at `https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY`; replace `YOUR_EXA_API_KEY` in host MCP settings before expecting Websets tools to connect. Monitors use Exa's Monitors API and require an Exa API key in the runtime. Gmail outreach and followups require the host's Gmail connector. Google Calendar booking context requires the host's Google Calendar connector. If those tools are missing, the skill outputs queries, Websets criteria, monitor specs, setup packet gaps, and draft/import-ready copy instead of pretending actions happened.
 
 ## Supported Targets
 
@@ -267,7 +267,8 @@ Path: `plugins/gtm-agent`
 
 Includes these skills:
 
-- `gtm-agent`: orchestrates the full Memory Store-powered GTM campaign loop: ICP design, Exa/Websets sourcing, people search, Gmail drafts/followups, review gates, engagement capture, and learning records.
+- `campaign-setup`: creates the first-run GTM setup packet from Memory Store, website research, demo CTA discovery, Gmail learning, Google Calendar policy, send ramp, and autopilot routines.
+- `gtm-agent`: orchestrates the full Memory Store-powered GTM campaign loop: campaign planning, ICP design, Exa/Websets sourcing, people search, Gmail outreach/followups, Google Calendar booking context, engagement capture, and learning records.
 - `exa-company-research`: researches companies, competitors, market categories, account context, public profiles, news, and company lists with Exa Company Research plus Memory Store context.
 - `exa-lead-generation`: generates enriched account lists from a confirmed ICP with Exa deep search, micro-vertical batching, structured schemas, dedupe, scoring, and CSV/import-ready output.
 - `exa-people-search`: finds likely buyers, public professional profiles, experts, and team members for already-qualified accounts.
@@ -276,12 +277,17 @@ Includes these skills:
 GTM loop:
 
 ```text
-checkin -> recall -> ICP hypotheses -> Exa company research -> Exa lead generation -> Websets/enrichments -> Exa people search -> Monitors -> reviewed copy -> Gmail followups -> engagement -> record -> better targeting
+checkin -> campaign setup -> recall -> campaign planner -> ICP hypotheses -> Exa company research -> Exa lead generation -> Websets/enrichments -> Exa people search -> signal cards -> Gmail autopilot -> Calendar booking context -> engagement -> record -> better targeting
 ```
+
+The campaign planner runs before copy. Its unit is `persona + live signal + offer angle + proof path + next action`. Memory Store is the context and learning substrate; the active offer may be Memory Store core, GTM Agent, briefs, context engineering, customer insights, a distribution plugin, or another product. A homepage, generic company category, or founder title is not enough signal to draft.
+
+Campaign setup is the repeatable GTM engineer onboarding script. It infers from Memory Store, website research, Gmail, and Google Calendar first, then asks only unresolved blockers. The reusable setup questions live in `plugins/gtm-agent/skills/campaign-setup/references/onboarding-questions.md`, the packet contract lives in `plugins/gtm-agent/skills/campaign-setup/references/setup-packet.md`, and agents can print the packet skeleton with `plugins/gtm-agent/skills/campaign-setup/scripts/render_setup_packet_template.py`.
 
 Run it:
 
 ```text
+/gtm-agent:campaign-setup
 /gtm-agent:gtm-agent
 /gtm-agent:exa-company-research
 /gtm-agent:exa-lead-generation
@@ -292,10 +298,16 @@ Run it:
 Or in free text:
 
 ```text
-Build a 1000-recipient GTM campaign with 20 ICPs, 50 targets each, Exa/Websets sourcing, monitors, and personalized Gmail drafts.
+Set up and run a 1000-recipient GTM autopilot with 20 ICPs, 50 targets each, Exa/Websets sourcing, monitors, Gmail sending/followups, and Memory Store learning.
 ```
 
-GTM Agent expects Memory Store MCP first. Exa, Websets, Exa Monitors, and Gmail make it operational: Exa researches companies and people, Exa deep search generates structured lead pools, Websets persists verified lists, Monitors keep new signals flowing, Gmail drafts/sends approved outreach, and Memory Store records the learning loop.
+For first setup, start with campaign setup:
+
+```text
+Set up GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, build the setup packet, and ask for setup approval before sending.
+```
+
+GTM Agent expects Memory Store MCP first. Exa, Websets, Exa Monitors, Gmail, and Google Calendar make it operational: Exa researches companies and people, Exa deep search generates structured lead pools, Websets persists verified lists, Monitors keep new signals flowing, Gmail learns from the current inbox and sends/follows up after setup approval, Google Calendar provides booking context after qualified replies, and Memory Store records the learning loop.
 
 ## Local Testing
 

@@ -1,6 +1,6 @@
 ---
 name: exa-people-search
-description: Use when finding likely buyers, public LinkedIn-style profiles, experts, team members, professional backgrounds, or contact research targets with Exa People Search plus Memory Store context.
+description: Use when finding Exa-backed buyers, experts, team members, public profiles, or contact targets with Memory Store context.
 ---
 
 # Exa People Search
@@ -29,9 +29,9 @@ Sources:
 
 6. **Use query variations.** Generate 2-3 variations by title, function, account name, geography, and domain language. Merge and dedupe.
 
-7. **Score buyer relevance.** Score each person by role fit, seniority, likely pain ownership, account trigger relevance, source quality, prior relationship, and suppression risk.
+7. **Score buyer relevance.** Score each person by role fit, seniority, likely pain ownership, account trigger relevance, source quality, prior relationship, and suppression risk. Do not use "founder" as the persona by itself; classify the job-to-be-done such as technical operator, community/support owner, coding-agent owner, GTM owner, CS/FDE owner, or vertical app builder.
 
-8. **Handoff to copy only after review.** People Search returns reviewed buyer candidates and personalization-safe public facts. It does not send or schedule outreach.
+8. **Handoff to copy only after review.** People Search returns reviewed buyer candidates and personalization-safe public facts. It does not send or schedule outreach. Handoff to copy only when the buyer row has why this person, why now, source, persona, offer angle, proof path, next action, confidence, and exclusion risk.
 
 ## Output Contract
 
@@ -39,7 +39,7 @@ Return:
 
 1. **people read** - best buyer thesis and uncertainty.
 2. **buyer rows** - name, title, company, location if available, profile URL, role fit, confidence.
-3. **safe hooks** - public facts that can support personalization.
+3. **safe hooks** - public facts that can support personalization and the live signal they prove.
 4. **suppression risks** - existing relationship, do-not-contact, ambiguity, or weak source.
 5. **next action** - enrich, draft, research more, exclude, or route to human.
 
@@ -47,5 +47,6 @@ Return:
 
 - Do not infer private emails or personal details from weak evidence.
 - Do not treat a profile as the right person without title/company fit.
+- Do not treat a founder title as a full persona without pain ownership and a current signal.
 - Do not use private Memory Store context directly in copy.
 - Do not send Gmail from this skill.

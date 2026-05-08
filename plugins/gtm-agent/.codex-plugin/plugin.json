@@ -1,7 +1,7 @@
 {
   "name": "gtm-agent",
-  "version": "0.2.1",
-  "description": "Memory Store-powered GTM agent with Exa company research, Exa lead generation, Exa people search, Websets sourcing, signal monitors, Gmail outreach, and campaign learning.",
+  "version": "0.3.0",
+  "description": "Memory Store-powered GTM agent with campaign setup, Exa research, Websets sourcing, signal monitors, Gmail outreach, Google Calendar booking context, autopilot routines, and campaign learning.",
   "author": {
     "name": "Memory Store",
     "email": "support@memory.store",
@@ -30,7 +30,7 @@
   "interface": {
     "displayName": "GTM Agent",
     "shortDescription": "Self-improving GTM campaigns",
-    "longDescription": "Build evidence-backed GTM campaigns with Memory Store context, Exa company research, Exa lead generation, Exa people search, Websets lead sets, Exa Monitors, Gmail drafts and followups, and durable learning loops. GTM Agent turns ICP hypotheses into sourced accounts, reviewed personalized outreach, engagement capture, and better next batches.",
+    "longDescription": "Build evidence-backed GTM campaigns with Memory Store context, first-run campaign setup, website and demo CTA discovery, Exa company research, Exa lead generation, Exa people search, Websets lead sets, Exa Monitors, Gmail outreach, Google Calendar booking context, autopilot routines, and durable learning loops. GTM Agent turns ICP hypotheses into sourced accounts, signal cards, autonomous outreach inside approved send policy, engagement capture, and better next batches.",
     "developerName": "Memory Store",
     "category": "Productivity",
     "capabilities": [
@@ -41,9 +41,9 @@
     "privacyPolicyURL": "https://memory.store/privacy",
     "termsOfServiceURL": "https://memory.store/terms",
     "defaultPrompt": [
-      "Build a GTM campaign with ICPs, Exa/Websets sourcing, and Gmail drafts.",
-      "Run Exa company research, lead generation, people search, and Websets sourcing for this campaign.",
-      "Turn campaign replies and objections into Memory Store GTM learnings."
+      "Set up GTM Agent autopilot from Memory Store, website, Gmail, and Calendar.",
+      "Set up the campaign planner before drafting emails.",
+      "Build an ICP campaign with Exa/Websets sourcing and signal cards."
     ],
     "brandColor": "#0F766E",
     "composerIcon": "./assets/gtm-agent-icon.png",

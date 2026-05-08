@@ -11,6 +11,8 @@ Use the lightest tool that can prove the current step:
 - **Websets MCP** for structured list building: natural-language criteria, entity verification, enrichment columns, imports, async collection, and event/webhook-style updates.
 - **Gmail connector** only after the account/copy review gate, and only for draft, send, or followup actions the user explicitly asked for.
 
+A website, generic company description, funding database row, or founder title is not a signal. It is only context. The sourcing job is to find a current reason to engage and the persona-specific workflow that reason maps to.
+
 If Exa Search MCP is missing, tell the user to connect it and continue with query design:
 
 ```bash
@@ -47,10 +49,29 @@ Each ICP cell should have:
 - **Exclusions** - competitors, current customers, low-fit segments, regulated edges, or do-not-contact categories.
 - **Target count** - usually 50 for the user's 1000-recipient plan.
 
+For Memory Store-built offers, start from these persona families unless recalled context says otherwise:
+
+- **Devtools/community teams** with Discord, Slack, GitHub issues, docs gaps, or repeated support answers.
+- **Coding-agent teams** using Cursor, Codex, Claude, repo conventions, PR context, and repeated fix attempts.
+- **AI GTM teams** where AI-assisted outbound loses ICP hypotheses, objections, reply learnings, and account context.
+- **Founder/operator teams** where founder attention, investor/customer promises, and internal loops fragment.
+- **Vertical AI app builders** where user or team memory is part of the product experience.
+- **CS/FDE teams** where onboarding, implementation notes, promises, objections, and next actions scatter across tools.
+- **Product/customer-insight teams** where feedback, support language, interviews, objections, docs gaps, and churn risks scatter across tools.
+- **Internal AI/platform teams** trying to make agents usable across company workflows, approvals, handoffs, and execution context.
+
+Do not classify someone only as a founder. Classify the operating role: technical operator, community/support owner, coding-agent owner, GTM owner, CS/FDE owner, product/customer-insight owner, internal AI/platform owner, or vertical app builder.
+
 ## Signal Catalog
 
 Prioritize signals that create a legitimate reason to engage now:
 
+- **LinkedIn** - hiring, founder posts, launch narratives, "we are building agents", support/CS/GTM pain, and team expansion.
+- **Reddit/HN** - raw pain language, complaints about AI agents losing context, CRM/support/GTM/tooling frustration.
+- **GitHub/docs/changelog** - active agent tooling, support load, integrations, docs churn, repeated issue patterns, and changelog velocity.
+- **Product Hunt/YC/Bookface/events** - launch timing, founder intent, category narrative, and visible go-to-market push.
+- **Gmail/CRM replies** - objections, warm paths, prior touch history, referrals, and suppression signals.
+- **Memory Store context** - approved claims, customer language, old experiments, exclusions, persona learning, and prior account context.
 - **Funding and expansion** - recent raise, Form D, hiring surge, new office, market launch.
 - **Team movement** - new VP, founder shift, role change, first GTM/operator hire.
 - **Product motion** - launch, changelog, docs update, public roadmap, integration announcement.
@@ -61,6 +82,25 @@ Prioritize signals that create a legitimate reason to engage now:
 - **Memory Store context** - prior conversation, meeting note, customer language, internal hypothesis, objection pattern.
 
 Avoid signals that only prove the company exists. A weak fit with a strong trigger is usually better than a static perfect-fit account with no timely reason to talk.
+
+## Signal Card
+
+Each shortlisted account/person must carry a signal card before copy:
+
+```text
+why_this_person:
+why_now:
+signal_source:
+persona:
+offer_angle:
+proof_path:
+next_action:
+remember_after_touch:
+confidence:
+exclusion_risk:
+```
+
+If a row cannot support this card, keep it out of draft-ready output. The next step is more research, exclusion, or a watchlist monitor.
 
 ## Websets Pattern
 
@@ -84,6 +124,7 @@ Useful enrichment columns:
 - Competitor/tool overlap
 - Exclusion risk
 - Outreach angle
+- Offer angle
 
 ## Exa Search Pattern
 

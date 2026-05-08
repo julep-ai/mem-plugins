@@ -1,6 +1,6 @@
 ---
 name: exa-lead-generation
-description: Use when generating enriched lead or account lists from an ICP with Exa deep search, Memory Store context, structured schemas, batch workers, dedupe, scoring, and CSV/import-ready output.
+description: Use when generating Exa deep-search lead or account lists from ICPs with schemas, batching, dedupe, scoring, and Memory Store context.
 ---
 
 # Exa Lead Generation
@@ -21,7 +21,7 @@ Sources:
 
 1. **Checkin and recall.** Start with Memory Store `checkin`, then recall ICPs, customer examples, objections, successful segments, exclusions, taboo claims, and prior campaign outcomes.
 
-2. **Research the seller first.** For a company-specific campaign, run one small ICP research pass before generating leads. Identify product description, target users, existing customers, ICP description, sub-verticals, demographic signals, and useful enrichments.
+2. **Research the seller first.** For a company-specific campaign, run one small ICP research pass before generating leads. Identify product description, sender persona, core claim, taboo pitches, target users, existing customers, ICP description, sub-verticals, demographic signals, and useful enrichments.
 
 3. **Confirm or infer the campaign model.** For the default Memory Store GTM scale:
    - 20 ICP cells
@@ -31,7 +31,7 @@ Sources:
 
 4. **Generate micro-verticals.** Expand the ICP into specific, mostly non-overlapping micro-verticals. Use competitor mining, geography, stage, tech stack, use case, and buyer persona patterns.
 
-5. **Design the output schema.** Keep schemas compact. Always include company name, website, product description, ICP fit score, and ICP fit reasoning. Add only the enrichments that improve action quality.
+5. **Design the output schema.** Keep schemas compact. Always include company name, website, product description, ICP fit score, and ICP fit reasoning. Add only the enrichments that improve action quality. For outbound-bound lists, include fields for persona, live signal, source URL, offer angle, proof path, next action, confidence, and exclusion risk.
 
 6. **Respect Exa deep-search constraints.**
    - Use structured output.
@@ -43,7 +43,7 @@ Sources:
 
 7. **Batch work outside main context.** The main agent orchestrates. Batch workers run Exa calls, write JSON or CSV artifacts when available, and report only counts, top findings, exclusions, and file paths. Do not load 1000 raw rows into the main thread.
 
-8. **Dedupe and score.** Deduplicate by normalized domain, company name, and obvious aliases. Score by ICP fit, signal strength, source confidence, exclusion risk, and Memory Store-backed fit.
+8. **Dedupe and score.** Deduplicate by normalized domain, company name, and obvious aliases. Score by ICP fit, signal strength, source confidence, exclusion risk, and Memory Store-backed fit. A website or founder title alone is not a signal; keep those rows in research-only state.
 
 9. **Record confirmed results.** Record approved ICP rules, exclusion rules, winning micro-verticals, enrichment choices, and campaign outcomes to Memory Store.
 
@@ -55,7 +55,7 @@ Return:
 2. **micro-vertical plan** - list of query cells and target counts.
 3. **schema** - fields, reason for each field, and expected cost/latency risk.
 4. **batch plan or result** - worker batches, counts, errors, and output files.
-5. **shortlist summary** - top ICPs, signal patterns, exclusions, confidence.
+5. **shortlist summary** - top ICPs, signal patterns, exclusions, confidence, and draft eligibility.
 6. **next action** - Websets persistence, people search, copy generation, monitor, or review.
 
 ## Do Not
@@ -63,4 +63,5 @@ Return:
 - Do not run bulk lead generation without Memory Store exclusions.
 - Do not expose raw private context in lead rows.
 - Do not send emails from this skill. Lead generation ends at reviewed target data.
+- Do not hand off to copy unless each row has persona, live signal, source, offer angle, proof path, next action, confidence, and exclusion risk.
 - Do not claim the lead list is complete unless dedupe and quality checks ran.

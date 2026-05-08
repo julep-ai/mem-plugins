@@ -7,13 +7,14 @@ Use this reference when designing the campaign workflow, review gates, followup 
 Do not design this as "Exa finds leads, Gmail sends emails." Design it as an experiment system:
 
 ```text
-ICP hypotheses -> evidence-backed accounts -> reviewed personalization -> controlled sends -> engagement capture -> Memory Store learning -> next batch
+setup approval -> ICP hypotheses -> evidence-backed accounts -> controlled sends -> engagement capture -> Memory Store learning -> next batch
 ```
 
 ## Campaign Entities
 
 Track these concepts in the working output even if the host does not have a database yet:
 
+- **setup packet** - company profile, offer profiles, sender voice, website findings, demo CTA, ICP matrix, signal sources, Gmail learnings, calendar policy, send ramp, autopilot routines, and approval blockers.
 - **campaign** - company, goal, offer, CTA, sender, send policy, review policy, scale, status.
 - **ICP cell** - name, buyer, criteria, trigger signals, pain hypothesis, target count, confidence.
 - **account** - company/domain, fit score, timing score, source URLs, evidence summary, risk.
@@ -27,15 +28,17 @@ Track these concepts in the working output even if the host does not have a data
 
 ## Review Gates
 
-Minimum gates:
+Minimum gates before autopilot starts:
 
-- Campaign brief approved.
-- ICP list approved.
-- First lead batch per ICP approved.
+- Setup packet approved.
+- Demo CTA confirmed or reply-first fallback approved.
+- Sender identity and brand voice approved.
+- ICP list and company-size range approved.
 - Representative copy approved.
-- Gmail drafts created before sends.
-- Send batch explicitly approved.
-- Followups drafted before sending unless the user has approved delegated followup behavior.
+- Send ramp, same-company rule, followup cadence, and stop conditions approved.
+- Claims, taboo claims, private-memory policy, and suppressions approved.
+
+After setup approval, per-batch approval is not required by default. Full autopilot may send and follow up inside the approved policy. If the user chooses draft-first mode, preserve per-batch approval.
 
 Hard blocks:
 
@@ -47,13 +50,14 @@ Hard blocks:
 - Hallucinated or unapproved claim.
 - Sensitive private Memory Store detail in outbound copy.
 - Too many sends for the mailbox policy.
+- Google Calendar or Gmail connector behavior is ambiguous.
 
 ## States
 
 Use clear states when reporting campaign progress:
 
 ```text
-planned -> sourcing -> sourced -> qualified -> drafted -> review_needed -> approved -> sent -> replied -> next_action -> learned
+setup_needed -> setup_review -> approved -> sourcing -> sourced -> qualified -> drafted -> sent -> replied -> next_action -> learned
 ```
 
 Terminal or suppressing states:
@@ -66,7 +70,8 @@ rejected, excluded, bounced, unsubscribed, negative_reply, no_contact, stale_sig
 
 Default behavior:
 
-- First touch is drafted or sent only after approval.
+- First touch is never sent before setup approval.
+- After setup approval, first touch may send automatically inside the approved ramp and stop conditions.
 - No reply after the configured wait creates a followup draft.
 - Positive reply stops automation, summarizes the thread, and suggests owner action.
 - Negative reply records the objection and suppresses further outreach.
@@ -75,7 +80,26 @@ Default behavior:
 - Out-of-office reschedules followup.
 - Referral creates a new related lead if the user wants to pursue it.
 
-MVP should draft followups, not auto-send them.
+Default followups after setup approval may send automatically inside the approved policy. If risk appears, switch to draft-only until resolved.
+
+## Send Ramp
+
+Default ramp:
+
+- day 1: max 10 sends.
+- days 2-3: max 20 sends per day.
+- day 4 onward: max 50 sends per day until changed.
+
+The ramp is a ceiling, not a quota. Send fewer when signal quality or mailbox health is weak.
+
+## Google Calendar Booking Context
+
+Use Google Calendar for scheduling context after qualified replies:
+
+- prefer the confirmed demo or Cal link when available.
+- use availability and timezone context only when the connector is available.
+- do not create, update, or move calendar events unless explicitly approved.
+- if Calendar is unavailable, keep the confirmed demo link and mark scheduling automation disabled.
 
 ## Engagement Readout
 
@@ -90,16 +114,17 @@ Do not over-optimize on opens. Use this order:
 
 Slice results by ICP cell, signal source, buyer title, company stage, copy variant, sender, channel, objection, and time from signal to outreach.
 
-## MVP Boundary
+## V1 Boundary
 
-MVP is a skill/playbook, not a full autonomous sales product:
+V1 is a plugin-level autopilot, not a separate dashboard:
 
 - one primary channel: email/Gmail
 - one sender identity unless the user says otherwise
-- draft-first behavior
-- representative samples before any send
-- batch review by ICP
+- full autopilot after setup approval
+- representative samples during setup before autopilot starts
+- ramped sends with hard stop conditions
+- Google Calendar context for qualified replies
 - Memory Store records after each approval, send, reply, objection, meeting, or performance update
 - Websets persists account pools where available
 
-Later product work can add autonomous send limits, multi-mailbox rotation, CRM sync, LinkedIn/X expansion, Websets monitors, adaptive bandits, deliverability monitoring, and team approval dashboards.
+Later product work can add Outlook/Microsoft support, multi-mailbox rotation, CRM sync, LinkedIn/X expansion, adaptive bandits, deliverability dashboards, and team approval dashboards.

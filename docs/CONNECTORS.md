@@ -43,7 +43,13 @@ Codex supports bearer-token environment variables for remote MCP auth. If your E
 
 ## Websets MCP
 
-Websets needs an Exa API key in the server URL, so the plugin cannot ship a ready-to-run Websets MCP config without leaking or hardcoding a secret.
+Websets needs an Exa API key in the server URL, so GTM Agent declares a placeholder Websets MCP entry but cannot ship a ready-to-run secret. Replace `YOUR_EXA_API_KEY` in host MCP settings before expecting Websets tools to appear.
+
+Declared placeholder:
+
+```text
+https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY
+```
 
 For Claude Code:
 
@@ -59,11 +65,29 @@ codex mcp add websets --url "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_AP
 
 After Websets is connected, GTM Agent can use `websets-sourcing` for persistent company/person sets, enrichments, imports, and async sourcing.
 
+If Websets is not exposed in the tool list, check the host MCP list first. The usual cause is that the placeholder URL was never replaced with a real key, or the host needs a plugin reload after the MCP config changed.
+
 ## Gmail
 
 The Codex plugin declares the Gmail app connector through `plugins/gtm-agent/.app.json`. The user still has to authorize Gmail in the host because Gmail access is account-scoped.
 
+Campaign Setup uses the existing Gmail inbox and sent mail for sender voice, prior touches, warm paths, objections, demo language, suppressions, and reply learning. Gmail is part of the onboarding evidence, not only the sending channel. After setup approval, GTM Agent can send and follow up through Gmail inside the approved ramp and stop conditions.
+
 Claude Code does not get Gmail merely because GTM Agent is installed. If Gmail is unavailable, GTM Agent should produce reviewed drafts, followup timing, and import-ready output instead of claiming it sent or threaded emails.
+
+## Google Calendar
+
+The Codex plugin declares the Google Calendar app connector through `plugins/gtm-agent/.app.json` for booking context after qualified replies:
+
+```json
+"google-calendar": {
+  "id": "connector_947e0d954944416db111db556030eea6"
+}
+```
+
+Google Calendar is used for availability and scheduling context, not as the first CTA source. Campaign Setup should first discover and confirm a demo/Cal link from Memory Store, website, or Gmail. If Calendar is unavailable, the confirmed demo link still works and scheduling automation is marked disabled.
+
+Outlook Email and Outlook Calendar are future connector paths for GTM Agent; v1 is optimized for Gmail and Google Calendar.
 
 ## Why Tools May Not Appear Immediately
 
@@ -73,3 +97,4 @@ Claude Code does not get Gmail merely because GTM Agent is installed. If Gmail i
 - Exa is available without your API key only within public/free limits.
 - Websets requires a real Exa API key in the MCP URL.
 - Gmail requires a separate account authorization in the host.
+- Google Calendar requires a separate account authorization in the host.
