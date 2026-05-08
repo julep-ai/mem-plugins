@@ -40,7 +40,7 @@
     {
       "name": "gtm-agent",
       "source": "./plugins/gtm-agent",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "description": "Memory Store-powered GTM agent with Exa company research, Exa lead generation, Exa people search, Websets sourcing, signal monitors, Gmail outreach, and campaign learning.",
       "author": {
         "name": "Memory Store",

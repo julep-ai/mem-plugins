@@ -4,7 +4,7 @@ Public Memory Store plugin marketplace for agent-native workflows built by Memor
 
 Add this marketplace once, then install the plugin you need. The source repo is `julep-ai/mem-plugins`, but the marketplace identity is Memory Store. The repo exposes multiple installable Memory Store-built plugins from one marketplace.
 
-The core `memory-store` plugin provides Memory Store-native workflows such as LinkedIn Studio. `gtm-agent` is a separate installable plugin for ICP discovery, Exa/Websets sourcing, signal monitors, personalized Gmail outreach, and campaign learning. It still requires Memory Store MCP so GTM work can recall company context and record what worked.
+The core `memory-store` plugin provides Memory Store-native workflows such as LinkedIn Studio and owns Memory Store MCP auth. `gtm-agent` is a separate installable plugin for ICP discovery, Exa/Websets sourcing, signal monitors, personalized Gmail outreach, and campaign learning. Install `memory-store` once, then GTM Agent can use that Memory Store context instead of asking for a second Memory Store auth.
 
 ## Marketplace Model
 
@@ -35,7 +35,7 @@ Each plugin should read as built by Memory Store. Do not create a new marketplac
 
 ## Installation
 
-Full installation and troubleshooting details are in [docs/INSTALLATION.md](docs/INSTALLATION.md).
+Full installation and troubleshooting details are in [docs/INSTALLATION.md](docs/INSTALLATION.md). Connector setup for Memory Store, Exa, Websets, and Gmail is in [docs/CONNECTORS.md](docs/CONNECTORS.md).
 
 The short version:
 
@@ -215,7 +215,7 @@ The MCP server provides the required `checkin`, `recall`, `record`, and `report-
 
 Without Memory Store MCP, the agent can only draft from pasted context. It cannot recall brand memory, find company stories, or record feedback for the next run.
 
-`gtm-agent` is a separate plugin but still requires Memory Store MCP. It can plan from Memory Store context, but high-quality sourcing expects Exa MCP and/or Websets MCP when available. Exa company research and people search use `web_search_advanced_exa`; Exa lead generation expects `deep_search_exa` with an Exa API key configured in the host MCP config; Websets expects `https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY` configured outside the repo. Monitors use Exa's Monitors API and require an Exa API key in the runtime. Gmail outreach and followups require the host's Gmail connector. If those tools are missing, the skill outputs queries, Websets criteria, monitor specs, and draft/import-ready copy instead of pretending actions happened.
+`gtm-agent` requires the core `memory-store` plugin to be installed and authenticated, but it does not redeclare Memory Store MCP in its own `.mcp.json`. That avoids duplicate Memory Store auth prompts in hosts that scope MCP auth per plugin. High-quality sourcing expects Exa MCP and/or Websets MCP when available. Exa company research and people search use `web_search_advanced_exa`; Exa lead generation expects `deep_search_exa` with an Exa API key configured in the host MCP config; Websets expects `https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY` configured outside the repo. Monitors use Exa's Monitors API and require an Exa API key in the runtime. Gmail outreach and followups require the host's Gmail connector. If those tools are missing, the skill outputs queries, Websets criteria, monitor specs, and draft/import-ready copy instead of pretending actions happened.
 
 ## Supported Targets
 

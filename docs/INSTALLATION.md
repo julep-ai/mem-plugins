@@ -137,7 +137,9 @@ Required Memory Store operations:
 - `record`
 - `report-issue`
 
-`gtm-agent` requires Memory Store MCP and can additionally use:
+`gtm-agent` requires the core `memory-store` plugin to be installed and authenticated. GTM Agent intentionally does not redeclare Memory Store MCP in its own `.mcp.json`, because doing so can create a second Memory Store auth prompt in hosts that scope MCP auth per plugin.
+
+`gtm-agent` can additionally use:
 
 - Exa MCP with `web_search_advanced_exa` for company and people research.
 - Exa MCP with `deep_search_exa` for lead generation.
@@ -145,7 +147,7 @@ Required Memory Store operations:
 - Exa Monitors API for recurring signal monitoring.
 - Gmail connector for approved drafts, sends, and followups.
 
-Do not commit Exa API keys. Configure Exa and Websets keys in the host MCP settings.
+Do not commit Exa API keys. Configure Exa and Websets keys in the host MCP settings. See [CONNECTORS.md](CONNECTORS.md).
 
 ## Plugin Commands
 

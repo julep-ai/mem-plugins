@@ -6,6 +6,8 @@ Use this reference when a GTM run is blocked, low-confidence, or unsafe to execu
 
 Do not run a memory-native GTM campaign if Memory Store is unavailable.
 
+GTM Agent expects Memory Store MCP to come from the installed `memory-store@mem-plugins` plugin or an existing host-level Memory Store connector. It intentionally does not redeclare Memory Store MCP in its own `.mcp.json`, because that can force a second auth prompt.
+
 Fallback:
 
 - Say Memory Store MCP is unavailable.
@@ -37,8 +39,8 @@ codex mcp add exa --url https://mcp.exa.ai/mcp
 
 For Websets MCP:
 
-```text
-https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY
+```bash
+codex mcp add websets --url "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY"
 ```
 
 ## Gmail Missing

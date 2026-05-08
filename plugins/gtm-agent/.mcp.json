@@ -1,19 +1,9 @@
 {
   "mcpServers": {
-    "memory-store": {
-      "type": "http",
-      "url": "https://memory.store/mcp",
-      "note": "Required. Provides checkin, recall, record, and report-issue so GTM Agent can use company memory and record campaign learning."
-    },
     "exa": {
       "type": "http",
       "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_search_advanced_exa,web_fetch_exa,deep_search_exa",
-      "note": "Recommended for company research, people search, public-web source discovery, evidence fetches, and structured lead generation. Lead generation requires an Exa API key configured in the host MCP config, typically as an x-api-key header; do not commit real keys."
-    },
-    "websets": {
-      "type": "http",
-      "url": "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY",
-      "note": "Recommended for verified account/contact sets, enrichments, imports, and async sourcing. Replace YOUR_EXA_API_KEY in the host MCP config before use."
+      "note": "Recommended for company research, people search, public-web source discovery, evidence fetches, and structured lead generation. Add an x-api-key header in host MCP config for production limits. GTM Agent intentionally does not redeclare Memory Store MCP; install memory-store@mem-plugins once for that."
     }
   }
 }
