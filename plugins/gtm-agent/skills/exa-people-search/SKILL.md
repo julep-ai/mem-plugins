@@ -1,6 +1,6 @@
 ---
 name: exa-people-search
-description: Use when finding Exa-backed buyers, experts, team members, or public profiles.
+description: Use when users ask to find, verify, dedupe, score, or map Exa-backed buyers, experts, team members, public profiles, LinkedIn identities, or work-email candidates.
 ---
 
 # Exa People Search

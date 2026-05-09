@@ -6,6 +6,8 @@ Monitors are a first-class production layer for GTM Agent. A campaign without mo
 
 Monitors are **not exposed as MCP tools yet**. They run on the underlying Websets API. GTM Agent's job is to output a monitor spec, route the user to create it, and record the resulting `monitor_id` to Memory Store so the routine compounds.
 
+Do not POST monitor REST calls, create webhooks, or attach live monitor destinations unless the approved routine explicitly allows API creation and the user has provided or approved use of the Exa API key for that action.
+
 ## What a Monitor does
 
 A Monitor re-runs a search against an existing Webset on a cron schedule. New verified results either append to the Webset (default) or replace prior ones (`override`). Monitors emit webhook events as items land, get enriched, or the run goes idle.

@@ -1,6 +1,6 @@
 ---
 name: campaign-setup
-description: Use when onboarding GTM Agent, creating setup packets, or approving autopilot policy.
+description: Use when users first configure GTM Agent, lack an approved setup packet, need connector readiness, sender voice, demo CTA, send ramp, autopilot policy, or approval gates.
 ---
 
 # Campaign Setup
@@ -12,10 +12,11 @@ Setup can start before every connector is active, but the setup packet must sepa
 ## Use For
 
 - first-run GTM Agent setup.
-- planning, starting, monitoring, analyzing, or updating GTM campaigns.
-- new campaigns from docs, notes, Memory Store, and public context.
-- campaign continuations, refreshes, rescues, expansions, reactivations, launches, or events.
+- missing, stale, or unapproved setup packets.
+- setup policy changes before production work starts.
 - sender voice, demo CTA, send ramp, followup cadence, suppression rules, and routine specs.
+
+For an already-approved campaign monitor, insights, refresh, rescue, reactivation, launch, or update request, return to `gtm-agent` and load only the relevant campaign, automation, connector, engagement, and learning references.
 
 ## Loop
 

@@ -49,7 +49,7 @@ checkin
   -> scheduled routines
 ```
 
-Only send/follow up after setup approval. Research, sourcing, enrichment, evidence cards, draft generation, and monitor specs can run before send approval as long as private context and connector scope are respected.
+Only send/follow up after setup approval. Research, sourcing, enrichment, evidence cards, draft generation, and monitor specs can run before send approval only when the needed connector gates pass. Draft generation requires authenticated Exa/Websets evidence rows, planner gates, private-context policy, and connector scope; Gmail absence may produce import-ready drafts only when Gmail is the only execution gap.
 
 ## Workstream Matrix
 
@@ -150,7 +150,7 @@ No row becomes send-ready unless it has:
 - confidence.
 - exclusion risk.
 
-No worker may send, delete, archive, bulk-label, create calendar events, or change a live monitor unless the approved policy explicitly allows it.
+No worker may send, delete, archive, bulk-label, create calendar events, call Memory Store `record`, or change a live monitor unless the approved policy explicitly allows it. Even when `record` is allowed by policy, the main agent should own durable learning after merge.
 
 ## Concurrency Guidance
 
@@ -171,7 +171,7 @@ Workers should fail small:
 
 - If Exa is missing, return exact queries and required tool setup.
 - If Websets is missing, return Webset specs and imports/enrichments.
-- If Gmail is missing, return draft/import-ready queues only.
+- If Gmail is missing, return draft/import-ready queues only after Exa/Websets evidence and planner gates pass.
 - If Calendar is missing, keep demo-link CTA and mark calendar automation disabled.
 - If a worker times out or returns low confidence, mark its slice `incomplete` and keep the campaign moving with other slices.
 - If two workers disagree, preserve both sources and route to `research_more`.

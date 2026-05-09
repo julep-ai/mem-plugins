@@ -21,7 +21,7 @@ Before giving install/update commands:
 3. For Claude Code, use `install` for absent plugins and `update` only for installed plugins.
 4. For Codex, use only `codex plugin marketplace add` and `codex plugin marketplace upgrade` in CLI docs unless `codex plugin --help` shows more subcommands. Plugin install/enable is currently UI-driven.
 5. After install/update, tell the user to restart/reload plugins and complete Memory Store MCP auth.
-6. If the user is adding GTM Agent, mention that Exa/Websets/Gmail are optional execution connectors but Memory Store MCP is required for normal use.
+6. If the user is adding GTM Agent, mention that Exa/Websets/Gmail are optional for planning mode but required for production sourcing, sending, reply monitoring, and campaign learning. Memory Store MCP is required for normal use.
 
 ## Product Contract
 

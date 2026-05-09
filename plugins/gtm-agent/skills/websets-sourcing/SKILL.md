@@ -1,6 +1,6 @@
 ---
 name: websets-sourcing
-description: Use when creating Exa Websets sourcing, previews, enrichments, imports, or refreshes.
+description: Use when users ask to create, preview, inspect, enrich, import, refresh, monitor, export, or reuse persistent Exa Websets for GTM sourcing.
 ---
 
 # Websets Sourcing

@@ -332,6 +332,13 @@ claude --plugin-dir ./plugins/memory-store
 claude --plugin-dir ./plugins/gtm-agent
 ```
 
+Run the GTM Agent skill-surface checks before changing skill descriptions, routing boundaries, or required reference files:
+
+```bash
+python3 plugins/gtm-agent/scripts/validate_skill_surface.py
+python3 plugins/gtm-agent/skills/campaign-setup/scripts/test_render_setup_packet_template.py
+```
+
 ## Build Another Skill Or Plugin
 
 Use one marketplace for this repo. Do not create a new marketplace per plugin. The Codex and Claude marketplace files are host adapters for the same marketplace. New products go inside the Memory Store marketplace as plugins built by Memory Store.

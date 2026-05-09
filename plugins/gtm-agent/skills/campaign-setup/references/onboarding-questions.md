@@ -79,6 +79,8 @@ Missing Exa/Websets production credentials are an `unknown_blocker` for producti
 
 ## Memory Store-Built Defaults
 
+Only apply this section when the seller or offer is Memory Store, a Memory Store plugin, or an explicitly adjacent Memory Store product. For any other seller, infer defaults from that seller's Memory Store, public evidence, and approved setup packet instead.
+
 Use these defaults unless recalled context or the user overrides them:
 
 - company-size range: AI/devtools/startup-to-midmarket teams, roughly 10-500 employees.

@@ -11,7 +11,8 @@ GTM Agent expects Memory Store MCP to come from the installed `memory-store@mem-
 Fallback:
 
 - Say Memory Store MCP is unavailable.
-- Ask for pasted company context or continue with a clearly ungrounded draft.
+- Continue only as generic planning or copy assistance from pasted/public context, not as GTM Agent.
+- Do not run production sourcing, autopilot routines, or learning workflows.
 - Do not claim the system learned.
 - Do not record anything unless `record` becomes available.
 
@@ -58,6 +59,7 @@ For Exa Monitors, use [monitors.md](monitors.md) to output the REST/dashboard sp
 If Gmail is missing:
 
 - Output ready-to-import drafts and followup timing only after planner/copy gates pass.
+- Gmail-missing draft fallback does not override Exa/Websets draft blocks; if Exa/Websets are missing, do not produce send-ready rows or outbound copy.
 - Do not claim emails were sent, scheduled, labeled, or threaded.
 - Do not claim production execution, reply monitoring, suppression checks, or mailbox learning.
 - Keep recipient data in a reviewable table or CSV-shaped output.

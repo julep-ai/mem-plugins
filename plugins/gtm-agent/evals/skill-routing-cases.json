@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "description_budget_words": 50,
+  "positive_cases": [
+    {
+      "id": "campaign-setup-first-run",
+      "query": "Set up GTM Agent autopilot. Recall Memory Store, inspect our website and demo CTA, learn from Gmail, define send ramp and approval gates.",
+      "expected_skill": "campaign-setup"
+    },
+    {
+      "id": "campaign-setup-missing-policy",
+      "query": "Before we send anything, build the setup packet and tell me what Exa, Websets, Gmail, Calendar, and monitors are allowed to do.",
+      "expected_skill": "campaign-setup"
+    },
+    {
+      "id": "gtm-agent-full-campaign",
+      "query": "Plan and run a GTM campaign from our Memory Store context with ICPs, signal cards, Gmail followups, daily monitoring, and weekly learning.",
+      "expected_skill": "gtm-agent"
+    },
+    {
+      "id": "gtm-agent-repair-campaign",
+      "query": "Our outbound is getting weak replies. Diagnose the campaign system, repair ICP and signals, and turn outcome learning into the next batch.",
+      "expected_skill": "gtm-agent"
+    },
+    {
+      "id": "gtm-agent-monitor-insights",
+      "query": "Monitor replies for the approved campaign and produce a weekly learning summary from outcomes.",
+      "expected_skill": "gtm-agent"
+    },
+    {
+      "id": "exa-company-research-competitor-map",
+      "query": "Use Exa to research competitors, recent launches, buyer proof, and account context before we choose target accounts.",
+      "expected_skill": "exa-company-research"
+    },
+    {
+      "id": "exa-lead-generation-batch",
+      "query": "Generate 200 target accounts from this confirmed ICP, batch by micro-vertical, dedupe domains, score fit, and return an export schema.",
+      "expected_skill": "exa-lead-generation"
+    },
+    {
+      "id": "exa-people-search-buyers",
+      "query": "For these qualified accounts, find likely buyers, verify LinkedIn identities and work-email candidates, and score suppression risk.",
+      "expected_skill": "exa-people-search"
+    },
+    {
+      "id": "websets-sourcing-persistent-list",
+      "query": "Create a persistent Webset for this ICP, preview criteria, add enrichments, import seed accounts, and refresh it weekly.",
+      "expected_skill": "websets-sourcing"
+    }
+  ],
+  "negative_cases": [
+    {
+      "id": "linkedin-content-belongs-to-memory-store",
+      "query": "Draft LinkedIn posts from our Memory Store memories and learn from edits.",
+      "forbidden_skills": [
+        "gtm-agent",
+        "campaign-setup",
+        "exa-lead-generation",
+        "exa-people-search",
+        "websets-sourcing"
+      ]
+    },
+    {
+      "id": "marketplace-maintenance-belongs-to-marketplace-operator",
+      "query": "Audit the plugin marketplace metadata and recommend stale skill cleanup.",
+      "forbidden_skills": [
+        "gtm-agent",
+        "campaign-setup",
+        "exa-company-research",
+        "exa-lead-generation",
+        "exa-people-search",
+        "websets-sourcing"
+      ]
+    },
+    {
+      "id": "generic-crm-export-not-gtm-autopilot",
+      "query": "Format this pasted CRM export into a CSV and fix capitalization.",
+      "forbidden_skills": [
+        "gtm-agent",
+        "campaign-setup"
+      ]
+    },
+    {
+      "id": "calendar-scheduling-not-booking-context",
+      "query": "Find a time for a team sync next week and add it to Google Calendar.",
+      "forbidden_skills": [
+        "gtm-agent",
+        "campaign-setup"
+      ]
+    }
+  ],
+  "reference_read_cases": [
+    {
+      "id": "gtm-agent-before-sourcing-or-copy",
+      "skill": "gtm-agent",
+      "query": "Source accounts and draft copy for a new campaign.",
+      "required_references": [
+        "references/campaign-engineering.md",
+        "references/campaign-planner.md",
+        "references/failure-modes.md"
+      ]
+    },
+    {
+      "id": "gtm-agent-weekly-learning",
+      "skill": "gtm-agent",
+      "query": "Monitor replies and learn from outcomes weekly for an approved campaign.",
+      "required_references": [
+        "references/automation-routines.md",
+        "references/engagement-model.md",
+        "references/learning-loop.md",
+        "references/failure-modes.md"
+      ]
+    },
+    {
+      "id": "gtm-agent-parallel-work",
+      "skill": "gtm-agent",
+      "query": "Split 20 ICP cells into background sourcing, evidence-card, copy-angle, Gmail, monitor, and learning workers.",
+      "required_references": [
+        "references/parallel-routines.md",
+        "references/automation-routines.md"
+      ]
+    },
+    {
+      "id": "campaign-setup-first-run-packet",
+      "skill": "campaign-setup",
+      "query": "Create the first-run setup packet and proposed autopilot routines.",
+      "required_references": [
+        "references/onboarding-questions.md",
+        "references/setup-packet.md",
+        "references/first-run-autopilot.md",
+        "../gtm-agent/references/campaign-engineering.md",
+        "../gtm-agent/references/campaign-planner.md",
+        "../gtm-agent/references/parallel-routines.md",
+        "../gtm-agent/references/automation-routines.md"
+      ]
+    }
+  ]
+}

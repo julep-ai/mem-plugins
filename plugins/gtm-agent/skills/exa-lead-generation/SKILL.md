@@ -1,6 +1,6 @@
 ---
 name: exa-lead-generation
-description: Use when generating Exa/Websets lead lists, ICP batches, schemas, dedupe, or scoring.
+description: Use when users ask to generate, batch, score, dedupe, schema, export, or shortlist Exa/Websets account or lead lists from a confirmed ICP.
 ---
 
 # Exa Lead Generation

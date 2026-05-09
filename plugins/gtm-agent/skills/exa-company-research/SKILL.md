@@ -1,6 +1,6 @@
 ---
 name: exa-company-research
-description: Use when doing Exa-backed company, market, competitor, news, or account research.
+description: Use when users ask for Exa-backed company, market, competitor, news, account, public-proof, or buyer-context research for GTM decisions.
 ---
 
 # Exa Company Research

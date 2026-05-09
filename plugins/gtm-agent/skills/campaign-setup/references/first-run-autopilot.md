@@ -19,6 +19,10 @@ The approval must cover:
 - email/LinkedIn channel policy when dual-channel is in scope.
 - routine specs for any asynchronous automation.
 
+## Approval Granularity
+
+Setup approval permits only the actions explicitly listed in each routine's `allowed_actions`. Gmail sends, Gmail labels, broad mailbox inspection, monitor creation, webhook creation, Calendar mutations, and Memory Store records each require explicit inclusion in the approved routine spec. If the setup packet approves the campaign thesis but not the action, output the routine proposal and ask for approval before taking the action.
+
 ## Autopilot Mode
 
 Autopilot is the core product behavior: the user engineers the campaign once, approves the policy, and the host keeps running precise routines toward the campaign goal.
