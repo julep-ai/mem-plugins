@@ -12,7 +12,7 @@ Generate account or recipient lists from a confirmed campaign model. Use Websets
 1. Start with Memory Store `checkin` and recall ICPs, exclusions, winning segments, objections, and prior campaign outcomes.
 2. Confirm campaign mode, ICP cells, target counts, and exclusions before bulk generation.
 3. Verify Exa Search and Websets are authenticated. If not, stop production generation and ask for Exa API key setup.
-4. Use active Exa Search MCP tools: `web_search_advanced_exa`, `web_search_exa`, `web_fetch_exa`. Use `deep_search_exa` or `company_research_exa` only as old-host fallbacks.
+4. Use active Exa Search MCP tools: `web_search_advanced_exa`, `web_search_exa`, `web_fetch_exa`. Use advanced categories deliberately for company discovery, people discovery, and article/news evidence. Use `deep_search_exa` or `company_research_exa` only as old-host fallbacks.
 5. Use `websets-sourcing` for persistent lists, criteria verification, enrichments, imports, refreshes, and monitorable pools.
 6. Keep schemas compact: company, website, ICP fit, fit reasoning, high-intent signal, source URL, persona, customer-story pattern, offer angle, proof path, next action, learning intent, confidence, exclusion risk.
 7. When the campaign target is around 1000 leads/emails per day, batch by ICP cell, signal family, and micro-vertical; return counts, accepted/rejected reasons, artifact paths/IDs, and top findings, not raw 1000-row dumps.

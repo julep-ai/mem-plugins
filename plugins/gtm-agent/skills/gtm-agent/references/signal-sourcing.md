@@ -26,13 +26,16 @@ A website, generic company description, funding database row, or founder title i
 If Exa Search MCP or its production API key is missing, tell the user to connect it and continue with setup/query design only. Mark live public research and signal discovery `research_blocked_for_production`:
 
 ```bash
-claude mcp add --transport http exa https://mcp.exa.ai/mcp --header "x-api-key: YOUR_EXA_API_KEY"
-codex mcp add exa --url https://mcp.exa.ai/mcp
+claude mcp add --transport http exa \
+  "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa" \
+  --header "x-api-key: YOUR_EXA_API_KEY"
+export EXA_API_KEY=YOUR_EXA_API_KEY
+codex mcp add exa --url "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa&exaApiKey=$EXA_API_KEY"
 ```
 
-Current Codex CLI builds do not support arbitrary `x-api-key` headers through `codex mcp add`. Configure the header in host MCP settings for production limits, or use the free-plan URL above only for exploratory lookup. Do not create send-ready rows or outbound drafts from free-plan/website-only research.
+Current Codex CLI builds do not support arbitrary `x-api-key` headers through `codex mcp add`. Exa Search supports `exaApiKey` in the hosted MCP URL, so use that for Codex production setup or configure `x-api-key` in host MCP settings when available. Do not create send-ready rows or outbound drafts from free-plan/website-only research.
 
-If Websets MCP is missing and the task requires structured lead sourcing, tell the user to connect it with their Exa key (Bearer token preferred, query-param fallback for older hosts). Continue by producing Webset queries, criteria, enrichment schemas, and `accounts.csv` import shape, but mark production sourcing `sourcing_blocked_for_production`:
+If Exa Search or Websets MCP is missing and the task requires structured lead sourcing, make setup agent-led before continuing: give `https://dashboard.exa.ai/api-keys`, ask the user to paste the key into a terminal prompt when possible, then run or output `plugins/gtm-agent/scripts/setup_exa_connectors.sh --host codex --persist-shell` or the host equivalent. Continue by producing Webset queries, criteria, enrichment schemas, and `accounts.csv` import shape, but mark production sourcing `sourcing_blocked_for_production` until Exa Search and Websets are authenticated:
 
 ```bash
 claude mcp add --transport http websets https://websetsmcp.exa.ai/mcp --header "Authorization: Bearer YOUR_EXA_API_KEY"

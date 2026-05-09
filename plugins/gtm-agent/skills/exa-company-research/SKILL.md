@@ -12,7 +12,7 @@ Research companies and markets for Memory Store-backed GTM decisions.
 1. Start with Memory Store `checkin` and recall ICPs, exclusions, prior account history, approved claims, and campaign goal.
 2. Classify the request: company deep dive, market scan, competitor map, target-account research, news/timing, or profile/team discovery.
 3. Prefer active Exa Search MCP tools at `https://mcp.exa.ai/mcp`: `web_search_advanced_exa`, `web_search_exa`, and `web_fetch_exa`.
-4. Use `web_search_advanced_exa` categories deliberately: `company` for company metadata, `news` for timing, `people` for public profiles.
+4. Use `web_search_advanced_exa` categories deliberately: `company` for company metadata, `people` for public profiles, and `article` or `news` for timing, launches, announcements, and pain-language sources.
 5. Run query variants in parallel when possible; return distilled rows, source URLs, confidence, and uncertainty notes.
 6. If outbound-bound, include planner fields: why this account/person, why now, persona, offer angle, proof path, next action, remember-after-touch, confidence, and exclusion risk.
 7. Record only confirmed research learnings to Memory Store.

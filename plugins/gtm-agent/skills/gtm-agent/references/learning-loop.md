@@ -8,10 +8,10 @@ Always pass the active `thread_id` from `checkin`.
 
 ## Self-Learning Contract
 
-GTM Agent is a long-term-memory agent, not a static prompt bundle. Its loop is:
+GTM Agent is a long-term-memory agent and proactive intelligence layer, not a static prompt bundle. Its loop is:
 
 ```text
-checkin -> recall durable rules -> execute under those rules -> observe user feedback/outcomes -> distill operational memory -> record -> improve later runs
+checkin -> recall durable rules -> surface relevant context -> execute under those rules -> observe user feedback/outcomes -> distill operational memory -> record -> improve later runs
 ```
 
 During setup and execution, identify durable operating memory:

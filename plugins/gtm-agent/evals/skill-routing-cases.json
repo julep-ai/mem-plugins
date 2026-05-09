@@ -13,6 +13,11 @@
       "expected_skill": "campaign-setup"
     },
     {
+      "id": "campaign-setup-exa-key-agent-led",
+      "query": "Exa and Websets are not set up. Give me the API key link, ask me to paste the key, configure Codex/Websets, and make sure advanced people, company, and article searches are available.",
+      "expected_skill": "campaign-setup"
+    },
+    {
       "id": "gtm-agent-full-campaign",
       "query": "Plan and run a GTM campaign from our Memory Store context with ICPs, signal cards, Gmail followups, daily monitoring, and weekly learning.",
       "expected_skill": "gtm-agent"
@@ -30,6 +35,11 @@
     {
       "id": "gtm-agent-long-term-memory-rules",
       "query": "Remember this as a rule for future GTM runs: never send until Websets has produced personas, email status, and signal cards.",
+      "expected_skill": "gtm-agent"
+    },
+    {
+      "id": "gtm-agent-proactive-intelligence-layer",
+      "query": "Use Memory Store as the proactive intelligence layer for this agent so future runs surface context and continue approved GTM routines without me re-explaining.",
       "expected_skill": "gtm-agent"
     },
     {

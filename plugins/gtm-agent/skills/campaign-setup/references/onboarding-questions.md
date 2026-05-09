@@ -14,7 +14,7 @@ Memory Store auth -> Exa/Websets/Gmail readiness -> campaign plan -> website -> 
 
 Do not treat a no-key Exa/Websets state as a normal setup gap for a real campaign. Website-only research can support positioning, but it cannot produce deep ICP personas, production lead lists, signal cards, person rows, email candidates, or send-ready copy. If Exa Search or Websets is missing or unauthenticated, ask for the Exa API key setup before any production sourcing or drafting. If Gmail is missing, full execution is blocked; the campaign can still plan/source, but it cannot send, monitor replies, or learn from mailbox outcomes.
 
-When setup is blocked, output one next action the user can complete inside the current host whenever possible: install/enable plugin, complete Memory Store auth, configure Exa key, enable Websets, authorize Gmail, or approve REST monitor creation. Dashboard/manual steps are fallback only.
+When setup is blocked, output one next action the user can complete inside the current host whenever possible: install/enable plugin, complete Memory Store auth, configure Exa key, enable Websets, authorize Gmail, or approve REST monitor creation. For Exa/Websets, give `https://dashboard.exa.ai/api-keys`, ask the user to paste the key into a terminal prompt or provide `EXA_API_KEY`, then run or output the host setup command. Dashboard/manual steps are fallback only.
 
 ## Core Questions
 

@@ -19,7 +19,7 @@ Manual CSVs, pasted lists, and one-off queries are fallback or import surfaces. 
 
 ## Company Research Worker
 
-Use company research for market and account understanding:
+Use company research for market and account understanding. Prefer `web_search_advanced_exa` with `category: "company"` for account discovery and competitor maps; use `category: "article"` or `category: "news"` when finding public launches, announcements, articles, and timing evidence.
 
 - company overview, product, pricing, team, funding, customers
 - competitors and alternatives
@@ -33,7 +33,8 @@ Pattern:
 2. Use `category: "company"` for company discovery.
 3. Use `category: "news"` for announcements and timing.
 4. Use `category: "people"` for public profile discovery.
-5. Return compact account briefs, not raw search dumps.
+5. Use `category: "article"` or `category: "news"` when available for launches, announcements, pain-language sources, and market timing.
+6. Return compact account briefs, not raw search dumps.
 
 ## Lead Generation Worker
 
@@ -45,7 +46,7 @@ Use lead generation for large ICP pools:
 4. Run batches in parallel.
 5. Deduplicate, score, and trim.
 
-Use `web_search_advanced_exa` for current Exa MCP lead-generation work. If a host still exposes deprecated tools such as `deep_search_exa`, treat them as backward-compatible helpers, not the primary path.
+Use `web_search_advanced_exa` for current Exa MCP lead-generation work. Production GTM should explicitly use advanced search categories for companies, people, and article/news evidence. If a host still exposes deprecated tools such as `deep_search_exa`, treat them as backward-compatible helpers, not the primary path.
 
 For the user's default scale:
 

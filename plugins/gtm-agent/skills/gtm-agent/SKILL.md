@@ -5,7 +5,7 @@ description: Use when users ask to plan, start, monitor, repair, scale, or learn
 
 # GTM Agent
 
-A GTM engineer in agent form. Build GTM campaigns and run them autonomously for **any seller** — whether the offer is AI infrastructure, houses, bricks, legal services, dog food, vertical SaaS, or services. Memory Store is the brain: it remembers the seller's offer, ICPs, customers, objections, claims, and campaign outcomes so each new batch is smarter than the last.
+A GTM engineer in agent form. Build GTM campaigns and run them autonomously for **any seller** — whether the offer is AI infrastructure, houses, bricks, legal services, dog food, vertical SaaS, or services. Memory Store is the proactive intelligence layer for agents: it remembers the seller's offer, ICPs, customers, objections, claims, campaign outcomes, obligations, and approved rules so each new batch is smarter than the last.
 
 This skill engineers the GTM **system** first — funnel stage, ICP shape, signal sources, competitor map, proof path, routines — then uses Exa, Websets, Gmail, Calendar, host automations, and background workers to execute inside approved policy.
 
@@ -29,7 +29,7 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 - Before sourcing or copy, load `references/campaign-engineering.md` and `references/campaign-planner.md`.
 - Parallelize by default with `references/parallel-routines.md`; split ICP cells, signal families, Webset batches, people search, evidence cards, copy angles, Gmail batches, monitor specs, and learning synthesis into bounded workers.
 - Treat autopilot as setup-once execution: after approval, run precise async routines from `references/automation-routines.md` with goal, cadence, allowed actions, forbidden actions, stop conditions, output, and Memory Store record policy.
-- Treat Memory Store as long-term operating memory: distill user rules, corrections, setup decisions, approval policies, campaign outcomes, and skill-improvement candidates through `references/learning-loop.md`.
+- Treat Memory Store as proactive intelligence and long-term operating memory: distill user rules, corrections, setup decisions, approval policies, campaign outcomes, and skill-improvement candidates through `references/learning-loop.md`.
 - Prefer active Exa tools: `web_search_advanced_exa`, `web_search_exa`, and `web_fetch_exa`. Use deprecated Exa tools only as host fallbacks.
 - Route focused work to sibling skills: `exa-company-research`, `exa-lead-generation`, `exa-people-search`, and `websets-sourcing`.
 - Load `references/failure-modes.md` when a request tries to skip setup, source from weak signals, bulk send, expose private context, or claim learning without Memory Store records.

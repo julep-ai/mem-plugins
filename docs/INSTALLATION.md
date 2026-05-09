@@ -139,7 +139,7 @@ Required Memory Store operations:
 
 `gtm-agent` requires the core `memory-store` plugin to be installed and authenticated. GTM Agent intentionally does not redeclare Memory Store MCP in its own `.mcp.json`, because doing so can create a second Memory Store auth prompt in hosts that scope MCP auth per plugin.
 
-GTM Agent uses Memory Store as long-term operating memory, not just recall. During setup and execution it should distill approved rules, user corrections, approval policies, connector expectations, persona decisions, sourcing gates, outcomes, and skill-improvement candidates into Memory Store records so future runs inherit them.
+GTM Agent uses Memory Store as a proactive intelligence layer with long-term memory for agents, not just recall. During setup and execution it should distill approved rules, user corrections, approval policies, connector expectations, persona decisions, sourcing gates, outcomes, and skill-improvement candidates into Memory Store records so future runs inherit them, surface relevant context, and continue approved routines.
 
 `gtm-agent` can additionally use:
 
@@ -150,6 +150,14 @@ GTM Agent uses Memory Store as long-term operating memory, not just recall. Duri
 - Google Calendar connector for booking context after qualified replies.
 
 Both Exa Search and Websets use the same Exa API key. Get one at `https://dashboard.exa.ai/api-keys`. The plugin's `.mcp.json` ships with `YOUR_EXA_API_KEY` placeholders; replace them in your host MCP settings, do not commit real keys. Free-plan Exa Search works without a key only for exploratory public lookup; Websets requires a key, and production GTM Agent runs should stop and ask for Exa/Websets setup before sourcing, persona discovery, email enrichment, signal cards, or outbound drafts.
+
+When Exa/Websets are missing during setup, the agent should give the API-key URL, ask the user to paste the key into a terminal prompt when possible, and run or output the host setup command. From a local checkout:
+
+```bash
+plugins/gtm-agent/scripts/setup_exa_connectors.sh --host codex --persist-shell
+```
+
+Production GTM research should verify `web_search_advanced_exa` is loaded for company, people, and article/news searches.
 
 For a 5-10 minute step-by-step Exa setup walkthrough — including Monitors and Gmail/Calendar auth — see [EXA_SETUP.md](EXA_SETUP.md). For per-connector reference (URLs, header vs query-param auth, dashboard playground link) see [CONNECTORS.md](CONNECTORS.md).
 

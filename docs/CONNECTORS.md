@@ -19,7 +19,7 @@ GTM Agent expects the Memory Store MCP tools from that core plugin:
 
 GTM Agent does **not** redeclare Memory Store MCP in its own `.mcp.json`. That avoids a second Memory Store auth prompt when `memory-store` is already installed.
 
-Memory Store is the long-term operating memory for the GTM plugin. GTM Agent should use `checkin` and `recall` before acting, then use `record` after approval or confirmed execution to persist setup rules, preferences, constraints, connector policy, persona/sourcing decisions, outcomes, and skill-improvement candidates.
+Memory Store is the proactive intelligence layer and long-term operating memory for the GTM plugin. GTM Agent should use `checkin` and `recall` before acting, then use `record` after approval or confirmed execution to persist setup rules, preferences, constraints, connector policy, persona/sourcing decisions, outcomes, and skill-improvement candidates. Future runs should use those records to surface relevant context, continue approved routines, and avoid re-asking.
 
 ## Get an Exa API key
 
@@ -30,6 +30,13 @@ https://dashboard.exa.ai/api-keys
 ```
 
 The free plan works without a key only for shallow exploratory search; it is not enough for a real GTM campaign. It lacks Websets access and should not be used for production ICP discovery, sourcing, enrichment, send-ready rows, or always-on monitoring. For any real campaign, create a key and configure it in both Exa Search and Websets server entries before expecting execution-grade sourcing.
+
+During first-run setup, GTM Agent should make this agent-led:
+
+1. Give the API-key URL directly: `https://dashboard.exa.ai/api-keys`.
+2. Ask the user to paste the key into a terminal prompt, not into chat when avoidable.
+3. Run `plugins/gtm-agent/scripts/setup_exa_connectors.sh --host codex --persist-shell` or the equivalent host command.
+4. Reload the host and verify `web_search_advanced_exa` plus Websets tools.
 
 ## Exa Search MCP
 
@@ -45,7 +52,13 @@ Active tools:
 
 - `web_search_exa` (default on) - clean web search results.
 - `web_fetch_exa` (default on) - full webpage content as markdown.
-- `web_search_advanced_exa` (optional) - category, domain, date range, highlights, summaries, subpage crawling.
+- `web_search_advanced_exa` (required for production GTM) - category, domain, date range, highlights, summaries, subpage crawling.
+
+Advanced search categories the GTM skills should use:
+
+- `company` for company/account discovery, competitor maps, and market structure.
+- `people` for buyer/persona discovery, public profile verification, and role mapping.
+- `article` or `news` when available for articles, launches, announcements, timing, and pain-language sources.
 
 Deprecated but still callable for backwards compat:
 `company_research_exa`, `people_search_exa`, `crawling_exa`, `linkedin_search_exa`, `get_code_context_exa`, `deep_search_exa`. GTM Agent skills should prefer `web_search_advanced_exa` and treat deprecated tools as host/backward-compatibility fallbacks only.
@@ -54,13 +67,15 @@ Manual host configuration (if not relying on the plugin's `.mcp.json`):
 
 ```bash
 # Claude Code
-claude mcp add --transport http exa https://mcp.exa.ai/mcp --header "x-api-key: YOUR_EXA_API_KEY"
+claude mcp add --transport http exa \
+  "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa" \
+  --header "x-api-key: YOUR_EXA_API_KEY"
 
 # Codex
-codex mcp add exa --url https://mcp.exa.ai/mcp
+codex mcp add exa --url "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa&exaApiKey=$EXA_API_KEY"
 ```
 
-Current Codex CLI builds support `--url` and `--bearer-token-env-var`, not arbitrary `x-api-key` headers. If you need Exa Search production limits in Codex, configure the `x-api-key` header in the host MCP settings or config file; otherwise the URL above runs on Exa's free plan and GTM Agent must keep the campaign in planning mode.
+Current Codex CLI builds support `--url` and `--bearer-token-env-var`, not arbitrary `x-api-key` headers. Exa Search supports `exaApiKey` in the hosted MCP URL, so the Codex command above configures production Exa Search without relying on unsupported headers. If your host supports HTTP headers, prefer `x-api-key` in host MCP settings so the key is not stored in the URL.
 
 Free-plan usage (no key, rate-limited):
 

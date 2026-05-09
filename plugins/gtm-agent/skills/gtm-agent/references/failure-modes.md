@@ -29,25 +29,27 @@ If recall lacks product, ICP, customer language, or approved claims:
 If Exa/Websets/Monitor support is missing, setup can continue as planning only, but production GTM is blocked or degraded:
 
 - Produce exact search queries, Websets criteria, enrichments, and batching plan.
-- Tell the user which MCP to connect and ask for Exa API key setup immediately when Exa/Websets credentials are missing.
+- Tell the user which MCP to connect and ask for Exa API key setup immediately when Exa/Websets credentials are missing. Give `https://dashboard.exa.ai/api-keys`, ask for a terminal-safe API-key paste/setup, and run or output `plugins/gtm-agent/scripts/setup_exa_connectors.sh --host codex --persist-shell` or the host-specific equivalent.
 - Output monitor specs when always-on signal detection is part of the plan.
 - Do not fabricate lead lists.
 - Do not draft campaign copy or mark accounts send-ready from website-only research.
 - Do not claim production sourcing, deeper ICP discovery, verified enrichment, refresh, or always-on monitoring happened.
 - Use explicit status labels: `setup_only`, `research_blocked_for_production`, `sourcing_blocked_for_production`, `monitoring_degraded`.
-- If only `web_search_exa` appears, treat the Exa surface as exploratory research only. Execution-grade lead generation and source fetching need `web_search_advanced_exa` and `web_fetch_exa`. Use deprecated tools such as `deep_search_exa` only when the host still exposes them.
+- If only `web_search_exa` appears, treat the Exa surface as exploratory research only. Execution-grade lead generation and source fetching need `web_search_advanced_exa` and `web_fetch_exa`. Advanced company, people, and article/news searches are required for deep GTM sourcing. Use deprecated tools such as `deep_search_exa` only when the host still exposes them.
 
 For Exa Search MCP:
 
 ```bash
-# Free/rate-limited exploratory mode only:
-codex mcp add exa --url https://mcp.exa.ai/mcp
+# Production Exa Search in Codex:
+export EXA_API_KEY=YOUR_EXA_API_KEY
+codex mcp add exa --url "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa&exaApiKey=$EXA_API_KEY"
 ```
 
 For Websets MCP:
 
 ```bash
-codex mcp add websets --url "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY"
+export EXA_API_KEY=YOUR_EXA_API_KEY
+codex mcp add websets --url https://websetsmcp.exa.ai/mcp --bearer-token-env-var EXA_API_KEY
 ```
 
 GTM Agent also declares Websets in `plugins/gtm-agent/.mcp.json` with a `YOUR_EXA_API_KEY` placeholder; the user still has to replace it in host MCP settings because the plugin cannot safely ship a real Exa key.
