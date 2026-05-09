@@ -27,7 +27,7 @@ Both Exa Search MCP and Websets MCP use the same key.
 https://dashboard.exa.ai/api-keys
 ```
 
-The free plan works without a key but is rate-limited and lacks Websets access. For any real campaign, create a key and configure it in both Exa Search and Websets server entries before expecting execution-grade sourcing.
+The free plan works without a key only for shallow exploratory search; it is not enough for a real GTM campaign. It lacks Websets access and should not be used for production ICP discovery, sourcing, enrichment, send-ready rows, or always-on monitoring. For any real campaign, create a key and configure it in both Exa Search and Websets server entries before expecting execution-grade sourcing.
 
 ## Exa Search MCP
 
@@ -58,7 +58,7 @@ claude mcp add --transport http exa https://mcp.exa.ai/mcp --header "x-api-key: 
 codex mcp add exa --url https://mcp.exa.ai/mcp
 ```
 
-Current Codex CLI builds support `--url` and `--bearer-token-env-var`, not arbitrary `x-api-key` headers. If you need Exa Search production limits in Codex, configure the `x-api-key` header in the host MCP settings or config file; otherwise the URL above runs on Exa's free plan.
+Current Codex CLI builds support `--url` and `--bearer-token-env-var`, not arbitrary `x-api-key` headers. If you need Exa Search production limits in Codex, configure the `x-api-key` header in the host MCP settings or config file; otherwise the URL above runs on Exa's free plan and GTM Agent must keep the campaign in planning mode.
 
 Free-plan usage (no key, rate-limited):
 
@@ -66,6 +66,8 @@ Free-plan usage (no key, rate-limited):
 claude mcp add --transport http exa https://mcp.exa.ai/mcp
 codex mcp add exa --url https://mcp.exa.ai/mcp
 ```
+
+Use free-plan Exa only to inspect public pages and prepare the setup packet. If the user asks to run a campaign, create ICP depth, build lead lists, generate account evidence cards, or draft outbound, stop and ask them to configure the Exa API key first.
 
 ## Websets MCP
 

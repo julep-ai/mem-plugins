@@ -17,6 +17,7 @@ Record confirmed events:
 - ICP cell added, removed, or reframed.
 - Account/source signal accepted or rejected.
 - Copy variant approved, edited, rejected, sent, or scheduled.
+- Email/LinkedIn channel policy approved, changed, or measured.
 - Reply received and classified.
 - Objection heard.
 - Meeting booked.
@@ -33,7 +34,7 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 
 `content`:
 
-> The user approved a GTM campaign plan for `<company>` today. Goal: `<goal>`. Scale: `<recipient count>` recipients across `<ICP count>` ICP cells. Channels: `<email | LinkedIn | mixed>`. The strongest thesis was `<one sentence>`. Approved ICP cells: `<list>`.
+> The user approved a GTM campaign plan for `<company>` today. Goal: `<goal>`. Scale: `<recipient count>` recipients across `<ICP count>` ICP cells. Daily sourcing target if any: `<count>`. Channels: `<email | LinkedIn | mixed>`. The strongest thesis was `<one sentence>`. Approved ICP cells: `<list>`.
 >
 > Source memories and public sources used: `<IDs/URLs>`.
 
@@ -45,7 +46,7 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 
 `content`:
 
-> The user approved the GTM campaign system for `<company>` today. Campaign mode: `<new_campaign | build_on_previous | refresh_existing | expand_winner | rescue_underperformer | reactivation | event_or_launch>`. Context sources approved: `<Memory Store, uploaded docs, pasted notes, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets>`. Funnel stages being engineered: `<summary>`. ICP system: `<summary>`. Signal system: `<summary>`. Learning system: `<summary>`.
+> The user approved the GTM campaign system for `<company>` today. Campaign mode: `<plan_new_campaign | start_new_campaign | monitor_campaign | campaign_insights | update_prior_campaign | new_campaign | build_on_previous | refresh_existing | expand_winner | rescue_underperformer | reactivation | event_or_launch>`. Context sources approved: `<Memory Store, uploaded docs, pasted notes, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets>`. Funnel stages being engineered: `<summary>`. ICP system: `<summary>`. Signal system: `<summary>`. Channel system: `<email/LinkedIn policy>`. Learning system: `<summary>`.
 
 `background`:
 
@@ -75,7 +76,7 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 
 `content`:
 
-> ICP refinement for `<company>`: `<cell name>` was `<added | removed | reframed>`. Reason: `<user reason or evidence>`. New definition: buyer `<buyer>`, pain `<pain>`, signals `<signals>`, exclusions `<exclusions>`.
+> ICP refinement for `<company>`: `<cell name>` was `<added | removed | reframed>`. Reason: `<user reason or evidence>`. New definition: buyer `<buyer>`, pain `<pain>`, customer-story/persona pattern `<pattern>`, signals `<signals>`, exclusions `<exclusions>`, learning intent `<intent>`.
 
 ### Signal accepted or rejected
 
@@ -83,11 +84,17 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 
 > GTM signal learning for `<company>`: `<signal type>` was `<accepted | rejected>` for `<ICP/account>`. Reason: `<specific reason>`. Source: `<URL or memory ID>`. Future sourcing should `<instruction>`.
 
+### Channel outcome
+
+`content`:
+
+> Channel outcome for `<company>` outbound to `<ICP/account/person>` today. Channel policy: `<email_only | linkedin_only | email_plus_linkedin>`. Persona: `<persona>`. Signal: `<signal>`. Copy hypothesis: `<hypothesis>`. Outcome: `<reply | connection | objection | meeting | no response | bounce | unsubscribe | no-contact>`. Learning: `<what changed for future channel selection>`.
+
 ### Copy variant outcome
 
 `content`:
 
-> Copy outcome for `<company>` outbound to `<ICP/account/person>`. Variant `<variant label>` was `<approved | edited | rejected | sent>`. User feedback: "`<quote if available>`". Final text or summary: `<text/summary>`. Hypothesis tested: `<one line>`.
+> Copy outcome for `<company>` outbound to `<ICP/account/person>`. Variant `<variant label>` was `<approved | edited | rejected | sent>`. User feedback: "`<quote if available>`". Final text or summary: `<text/summary>`. Hypothesis tested: `<one line>`. Customer-story/persona pattern used: `<pattern>`.
 
 ### Reply or objection
 
@@ -107,6 +114,12 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 
 > GTM performance update for `<company>` campaign `<campaign name>` as of `<date>`. Sent: `<n>`. Replies: `<n>`. Positive replies: `<n>`. Meetings: `<n>`. Bounces: `<n>`. Unsubscribes: `<n>`. Best ICP: `<cell>`. Best signal: `<signal>`. Best copy angle: `<variant>`. Main failure pattern: `<pattern>`.
 
+### Campaign update from insights
+
+`content`:
+
+> Campaign update for `<company>` based on recent GTM insights. Changed ICPs: `<summary>`. Changed signal rules: `<summary>`. Changed copy hypotheses: `<summary>`. Changed channel policy: `<summary>`. Customer stories/personas to mine next: `<summary>`. Killed experiments: `<summary>`. Next batch should `<instruction>`.
+
 ## Learning Dimensions
 
 When summarizing results, slice by:
@@ -118,6 +131,8 @@ When summarizing results, slice by:
 - Copy variant
 - Sender
 - Channel
+- Customer-story/persona pattern
+- Email plus LinkedIn identity confidence
 - Objection
 - Outcome
 - Time lag from signal to outreach

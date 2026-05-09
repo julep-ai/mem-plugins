@@ -16,9 +16,12 @@ A campaign always starts with a plan, never with sourcing. Use the host's plan m
    - active offer profile and sender persona
    - ICP cells, including at least one unconventional ICP from
      campaign-planner.md Persona Discovery
-   - scale and timing (target counts per ICP, send window)
+   - customer-story/persona hypotheses being tested
+   - high-intent signal sources and monitor plan
+   - scale and timing (target counts per ICP, daily sourcing target, send window)
    - success criteria (replies, qualified meetings, learnings)
    - exclusions, taboo claims, suppression rules
+   - email/LinkedIn channel policy when dual-channel is in scope
    - signal sources to prioritize
    - send ramp and stop conditions
 
@@ -88,12 +91,15 @@ score_icp_fit         # 1-10
 score_timing          # 1-10
 score_pain            # 1-10
 score_personalization # 1-10
+customer_story_pattern # remembered customer/persona pattern if applicable
+learning_intent       # persona | signal | proof | subject | CTA | channel | sequence
 risk                  # low | medium | high
 status                # research_more | watch | qualified | exclude |
                       # send_ready | drafted | sent | replied | meeting |
                       # bounced | unsubscribed | negative_reply
 signal_source_url     # the live signal that justified this row
 signal_summary        # short, one sentence
+channel_policy        # email_only | email_plus_linkedin | linkedin_only | suppress
 exclusion_reason      # blank if status != exclude
 last_updated          # ISO timestamp
 ```

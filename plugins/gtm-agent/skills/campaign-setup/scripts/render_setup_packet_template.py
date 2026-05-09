@@ -8,6 +8,7 @@ unknown_blocker:
 company_profile:
 campaign_mode:
 context_sources:
+connector_status:
 offer_profiles:
 sender_voice:
 website_findings:
@@ -17,6 +18,7 @@ icp_matrix:
 signal_sources:
 gmail_learnings:
 calendar_policy:
+channel_policy:
 send_ramp_policy:
 autopilot_routines:
 approval_needed_before_start:

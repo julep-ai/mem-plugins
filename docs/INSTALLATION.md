@@ -147,7 +147,7 @@ Required Memory Store operations:
 - Gmail connector for inbox learning, approved setup/autopilot sends, replies, and followups.
 - Google Calendar connector for booking context after qualified replies.
 
-Both Exa Search and Websets use the same Exa API key. Get one at `https://dashboard.exa.ai/api-keys`. The plugin's `.mcp.json` ships with `YOUR_EXA_API_KEY` placeholders; replace them in your host MCP settings, do not commit real keys. Free-plan Exa Search works without a key (rate-limited); Websets requires a key.
+Both Exa Search and Websets use the same Exa API key. Get one at `https://dashboard.exa.ai/api-keys`. The plugin's `.mcp.json` ships with `YOUR_EXA_API_KEY` placeholders; replace them in your host MCP settings, do not commit real keys. Free-plan Exa Search works without a key only for exploratory public lookup; Websets requires a key, and production GTM Agent runs should stop and ask for Exa/Websets setup before sourcing, signal cards, or outbound drafts.
 
 For a 5-10 minute step-by-step Exa setup walkthrough — including Monitors and Gmail/Calendar auth — see [EXA_SETUP.md](EXA_SETUP.md). For per-connector reference (URLs, header vs query-param auth, dashboard playground link) see [CONNECTORS.md](CONNECTORS.md).
 
@@ -239,7 +239,7 @@ Restart/reload the host and complete Memory Store MCP auth. The plugin can draft
 
 ### Exa or Websets tools are unavailable
 
-The GTM Agent should still produce query plans, Websets specs, monitor specs, and draft-ready output. To execute sourcing directly:
+The GTM Agent should still produce the setup packet, exact research queries, Websets specs, monitor specs, and connector setup instructions. It should not produce send-ready lead lists or outbound copy from website-only research. To execute sourcing directly:
 
 1. Get an Exa API key at https://dashboard.exa.ai/api-keys.
 2. Replace `YOUR_EXA_API_KEY` in your host MCP settings for both `exa` and `websets` entries (the plugin's `.mcp.json` ships placeholders).

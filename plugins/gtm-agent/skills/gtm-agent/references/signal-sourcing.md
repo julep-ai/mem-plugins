@@ -17,21 +17,22 @@ Production meaning:
 - Memory Store is the required brain.
 - Exa Search is the required live research and source-discovery layer.
 - Websets is the required production sourcing, verification, enrichment, import, refresh, and export layer.
+- Gmail is the required execution and reply-learning layer.
 - Exa Monitors are the required always-on signal layer.
 - Manual CSVs and pasted lists are valid fallback/import paths, not the primary production loop.
 
 A website, generic company description, funding database row, or founder title is not a signal. It is only context. The sourcing job is to find a current reason to engage and the persona-specific workflow that reason maps to.
 
-If Exa Search MCP is missing, tell the user to connect it and continue with setup/query design only. Mark live public research and signal discovery `research_degraded`:
+If Exa Search MCP or its production API key is missing, tell the user to connect it and continue with setup/query design only. Mark live public research and signal discovery `research_blocked_for_production`:
 
 ```bash
 claude mcp add --transport http exa https://mcp.exa.ai/mcp --header "x-api-key: YOUR_EXA_API_KEY"
 codex mcp add exa --url https://mcp.exa.ai/mcp
 ```
 
-Current Codex CLI builds do not support arbitrary `x-api-key` headers through `codex mcp add`. Configure the header in host MCP settings for production limits, or use the free-plan URL above.
+Current Codex CLI builds do not support arbitrary `x-api-key` headers through `codex mcp add`. Configure the header in host MCP settings for production limits, or use the free-plan URL above only for exploratory lookup. Do not create send-ready rows or outbound drafts from free-plan/website-only research.
 
-If Websets MCP is missing and the task requires structured lead sourcing, tell the user to connect it with their Exa key (Bearer token preferred, query-param fallback for older hosts). Continue by producing Webset queries, criteria, enrichment schemas, and `accounts.csv` import shape, but mark production sourcing `sourcing_degraded`:
+If Websets MCP is missing and the task requires structured lead sourcing, tell the user to connect it with their Exa key (Bearer token preferred, query-param fallback for older hosts). Continue by producing Webset queries, criteria, enrichment schemas, and `accounts.csv` import shape, but mark production sourcing `sourcing_blocked_for_production`:
 
 ```bash
 claude mcp add --transport http websets https://websetsmcp.exa.ai/mcp --header "Authorization: Bearer YOUR_EXA_API_KEY"
@@ -40,6 +41,8 @@ codex mcp add websets --url https://websetsmcp.exa.ai/mcp --bearer-token-env-var
 ```
 
 Get the API key at `https://dashboard.exa.ai/api-keys`. Both MCPs use the same key.
+
+If Gmail is missing and the task requires execution, tell the user to connect Gmail. Continue with sourcing and copy hypotheses only. Mark sending, followups, reply scans, suppression checks, and mailbox outcome learning `sending_blocked_for_production`.
 
 If Exa Monitors are not configured, the agent may still run one-off sourcing, but it must mark always-on GTM `monitoring_degraded` and output monitor specs from [monitors.md](monitors.md). Do not claim the campaign is continuously watching signals until a monitor or approved host automation exists.
 
@@ -54,6 +57,8 @@ Default high-scale plan:
 
 For Websets, oversource each ICP cell by 25-60 percent to absorb duplicates, unreachable accounts, low-confidence rows, exclusions, and bad-fit discoveries. A 50-recipient cell should usually source 65-80 candidates before trimming.
 
+For daily high-intent operation, treat `1000 leads/emails per day` as a sourcing and review target, not an unconditional send quota. The campaign should produce enough verified people and channel identities for the approved ramp, plus a watchlist for later. Promote only rows that pass the signal card gate and suppression checks.
+
 ## ICP Cell Shape
 
 Each ICP cell should have:
@@ -66,8 +71,41 @@ Each ICP cell should have:
 - **Soft criteria** - ranking signals.
 - **Exclusions** - competitors, current customers, low-fit segments, regulated edges, or do-not-contact categories.
 - **Target count** - usually 50 for the user's 1000-recipient plan.
+- **Learning intent** - what this cell is testing: persona fit, signal quality, proof path, objection, channel, copy angle, or customer-story resonance.
 
 Persona families are seller-specific. The planner does not import a default list — it derives families from the seller's Memory Store recall (customer base, prior campaigns, lived empathy). At least one ICP cell per campaign should be unconventional (see [campaign-planner.md](campaign-planner.md) Persona Discovery), sourced through Memory Store pain recall, not firmographic templates.
+
+## High-Intent Signal Gate
+
+A sourced row is high-intent only when it has at least one current, sourceable reason to engage and a persona-specific reason that person owns the pain. Strong signals include:
+
+- hiring for agent, AI platform, growth, support, community, sales engineering, FDE, or customer operations roles.
+- public LinkedIn post about building agents, GTM automation, support load, community scale, launch pressure, workflow bottlenecks, or customer context.
+- recent product launch, changelog, docs churn, GitHub issue pattern, integration release, or community/support discussion.
+- competitor adoption, competitor complaint, migration signal, public case study, pricing/changelog shift, or public customer story.
+- warm-path or prior-reply signal from Gmail/Memory Store.
+- match to a remembered customer-story pattern: same persona, same pain, same workflow, similar trigger.
+
+Weak signals do not qualify: generic AI category, old funding, founder title alone, homepage copy, broad company size, or a list membership with no current timing.
+
+## Channel Identity
+
+When LinkedIn is in scope, each person row should keep email and LinkedIn identity together:
+
+```text
+person_name:
+company:
+persona:
+work_email:
+linkedin_profile_url:
+email_source:
+linkedin_source:
+identity_confidence:
+channel_policy: email_only | email_plus_linkedin | linkedin_only | suppress
+channel_learning_intent:
+```
+
+Email and LinkedIn touches should reinforce the same hypothesis, not duplicate the same wording. Track both against the same person so later insights can answer whether email-only, LinkedIn-only, or combined touches worked for that persona/signal.
 
 The lists below are **illustrative for one kind of seller** (software/AI infrastructure). For other sellers — real estate, legal services, consumer goods, agencies, services, vertical SaaS — recall produces entirely different families. Use these as a structural example only.
 

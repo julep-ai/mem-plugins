@@ -53,11 +53,12 @@ Field rules:
 Start with these routines after setup approval:
 
 - **Daily Websets refresh review** - inspect approved Websets, summarize new candidates, score against ICP cells, and keep weak rows out of send-ready state.
-- **Daily monitor review** - inspect approved monitor results, dedupe against existing accounts, and propose new signal cards.
+- **Daily high-intent monitor review** - inspect approved monitor results, dedupe against existing accounts, identify high-intent signals, and propose new signal cards.
 - **Gmail reply scan** - classify campaign replies, stop followups when needed, summarize owner actions, and record confirmed outcomes.
 - **Followup check** - find sent threads eligible for the next followup, enforce stop conditions, and send or draft according to the approved policy.
 - **Daily campaign digest** - report sends, drafts, replies, meetings, bounces, suppressions, risks, and next actions.
-- **Weekly learning summary** - update ICP, signal, copy, objection, and suppression learnings from confirmed events.
+- **Weekly campaign insights** - update ICP, signal, copy, objection, channel, customer-story/persona, and suppression learnings from confirmed events.
+- **Prior campaign update** - apply approved insights to a prior campaign's ICP cells, signal rules, copy hypotheses, channel policy, and suppressions.
 
 ## Host Mapping
 
@@ -81,6 +82,8 @@ day_4_plus: max 50 sends/day only if bounce, unsubscribe, and negative-reply ris
 ```
 
 The ramp is a ceiling, not a quota. A routine should send fewer or none when signal quality, evidence, sender health, or connector state is weak.
+
+Daily sourcing targets can be much higher than daily sends. For example, a campaign may source and score around 1000 leads/emails per day across Websets and Exa, while sending only the approved ramp subset that passes signal-card, suppression, and Gmail health gates.
 
 ## Example Routine
 

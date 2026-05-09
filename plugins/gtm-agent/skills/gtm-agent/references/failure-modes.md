@@ -25,19 +25,21 @@ If recall lacks product, ICP, customer language, or approved claims:
 
 ## Exa, Websets, Or Monitors Missing
 
-If Exa/Websets/Monitor support is missing, setup can continue but production GTM is degraded:
+If Exa/Websets/Monitor support is missing, setup can continue as planning only, but production GTM is blocked or degraded:
 
 - Produce exact search queries, Websets criteria, enrichments, and batching plan.
-- Tell the user which MCP to connect.
+- Tell the user which MCP to connect and ask for Exa API key setup immediately when Exa/Websets credentials are missing.
 - Output monitor specs when always-on signal detection is part of the plan.
 - Do not fabricate lead lists.
-- Do not claim production sourcing, verified enrichment, refresh, or always-on monitoring happened.
-- Use explicit status labels: `research_degraded`, `sourcing_degraded`, `monitoring_degraded`.
+- Do not draft campaign copy or mark accounts send-ready from website-only research.
+- Do not claim production sourcing, deeper ICP discovery, verified enrichment, refresh, or always-on monitoring happened.
+- Use explicit status labels: `setup_only`, `research_blocked_for_production`, `sourcing_blocked_for_production`, `monitoring_degraded`.
 - If only `web_search_exa` appears, treat the Exa surface as exploratory research only. Execution-grade lead generation and source fetching need `web_search_advanced_exa` and `web_fetch_exa`. Use deprecated tools such as `deep_search_exa` only when the host still exposes them.
 
 For Exa Search MCP:
 
 ```bash
+# Free/rate-limited exploratory mode only:
 codex mcp add exa --url https://mcp.exa.ai/mcp
 ```
 
@@ -55,10 +57,11 @@ For Exa Monitors, use [monitors.md](monitors.md) to output the REST/dashboard sp
 
 If Gmail is missing:
 
-- Output ready-to-import drafts and followup timing.
+- Output ready-to-import drafts and followup timing only after planner/copy gates pass.
 - Do not claim emails were sent, scheduled, labeled, or threaded.
+- Do not claim production execution, reply monitoring, suppression checks, or mailbox learning.
 - Keep recipient data in a reviewable table or CSV-shaped output.
-- Mark full autopilot sending disabled until Gmail is connected.
+- Mark full autopilot sending disabled until Gmail is connected. Use `sending_blocked_for_production`.
 
 ## Google Calendar Missing
 

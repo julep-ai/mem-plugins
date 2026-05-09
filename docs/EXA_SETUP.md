@@ -10,7 +10,7 @@ GTM Agent v1 supports Exa as the only research/sourcing backend. There is no swa
 https://dashboard.exa.ai/api-keys
 ```
 
-Sign in, create a key, copy it. The same key authenticates both Exa Search MCP and Websets MCP. Free-plan keys work but are rate-limited; paid plans are required for production-scale Websets.
+Sign in, create a key, copy it. The same key authenticates both Exa Search MCP and Websets MCP. No-key/free-plan Exa is only for exploratory lookup; paid plans are required for production-scale Websets. A real GTM campaign should not proceed to production ICP discovery, sourcing, signal cards, or outbound drafts until this key is configured.
 
 Store the key once in your shell profile if you plan to install across hosts:
 
@@ -56,14 +56,14 @@ URL:    https://mcp.exa.ai/mcp
 Header: x-api-key: <your key>
 ```
 
-### Free-plan fallback (no key)
+### Free-plan fallback (no key, exploratory only)
 
 ```bash
 claude mcp add --transport http exa https://mcp.exa.ai/mcp
 codex mcp add exa --url https://mcp.exa.ai/mcp
 ```
 
-This works but is rate-limited and lacks Websets access.
+This works but is rate-limited and lacks Websets access. Use it only to inspect public pages or shape setup questions. GTM Agent must still ask for an Exa API key before production sourcing or drafting.
 
 ## 4. Configure Websets MCP
 

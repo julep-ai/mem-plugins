@@ -10,6 +10,8 @@ Do not design this as "Exa finds leads, Gmail sends emails." Design it as an exp
 setup approval -> ICP hypotheses -> evidence-backed accounts -> approved automation routines -> controlled sends -> engagement capture -> Memory Store learning -> next batch
 ```
 
+The campaign is a learning system, not just a delivery system. Every ICP cell, signal family, channel choice, and copy variant needs an intent that can later be judged.
+
 ## Campaign Entities
 
 Track these concepts in the working output even if the host does not have a database yet:
@@ -18,10 +20,11 @@ Track these concepts in the working output even if the host does not have a data
 - **campaign** - company, goal, offer, CTA, sender, send policy, review policy, scale, status.
 - **ICP cell** - name, buyer, criteria, trigger signals, pain hypothesis, target count, confidence.
 - **account** - company/domain, fit score, timing score, source URLs, evidence summary, risk.
-- **contact** - name/title/email if known, persona, source URLs, prior relationship, suppression state.
+- **contact** - name/title/email if known, LinkedIn profile URL if known, persona, source URLs, prior relationship, suppression state.
 - **evidence** - source URL or memory ID, claim, freshness, relevance, whether it is safe to use in copy.
-- **copy variant** - subject, body, CTA, angle, hypothesis, evidence IDs, risk flags, review status.
-- **message** - draft/sent/thread IDs when available, sequence step, send status, reply status.
+- **copy variant** - subject, body, CTA, angle, customer-story/persona pattern, hypothesis, evidence IDs, risk flags, review status.
+- **channel touch** - email, LinkedIn, or mixed touch against the same person, with channel-specific wording and a learning intent.
+- **message** - draft/sent/thread IDs when available, LinkedIn URL/status when available, sequence step, send status, reply status.
 - **engagement event** - reply, meeting, objection, bounce, unsubscribe, referral, qualitative note.
 - **learning** - what changed about ICP, signal, copy, channel, account, or objection handling.
 - **suppression** - email/domain/reason/source for no-contact and future exclusion.
@@ -45,6 +48,8 @@ After setup approval, per-batch approval is not required by default. Full autopi
 Hard blocks:
 
 - No source evidence.
+- No high-intent signal.
+- No customer-story/persona pattern or proof path for the persona.
 - No valid sender identity.
 - Duplicate recent outreach.
 - Existing customer or competitor excluded by policy.
@@ -94,6 +99,18 @@ Default ramp:
 
 The ramp is a ceiling, not a quota. Send fewer when signal quality or mailbox health is weak.
 
+For high-scale sourcing, a campaign may target around 1000 leads/emails per day in the working queue, but the send volume is never the same as the sourced volume. Only `send_ready` rows with complete signal cards, suppressions cleared, Gmail readiness, and approved policy may send.
+
+## Email And LinkedIn
+
+When LinkedIn is approved:
+
+- keep email and LinkedIn on the same person record.
+- use LinkedIn profile URL as a dedupe key alongside email and domain.
+- do not send the same copy in both channels.
+- track channel outcome separately: email reply, LinkedIn reply, connection accepted, profile viewed if available, no response, objection, unsubscribe/no-contact.
+- preserve the experiment intent: why this persona should respond better through email-only, LinkedIn-only, or combined touches.
+
 ## Google Calendar Booking Context
 
 Use Google Calendar for scheduling context after qualified replies:
@@ -116,11 +133,21 @@ Do not over-optimize on opens. Use this order:
 
 Slice results by ICP cell, signal source, buyer title, company stage, copy variant, sender, channel, objection, and time from signal to outreach.
 
+Insight readouts should answer:
+
+- Which personas emerged from customer stories rather than static firmographics?
+- Which high-intent signals predicted replies or meetings?
+- Which customer-story proof paths worked or failed?
+- Which channel policy worked per persona: email-only, LinkedIn-only, or email plus LinkedIn?
+- Which copy hypotheses should be repeated, killed, or changed?
+- Which prior campaign rules should be updated before the next batch?
+
 ## V1 Boundary
 
 V1 is a plugin-level autopilot, not a separate dashboard:
 
-- one primary channel: email/Gmail
+- one primary execution channel: email/Gmail
+- optional LinkedIn tracking/touch policy when approved and identity confidence is sufficient
 - one sender identity unless the user says otherwise
 - full autopilot after setup approval
 - approved routine specs for asynchronous daily/weekly work

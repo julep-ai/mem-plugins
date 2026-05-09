@@ -12,6 +12,11 @@ AI is good at filling structured systems. The skill should provide the system; t
 
 Classify the run first:
 
+- `plan_new_campaign` - co-design the campaign plan with the user before creating folders, sourcing, drafting, or automations.
+- `start_new_campaign` - create or activate a new approved campaign; begin sourcing, signal cards, representative copy, and routines.
+- `monitor_campaign` - inspect active campaign health, Websets/monitor changes, Gmail replies/followups, bounces, suppressions, and stop conditions.
+- `campaign_insights` - summarize performance and extract learnings by ICP, signal, copy angle, channel, persona, and objection.
+- `update_prior_campaign` - change an existing campaign based on new results, customer stories, exclusions, ICP shifts, copy learnings, or channel results.
 - `new_campaign` - first campaign for this product, offer, sender, or market.
 - `build_on_previous` - previous campaign exists; reuse learnings, exclusions, replies, objections, copy, and Websets.
 - `refresh_existing` - same campaign, but ICP, signals, offer, proof, or copy need updates.
@@ -21,6 +26,8 @@ Classify the run first:
 - `event_or_launch` - time-bound campaign around launch, funding, conference, changelog, product release, or news.
 
 If unclear, infer the top two modes and ask the user to confirm only when the mode changes policy, risk, or required evidence.
+
+Planning mode is encouraged. If the user is creating or materially changing a campaign, first return a compact plan for approval: campaign name, active offer, sender, target scale, ICP cells, high-intent signal sources, email/LinkedIn channel policy, proof paths, success criteria, suppressions, send ramp, monitor specs, learning loop, and the exact connector gates. Do not skip this plan and jump straight into shallow website research.
 
 ## Context Ingestion
 
@@ -53,10 +60,12 @@ Every campaign should map to funnel stages. Use this as the default system:
 ```text
 market_definition
   -> ICP hypotheses
+  -> customer-story/persona mining
   -> signal discovery
   -> account sourcing
   -> buyer/persona discovery
   -> evidence card
+  -> channel plan (email + optional LinkedIn)
   -> copy hypothesis
   -> review / approval
   -> send / followup
@@ -89,12 +98,17 @@ pain:
 hard_criteria:
 soft_criteria:
 trigger_signals:
+customer_story_or_pattern:
 proof_path:
 exclusions:
 source_context:
 confidence:
 first_batch_size:
+daily_target:
+learning_intent:
 ```
+
+High-intent sourcing is not a static persona list. Each ICP cell should define the signals that imply current need: hiring for agent/GTM/support roles, public launch/change, docs/changelog activity, community/support load, GitHub issue pattern, relevant LinkedIn post, new integration, competitor switch, customer-story match, warm path, or prior reply pattern. A generic title plus company category is not high intent.
 
 For first-time campaigns, propose several ICP hypotheses and start small. For prior campaigns, reuse winners, suppress losers, and explicitly say what changed.
 
@@ -112,6 +126,29 @@ proof_system:
 execution_system:
 learning_system:
 open_decisions:
+```
+
+For `monitor_campaign`, include:
+
+```text
+campaign_health:
+new_high_intent_signals:
+reply/followup_status:
+stop_conditions:
+recommended_updates:
+```
+
+For `campaign_insights` or `update_prior_campaign`, include:
+
+```text
+winning_personas:
+losing_personas:
+winning_signals:
+copy_hypotheses:
+channel_results:
+customer_stories_to_mine:
+policy_changes:
+next_experiments:
 ```
 
 Keep it compact. The point is not a document; the point is to make the GTM machine explicit enough that background workers and automations can fill it.

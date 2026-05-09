@@ -5,7 +5,7 @@ description: Use when creating Exa Websets sourcing, previews, enrichments, impo
 
 # Websets Sourcing
 
-Use Exa Websets as the persistent sourcing and enrichment layer for GTM Agent.
+Use Exa Websets as the persistent sourcing and enrichment layer for GTM Agent. Production Websets sourcing requires a configured Exa API key; if auth is missing, stop and output setup steps plus the Webset spec.
 
 ## Loop
 
@@ -15,7 +15,7 @@ Use Exa Websets as the persistent sourcing and enrichment layer for GTM Agent.
 4. Separate criteria from enrichments: criteria filter inclusion; enrichments add action fields.
 5. Pick entity type: `company`, `person`, `article`, `research_paper`, or `custom`.
 6. Use imports for seed accounts, customers, competitors, suppressions, or CSV scope.
-7. Add only enrichments that improve GTM action: buyer/persona, recent signal, source URL, offer angle, proof path, next action, confidence, and exclusion risk.
+7. Add only enrichments that improve GTM action: buyer/persona, high-intent signal, source URL, customer-story/persona pattern, offer angle, proof path, next action, learning intent, channel identity, confidence, and exclusion risk.
 8. Track async IDs and status; record approved Webset/search/enrichment/import IDs to Memory Store.
 
 Websets MCP is separate from Exa Monitors. For monitors, use `../gtm-agent/references/monitors.md` and record returned monitor IDs after approval.
@@ -26,4 +26,4 @@ Return: webset read, spec, status, quality notes, Memory Store mapping, and next
 
 ## Rules
 
-Do not create broad reusable Websets without approval. Do not commit secrets. Do not delete Websets unless explicitly asked. Do not mark rows draft-ready without complete planner fields.
+Do not create broad reusable Websets without approval. Do not commit secrets. Do not delete Websets unless explicitly asked. Do not mark rows draft-ready without complete planner fields or high-intent signal evidence.

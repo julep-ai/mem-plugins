@@ -16,6 +16,7 @@ The approval must cover:
 - send ramp and followup cadence.
 - suppression and stop conditions.
 - connector gaps and manual fallbacks.
+- email/LinkedIn channel policy when dual-channel is in scope.
 - routine specs for any asynchronous automation.
 
 ## Autopilot Mode
@@ -47,6 +48,8 @@ Default ramp:
 
 The ramp is a ceiling, not a quota. Send fewer when signal quality, evidence, mailbox health, or personalization confidence is weak.
 
+High-scale campaigns may source and score around 1000 leads/emails per day, but this is a sourcing target, not a send quota. Sending remains bounded by the approved ramp, Gmail health, suppressions, and signal-card quality.
+
 ## Followup Cadence
 
 Default followups:
@@ -75,7 +78,16 @@ Default Gmail routines:
 - summarize qualified replies and owner actions.
 - record confirmed replies, objections, meetings, bounces, and suppressions to Memory Store.
 
-If Gmail is unavailable, produce import-ready send/followup queues and mark Gmail automation disabled.
+If Gmail is unavailable, produce import-ready send/followup queues and mark Gmail automation disabled. Gmail is required for production sending, reply monitoring, suppression checks, and mailbox-derived learning. Without Gmail, GTM Agent can plan and source but cannot claim execution autopilot.
+
+## LinkedIn Policy
+
+LinkedIn is optional and must be approved in setup. When enabled:
+
+- keep LinkedIn profile URL on the same person row as the email identity.
+- use different channel copy, not the same email pasted into LinkedIn.
+- track channel outcome separately while preserving one person-level learning record.
+- do not run LinkedIn touches when person identity confidence is weak.
 
 ## Google Calendar Routines
 
@@ -93,9 +105,10 @@ Default routines:
 
 - daily campaign digest with sends, replies, meetings, objections, bounces, suppressions, and next actions.
 - weekly ICP/signal/copy learning summary.
+- weekly channel and customer-story/persona learning summary.
 - weekly suppression-list update.
 - Websets refresh for approved account pools.
-- monitor review for approved Exa monitor specs.
+- high-intent monitor review for approved Exa monitor specs.
 
 Learning records should explain what changed about ICP, signal quality, copy angle, objection handling, proof path, or suppression policy.
 

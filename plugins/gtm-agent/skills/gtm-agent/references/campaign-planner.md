@@ -7,7 +7,7 @@ Use this reference before sourcing at scale or drafting copy. Load [campaign-eng
 Do not draft outbound until the campaign unit is complete:
 
 ```text
-persona + live signal + offer angle + proof path + next action
+persona + high-intent signal + customer-story/persona pattern + offer angle + proof path + next action + learning intent
 ```
 
 For each account or person, the planner must answer:
@@ -16,10 +16,12 @@ For each account or person, the planner must answer:
 - **why now** - a current public or private signal, not just company existence.
 - **where signal came from** - URL, Memory Store ID, Gmail/CRM thread, or approved pasted evidence.
 - **what persona they are** - precise operating persona, not only title or seniority.
+- **what customer story or remembered pattern maps to them** - which existing customer, user, objection, support theme, or persona pattern explains why this prospect should care. Use approved public proof only in outbound; keep private stories as internal strategy unless approved.
 - **what offer angle maps to them** - the specific product, plugin, brief, workflow, service, or thesis that fits this persona and signal.
 - **proof path** - how the claim can be demonstrated without inventing metrics or private customer stories.
 - **next action** - reply ask, teardown offer, demo path, intro, followup, suppress, or research more.
 - **what should be remembered** - the learning that should be recorded after approval, rejection, send, reply, objection, or meeting.
+- **learning intent** - what this touch is testing: persona, signal source, customer-story resonance, subject line, proof path, CTA, email channel, LinkedIn channel, or sequence step.
 - **confidence and exclusion risk** - confidence level plus why the prospect might be wrong, stale, already contacted, competitor, customer, or do-not-contact.
 
 If any field is missing, output a planner gap and the exact research query or Memory Store recall needed. Do not produce a polished email to hide weak evidence.
@@ -39,6 +41,7 @@ Before sourcing, define the active offer profile:
 - **do-not-pitch list** - labels, claims, and categories that flatten the offer.
 - **buyer/persona map** - who owns the pain.
 - **signal sources** - where timing or pain will be proven.
+- **customer-story map** - which remembered customer stories, user behaviors, objections, or outcome patterns imply new personas to test.
 - **proof path** - demo, teardown, brief, customer example, workflow audit, listing comp, case study, benchmark, or artifact.
 - **conversion action** - reply, call, install, pilot, teardown, brief review, intro, viewing, consult, sample, quote.
 
@@ -153,13 +156,15 @@ Useful offer angles:
 
 ICPs are not a static template, and they are never seller-agnostic. The same planner method runs whether the seller is selling AI infrastructure, houses, legal services, or dog food — but the personas produced are entirely a function of the seller's offer and Memory Store's recall about that seller's customers, prior objections, and lived empathy.
 
-Three rules for every campaign, every seller:
+Four rules for every campaign, every seller:
 
 1. **Start from pain, not category.** Recall pain language from Memory Store first — the seller's customer notes, prior objections, support transcripts, founder threads, sales call notes, public complaints in the seller's space. Cluster the pain. Then ask which roles or workflows own that pain. Category/firmographic fit comes last, not first.
 
 2. **Empathy gate.** The seller must be able to speak to this persona honestly because the seller has lived an adjacent version of the pain. If the planner cannot answer "why are *we* (this specific seller) the right person to write to *them*", drop the persona. This is what makes campaigns sound true and stops them from sounding like cold spam.
 
-3. **One unconventional ICP per campaign, mandatory.** At least one ICP cell must be a persona no one else is targeting for this offer. Found through Memory Store recall, not firmographic templates. The other cells can be conventional. Examples of how unconventional looks in practice:
+3. **Customer-story expansion.** Use existing customer stories and usage patterns to discover more personas. Ask: who else has the same pain but would describe it differently? who sits next to the current buyer? who benefits after the first user succeeds? what objection indicates a hidden buyer? Each new persona must name the source story/pattern and the hypothesis being tested.
+
+4. **One unconventional ICP per campaign, mandatory.** At least one ICP cell must be a persona no one else is targeting for this offer. Found through Memory Store recall, not firmographic templates. The other cells can be conventional. Examples of how unconventional looks in practice:
 
    - Software/AI seller: AI researchers, indie builders, knowledge workers outside tech adopting AI, cognition-system power users.
    - Real-estate seller (houses, bricks, fixtures): probate attorneys with inherited-property clients, divorce mediators, regional architects working on additions, commercial-to-residential conversion specialists.
@@ -205,7 +210,7 @@ A homepage, generic "AI" category, funding page, or founder title is context, no
 Before any copy package, return a campaign planner table with these columns:
 
 ```text
-persona | live signal | source | offer angle | proof path | next action | remember after touch | confidence | exclusion risk
+persona | high-intent signal | source | customer-story/persona pattern | offer angle | proof path | next action | learning intent | remember after touch | confidence | exclusion risk
 ```
 
 For Memory Store-built offers, also include:
@@ -216,6 +221,8 @@ For Memory Store-built offers, also include:
 - signal sources to prioritize.
 - claims that are approved.
 - claims that need proof before copy.
+- persona/customer-story hypotheses being tested.
+- email and LinkedIn channel policy when dual-channel is in scope.
 
 ## Draft Eligibility
 
@@ -223,9 +230,11 @@ An account/person is draft-eligible only when:
 
 - the persona is specific enough to explain ownership of the pain.
 - the signal is timely, sourceable, and stronger than "they exist".
+- the customer-story/persona pattern explains why this message should be useful to someone like them.
 - the offer angle maps to that persona's actual workflow.
 - the proof path is honest without private leakage.
 - the next action is concrete and low-friction.
+- the learning intent is explicit enough to improve the next batch.
 - confidence is at least moderate and exclusion risk is low or explicitly accepted.
 
 Otherwise, keep the row in `research_more`, `exclude`, or `watch` state.
