@@ -26,9 +26,13 @@ For each account or person, the planner must answer:
 
 If any field is missing, output a planner gap and the exact research query or Memory Store recall needed. Do not produce a polished email to hide weak evidence.
 
-## Customer-Derived ICP Rule
+## Customer Usage Map And ICP Evidence
 
-For campaigns selling Memory Store or a Memory Store-backed plugin, the first ICP pass must start from observed Memory Store consumers, not generic market categories. Recall and classify:
+The `customer_usage_map` is not a dump of Memory Store IDs. It is the map of real customers/users for the seller being configured, when discoverable. For Memory Store-owned campaigns, those are Memory Store's own customers/users. For another seller, they are that seller's customers/users. For account-level signal cards, also build a lightweight prospect customer map when useful: the target account's customers, customer categories, testimonials, case studies, reviews, or users found publicly.
+
+Use Memory Store IDs, Gmail threads, CRM IDs, and URLs as evidence attached to ICP cells. Do not let evidence IDs stand in for the actual customer usage map.
+
+Before public ICP expansion, classify:
 
 - paid customers and activation attempts.
 - direct power users and internal dogfood users.
@@ -36,11 +40,12 @@ For campaigns selling Memory Store or a Memory Store-backed plugin, the first IC
 - passive-ingest workspaces where value comes from Slack/meeting/source memory rather than direct tool calls.
 - customer failures, thin stores, unopened briefs, connector gaps, and support patterns.
 - prior GTM plans, customer docs, sales playbooks, and account briefs.
+- public customer pages, logos, case studies, testimonials, reviews, partner pages, changelogs mentioning customers, and social posts from users.
 
 Then convert those observations into ICP cells:
 
 ```text
-observed customer/user pattern -> job-to-be-done -> target account pool -> persona -> high-intent signal -> proof path -> exclusion rule
+seller customer/user pattern -> job-to-be-done -> target account pool -> persona -> high-intent signal -> proof path -> evidence IDs/URLs -> exclusion rule
 ```
 
 Examples for Memory Store itself:
@@ -51,7 +56,24 @@ Examples for Memory Store itself:
 - **Passive workspace memory:** Shashank/Ukumi and Diwo-style teams where value comes from Slack, meeting, source, standup, and product-operation context. Public expansion pool: remote-first teams, CS/FDE/product ops teams, and companies using Fathom/Fireflies/Granola/Slack/Google Chat.
 - **Reactivation pool:** existing Julep/Memory Store power users, triers, and enriched leads. This is not an Exa-discovered ICP; it is an owned-account campaign and should run before cold expansion when the goal is fast learning.
 
-Do not use these examples as fixed defaults. Use the real seller's current Memory Store first. The planner output must show which customer/user memory created each ICP cell.
+Do not use these examples as fixed defaults. Use the real seller's current Memory Store and public customer evidence first. The planner output must show which seller customer/user pattern created each ICP cell and which Memory Store IDs, Gmail/CRM references, or public URLs support it.
+
+When direct customer evidence is absent, derive customer proxies with Exa/Websets before finalizing ICPs:
+
+```text
+"<seller> customers case studies testimonials users reviews logos"
+"<seller category> case studies customers using <tool/workflow>"
+"site:<seller-domain> customer OR customers OR case-study OR testimonial OR user"
+"category:company companies whose customers are <target buyer> and who mention <workflow pain>"
+```
+
+For target accounts, a prospect customer map can sharpen personalization:
+
+```text
+target account -> their customers/users -> what they sell/deliver -> where Memory Store/GTM Agent helps them serve those customers -> public proof URL
+```
+
+Use this only when sourceable. Do not imply the prospect has customers that were merely inferred.
 
 ## Offer Profile
 
@@ -243,7 +265,7 @@ persona | high-intent signal | source | customer-story/persona pattern | offer a
 Also return a customer-derived ICP map before the planner table:
 
 ```text
-source customer/user pattern | Memory Store source | inferred job-to-be-done | public expansion pool | Websets/search query | first-batch target count | exclusion rule
+seller customer/user pattern | source evidence IDs/URLs | inferred job-to-be-done | public expansion pool | Websets/search query | first-batch target count | exclusion rule
 ```
 
 For Memory Store-built offers, also include:

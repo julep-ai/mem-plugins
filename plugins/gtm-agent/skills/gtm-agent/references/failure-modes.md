@@ -110,9 +110,10 @@ If any answer is weak, rebuild the campaign planner and signal cards. Do not ite
 If ICPs sound like broad market labels before they sound like actual customers:
 
 - Stop public sourcing and rebuild the customer-consumer mining pass from Memory Store.
-- For Memory Store-owned campaigns, require cells tied to real usage patterns: paid customers, direct power users, internal dogfood users, passive workspaces, reactivation lists, failed/thin accounts, or prior GTM plans.
+- Require cells tied to real seller customer/user patterns when available: paid customers, direct power users, internal dogfood users, passive workspaces, reactivation lists, public case studies, testimonials, reviews, customer logos, failed/thin accounts, or prior GTM plans.
 - Treat labels such as "founder-led AI teams", "AI GTM teams", "CS/FDE/support", or "platform operators" as unfinished shorthand unless each has a source Memory Store pattern and a job-to-be-done.
-- Use Exa/Websets after this map exists: first to expand a customer-derived pool, then to verify account/person signals, not to invent a market from scratch.
+- Use Exa/Websets to find the seller's customers/users when public, derive customer proxies when direct customer evidence is absent, expand a customer-derived pool, and verify account/person signals. Do not use Exa to invent a market from scratch when customer evidence exists.
+- Keep Memory Store IDs in the ICP evidence fields. Do not treat a list of IDs as the customer usage map.
 - Keep lead volume separate from send volume. Source broadly, score strictly, and send only rows that pass the planner gate and the approved quality-based ramp.
 
 ## Stale Or Conflicting Evidence
