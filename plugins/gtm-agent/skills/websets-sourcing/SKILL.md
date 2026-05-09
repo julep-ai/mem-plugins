@@ -15,7 +15,7 @@ Use Exa Websets as the persistent sourcing and enrichment layer for GTM Agent. P
 4. Separate criteria from enrichments: criteria filter inclusion; enrichments add action fields.
 5. Pick entity type: `company`, `person`, `article`, `research_paper`, or `custom`.
 6. Use imports for seed accounts, customers, competitors, suppressions, or CSV scope.
-7. Add only enrichments that improve GTM action: buyer/persona, high-intent signal, source URL, customer-story/persona pattern, offer angle, proof path, next action, learning intent, channel identity, confidence, and exclusion risk.
+7. Add only enrichments that improve GTM action: buyer/persona, person name, title, work email or email status, LinkedIn/profile URL, identity confidence, high-intent signal, source URL, customer-story/persona pattern, offer angle, proof path, next action, learning intent, channel identity, confidence, and exclusion risk.
 8. Track async IDs and status; record approved Webset/search/enrichment/import IDs to Memory Store.
 
 Websets MCP is separate from Exa Monitors. For monitors, use `../gtm-agent/references/monitors.md` and record returned monitor IDs after approval.

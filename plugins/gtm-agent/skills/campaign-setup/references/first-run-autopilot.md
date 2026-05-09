@@ -18,6 +18,7 @@ The approval must cover:
 - connector gaps and manual fallbacks.
 - email/LinkedIn channel policy when dual-channel is in scope.
 - routine specs for any asynchronous automation.
+- first shadow sample proving accounts, personas, and channel identities can be sourced before production sends.
 
 ## Approval Granularity
 
@@ -40,7 +41,7 @@ Approved routines may run daily, weekly, every few hours, or on monitor/reply ev
 - expected output.
 - what to record back to Memory Store.
 
-If the current host cannot schedule routines, output the exact routine specs and mark them `manual_until_scheduled`. Do not weaken the autopilot claim; surface the missing host capability.
+If the current host cannot schedule routines, output the exact routine specs and mark them `manual_until_scheduled`. Do not weaken the autopilot claim; surface the missing host capability. The normal path is in-host automation or approved REST/API calls; dashboard setup is only a fallback when the provider does not expose the action through tools or API in the current host.
 
 ## Send Ramp
 
@@ -113,6 +114,7 @@ Default routines:
 - weekly suppression-list update.
 - Websets refresh for approved account pools.
 - high-intent monitor review for approved Exa monitor specs.
+- persona/email enrichment review for sourced rows missing channel identity.
 
 Learning records should explain what changed about ICP, signal quality, copy angle, objection handling, proof path, or suppression policy.
 

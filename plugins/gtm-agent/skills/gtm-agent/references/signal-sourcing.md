@@ -9,7 +9,7 @@ Use the lightest tool that can prove the current step, but do not downgrade the 
 - **Memory Store recall** for product positioning, customer language, ICP hypotheses, prior objections, approved claims, exclusions, and account history.
 - **Exa Search MCP** at `https://mcp.exa.ai/mcp` for exploratory web research, market maps, account pages, news, docs, people pages, advanced searches, and source fetches. Active tools: `web_search_exa`, `web_fetch_exa`, and `web_search_advanced_exa` (category, domain, date range, highlights, summaries, subpage crawling). Deprecated but callable for backwards compat: `company_research_exa`, `people_search_exa`, `crawling_exa`, `linkedin_search_exa`, `deep_search_exa`, `get_code_context_exa`.
 - **Websets MCP** at `https://websetsmcp.exa.ai/mcp` for structured list building: natural-language criteria, entity verification, enrichment columns, imports, async collection, webhooks, and event polling. 22 tools across webset, items, search, enrichment, webhooks, imports.
-- **Exa Monitors REST API** at `https://api.exa.ai/websets/v0/monitors` for cron-scheduled Webset refresh. Not exposed as MCP tools yet — output a monitor spec and let the user attach it via dashboard or API.
+- **Exa Monitors REST API** at `https://api.exa.ai/websets/v0/monitors` for cron-scheduled Webset refresh. Not exposed as MCP tools yet — create through approved REST/host automation when possible; dashboard setup is fallback only.
 - **Gmail connector** only after the account/copy review gate, and only for draft, send, or followup actions the user explicitly asked for.
 
 Production meaning:
@@ -44,7 +44,39 @@ Get the API key at `https://dashboard.exa.ai/api-keys`. Both MCPs use the same k
 
 If Gmail is missing and the task requires execution, tell the user to connect Gmail. Continue with sourcing and copy hypotheses only. Mark sending, followups, reply scans, suppression checks, and mailbox outcome learning `sending_blocked_for_production`.
 
-If Exa Monitors are not configured, the agent may still run one-off sourcing, but it must mark always-on GTM `monitoring_degraded` and output monitor specs from [monitors.md](monitors.md). Do not claim the campaign is continuously watching signals until a monitor or approved host automation exists.
+If Exa Monitors are not configured, the agent may still run one-off sourcing, but it must mark always-on GTM `monitoring_degraded` and output monitor specs from [monitors.md](monitors.md). Prefer an agent-created REST monitor or host automation after approval; do not tell the user to operate the dashboard unless the host cannot run the API call. Do not claim the campaign is continuously watching signals until a monitor or approved host automation exists.
+
+## Deep Sourcing Minimum
+
+A production sourcing pass is not complete until it attempts all three layers:
+
+1. **Account discovery** - companies or entities matching the ICP cell and live trigger.
+2. **Persona discovery** - the specific operating persona/job-to-be-done that owns the pain.
+3. **Channel identity** - work email or email-candidate status, LinkedIn/profile URL when available, source URLs, and confidence.
+
+For every send-ready or draft-ready person row, include:
+
+```text
+person_name:
+company:
+persona:
+title_or_role:
+work_email:
+email_status: verified | candidate | unavailable | suppressed
+email_source:
+linkedin_profile_url:
+linkedin_source:
+identity_confidence:
+why_this_person:
+why_now:
+signal_source:
+offer_angle:
+proof_path:
+next_action:
+exclusion_risk:
+```
+
+Do not invent emails. If Exa/Websets cannot produce a public or enriched email, mark `email_status: unavailable`, keep the row out of send-ready state, and propose the next enrichment/import step. If the run only finds company pages, founder titles, or generic categories, it is research, not GTM sourcing.
 
 ## Campaign Math
 
@@ -211,7 +243,12 @@ Useful enrichment columns:
 - ICP fit reason in 20 words or less
 - Trigger signal in 20 words or less
 - Source URL for trigger
+- Person name
 - Buyer title
+- Persona / job-to-be-done
+- Work email or email status
+- LinkedIn/profile URL
+- Identity confidence
 - Relevant quote or phrase from public source
 - Employee range or funding stage
 - Competitor/tool overlap

@@ -2,11 +2,11 @@
 
 Use this reference when the campaign needs an always-on signal stream — new accounts entering an ICP, fresh launches in a category, recurring hiring/funding/news triggers, or competitor watch.
 
-Monitors are a first-class production layer for GTM Agent. A campaign without monitors can still run one-off sourcing, but it is not always-on GTM. Mark it `monitoring_degraded` until monitor specs are approved and attached through the Exa dashboard/API or an approved host automation.
+Monitors are a first-class production layer for GTM Agent. A campaign without monitors can still run one-off sourcing, but it is not always-on GTM. Mark it `monitoring_degraded` until monitor specs are approved and attached through an agent-run REST call, approved host automation, or another in-host routine. Dashboard setup is a last-resort fallback, not the normal user journey.
 
-Monitors are **not exposed as MCP tools yet**. They run on the underlying Websets API. GTM Agent's job is to output a monitor spec, route the user to create it, and record the resulting `monitor_id` to Memory Store so the routine compounds.
+Monitors are **not exposed as MCP tools yet**. They run on the underlying Websets API. GTM Agent's job is to prepare the monitor spec, create it through REST when the user has approved API use and provided/authorized the Exa key, or emit an exact command the user can approve/run in the host. Only route to the Exa dashboard when the host cannot run the API call.
 
-Do not POST monitor REST calls, create webhooks, or attach live monitor destinations unless the approved routine explicitly allows API creation and the user has provided or approved use of the Exa API key for that action.
+Do not POST monitor REST calls, create webhooks, or attach live monitor destinations unless the approved routine explicitly allows API creation and the user has provided or approved use of the Exa API key for that action. If approval or credentials are missing, keep the campaign in `monitoring_degraded` and output the smallest missing setup step.
 
 ## What a Monitor does
 
@@ -129,9 +129,9 @@ Other endpoints (same auth):
 - `DELETE https://api.exa.ai/websets/v0/monitors/{id}` — remove.
 - `GET https://api.exa.ai/websets/v0/monitors/{id}/runs` — run history.
 
-## Dashboard path
+## Manual fallback
 
-The user can also build a Monitor without code. From a Webset detail page, attach a Monitor and pick cadence/query/behavior. Direct playground for new Websets:
+Use this only when the host cannot run the REST call or the user explicitly wants UI setup. From a Webset detail page, attach a Monitor and pick cadence/query/behavior. Direct playground for new Websets:
 
 ```text
 https://dashboard.exa.ai/playground/create-websets?q=<query>
@@ -163,6 +163,7 @@ Cron must trigger at most once per day. Use timezone to anchor to the buyer's wo
 When GTM Agent recommends a Monitor, output:
 
 ```text
+creation_mode: agent_rest | host_automation | manual_dashboard_fallback
 parent_webset_id:
 query:
 entity:

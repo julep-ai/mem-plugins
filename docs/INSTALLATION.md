@@ -143,11 +143,11 @@ Required Memory Store operations:
 
 - Exa Search MCP (`https://mcp.exa.ai/mcp`) for `web_search_exa`, `web_fetch_exa`, and `web_search_advanced_exa`. Deprecated tools such as `company_research_exa`, `people_search_exa`, and `deep_search_exa` are backward-compatibility fallbacks only.
 - Websets MCP (`https://websetsmcp.exa.ai/mcp`) for persistent company/person sets — 22 tools across webset, items, search, enrichment, webhooks, imports.
-- Exa Monitors REST API (`https://api.exa.ai/websets/v0/monitors`) for cron-scheduled Webset refresh. Monitors are not yet exposed as MCP tools.
+- Exa Monitors REST API (`https://api.exa.ai/websets/v0/monitors`) for cron-scheduled Webset refresh. Monitors are not yet exposed as MCP tools; GTM Agent should create them through approved REST/API or host automation where possible.
 - Gmail connector for inbox learning, approved setup/autopilot sends, replies, and followups.
 - Google Calendar connector for booking context after qualified replies.
 
-Both Exa Search and Websets use the same Exa API key. Get one at `https://dashboard.exa.ai/api-keys`. The plugin's `.mcp.json` ships with `YOUR_EXA_API_KEY` placeholders; replace them in your host MCP settings, do not commit real keys. Free-plan Exa Search works without a key only for exploratory public lookup; Websets requires a key, and production GTM Agent runs should stop and ask for Exa/Websets setup before sourcing, signal cards, or outbound drafts.
+Both Exa Search and Websets use the same Exa API key. Get one at `https://dashboard.exa.ai/api-keys`. The plugin's `.mcp.json` ships with `YOUR_EXA_API_KEY` placeholders; replace them in your host MCP settings, do not commit real keys. Free-plan Exa Search works without a key only for exploratory public lookup; Websets requires a key, and production GTM Agent runs should stop and ask for Exa/Websets setup before sourcing, persona discovery, email enrichment, signal cards, or outbound drafts.
 
 For a 5-10 minute step-by-step Exa setup walkthrough — including Monitors and Gmail/Calendar auth — see [EXA_SETUP.md](EXA_SETUP.md). For per-connector reference (URLs, header vs query-param auth, dashboard playground link) see [CONNECTORS.md](CONNECTORS.md).
 
@@ -250,9 +250,9 @@ If only Exa Search appears but Websets does not, the Websets header is still set
 
 ### Setting up Exa Monitors
 
-Monitors are not exposed as MCP tools yet. Once a Webset exists, attach a Monitor through:
+Monitors are not exposed as MCP tools yet. Once a Webset exists, the normal path is for GTM Agent to create or propose creation through an approved REST/API call or host automation. Use dashboard setup only when the current host cannot run the REST call.
 
-- Dashboard: open the Webset at https://dashboard.exa.ai and add a Monitor.
 - REST API: `POST https://api.exa.ai/websets/v0/monitors` with `Authorization: Bearer YOUR_EXA_API_KEY`. Body needs `websetId`, `cadence` (cron + IANA timezone, max once per day), and `behavior` (type `search`, with `query`, `count`, `behavior: "append" | "override"`). Optional webhook events: `webset.item.created`, `webset.item.enriched`, `webset.idle`.
+- Manual fallback: open the Webset at https://dashboard.exa.ai and add a Monitor.
 
-Paste the returned `monitor_id` back so GTM Agent can record the routine to Memory Store.
+Record the returned `monitor_id` so GTM Agent can map the routine to Memory Store.

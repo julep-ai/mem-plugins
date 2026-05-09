@@ -52,7 +52,7 @@ codex mcp add websets --url "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_AP
 
 GTM Agent also declares Websets in `plugins/gtm-agent/.mcp.json` with a `YOUR_EXA_API_KEY` placeholder; the user still has to replace it in host MCP settings because the plugin cannot safely ship a real Exa key.
 
-For Exa Monitors, use [monitors.md](monitors.md) to output the REST/dashboard spec. Monitors are not currently exposed as MCP tools, but they are still the production path for recurring signal streams.
+For Exa Monitors, use [monitors.md](monitors.md) to output the REST/API or host-automation spec. Monitors are not currently exposed as MCP tools, but they are still the production path for recurring signal streams. Dashboard setup is a manual fallback only.
 
 ## Gmail Missing
 

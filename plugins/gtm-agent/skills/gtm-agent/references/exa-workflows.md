@@ -82,7 +82,7 @@ Use Exa Monitors for recurring signal streams:
 - conference/event pages
 - pain-point language in public posts, forums, or blogs
 
-Monitors are scheduled recurring searches that re-run a query against an existing Webset and append (or override) verified results. They are not currently exposed as MCP tools — create them via the dashboard at `https://dashboard.exa.ai` or the REST API at `POST https://api.exa.ai/websets/v0/monitors` (see [monitors.md](monitors.md)). Cadence uses a 5-field Unix cron expression that triggers at most once per day, anchored to an IANA timezone. Webhook events `webset.item.created`, `webset.item.enriched`, and `webset.idle` deliver structured output downstream. Store monitor IDs, parent Webset IDs, query, cadence, behavior, webhook route, and related Memory Store thread IDs.
+Monitors are scheduled recurring searches that re-run a query against an existing Webset and append (or override) verified results. They are not currently exposed as MCP tools — create them through an approved REST call or host automation when possible, and use dashboard setup only as a manual fallback (see [monitors.md](monitors.md)). Cadence uses a 5-field Unix cron expression that triggers at most once per day, anchored to an IANA timezone. Webhook events `webset.item.created`, `webset.item.enriched`, and `webset.idle` deliver structured output downstream. Store monitor IDs, parent Webset IDs, query, cadence, behavior, webhook route, and related Memory Store thread IDs.
 
 ## Routing Rule
 

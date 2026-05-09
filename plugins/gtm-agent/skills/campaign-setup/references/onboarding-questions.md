@@ -6,13 +6,15 @@ This reference is the repeatable GTM engineer onboarding script. Each question s
 
 ## Setup Principle
 
-The onboarding interview is how GTM Agent designs the campaign. The questions are repeatable, but the first move is always inference:
+The onboarding interview is how GTM Agent designs the campaign. The first-run experience must feel like an agent-led setup assistant, not a documentation handoff. The questions are repeatable, but the first move is always inference:
 
 ```text
-Memory Store -> Exa/Websets/Gmail readiness -> campaign plan -> website -> Calendar -> ask only unresolved blockers
+Memory Store auth -> Exa/Websets/Gmail readiness -> campaign plan -> website -> Calendar -> ask only unresolved blockers
 ```
 
-Do not treat a no-key Exa/Websets state as a normal setup gap for a real campaign. Website-only research can support positioning, but it cannot produce deep ICP personas, production lead lists, signal cards, or send-ready copy. If Exa Search or Websets is missing or unauthenticated, ask for the Exa API key setup before any production sourcing or drafting. If Gmail is missing, full execution is blocked; the campaign can still plan/source, but it cannot send, monitor replies, or learn from mailbox outcomes.
+Do not treat a no-key Exa/Websets state as a normal setup gap for a real campaign. Website-only research can support positioning, but it cannot produce deep ICP personas, production lead lists, signal cards, person rows, email candidates, or send-ready copy. If Exa Search or Websets is missing or unauthenticated, ask for the Exa API key setup before any production sourcing or drafting. If Gmail is missing, full execution is blocked; the campaign can still plan/source, but it cannot send, monitor replies, or learn from mailbox outcomes.
+
+When setup is blocked, output one next action the user can complete inside the current host whenever possible: install/enable plugin, complete Memory Store auth, configure Exa key, enable Websets, authorize Gmail, or approve REST monitor creation. Dashboard/manual steps are fallback only.
 
 ## Core Questions
 
@@ -28,7 +30,7 @@ Ask or infer these in order:
    - Memory Store, uploaded docs, pasted notes, positioning docs, prior campaign exports, CSV/account lists, website, Gmail, Calendar, Exa/Websets.
 
 4. **Are Exa Search, Websets, and Gmail production-ready?**
-   - Exa API key status, Exa Search MCP status, Websets MCP status, Gmail connector status, monitor availability, and exact setup step needed if blocked.
+   - Memory Store auth status, Exa API key status, Exa Search MCP status, Websets MCP status, Gmail connector status, monitor availability, and exact setup step needed if blocked.
 
 5. **What funnel system are we engineering?**
    - market definition, ICP hypotheses, signal discovery, account sourcing, buyer discovery, evidence cards, copy, review, send/followup, reply classification, meeting/next action, learning.
@@ -44,6 +46,9 @@ Ask or infer these in order:
 
 9. **Who should we target first?**
    - ICP cells, company size, stage, geography, buyer persona, pain, triggers, exclusions.
+
+9a. **Can we prove deep sourcing on a shadow sample?**
+   - 5-10 accounts, specific operating personas, person names/titles, work email or email status, LinkedIn/profile URLs, source URLs, signal cards, and exclusion risks.
 
 10. **Which signals count as live enough?**
    - hiring, launch, docs/changelog, support/community load, GitHub activity, public complaint, reply history, warm path, or other trigger.

@@ -94,7 +94,7 @@ claude mcp add --transport http websets "https://websetsmcp.exa.ai/mcp?exaApiKey
 codex mcp add websets --url "https://websetsmcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY"
 ```
 
-Direct dashboard playground for previewing or building Websets without code:
+Manual preview fallback for building Websets outside the host:
 
 ```text
 https://dashboard.exa.ai/playground/create-websets?q=<your+query>
@@ -104,13 +104,14 @@ If Websets tools do not appear after install, the usual causes: API key still se
 
 ## Exa Monitors
 
-Monitors keep an existing Webset fresh by re-running a search on a cron schedule and appending or overriding results. Monitors are **not currently exposed as MCP tools**. Use one of:
+Monitors keep an existing Webset fresh by re-running a search on a cron schedule and appending or overriding results. Monitors are **not currently exposed as MCP tools**. GTM Agent should prefer agent-led setup:
 
-- Dashboard UI: https://dashboard.exa.ai (open the Webset, attach a Monitor).
 - REST API: `POST https://api.exa.ai/websets/v0/monitors` with `{ websetId, cadence: { cron, timezone }, behavior: { type: "search", config: { query, count, behavior: "append" | "override" } } }`. Cron must be a valid 5-field expression that triggers at most once per day; timezone is IANA (defaults to `Etc/UTC`).
+- Host automation: run the same monitor-review or Websets-refresh routine on a schedule when REST monitor creation is unavailable.
+- Manual fallback: https://dashboard.exa.ai (open the Webset, attach a Monitor).
 - Webhook events: `webset.item.created`, `webset.item.enriched`, `webset.idle`.
 
-GTM Agent's `websets-sourcing` skill outputs a Monitor spec when a monitor is needed; the user creates the monitor through the dashboard or REST API and pastes the resulting `monitor_id` back when recording the routine to Memory Store.
+GTM Agent's `websets-sourcing` skill outputs a Monitor spec when a monitor is needed; after approval it should create the monitor through REST/API or an approved host automation where possible. Manual dashboard creation is a fallback, and the resulting `monitor_id` should still be recorded to Memory Store.
 
 ## Automation Hosts
 

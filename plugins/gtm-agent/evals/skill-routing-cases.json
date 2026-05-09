@@ -39,7 +39,7 @@
     },
     {
       "id": "exa-people-search-buyers",
-      "query": "For these qualified accounts, find likely buyers, verify LinkedIn identities and work-email candidates, and score suppression risk.",
+      "query": "For these qualified accounts, find likely buyers, verify personas, LinkedIn identities, work-email candidates, email status, and suppression risk.",
       "expected_skill": "exa-people-search"
     },
     {
@@ -132,6 +132,28 @@
         "../gtm-agent/references/campaign-planner.md",
         "../gtm-agent/references/parallel-routines.md",
         "../gtm-agent/references/automation-routines.md"
+      ]
+    },
+    {
+      "id": "gtm-agent-deep-sourcing-minimum",
+      "skill": "gtm-agent",
+      "query": "Run a shadow sourcing batch that proves accounts, personas, buyer identities, email candidates, LinkedIn URLs, and signal cards before we send.",
+      "required_references": [
+        "references/campaign-engineering.md",
+        "references/campaign-planner.md",
+        "references/signal-sourcing.md",
+        "references/enrichment-catalog.md",
+        "references/failure-modes.md"
+      ]
+    },
+    {
+      "id": "gtm-agent-agent-led-monitoring",
+      "skill": "gtm-agent",
+      "query": "Set up always-on monitoring for this approved Webset without making me go operate the Exa dashboard.",
+      "required_references": [
+        "references/automation-routines.md",
+        "references/monitors.md",
+        "references/failure-modes.md"
       ]
     }
   ]

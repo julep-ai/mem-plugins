@@ -131,7 +131,7 @@ If only Exa Search shows up, the Websets header is still set to the placeholder 
 
 ## 7. (Optional) Attach an Exa Monitor
 
-Monitors keep a Webset fresh. They are not exposed as MCP tools yet — use the REST API or dashboard.
+Monitors keep a Webset fresh. They are not exposed as MCP tools yet. Prefer agent-led REST/API creation after setup approval; use the dashboard only as a manual fallback.
 
 ### REST API
 
@@ -158,7 +158,7 @@ Cadence rules: 5-field Unix cron, must trigger at most once per day, IANA timezo
 
 ### Dashboard
 
-Open the Webset at `https://dashboard.exa.ai`, attach a Monitor, pick cadence/query/behavior, save.
+Manual fallback: open the Webset at `https://dashboard.exa.ai`, attach a Monitor, pick cadence/query/behavior, save.
 
 ### Webhook events
 
