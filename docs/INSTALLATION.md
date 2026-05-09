@@ -139,6 +139,8 @@ Required Memory Store operations:
 
 `gtm-agent` requires the core `memory-store` plugin to be installed and authenticated. GTM Agent intentionally does not redeclare Memory Store MCP in its own `.mcp.json`, because doing so can create a second Memory Store auth prompt in hosts that scope MCP auth per plugin.
 
+GTM Agent uses Memory Store as long-term operating memory, not just recall. During setup and execution it should distill approved rules, user corrections, approval policies, connector expectations, persona decisions, sourcing gates, outcomes, and skill-improvement candidates into Memory Store records so future runs inherit them.
+
 `gtm-agent` can additionally use:
 
 - Exa Search MCP (`https://mcp.exa.ai/mcp`) for `web_search_exa`, `web_fetch_exa`, and `web_search_advanced_exa`. Deprecated tools such as `company_research_exa`, `people_search_exa`, and `deep_search_exa` are backward-compatibility fallbacks only.
@@ -189,7 +191,7 @@ Start small and make every routine precise:
 3. Configure Exa Search and Websets with a real Exa API key.
 4. Authorize Gmail and Google Calendar if the host supports them.
 5. Run `/gtm-agent:campaign-setup`.
-6. Approve the setup packet: campaign mode, context sources, funnel system, offer, sender, CTA, ICP cells, claims, send ramp, followups, suppressions, stop conditions, routine specs, and background-worker graph.
+6. Approve the setup packet: campaign mode, context sources, funnel system, offer, sender, CTA, ICP cells, claims, send ramp, followups, suppressions, stop conditions, routine specs, memory distillation items, and background-worker graph.
 7. Run a small pilot, usually day 1 max 10 sends.
 8. Turn approved recurring work into automations: daily Websets/monitor review, Gmail reply scan, followup check, daily digest, and weekly Memory Store learning summary.
 

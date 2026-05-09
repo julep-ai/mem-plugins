@@ -29,9 +29,10 @@ For an already-approved campaign monitor, insights, refresh, rescue, reactivatio
 7. Ask unresolved blockers from `references/onboarding-questions.md`.
 8. Build the planner and worker graph with `../gtm-agent/references/campaign-planner.md` and `../gtm-agent/references/parallel-routines.md`.
 9. For any first production run, require a shadow sample that demonstrates account discovery, persona discovery, and channel identity. If Exa/Websets cannot find people or emails, mark the exact blocker instead of pretending sourcing is complete.
-10. Configure full autopilot with `references/first-run-autopilot.md` and `../gtm-agent/references/automation-routines.md`.
-11. Return the setup packet from `references/setup-packet.md`.
-12. Record only after the user approves or edits the packet.
+10. Distill durable setup rules, preferences, approval policies, connector expectations, and skill-improvement candidates with `../gtm-agent/references/learning-loop.md`.
+11. Configure full autopilot with `references/first-run-autopilot.md` and `../gtm-agent/references/automation-routines.md`.
+12. Return the setup packet from `references/setup-packet.md`.
+13. Record only after the user approves or edits the packet.
 
 ## Setup Packet Shape
 
@@ -52,6 +53,7 @@ calendar_policy:
 channel_policy:
 send_ramp_policy:
 autopilot_routines:
+memory_distillation:
 approval_needed_before_start:
 ```
 

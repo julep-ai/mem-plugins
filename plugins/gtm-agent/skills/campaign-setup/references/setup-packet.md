@@ -23,6 +23,7 @@ calendar_policy:
 channel_policy:
 send_ramp_policy:
 autopilot_routines:
+memory_distillation:
 approval_needed_before_start:
 ```
 
@@ -46,6 +47,7 @@ Do not rename keys. If a value is unavailable, mark it as `unknown`, `missing_co
 - `channel_policy`: email-first or email-plus-LinkedIn, per-person touch limits, LinkedIn profile requirements, same-person dedupe, and channel-specific learning intent.
 - `send_ramp_policy`: day 1 max 10 sends, days 2-3 max 20/day, then max 50/day until changed; pause conditions; same-company rule.
 - `autopilot_routines`: approved or proposed routine specs for Gmail reply scans, followup checks, daily campaign digest, weekly ICP/signal/copy learning summary, Websets refreshes, high-intent monitor reviews, host automation cadence, background-worker graph, allowed actions, forbidden actions, stop conditions, and expected output.
+- `memory_distillation`: what should be remembered for future runs: operating rules, user preferences, constraints, approval policies, connector expectations, persona/sourcing decisions, campaign-learning intent, and whether each item is `proposed`, `approved`, `active`, or `deprecated`.
 - `approval_needed_before_start`: demo link confirmation, sender identity, send ramp, ICP cells, claims, exclusions, Exa/Websets credential setup, connector gaps, and any unresolved high-risk ambiguity.
 
 ## Setup Decision Groups
@@ -60,4 +62,4 @@ Keep this grouping compact. The packet fields remain the canonical output.
 
 ## Approval Rule
 
-The setup packet can be used for planning before approval, but not for autonomous sending or scheduled host automations. After the user approves or edits it, record the confirmed decisions to Memory Store and treat the packet as the active campaign operating policy.
+The setup packet can be used for planning before approval, but not for autonomous sending or scheduled host automations. After the user approves or edits it, record the confirmed decisions and `memory_distillation` items to Memory Store and treat the packet as the active campaign operating policy.

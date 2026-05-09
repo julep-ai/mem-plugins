@@ -1,10 +1,44 @@
 # Learning Loop
 
-Use this reference when recording GTM outcomes back to Memory Store.
+Use this reference when recording GTM outcomes, setup rules, user corrections, approval policies, and self-improvement candidates back to Memory Store.
 
 Memory Store `record` is a natural-language quick jot, not a typed event API. Write specific prose that future agents can recall.
 
 Always pass the active `thread_id` from `checkin`.
+
+## Self-Learning Contract
+
+GTM Agent is a long-term-memory agent, not a static prompt bundle. Its loop is:
+
+```text
+checkin -> recall durable rules -> execute under those rules -> observe user feedback/outcomes -> distill operational memory -> record -> improve later runs
+```
+
+During setup and execution, identify durable operating memory:
+
+- `operating_rule` - what the agent must always or never do for this seller/campaign/plugin.
+- `preference` - user taste, workflow preference, channel preference, writing preference, approval preference.
+- `constraint` - excluded ICPs, taboo claims, connector limits, compliance boundaries, do-not-contact categories.
+- `approval_policy` - actions allowed after setup approval, actions requiring explicit approval, stop conditions.
+- `connector_rule` - how Memory Store, Exa, Websets, Gmail, Calendar, monitors, or host automations should be used.
+- `persona_rule` - ICP/persona definitions, excluded personas, unconventional persona hypotheses, owner-of-pain framing.
+- `sourcing_rule` - signal quality gates, required identity fields, email/LinkedIn policy, enrichment expectations.
+- `campaign_learning` - what changed after replies, bounces, objections, meetings, weak rows, or strong rows.
+- `skill_improvement_candidate` - repeated failure, missing eval, confusing instruction, bad default, or workflow gap.
+
+Use this shape in prose when recording:
+
+```text
+kind:
+scope: seller | campaign | plugin | channel | ICP | connector | skill
+status: proposed | approved | active | deprecated
+source: conversation | setup_packet | user_feedback | execution_result | campaign_outcome
+rule_or_learning:
+evidence:
+future_behavior:
+```
+
+Record when the user explicitly sets a rule, corrects the agent, approves a setup packet, changes policy, confirms a result, or says future runs should behave differently. Do not record every brainstorm, unapproved draft, transient idea, or speculative inference. If the rule is important but not yet approved, include `status: proposed` and ask for confirmation before using it for sends or external actions.
 
 ## When To Record
 
@@ -25,6 +59,10 @@ Record confirmed events:
 - Performance update from the user or mailbox/campaign system.
 - Approved claim, customer name, metric, or taboo topic update.
 - Automation routine approved, paused, changed, or retired.
+- Conversation rule, preference, constraint, or approval policy stated by the user.
+- First-run setup correction that should change future setup behavior.
+- Connector expectation such as agent-led monitoring, Exa/Websets depth, Gmail limits, or dashboard/manual fallback policy.
+- Skill-improvement candidate discovered during execution or user feedback.
 
 Do not record drafts the user never saw, outcomes inferred from silence, guessed metrics, or private claims that were not approved.
 
@@ -71,6 +109,26 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 `background`:
 
 > Campaign context: `<campaign/thread/ICP>`. Required tools: `<Memory Store, Exa, Websets, Gmail, Calendar, host automation>`. Record policy: `<what gets recorded>`. Owner review needed when: `<conditions>`.
+
+### Conversational rule distilled
+
+`content`:
+
+> GTM Agent operating memory for `<company/plugin/campaign>` from today. Kind: `<operating_rule | preference | constraint | approval_policy | connector_rule | persona_rule | sourcing_rule>`. Scope: `<seller | campaign | plugin | channel | ICP | connector | skill>`. Status: `<proposed | approved | active | deprecated>`. Rule: `<specific durable instruction>`. Future GTM Agent runs should `<future behavior>`.
+
+`background`:
+
+> Source: user conversation/setup packet/user feedback. Evidence: `<memory IDs, artifact path, source URL, Gmail thread, Webset ID, or direct user correction summary>`.
+
+### Skill improvement candidate
+
+`content`:
+
+> GTM Agent skill-improvement candidate from today. Failure/gap: `<what went wrong or felt weak>`. Expected behavior: `<what future agents should do>`. Suggested update: `<eval/reference/SKILL.md/docs change>`. Priority: `<high | medium | low>`.
+
+`background`:
+
+> Source and reproduction: `<prompt, campaign mode, connector state, artifact path, or user feedback summary>`.
 
 ### ICP refined
 

@@ -29,6 +29,7 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 - Before sourcing or copy, load `references/campaign-engineering.md` and `references/campaign-planner.md`.
 - Parallelize by default with `references/parallel-routines.md`; split ICP cells, signal families, Webset batches, people search, evidence cards, copy angles, Gmail batches, monitor specs, and learning synthesis into bounded workers.
 - Treat autopilot as setup-once execution: after approval, run precise async routines from `references/automation-routines.md` with goal, cadence, allowed actions, forbidden actions, stop conditions, output, and Memory Store record policy.
+- Treat Memory Store as long-term operating memory: distill user rules, corrections, setup decisions, approval policies, campaign outcomes, and skill-improvement candidates through `references/learning-loop.md`.
 - Prefer active Exa tools: `web_search_advanced_exa`, `web_search_exa`, and `web_fetch_exa`. Use deprecated Exa tools only as host fallbacks.
 - Route focused work to sibling skills: `exa-company-research`, `exa-lead-generation`, `exa-people-search`, and `websets-sourcing`.
 - Load `references/failure-modes.md` when a request tries to skip setup, source from weak signals, bulk send, expose private context, or claim learning without Memory Store records.
@@ -49,7 +50,7 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 8. Draft only rows that pass the planner gate; write to `copy/<account>.md`.
 9. Apply setup approval, send ramp, followup cadence, channel policy, suppressions, and stop conditions; track in `sends.csv`.
 10. Create or propose routines for monitors, Websets refreshes, Gmail scans, followups, digests, and weekly learning. Persist `monitors.json` and `events.jsonl`.
-11. Record only approved or confirmed learnings through Memory Store at the main-agent layer (workers do not record). Append each call to `learnings.md`.
+11. Distill durable rules and outcomes through `references/learning-loop.md`, then record only approved or confirmed learnings through Memory Store at the main-agent layer (workers do not record). Append each call to `learnings.md`.
 
 ## Output
 
@@ -77,4 +78,4 @@ Infer first, ask only blockers: company/product, campaign mode, context sources,
 - Sourcing, lead generation, enrichment, or signals: `references/exa-workflows.md`, `references/signal-sourcing.md`, `references/enrichment-catalog.md`; route persistent lists to `websets-sourcing`.
 - Copy or sequences: `references/campaign-planner.md`, `references/copy-and-sequences.md`, and `references/failure-modes.md`.
 - Monitoring or recurring work: `references/automation-routines.md`, `references/monitors.md`, and `references/parallel-routines.md`.
-- Replies, outcomes, or weekly insights: `references/engagement-model.md`, `references/learning-loop.md`, and `references/failure-modes.md`.
+- Conversational rules, setup corrections, replies, outcomes, weekly insights, or skill-improvement candidates: `references/engagement-model.md`, `references/learning-loop.md`, and `references/failure-modes.md`.

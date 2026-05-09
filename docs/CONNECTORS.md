@@ -19,6 +19,8 @@ GTM Agent expects the Memory Store MCP tools from that core plugin:
 
 GTM Agent does **not** redeclare Memory Store MCP in its own `.mcp.json`. That avoids a second Memory Store auth prompt when `memory-store` is already installed.
 
+Memory Store is the long-term operating memory for the GTM plugin. GTM Agent should use `checkin` and `recall` before acting, then use `record` after approval or confirmed execution to persist setup rules, preferences, constraints, connector policy, persona/sourcing decisions, outcomes, and skill-improvement candidates.
+
 ## Get an Exa API key
 
 Both Exa Search MCP and Websets MCP use the same key.
@@ -117,7 +119,7 @@ GTM Agent's `websets-sourcing` skill outputs a Monitor spec when a monitor is ne
 
 Autopilot is a host-level automation pattern, not an uncontrolled background daemon hidden inside the plugin. In Codex, use recurring automations for daily digests, Websets refresh checks, monitor reviews, Gmail reply scans, and weekly learning summaries. In Claude Code, Claude Cowork, or OpenCode, use the host's scheduled-task or recurring-agent mechanism when available, or run the same routine prompt manually until that host exposes scheduling.
 
-Each automation should have one precise goal, one cadence, one Memory Store thread/context, required connectors, allowed actions, forbidden actions, stop conditions, and expected output. The GTM Agent skill should record approved routine specs to Memory Store so future runs know what they are allowed to do.
+Each automation should have one precise goal, one cadence, one Memory Store thread/context, required connectors, allowed actions, forbidden actions, stop conditions, expected output, and record policy. The GTM Agent skill should record approved routine specs and any new durable rules to Memory Store so future runs know what they are allowed to do.
 
 ## Gmail
 

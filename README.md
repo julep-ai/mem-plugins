@@ -217,7 +217,7 @@ The MCP server provides the required `checkin`, `recall`, `record`, and `report-
 
 Without Memory Store MCP, the agent can only draft from pasted context. It cannot recall brand memory, find company stories, or record feedback for the next run.
 
-`gtm-agent` requires the core `memory-store` plugin to be installed and authenticated, but it does not redeclare Memory Store MCP in its own `.mcp.json`. That avoids duplicate Memory Store auth prompts in hosts that scope MCP auth per plugin.
+`gtm-agent` requires the core `memory-store` plugin to be installed and authenticated, but it does not redeclare Memory Store MCP in its own `.mcp.json`. That avoids duplicate Memory Store auth prompts in hosts that scope MCP auth per plugin. GTM Agent uses Memory Store as long-term operating memory: setup rules, user corrections, approval policies, persona decisions, connector expectations, campaign outcomes, and skill-improvement candidates should be distilled and recorded so future runs improve instead of re-asking.
 
 High-quality sourcing expects Exa MCP and Websets MCP when available:
 
@@ -289,14 +289,14 @@ Includes these skills:
 GTM loop:
 
 ```text
-checkin -> context ingestion -> campaign mode -> funnel/ICP system -> campaign planner -> Exa/Websets sourcing -> people search -> signal cards -> approved automation routines -> Gmail autopilot -> Calendar booking context -> engagement -> record -> better targeting
+checkin -> recall durable rules -> context ingestion -> campaign mode -> funnel/ICP system -> campaign planner -> Exa/Websets sourcing -> people search -> signal cards -> approved automation routines -> Gmail autopilot -> Calendar booking context -> engagement -> distill rules/outcomes -> record -> better targeting
 ```
 
 The campaign engineering layer runs before copy. It classifies whether this is a new campaign, a continuation, a refresh, an expansion, a rescue, a reactivation, or an event/launch campaign; ingests Memory Store, uploaded/pasted docs, prior campaign artifacts, website, Gmail, Calendar, and public context; and maps the funnel system. The planner unit is still `persona + live signal + offer angle + proof path + next action`. A homepage, generic company category, founder title, or website-only scrape is not enough signal to draft.
 
 Campaign setup is the repeatable GTM engineer onboarding script. It infers from Memory Store, website research, Gmail, and Google Calendar first, then asks only unresolved blockers. The reusable setup questions live in `plugins/gtm-agent/skills/campaign-setup/references/onboarding-questions.md`, the packet contract lives in `plugins/gtm-agent/skills/campaign-setup/references/setup-packet.md`, and agents can print the packet skeleton with `plugins/gtm-agent/skills/campaign-setup/scripts/render_setup_packet_template.py`.
 
-Autopilot is the point of GTM Agent, but it is precise rather than vague. A user engineers the campaign once: offer, sender, ICP cells, signal sources, proof path, CTA, send ramp, stop conditions, routine specs, and background-worker graph. After approval, the host can run recurring goal-scoped automations that spawn bounded workers: daily Websets/monitor review, Gmail reply scan, followup check, daily digest, and weekly Memory Store learning summary. Start with a small ramp, record outcomes, and let future runs use those learnings instead of re-asking or re-sourcing from scratch.
+Autopilot is the point of GTM Agent, but it is precise rather than vague. A user engineers the campaign once: offer, sender, ICP cells, signal sources, proof path, CTA, send ramp, stop conditions, routine specs, and background-worker graph. During that conversation, GTM Agent also distills durable operating memory: rules, preferences, constraints, approval policies, connector expectations, persona decisions, sourcing gates, and skill-improvement candidates. After approval, the host can run recurring goal-scoped automations that spawn bounded workers: daily Websets/monitor review, Gmail reply scan, followup check, daily digest, and weekly Memory Store learning summary. Start with a small ramp, record outcomes, and let future runs use those learnings instead of re-asking or re-sourcing from scratch.
 
 Run it:
 

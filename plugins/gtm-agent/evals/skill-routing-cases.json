@@ -28,6 +28,11 @@
       "expected_skill": "gtm-agent"
     },
     {
+      "id": "gtm-agent-long-term-memory-rules",
+      "query": "Remember this as a rule for future GTM runs: never send until Websets has produced personas, email status, and signal cards.",
+      "expected_skill": "gtm-agent"
+    },
+    {
       "id": "exa-company-research-competitor-map",
       "query": "Use Exa to research competitors, recent launches, buyer proof, and account context before we choose target accounts.",
       "expected_skill": "exa-company-research"
@@ -154,6 +159,14 @@
         "references/automation-routines.md",
         "references/monitors.md",
         "references/failure-modes.md"
+      ]
+    },
+    {
+      "id": "gtm-agent-memory-distillation",
+      "skill": "gtm-agent",
+      "query": "During this setup conversation, distill the durable rules and store them so the GTM agent has long-term memory next time.",
+      "required_references": [
+        "references/learning-loop.md"
       ]
     }
   ]

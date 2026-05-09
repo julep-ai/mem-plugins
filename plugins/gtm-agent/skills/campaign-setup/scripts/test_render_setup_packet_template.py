@@ -39,6 +39,7 @@ class RenderSetupPacketTemplateTest(unittest.TestCase):
             "channel_policy:",
             "send_ramp_policy:",
             "autopilot_routines:",
+            "memory_distillation:",
             "approval_needed_before_start:",
         ]
 
