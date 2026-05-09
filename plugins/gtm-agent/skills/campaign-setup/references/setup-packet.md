@@ -12,6 +12,7 @@ campaign_mode:
 context_sources:
 connector_status:
 offer_profiles:
+customer_usage_map:
 sender_voice:
 website_findings:
 demo_cta:
@@ -36,6 +37,7 @@ Do not rename keys. If a value is unavailable, mark it as `unknown`, `missing_co
 - `context_sources`: Memory Store, uploaded/pasted docs, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets, and what each source is allowed to influence.
 - `connector_status`: production/degraded mode for Memory Store, Exa Search, Websets, Exa Monitors, Gmail, Calendar, and host automations. Mark missing Exa as `research_blocked_for_production`, missing Websets as `sourcing_blocked_for_production`, missing Monitors as `monitoring_degraded`, missing Gmail as `sending_blocked_for_production`, and missing Calendar as `booking_context_disabled`. If Exa or Websets credentials are missing, the packet status is `setup_only` until the user configures the Exa API key. If Gmail is missing, sends, reply monitoring, followups, and mailbox learning are blocked.
 - `offer_profiles`: active offer, alternate sellable offers, core claim, do-not-pitch list, proof path, and conversion action.
+- `customer_usage_map`: existing customer/user patterns used to derive ICP cells, with source Memory Store IDs, observed job-to-be-done, public expansion pool, first-batch target count, and exclusion rule. For Memory Store-owned campaigns, this field is required before `icp_matrix`.
 - `sender_voice`: sender identity, tone, phrases to use, phrases to avoid, and whether it came from Memory Store, Gmail, website, or user input.
 - `website_findings`: website pages checked, claims found, proof assets, screenshots/assets worth collecting, and risky or unsupported claims.
 - `demo_cta`: discovered link candidates, chosen link, confirmation status, CTA style, and fallback CTA.

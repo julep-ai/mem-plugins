@@ -26,6 +26,33 @@ For each account or person, the planner must answer:
 
 If any field is missing, output a planner gap and the exact research query or Memory Store recall needed. Do not produce a polished email to hide weak evidence.
 
+## Customer-Derived ICP Rule
+
+For campaigns selling Memory Store or a Memory Store-backed plugin, the first ICP pass must start from observed Memory Store consumers, not generic market categories. Recall and classify:
+
+- paid customers and activation attempts.
+- direct power users and internal dogfood users.
+- old product power users, triers, ghost signups, and landing-page leads.
+- passive-ingest workspaces where value comes from Slack/meeting/source memory rather than direct tool calls.
+- customer failures, thin stores, unopened briefs, connector gaps, and support patterns.
+- prior GTM plans, customer docs, sales playbooks, and account briefs.
+
+Then convert those observations into ICP cells:
+
+```text
+observed customer/user pattern -> job-to-be-done -> target account pool -> persona -> high-intent signal -> proof path -> exclusion rule
+```
+
+Examples for Memory Store itself:
+
+- **Paid onboarding/wiki customer:** Siftly/Swiftly-style teams where implicit GTM/customer knowledge does not transfer to new hires. Public expansion pool: GEO/AEO/AI-search agencies, content-ops companies, and knowledge-heavy customer-delivery teams.
+- **Sales/GTM context user:** Minicor/Ishita-style operators using Memory Store as grounded context for sales copy, account briefs, objections, and campaign learning. Public expansion pool: Clay/Smartlead/Apollo agencies, GTM engineering teams, and founder-led B2B sellers doing signal-based outbound.
+- **Coding-agent continuity user:** Shubham/Rishabh-style users who need Codex, Claude, Cursor, or repo agents to preserve project context and exact working rules. Public expansion pool: developer-tool teams, AI coding-agent teams, MCP/server tooling, and engineering-heavy startups.
+- **Passive workspace memory:** Shashank/Ukumi and Diwo-style teams where value comes from Slack, meeting, source, standup, and product-operation context. Public expansion pool: remote-first teams, CS/FDE/product ops teams, and companies using Fathom/Fireflies/Granola/Slack/Google Chat.
+- **Reactivation pool:** existing Julep/Memory Store power users, triers, and enriched leads. This is not an Exa-discovered ICP; it is an owned-account campaign and should run before cold expansion when the goal is fast learning.
+
+Do not use these examples as fixed defaults. Use the real seller's current Memory Store first. The planner output must show which customer/user memory created each ICP cell.
+
 ## Offer Profile
 
 The planner is **seller-agnostic**. Memory Store is the context and learning substrate, but the seller can be any business — software, infrastructure, services, real estate, consumer goods, vertical SaaS, agencies, consulting. The planner shape is identical; only the contents change.
@@ -101,7 +128,7 @@ The profiles below are illustrative — they show how the planner shape gets fil
 
 **Do not lead with:** better AI memory, knowledge base, CRM, RAG, AI sales tool, or MCP plugin. Those may appear as implementation detail only if the prospect's context makes them relevant.
 
-**Default first wedge:** devtools and AI infra teams with public support, community, docs, GitHub, or context-loss signals. This wedge best matches Memory Store's strongest remembered positioning around agent continuity, support/community memory, coding-agent memory, and Memory Store-powered GTM learning.
+**Default first wedge:** choose the strongest observed-customer wedge from Memory Store recall, then expand publicly with Exa/Websets. For Memory Store itself, current strong wedges include onboarding/wiki customers, GTM context users, coding-agent continuity users, passive workspace-memory teams, and owned-account reactivation. Do not default to "devtools and AI infra" unless current recall says that is the best starting wedge.
 
 Useful offer angles:
 
@@ -213,10 +240,17 @@ Before any copy package, return a campaign planner table with these columns:
 persona | high-intent signal | source | customer-story/persona pattern | offer angle | proof path | next action | learning intent | remember after touch | confidence | exclusion risk
 ```
 
+Also return a customer-derived ICP map before the planner table:
+
+```text
+source customer/user pattern | Memory Store source | inferred job-to-be-done | public expansion pool | Websets/search query | first-batch target count | exclusion rule
+```
+
 For Memory Store-built offers, also include:
 
 - active offer profile.
 - strongest wedge to start with.
+- customer-derived ICP map.
 - personas to exclude for now.
 - signal sources to prioritize.
 - claims that are approved.

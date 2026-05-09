@@ -21,18 +21,19 @@ For an already-approved campaign monitor, insights, refresh, rescue, reactivatio
 ## Loop
 
 1. Start with Memory Store `checkin` and recall.
-2. Load `../gtm-agent/references/campaign-engineering.md`; classify campaign mode, context sources, funnel stage, ICP system, signal system, proof system, execution system, and learning system.
-3. Verify Memory Store, Exa Search, Websets, and Gmail readiness before any production sourcing, drafting, sending, or learning loop. If Exa/Websets setup is missing, guide it in-chat: provide `https://dashboard.exa.ai/api-keys`, ask for a terminal-safe API-key paste/setup, and run or output the host setup command from `docs/EXA_SETUP.md`. Do not send the user to a separate dashboard except where a provider has no tool/API path. If the Exa API key is missing or Websets returns an auth error, ask for setup immediately, output exact commands, and keep the campaign in `setup_only`. If Gmail is missing, keep sending and reply learning disabled.
-4. Discover website/demo CTA and research public proof with Exa/Web fetch when available; if Exa is missing, output exact research queries and mark public research degraded.
-5. Learn bounded sender voice, objections, suppressions, and warm paths from Gmail when available.
-6. Use Calendar only for booking context after qualified replies unless policy says otherwise.
-7. Ask unresolved blockers from `references/onboarding-questions.md`.
-8. Build the planner and worker graph with `../gtm-agent/references/campaign-planner.md` and `../gtm-agent/references/parallel-routines.md`.
-9. For any first production run, require a shadow sample that demonstrates account discovery, persona discovery, and channel identity. If Exa/Websets cannot find people or emails, mark the exact blocker instead of pretending sourcing is complete.
-10. Distill durable setup rules, preferences, approval policies, connector expectations, and skill-improvement candidates with `../gtm-agent/references/learning-loop.md`.
-11. Configure full autopilot with `references/first-run-autopilot.md` and `../gtm-agent/references/automation-routines.md`.
-12. Return the setup packet from `references/setup-packet.md`.
-13. Record only after the user approves or edits the packet.
+2. Before public ICP brainstorming, run a customer-consumer mining pass from Memory Store: paid customers, active users, old power users/triers, internal dogfood users, passive-ingest accounts, failed/thin accounts, and prior GTM plans. Convert observed usage into ICP cells only after naming the source pattern.
+3. Load `../gtm-agent/references/campaign-engineering.md`; classify campaign mode, context sources, funnel stage, ICP system, signal system, proof system, execution system, and learning system.
+4. Verify Memory Store, Exa Search, Websets, and Gmail readiness before any production sourcing, drafting, sending, or learning loop. If Exa/Websets setup is missing, guide it in-chat: provide `https://dashboard.exa.ai/api-keys`, ask for a terminal-safe API-key paste/setup, and run or output the host setup command from `docs/EXA_SETUP.md`. Do not send the user to a separate dashboard except where a provider has no tool/API path. If the Exa API key is missing or Websets returns an auth error, ask for setup immediately, output exact commands, and keep the campaign in `setup_only`. If Gmail is missing, keep sending and reply learning disabled.
+5. Discover website/demo CTA and research public proof with Exa/Web fetch when available; if Exa is missing, output exact research queries and mark public research degraded.
+6. Learn bounded sender voice, objections, suppressions, and warm paths from Gmail when available.
+7. Use Calendar only for booking context after qualified replies unless policy says otherwise.
+8. Ask unresolved blockers from `references/onboarding-questions.md`.
+9. Build the planner and worker graph with `../gtm-agent/references/campaign-planner.md` and `../gtm-agent/references/parallel-routines.md`.
+10. For any first production run, require a shadow sample that demonstrates account discovery, persona discovery, channel identity, and customer-pattern fit. If Exa/Websets cannot find people or emails, mark the exact blocker instead of pretending sourcing is complete.
+11. Distill durable setup rules, preferences, approval policies, connector expectations, and skill-improvement candidates with `../gtm-agent/references/learning-loop.md`.
+12. Configure full autopilot with `references/first-run-autopilot.md` and `../gtm-agent/references/automation-routines.md`.
+13. Return the setup packet from `references/setup-packet.md`.
+14. Record only after the user approves or edits the packet.
 
 ## Setup Packet Shape
 
@@ -42,6 +43,7 @@ campaign_mode:
 context_sources:
 connector_status:
 offer_profiles:
+customer_usage_map:
 sender_voice:
 website_findings:
 demo_cta:
@@ -62,6 +64,7 @@ Group unresolved items as `inferred`, `needs_confirmation`, and `unknown_blocker
 ## Rules
 
 - Missing Exa/Websets/Gmail/Monitors/Calendar should not block setup planning; mark the exact degraded mode and provide setup steps plus manual/import-ready fallback. Missing Exa or Websets must block production sourcing, lead generation, send-ready rows, and campaign copy. Missing Gmail must block sends, followups, reply scans, mailbox suppression checks, and outcome learning. Do not call a campaign production-ready until Exa, Websets, Gmail, and the relevant monitor specs are available.
+- For a Memory Store campaign, an ICP matrix without a customer usage map is incomplete. Do not lead with generic categories like "founder-led teams" or "AI GTM teams" unless the setup packet explains which existing customer/user pattern created that cell.
 - Do not send during setup.
 - Do not use a discovered demo link until confirmed once.
 - Do not claim uploaded or pasted context was learned until it is recorded through Memory Store after approval.

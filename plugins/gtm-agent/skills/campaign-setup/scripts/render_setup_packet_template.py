@@ -10,6 +10,7 @@ campaign_mode:
 context_sources:
 connector_status:
 offer_profiles:
+customer_usage_map:
 sender_voice:
 website_findings:
 demo_cta:

@@ -105,6 +105,16 @@ If drafts sound generic, diagnose upstream before rewriting:
 
 If any answer is weak, rebuild the campaign planner and signal cards. Do not iterate copy on top of a bad planner.
 
+## Generic ICP Drift
+
+If ICPs sound like broad market labels before they sound like actual customers:
+
+- Stop public sourcing and rebuild the customer-consumer mining pass from Memory Store.
+- For Memory Store-owned campaigns, require cells tied to real usage patterns: paid customers, direct power users, internal dogfood users, passive workspaces, reactivation lists, failed/thin accounts, or prior GTM plans.
+- Treat labels such as "founder-led AI teams", "AI GTM teams", "CS/FDE/support", or "platform operators" as unfinished shorthand unless each has a source Memory Store pattern and a job-to-be-done.
+- Use Exa/Websets after this map exists: first to expand a customer-derived pool, then to verify account/person signals, not to invent a market from scratch.
+- Keep lead volume separate from send volume. Source broadly, score strictly, and send only rows that pass the planner gate and the approved quality-based ramp.
+
 ## Stale Or Conflicting Evidence
 
 If sources conflict or are stale:

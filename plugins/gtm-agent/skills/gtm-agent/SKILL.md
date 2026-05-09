@@ -25,6 +25,7 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 ## Always
 
 - Start with Memory Store `checkin`, then recall product, ICPs, claims, objections, exclusions, prior campaigns, and approved setup.
+- For Memory Store-owned campaigns, mine existing Memory Store consumers before proposing ICPs: paid customers, power users, triers, internal dogfood users, passive-ingest workspaces, customer failures, and prior GTM plans. Each ICP cell must cite the remembered customer/user pattern that created it. Generic category pools are invalid until mapped to a real usage pattern.
 - If setup is missing, first-run, or autopilot policy is unclear, route to `campaign-setup`.
 - Before sourcing or copy, load `references/campaign-engineering.md` and `references/campaign-planner.md`.
 - Parallelize by default with `references/parallel-routines.md`; split ICP cells, signal families, Webset batches, people search, evidence cards, copy angles, Gmail batches, monitor specs, and learning synthesis into bounded workers.
@@ -35,7 +36,7 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 - Load `references/failure-modes.md` when a request tries to skip setup, source from weak signals, bulk send, expose private context, or claim learning without Memory Store records.
 - When Exa/Websets/Monitors are missing, output exact setup steps, queries, Webset specs, monitor specs, and import-ready CSV schemas; do not pretend production sourcing, deep ICP discovery, send-ready signal cards, outbound copy, or always-on monitoring happened.
 - Treat `plan_new_campaign`, `start_new_campaign`, `monitor_campaign`, `campaign_insights`, and `update_prior_campaign` as first-class modes. Do not force every request through first-run setup.
-- For high-scale runs, build a daily target plan around roughly 1,000 sourced leads/emails only after strict connector gates and suppressions pass; sends still obey the approved ramp and mailbox health.
+- For high-scale runs, separate sourcing volume from send volume. It is acceptable to source roughly 1,000 leads/emails per day after connector gates pass, but sends ramp only when row quality, deliverability, and reply learning justify it. Default ramp shape is `10/day -> 20/day -> 50/day`, with promotion gated by message quality, bounce risk, suppression checks, and mailbox health.
 
 ## Loop
 
@@ -43,7 +44,7 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 1. Check in and recall context.
 2. Classify campaign mode and context sources: plan, start, monitor, insights, update, refresh, expand, rescue, reactivate, or event/launch.
 3. Map funnel, ICP, signal, proof, execution, and learning systems.
-4. Mine customer stories and prior outcomes for persona hypotheses, proof paths, useful objections, and segment language.
+4. Mine customer stories, current consumer patterns, prior outcomes, activation gaps, and failed/weak accounts for persona hypotheses, proof paths, useful objections, and segment language. For Memory Store itself, start from actual consumers/customers before public-market extrapolation.
 5. Build the campaign unit: `persona + high-intent signal + offer angle + proof path + next action + learning intent`.
 6. Create the worker graph and connector plan, including production/degraded mode status for Exa, Websets, Gmail, Monitors, and Calendar.
 7. Source, enrich, score, and dedupe evidence cards into `campaigns/<slug>/accounts.csv` and `signal-cards/`.
