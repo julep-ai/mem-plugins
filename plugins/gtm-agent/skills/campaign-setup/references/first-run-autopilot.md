@@ -1,10 +1,10 @@
 # First-Run Autopilot
 
-Use this reference when creating the first setup packet or turning an approved setup into autonomous GTM routines.
+Use this reference when creating the first GTM plan or turning an approved GTM plan into autonomous GTM routines.
 
-## Setup Approval
+## Plan Approval
 
-Setup approval is the one-time gate that replaces per-batch approval. Before approval, do not send. After approval, GTM Agent may source, draft, send, follow up, inspect replies, run host automations, and record learnings inside the approved policy.
+Plan approval is the one-time gate that replaces per-batch approval. Before approval, do not send. After approval, GTM Agent may source, draft, send, follow up, inspect replies, run host automations, and record learnings inside the approved policy.
 
 The approval must cover:
 
@@ -22,7 +22,7 @@ The approval must cover:
 
 ## Approval Granularity
 
-Setup approval permits only the actions explicitly listed in each routine's `allowed_actions`. Gmail sends, Gmail labels, broad mailbox inspection, monitor creation, webhook creation, Calendar mutations, and Memory Store records each require explicit inclusion in the approved routine spec. If the setup packet approves the campaign thesis but not the action, output the routine proposal and ask for approval before taking the action.
+Plan approval permits only the actions explicitly listed in each routine's `allowed_actions`. Gmail sends, Gmail labels, broad mailbox inspection, monitor creation, webhook creation, Calendar mutations, and Memory Store records each require explicit inclusion in the approved routine spec. If the GTM plan approves the campaign thesis but not the action, output the routine proposal and ask for approval before taking the action.
 
 ## Autopilot Mode
 
@@ -87,7 +87,7 @@ If Gmail is unavailable, produce import-ready send/followup queues and mark Gmai
 
 ## LinkedIn Policy
 
-LinkedIn is optional and must be approved in setup. When enabled:
+LinkedIn is optional and must be approved in the GTM plan. When enabled:
 
 - keep LinkedIn profile URL on the same person row as the email identity.
 - use different channel copy, not the same email pasted into LinkedIn.

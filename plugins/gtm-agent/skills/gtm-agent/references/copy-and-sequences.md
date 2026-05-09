@@ -90,11 +90,11 @@ Stop or reroute on replies, bounces, unsubscribes, objections, meeting booked, o
 
 When Gmail is available:
 
-- Before setup approval, draft first and do not send.
-- After setup approval, autopilot may send inside the approved ramp and stop conditions.
+- Before plan approval, draft first and do not send.
+- After plan approval, autopilot may send inside the approved ramp and stop conditions.
 - Preserve exact recipients, subjects, and thread context.
 - Use reply threads for followups when a conversation exists.
-- Do not mass-send from a generated batch before setup approval, representative samples, and send criteria are approved.
+- Do not mass-send from a generated batch before plan approval, representative samples, and send criteria are approved.
 - Report assumptions and missing fields before asking the Gmail connector to act.
 
 ## Media And Screenshots

@@ -1,20 +1,20 @@
 # Onboarding Questions
 
-Use these questions when Campaign Setup cannot infer the answer from Memory Store, website research, Gmail, or Google Calendar. Ask only the smallest missing blocker. Do not turn setup into a long form when context is already available.
+Use these questions when GTM Agent cannot infer the answer from Memory Store, website research, Gmail, or Google Calendar. Ask only the smallest missing blocker. Do not turn the GTM plan into a long form when context is already available.
 
-This reference is the repeatable GTM engineer onboarding script. Each question should become either an inferred setup decision, a confirmation request, or a true blocker.
+This reference is the repeatable GTM engineer planning script. Each question should become either an inferred plan decision, a confirmation request, or a true blocker.
 
-## Setup Principle
+## Plan Principle
 
-The onboarding interview is how GTM Agent designs the campaign. The first-run experience must feel like an agent-led setup assistant, not a documentation handoff. The questions are repeatable, but the first move is always inference:
+The onboarding interview is how GTM Agent designs the campaign. The first-run experience must feel like an agent-led GTM planning pass, not a documentation handoff. The questions are repeatable, but the first move is always inference:
 
 ```text
 Memory Store auth -> Exa/Websets/Gmail readiness -> campaign plan -> website -> Calendar -> ask only unresolved blockers
 ```
 
-Do not treat a no-key Exa/Websets state as a normal setup gap for a real campaign. Website-only research can support positioning, but it cannot produce deep ICP personas, production lead lists, signal cards, person rows, email candidates, or send-ready copy. If Exa Search or Websets is missing or unauthenticated, ask for the Exa API key setup before any production sourcing or drafting. If Gmail is missing, full execution is blocked; the campaign can still plan/source, but it cannot send, monitor replies, or learn from mailbox outcomes.
+Do not treat a no-key Exa/Websets state as a normal planning gap for a real campaign. Website-only research can support positioning, but it cannot produce deep ICP personas, production lead lists, signal cards, person rows, email candidates, or send-ready copy. If Exa Search or Websets is missing or unauthenticated, ask for the Exa API key setup before any production sourcing or drafting. If Gmail is missing, full execution is blocked; the campaign can still plan/source, but it cannot send, monitor replies, or learn from mailbox outcomes.
 
-When setup is blocked, output one next action the user can complete inside the current host whenever possible: install/enable plugin, complete Memory Store auth, configure Exa key, enable Websets, authorize Gmail, or approve REST monitor creation. For Exa/Websets, give `https://dashboard.exa.ai/api-keys`, ask the user to paste the key into a terminal prompt or provide `EXA_API_KEY`, then run or output the host setup command. Dashboard/manual steps are fallback only.
+When production execution is blocked, output one next action the user can complete inside the current host whenever possible: install/enable plugin, complete Memory Store auth, configure Exa key, enable Websets, authorize Gmail, or approve REST monitor creation. For Exa/Websets, give `https://dashboard.exa.ai/api-keys`, ask the user to paste the key into a terminal prompt or provide `EXA_API_KEY`, then run or output the host setup command. Dashboard/manual steps are fallback only.
 
 ## Core Questions
 
@@ -57,7 +57,7 @@ Ask or infer these in order:
    - taboo claims, competitor exclusions, current customers, sensitive proof, screenshots, attachments, regulated segments, do-not-contact rules.
 
 12. **How autonomous should this campaign be?**
-   - default is full autopilot after setup approval with ramped limits, precise daily/weekly routine specs, background-worker graphs, and stop conditions. At high scale, the daily operating target may be around 1,000 sourced leads/emails, but sends are still gated by mailbox health, signal quality, suppression checks, and the approved ramp.
+   - default is full autopilot after plan approval with ramped limits, precise daily/weekly routine specs, background-worker graphs, and stop conditions. At high scale, the daily operating target may be around 1,000 sourced leads/emails, but sends are still gated by mailbox health, signal quality, suppression checks, and the approved ramp.
 
 13. **How should Gmail be used?**
    - sender voice, sent-mail examples, inbox replies, objections, warm paths, suppressions, followups, and active threads.
@@ -70,7 +70,7 @@ Ask or infer these in order:
 
 ## Question Output
 
-Before showing the setup packet, summarize the interview state:
+Before showing the GTM plan, summarize the interview state:
 
 ```text
 inferred:
@@ -80,11 +80,11 @@ unknown_blocker:
 
 Use `inferred` for decisions with source and confidence. Use `needs_confirmation` for demo links, claims, sender identity, send ramp, media policy, or ICP choices that are likely but still require approval. Use `unknown_blocker` only when autopilot would be unsafe without the answer.
 
-Missing Exa/Websets production credentials are an `unknown_blocker` for production GTM, not a minor warning. The setup packet may continue as `setup_only`, but the next action must be Exa key configuration. Missing Gmail is an `unknown_blocker` for sending, reply monitoring, and learning from campaign outcomes.
+Missing Exa/Websets production credentials are an `unknown_blocker` for production GTM, not a minor warning. The GTM plan may continue as `plan_only`, but the next action must be Exa key configuration. Missing Gmail is an `unknown_blocker` for sending, reply monitoring, and learning from campaign outcomes.
 
 ## Memory Store-Built Defaults
 
-Only apply this section when the seller or offer is Memory Store, a Memory Store plugin, or an explicitly adjacent Memory Store product. For any other seller, infer defaults from that seller's Memory Store, public evidence, and approved setup packet instead.
+Only apply this section when the seller or offer is Memory Store, a Memory Store plugin, or an explicitly adjacent Memory Store product. For any other seller, infer defaults from that seller's Memory Store, public evidence, and approved GTM plan instead.
 
 Use these defaults unless recalled context or the user overrides them:
 
@@ -98,7 +98,7 @@ Use these defaults unless recalled context or the user overrides them:
 
 ## Output Discipline
 
-Every setup answer should map to the setup packet:
+Every answer should map to the GTM plan:
 
 - `company_profile`
 - `campaign_mode`

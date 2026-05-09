@@ -7,7 +7,7 @@ Use this reference when designing the campaign workflow, review gates, followup 
 Do not design this as "Exa finds leads, Gmail sends emails." Design it as an experiment system:
 
 ```text
-setup approval -> ICP hypotheses -> evidence-backed accounts -> approved automation routines -> controlled sends -> engagement capture -> Memory Store learning -> next batch
+plan approval -> ICP hypotheses -> evidence-backed accounts -> approved automation routines -> controlled sends -> engagement capture -> Memory Store learning -> next batch
 ```
 
 The campaign is a learning system, not just a delivery system. Every ICP cell, signal family, channel choice, and copy variant needs an intent that can later be judged.
@@ -16,7 +16,7 @@ The campaign is a learning system, not just a delivery system. Every ICP cell, s
 
 Track these concepts in the working output even if the host does not have a database yet:
 
-- **setup packet** - company profile, offer profiles, sender voice, website findings, demo CTA, ICP matrix, signal sources, Gmail learnings, calendar policy, send ramp, autopilot routines, and approval blockers.
+- **GTM plan** - company profile, offer profiles, sender voice, website findings, demo CTA, ICP matrix, signal sources, Gmail learnings, calendar policy, send ramp, autopilot routines, and approval blockers.
 - **campaign** - company, goal, offer, CTA, sender, send policy, review policy, scale, status.
 - **ICP cell** - name, buyer, criteria, trigger signals, pain hypothesis, target count, confidence.
 - **account** - company/domain, fit score, timing score, source URLs, evidence summary, risk.
@@ -34,7 +34,7 @@ Track these concepts in the working output even if the host does not have a data
 
 Minimum gates before autopilot starts:
 
-- Setup packet approved.
+- GTM plan approved.
 - Demo CTA confirmed or reply-first fallback approved.
 - Sender identity and brand voice approved.
 - ICP list and company-size range approved.
@@ -43,7 +43,7 @@ Minimum gates before autopilot starts:
 - Routine specs approved for any asynchronous host automation.
 - Claims, taboo claims, private-memory policy, and suppressions approved.
 
-After setup approval, per-batch approval is not required by default. Full autopilot may send and follow up inside the approved policy. If the user chooses draft-first mode, preserve per-batch approval.
+After plan approval, per-batch approval is not required by default. Full autopilot may send and follow up inside the approved policy. If the user chooses draft-first mode, preserve per-batch approval.
 
 Hard blocks:
 
@@ -64,7 +64,7 @@ Hard blocks:
 Use clear states when reporting campaign progress:
 
 ```text
-setup_needed -> setup_review -> approved -> routine_ready -> sourcing -> sourced -> qualified -> drafted -> sent -> replied -> next_action -> learned
+plan_needed -> plan_review -> approved -> routine_ready -> sourcing -> sourced -> qualified -> drafted -> sent -> replied -> next_action -> learned
 ```
 
 Terminal or suppressing states:
@@ -77,8 +77,8 @@ rejected, excluded, bounced, unsubscribed, negative_reply, no_contact, stale_sig
 
 Default behavior:
 
-- First touch is never sent before setup approval.
-- After setup approval, first touch may send automatically inside the approved ramp and stop conditions.
+- First touch is never sent before plan approval.
+- After plan approval, first touch may send automatically inside the approved ramp and stop conditions.
 - No reply after the configured wait creates a followup draft.
 - Positive reply stops automation, summarizes the thread, and suggests owner action.
 - Negative reply records the objection and suppresses further outreach.
@@ -87,7 +87,7 @@ Default behavior:
 - Out-of-office reschedules followup.
 - Referral creates a new related lead if the user wants to pursue it.
 
-Default followups after setup approval may send automatically inside the approved policy. If risk appears, switch to draft-only until resolved.
+Default followups after plan approval may send automatically inside the approved policy. If risk appears, switch to draft-only until resolved.
 
 ## Send Ramp
 
@@ -149,7 +149,7 @@ V1 is a plugin-level autopilot, not a separate dashboard:
 - one primary execution channel: email/Gmail
 - optional LinkedIn tracking/touch policy when approved and identity confidence is sufficient
 - one sender identity unless the user says otherwise
-- full autopilot after setup approval
+- full autopilot after plan approval
 - approved routine specs for asynchronous daily/weekly work
 - representative samples during setup before autopilot starts
 - ramped sends with hard stop conditions

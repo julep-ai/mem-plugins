@@ -20,27 +20,27 @@ GTM Agent is Memory Store-backed, Exa/Websets-powered, Gmail-executed, and monit
 - **Gmail is required for production execution**: sender voice, prior touches, suppression checks, sends, followups, reply monitoring, and outcome learning.
 - **Calendar is booking context**: use it only after qualified replies, and mark booking context disabled when absent.
 
-A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user can approve the thesis, ICPs, queries, and setup packet. Do not describe that as full GTM Agent. Mark it `setup_only`, `research_blocked_for_production`, `sourcing_blocked_for_production`, `sending_blocked_for_production`, or `monitoring_degraded` until the missing connector is active. Missing Exa/Websets credentials must block production sourcing, signal cards, and outbound drafts. Missing Gmail must block sends, followups, reply scans, and mailbox-derived learning.
+A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user can approve the thesis, ICPs, queries, and GTM plan. Do not describe that as full GTM Agent. Mark it `plan_only`, `research_blocked_for_production`, `sourcing_blocked_for_production`, `sending_blocked_for_production`, or `monitoring_degraded` until the missing connector is active. Missing Exa/Websets credentials must block production sourcing, signal cards, and outbound drafts. Missing Gmail must block sends, followups, reply scans, and mailbox-derived learning.
 
 ## Always
 
-- Start with Memory Store `checkin`, then recall product, ICPs, claims, objections, exclusions, prior campaigns, and approved setup.
+- Start with Memory Store `checkin`, then recall product, ICPs, claims, objections, exclusions, prior campaigns, and approved GTM plan.
 - For Memory Store-owned campaigns, mine existing Memory Store consumers before proposing ICPs: paid customers, power users, triers, internal dogfood users, passive-ingest workspaces, customer failures, and prior GTM plans. Each ICP cell must cite the remembered customer/user pattern that created it. Generic category pools are invalid until mapped to a real usage pattern.
-- If setup is missing, first-run, or autopilot policy is unclear, route to `campaign-setup`.
+- If the GTM plan is missing, first-run, or autopilot policy is unclear, route to `campaign-setup`.
 - Before sourcing or copy, load `references/campaign-engineering.md` and `references/campaign-planner.md`.
 - Parallelize by default with `references/parallel-routines.md`; split ICP cells, signal families, Webset batches, people search, evidence cards, copy angles, Gmail batches, monitor specs, and learning synthesis into bounded workers.
-- Treat autopilot as setup-once execution: after approval, run precise async routines from `references/automation-routines.md` with goal, cadence, allowed actions, forbidden actions, stop conditions, output, and Memory Store record policy.
-- Treat Memory Store as proactive intelligence and long-term operating memory: distill user rules, corrections, setup decisions, approval policies, campaign outcomes, and skill-improvement candidates through `references/learning-loop.md`.
+- Treat autopilot as plan-once execution: after approval, run precise async routines from `references/automation-routines.md` with goal, cadence, allowed actions, forbidden actions, stop conditions, output, and Memory Store record policy.
+- Treat Memory Store as proactive intelligence and long-term operating memory: distill user rules, corrections, plan decisions, approval policies, campaign outcomes, and skill-improvement candidates through `references/learning-loop.md`.
 - Prefer active Exa tools: `web_search_advanced_exa`, `web_search_exa`, and `web_fetch_exa`. Use deprecated Exa tools only as host fallbacks.
 - Route focused work to sibling skills: `exa-company-research`, `exa-lead-generation`, `exa-people-search`, and `websets-sourcing`.
-- Load `references/failure-modes.md` when a request tries to skip setup, source from weak signals, bulk send, expose private context, or claim learning without Memory Store records.
+- Load `references/failure-modes.md` when a request tries to skip plan approval, source from weak signals, bulk send, expose private context, or claim learning without Memory Store records.
 - When Exa/Websets/Monitors are missing, output exact setup steps, queries, Webset specs, monitor specs, and import-ready CSV schemas; do not pretend production sourcing, deep ICP discovery, send-ready signal cards, outbound copy, or always-on monitoring happened.
-- Treat `plan_new_campaign`, `start_new_campaign`, `monitor_campaign`, `campaign_insights`, and `update_prior_campaign` as first-class modes. Do not force every request through first-run setup.
+- Treat `plan_new_campaign`, `start_new_campaign`, `monitor_campaign`, `campaign_insights`, and `update_prior_campaign` as first-class modes. Do not force every request through first-run planning.
 - For high-scale runs, separate sourcing volume from send volume. It is acceptable to source roughly 1,000 leads/emails per day after connector gates pass, but sends ramp only when row quality, deliverability, and reply learning justify it. Default ramp shape is `10/day -> 20/day -> 50/day`, with promotion gated by message quality, bounce risk, suppression checks, and mailbox health.
 
 ## Loop
 
-0. **Plan first.** If no campaign folder exists or the user is starting fresh, enter the host's plan mode (Claude Code, Codex, Cowork) and co-write the proposed plan with the user — name, hypothesis, offer, ICPs (including at least one unconventional persona from `references/campaign-planner.md` Persona Discovery), scale, success criteria, exclusions, signal sources, send ramp, stop conditions. Before setup approval, do not create folders or record a campaign thread unless the user explicitly asks to save a draft. After the user approves or asks to persist it, ask where to save (default: `./<slug-from-name>`), create the campaign folder, write `plan.md` first, and record the campaign thread to Memory Store. See `references/campaign-folder.md`.
+0. **Plan first.** If no campaign folder exists or the user is starting fresh, enter the host's plan mode (Claude Code, Codex, Cowork) and co-write the proposed plan with the user — name, hypothesis, offer, ICPs (including at least one unconventional persona from `references/campaign-planner.md` Persona Discovery), scale, success criteria, exclusions, signal sources, send ramp, stop conditions. Before plan approval, do not create folders or record a campaign thread unless the user explicitly asks to save a draft. After the user approves or asks to persist it, ask where to save (default: `./<slug-from-name>`), create the campaign folder, write `plan.md` first, and record the campaign thread to Memory Store. See `references/campaign-folder.md`.
 1. Check in and recall context.
 2. Classify campaign mode and context sources: plan, start, monitor, insights, update, refresh, expand, rescue, reactivate, or event/launch.
 3. Map funnel, ICP, signal, proof, execution, and learning systems.
@@ -49,13 +49,13 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 6. Create the worker graph and connector plan, including production/degraded mode status for Exa, Websets, Gmail, Monitors, and Calendar.
 7. Source, enrich, score, and dedupe evidence cards into `campaigns/<slug>/accounts.csv` and `signal-cards/`.
 8. Draft only rows that pass the planner gate; write to `copy/<account>.md`.
-9. Apply setup approval, send ramp, followup cadence, channel policy, suppressions, and stop conditions; track in `sends.csv`.
+9. Apply plan approval, send ramp, followup cadence, channel policy, suppressions, and stop conditions; track in `sends.csv`.
 10. Create or propose routines for monitors, Websets refreshes, Gmail scans, followups, digests, and weekly learning. Persist `monitors.json` and `events.jsonl`.
 11. Distill durable rules and outcomes through `references/learning-loop.md`, then record only approved or confirmed learnings through Memory Store at the main-agent layer (workers do not record). Append each call to `learnings.md`.
 
 ## Output
 
-Return, in order: campaign read, setup status, campaign mode, campaign system, planner, ICP matrix, high-intent signal plan, work plan, signal cards, copy package, channel policy, autopilot policy, routine candidates, review queue, learning prompt.
+Return, in order: campaign read, plan status, campaign mode, campaign system, planner, ICP matrix, high-intent signal plan, work plan, signal cards, copy package, channel policy, autopilot policy, routine candidates, review queue, learning prompt.
 
 ## Minimum Inputs
 
@@ -63,20 +63,20 @@ Infer first, ask only blockers: company/product, campaign mode, context sources,
 
 ## Invariants
 
-- Do not send before setup approval.
+- Do not send before plan approval.
 - After approval, autonomous sends must stay inside the approved ramp, CTA policy, same-company rule, and stop conditions.
 - Do not invent customers, metrics, quotes, emails, funding, job changes, or buying signals.
 - Every non-obvious claim needs a source URL, Memory Store ID, or approval flag.
 - A website, category fit, or founder title is context, not a live signal.
-- Exa, Websets, Gmail, and Monitors are first-class production layers. If Exa or Websets credentials are unavailable, continue only in setup/planning mode, ask for the Exa API key setup, and say exactly what is blocked. If Gmail is unavailable, no send/followup/reply-learning action is production-ready.
+- Exa, Websets, Gmail, and Monitors are first-class production layers. If Exa or Websets credentials are unavailable, continue only in planning mode, ask for the Exa API key setup, and say exactly what is blocked. If Gmail is unavailable, no send/followup/reply-learning action is production-ready.
 - Do not expose private Memory Store context in outbound copy unless approved.
 - Do not claim the system learned unless `record` wrote the confirmed learning.
 
 ## Reference Loading Map
 
-- Setup missing or approval unclear: use `campaign-setup` plus `references/failure-modes.md`.
+- GTM plan missing or approval unclear: use `campaign-setup` plus `references/failure-modes.md`.
 - New plan or saved campaign artifacts: `references/campaign-engineering.md`, `references/campaign-planner.md`, `references/campaign-folder.md`.
 - Sourcing, lead generation, enrichment, or signals: `references/exa-workflows.md`, `references/signal-sourcing.md`, `references/enrichment-catalog.md`; route persistent lists to `websets-sourcing`.
 - Copy or sequences: `references/campaign-planner.md`, `references/copy-and-sequences.md`, and `references/failure-modes.md`.
 - Monitoring or recurring work: `references/automation-routines.md`, `references/monitors.md`, and `references/parallel-routines.md`.
-- Conversational rules, setup corrections, replies, outcomes, weekly insights, or skill-improvement candidates: `references/engagement-model.md`, `references/learning-loop.md`, and `references/failure-modes.md`.
+- Conversational rules, plan corrections, replies, outcomes, weekly insights, or skill-improvement candidates: `references/engagement-model.md`, `references/learning-loop.md`, and `references/failure-modes.md`.

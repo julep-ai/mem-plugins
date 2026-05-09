@@ -2,7 +2,7 @@
   "status": "proposed_not_created",
   "blocker": "Websets MCP is configured in Codex with Exa API-key auth, but tools are not visible in this already-running session. Restart/reload Codex before creating Websets.",
   "required_before_creation": [
-    "approve setup packet",
+    "approve GTM plan",
     "restart/reload Codex and verify Websets tools are visible",
     "run shadow sample before production sends"
   ],

@@ -217,7 +217,7 @@ The MCP server provides the required `checkin`, `recall`, `record`, and `report-
 
 Without Memory Store MCP, the agent can only draft from pasted context. It cannot recall brand memory, find company stories, or record feedback for the next run.
 
-`gtm-agent` requires the core `memory-store` plugin to be installed and authenticated, but it does not redeclare Memory Store MCP in its own `.mcp.json`. That avoids duplicate Memory Store auth prompts in hosts that scope MCP auth per plugin. GTM Agent uses Memory Store as a proactive intelligence layer and long-term operating memory for agents: setup rules, user corrections, approval policies, persona decisions, connector expectations, campaign outcomes, and skill-improvement candidates should be distilled and recorded so future runs can surface context, continue work, and improve without re-asking.
+`gtm-agent` requires the core `memory-store` plugin to be installed and authenticated, but it does not redeclare Memory Store MCP in its own `.mcp.json`. That avoids duplicate Memory Store auth prompts in hosts that scope MCP auth per plugin. GTM Agent uses Memory Store as a proactive intelligence layer and long-term operating memory for agents: plan rules, user corrections, approval policies, persona decisions, connector expectations, campaign outcomes, and skill-improvement candidates should be distilled and recorded so future runs can surface context, continue work, and improve without re-asking.
 
 High-quality sourcing expects Exa MCP and Websets MCP when available:
 
@@ -229,7 +229,7 @@ Both Exa Search and Websets share one API key from [https://dashboard.exa.ai/api
 
 When Exa/Websets are missing, GTM Agent should guide setup instead of stopping at documentation: open the Exa API-key URL, ask the user to paste the key into a terminal prompt when possible, then run `plugins/gtm-agent/scripts/setup_exa_connectors.sh --host codex --persist-shell` or the host equivalent. Production research should verify `web_search_advanced_exa` is available for company, people, and article/news searches.
 
-Gmail outreach and followups require the host's Gmail connector. Google Calendar booking context requires the host's Google Calendar connector. Gmail is the default founder-led first-touch and reply-learning channel. If Gmail/Calendar are missing, the skill outputs setup gaps and routine specs instead of pretending actions happened. If Exa/Websets are missing, the skill must keep the campaign in setup/planning mode and ask for the Exa API key before production sourcing or drafting.
+Gmail outreach and followups require the host's Gmail connector. Google Calendar booking context requires the host's Google Calendar connector. Gmail is the default founder-led first-touch and reply-learning channel. If Gmail/Calendar are missing, the skill outputs connector gaps and routine specs instead of pretending actions happened. If Exa/Websets are missing, the skill must keep the campaign in planning mode and ask for the Exa API key before production sourcing or drafting.
 
 ## Supported Targets
 
@@ -281,7 +281,7 @@ Path: `plugins/gtm-agent`
 
 Includes these skills:
 
-- `campaign-setup`: creates the GTM setup packet from Memory Store, uploaded or pasted context, prior campaigns, website research, demo CTA discovery, Gmail learning, Google Calendar policy, send ramp, and goal-scoped autopilot routines.
+- `campaign-setup`: creates the GTM plan from Memory Store, uploaded or pasted context, prior campaigns, website research, demo CTA discovery, Gmail learning, Google Calendar policy, send ramp, and goal-scoped autopilot routines.
 - `gtm-agent`: orchestrates the full Memory Store-powered GTM campaign loop: campaign engineering, campaign planning, ICP design, Exa/Websets sourcing, people search, Gmail outreach/followups, Google Calendar booking context, asynchronous routines, engagement capture, and learning records.
 - `exa-company-research`: researches companies, competitors, market categories, account context, public profiles, news, and company lists with Exa Company Research plus Memory Store context.
 - `exa-lead-generation`: generates enriched account lists from a confirmed ICP with Exa advanced search, micro-vertical batching, structured schemas, dedupe, scoring, and CSV/import-ready output.
@@ -296,7 +296,7 @@ checkin -> recall durable rules -> context ingestion -> campaign mode -> funnel/
 
 The campaign engineering layer runs before copy. It classifies whether this is a new campaign, a continuation, a refresh, an expansion, a rescue, a reactivation, or an event/launch campaign; ingests Memory Store, uploaded/pasted docs, prior campaign artifacts, website, Gmail, Calendar, and public context; and maps the funnel system. The planner unit is still `persona + live signal + offer angle + proof path + next action`. A homepage, generic company category, founder title, or website-only scrape is not enough signal to draft.
 
-Campaign setup is the repeatable GTM engineer onboarding script. It infers from Memory Store, website research, Gmail, and Google Calendar first, then asks only unresolved blockers. The reusable setup questions live in `plugins/gtm-agent/skills/campaign-setup/references/onboarding-questions.md`, the packet contract lives in `plugins/gtm-agent/skills/campaign-setup/references/setup-packet.md`, and agents can print the packet skeleton with `plugins/gtm-agent/skills/campaign-setup/scripts/render_setup_packet_template.py`.
+The first GTM plan is the repeatable GTM engineer onboarding script. It infers from Memory Store, website research, Gmail, and Google Calendar first, then asks only unresolved blockers. The reusable planning questions live in `plugins/gtm-agent/skills/campaign-setup/references/onboarding-questions.md`, the GTM plan contract lives in `plugins/gtm-agent/skills/campaign-setup/references/gtm-plan.md`, and agents can print the GTM plan skeleton with `plugins/gtm-agent/skills/campaign-setup/scripts/render_gtm_plan_template.py`.
 
 Autopilot is the point of GTM Agent, but it is precise rather than vague. A user engineers the campaign once: offer, sender, ICP cells, signal sources, proof path, CTA, send ramp, stop conditions, routine specs, and background-worker graph. During that conversation, GTM Agent also distills durable operating memory: rules, preferences, constraints, approval policies, connector expectations, persona decisions, sourcing gates, and skill-improvement candidates. After approval, the host can run recurring goal-scoped automations that spawn bounded workers: daily Websets/monitor review, Gmail reply scan, followup check, daily digest, and weekly Memory Store learning summary. Start with a small ramp, record outcomes, and let future runs use those learnings instead of re-asking or re-sourcing from scratch.
 
@@ -317,13 +317,13 @@ Or in free text:
 Set up and run a 1000-recipient GTM autopilot with 20 ICPs, 50 targets each, Exa/Websets sourcing, monitors, Gmail sending/followups, and Memory Store learning.
 ```
 
-For first setup, start with campaign setup:
+For the first GTM plan:
 
 ```text
-Set up GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, define daily/weekly automation routines, build the setup packet, and ask for setup approval before sending.
+Start GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, define daily/weekly automation routines, build the GTM plan, and ask for plan approval before sending.
 ```
 
-GTM Agent expects Memory Store MCP first. Exa, Websets, Exa Monitors, Gmail, Google Calendar, and host automations make it operational: Exa researches companies and people, Exa advanced search generates structured lead pools, Websets persists verified lists, Monitors keep new high-intent signals flowing, Gmail learns from the current inbox and sends/follows up after setup approval, Google Calendar provides booking context after qualified replies, host automations run the approved routines, and Memory Store records the learning loop. High-scale campaigns may source around 1000 leads/emails per day, but sends remain gated by signal-card quality, suppressions, Gmail health, and the approved ramp.
+GTM Agent expects Memory Store MCP first. Exa, Websets, Exa Monitors, Gmail, Google Calendar, and host automations make it operational: Exa researches companies and people, Exa advanced search generates structured lead pools, Websets persists verified lists, Monitors keep new high-intent signals flowing, Gmail learns from the current inbox and sends/follows up after plan approval, Google Calendar provides booking context after qualified replies, host automations run the approved routines, and Memory Store records the learning loop. High-scale campaigns may source around 1000 leads/emails per day, but sends remain gated by signal-card quality, suppressions, Gmail health, and the approved ramp.
 
 ## Local Testing
 
@@ -338,7 +338,7 @@ Run the GTM Agent skill-surface checks before changing skill descriptions, routi
 
 ```bash
 python3 plugins/gtm-agent/scripts/validate_skill_surface.py
-python3 plugins/gtm-agent/skills/campaign-setup/scripts/test_render_setup_packet_template.py
+python3 plugins/gtm-agent/skills/campaign-setup/scripts/test_render_gtm_plan_template.py
 ```
 
 ## Build Another Skill Or Plugin

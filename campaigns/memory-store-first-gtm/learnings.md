@@ -2,7 +2,7 @@
 
 No Memory Store records have been written for this campaign yet.
 
-Reason: the setup packet is still proposed. Per GTM Agent policy, record only after the user approves or edits the packet.
+Reason: the GTM plan is still proposed. Per GTM Agent policy, record only after the user approves or edits the plan.
 
 When approved, append entries in this format:
 

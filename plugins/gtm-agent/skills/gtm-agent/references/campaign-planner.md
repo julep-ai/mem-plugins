@@ -116,9 +116,9 @@ Operationalize competitor intelligence as a routine, not a one-shot:
 
 Competitor intelligence feeds three downstream things: ICP cell design (use their customers as a target pool), signal sources (their changelog/news drives outreach timing), and copy proof paths (their gaps are your wedges). Without competitor intelligence the campaign reverts to firmographic spam.
 
-## First-Run Setup Contract
+## First-Run GTM Plan Contract
 
-When GTM Agent has no approved setup packet, route setup to `campaign-setup` before sourcing or drafting. Campaign Setup owns the repeatable onboarding questions and exact setup packet schema. The approved setup packet must define:
+When GTM Agent has no approved GTM plan, route the first plan to `campaign-setup` before sourcing or drafting. The `campaign-setup` skill owns the repeatable onboarding questions and exact GTM plan schema for compatibility with existing hosts. The approved GTM plan must define:
 
 - active offer profile.
 - campaign mode and context source base.

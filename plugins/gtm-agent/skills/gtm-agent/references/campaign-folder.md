@@ -45,8 +45,8 @@ The plan is the contract. Everything downstream reads it. If sourcing or copy dr
 
 ```
 <campaign-slug>/
-  plan.md                  # frozen plan from plan mode (the contract)
-  setup-packet.md          # approved campaign-setup output
+  plan.md                  # approved GTM plan: hypothesis, ICPs,
+                           # connector readiness, policy, routines
   icps/
     <cell-slug>.md         # one ICP cell: persona, criteria, trigger,
                            # target count, exclusions, source plan
@@ -115,8 +115,7 @@ A row without `personal_email`, `linkedin_profile_url`, or `company_url` is not 
 
 ## File Lifecycles
 
-- `plan.md` — written once at folder creation. Frozen. To change, fork the campaign.
-- `setup-packet.md` — written once after `campaign-setup` approval. Updated only when the user re-approves a change.
+- `plan.md` — written once at folder creation as the approved GTM plan. Updated only when the user re-approves a change; fork the campaign for major pivots.
 - `icps/<cell>.md` — written when the ICP cell is approved. Updated as Memory Store learnings refine criteria.
 - `accounts.csv` — appended/updated continuously by Webset and Exa workers. Status column is the source of truth.
 - `signal-cards/<account>.md` — written when row reaches `qualified`. One file per account.
@@ -137,7 +136,7 @@ The folder is regenerable. Memory Store is durable. The split:
 | Today's signals | Signal source quality over time |
 | Send queue, event log | Objection patterns, suppression policy |
 | Webset/monitor IDs (for round-trip) | Which Websets/monitors paid off |
-| Plan and setup packet | Campaign outcomes vs. plan hypothesis |
+| GTM plan | Campaign outcomes vs. plan hypothesis |
 
 If the folder is deleted, the campaign is gone but the learnings remain. If Memory Store loses a thread, the folder still has the working state to rebuild from. Both layers are durable in different ways.
 
@@ -148,7 +147,7 @@ If the folder is deleted, the campaign is gone but the learnings remain. If Memo
 ## Do Not
 
 - Do not start sourcing before `plan.md` exists.
-- Do not start copy before `setup-packet.md` is approved.
+- Do not start copy before `plan.md` is approved and required connector gates are green.
 - Do not mark a row `send_ready` if it lacks `personal_email`, `linkedin_profile_url`, or a live `signal_source_url`.
 - Do not record per-row state to Memory Store. Record durable learnings only.
 - Do not edit `events.jsonl` retroactively. Append corrections as new events.

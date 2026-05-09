@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Print the GTM Agent campaign setup packet template."""
+"""Print the GTM Agent GTM plan template."""
 
-PACKET = """inferred:
+PLAN = """inferred:
 needs_confirmation:
 unknown_blocker:
 
@@ -28,7 +28,7 @@ approval_needed_before_start:
 
 
 def main() -> None:
-    print(PACKET, end="")
+    print(PLAN, end="")
 
 
 if __name__ == "__main__":

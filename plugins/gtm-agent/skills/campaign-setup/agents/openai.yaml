@@ -1,4 +1,4 @@
 interface:
   display_name: "Campaign Setup"
-  short_description: "First-run GTM autopilot setup"
+  short_description: "First-run GTM plan"
   default_prompt: "Set up GTM Agent with website discovery, Gmail learning, demo CTA, and autopilot policy."

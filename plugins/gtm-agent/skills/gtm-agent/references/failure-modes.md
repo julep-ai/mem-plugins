@@ -26,7 +26,7 @@ If recall lacks product, ICP, customer language, or approved claims:
 
 ## Exa, Websets, Or Monitors Missing
 
-If Exa/Websets/Monitor support is missing, setup can continue as planning only, but production GTM is blocked or degraded:
+If Exa/Websets/Monitor support is missing, the GTM plan can continue, but production GTM is blocked or degraded:
 
 - Produce exact search queries, Websets criteria, enrichments, and batching plan.
 - Tell the user which MCP to connect and ask for Exa API key setup immediately when Exa/Websets credentials are missing. Give `https://dashboard.exa.ai/api-keys`, ask for a terminal-safe API-key paste/setup, and run or output `plugins/gtm-agent/scripts/setup_exa_connectors.sh --host codex --persist-shell` or the host-specific equivalent.
@@ -34,7 +34,7 @@ If Exa/Websets/Monitor support is missing, setup can continue as planning only, 
 - Do not fabricate lead lists.
 - Do not draft campaign copy or mark accounts send-ready from website-only research.
 - Do not claim production sourcing, deeper ICP discovery, verified enrichment, refresh, or always-on monitoring happened.
-- Use explicit status labels: `setup_only`, `research_blocked_for_production`, `sourcing_blocked_for_production`, `monitoring_degraded`.
+- Use explicit status labels: `plan_only`, `research_blocked_for_production`, `sourcing_blocked_for_production`, `monitoring_degraded`.
 - If only `web_search_exa` appears, treat the Exa surface as exploratory research only. Execution-grade lead generation and source fetching need `web_search_advanced_exa` and `web_fetch_exa`. Advanced company, people, and article/news searches are required for deep GTM sourcing. Use deprecated tools such as `deep_search_exa` only when the host still exposes them.
 
 For Exa Search MCP:
@@ -75,15 +75,15 @@ If Google Calendar is missing:
 - Mark scheduling automation disabled.
 - Do not claim availability was checked or events were created.
 
-## Setup Not Approved
+## Plan Not Approved
 
-If the user asks for autonomous GTM but the setup packet is not approved:
+If the user asks for autonomous GTM but the GTM plan is not approved:
 
 - Route to `campaign-setup`.
 - Show representative copy and send criteria.
-- Do not send until setup approval covers sender, CTA, ICPs, claims, ramp, stop conditions, and connector gaps.
+- Do not send until plan approval covers sender, CTA, ICPs, claims, ramp, stop conditions, and connector gaps.
 
-After setup approval, per-batch approval is not required unless the approved policy says draft-first.
+After plan approval, per-batch approval is not required unless the approved policy says draft-first.
 
 ## Low Signal Quality
 

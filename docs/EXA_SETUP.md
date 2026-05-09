@@ -169,7 +169,7 @@ If only Exa Search shows up, the Websets header is still set to the placeholder 
 
 ## 8. (Optional) Attach an Exa Monitor
 
-Monitors keep a Webset fresh. They are not exposed as MCP tools yet. Prefer agent-led REST/API creation after setup approval; use the dashboard only as a manual fallback.
+Monitors keep a Webset fresh. They are not exposed as MCP tools yet. Prefer agent-led REST/API creation after plan approval; use the dashboard only as a manual fallback.
 
 ### REST API
 
@@ -212,20 +212,20 @@ Webhook secrets are shown once on creation. Save them immediately for signature 
 
 Exa handles research and sourcing. Outreach and booking context need separate connectors authorized in your host:
 
-- Gmail: authorize the Gmail connector in your host MCP/connector settings. GTM Agent uses it for sender voice learning, drafting, sending after setup approval, replies, and followups.
+- Gmail: authorize the Gmail connector in your host MCP/connector settings. GTM Agent uses it for sender voice learning, drafting, sending after plan approval, replies, and followups.
 - Google Calendar: authorize the calendar connector for booking context after qualified replies.
 
 Both are account-scoped; the plugin cannot ship them ready-to-run.
 
-## 10. Run campaign setup
+## 10. Build the first GTM plan
 
 ```text
 /gtm-agent:campaign-setup
 
-Set up GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, define daily/weekly automation routines, build the setup packet, and ask for setup approval before sending.
+Start GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, define daily/weekly automation routines, build the GTM plan, and ask for plan approval before sending.
 ```
 
-The skill returns a setup packet — review it, approve it, and the orchestrator can start sourcing and drafting on real Exa data. No sends happen before setup approval.
+The skill returns a GTM plan — review it, approve it, and the orchestrator can start sourcing and drafting on real Exa data. No sends happen before plan approval.
 
 ## Troubleshooting
 

@@ -1,8 +1,30 @@
 # Memory Store First GTM Campaign
 
-Status: proposed setup packet, not approved for sourcing or sending
+Status: GTM plan ready for launch review; production sourcing/sending blocked until connector gates and send policy are approved
 Created: 2026-05-09
 Memory Store thread: T-496W7H
+
+## Plan Decision Groups
+
+inferred:
+
+- Primary offer is Memory Store core, not GTM Agent, because this campaign is for Memory Store.
+- Start from Memory Store's actual usage patterns before public-market extrapolation.
+- First ICP cells should test GTM context, customer-delivery memory, coding-agent continuity, passive workspace memory, and owned reactivation.
+- Memory Store MCP is usable in this session. Gmail search/read is usable enough for bounded voice and suppression research after approval.
+
+needs_confirmation:
+
+- Sender identity: Shubham, Ishita, or a shared founder identity.
+- CTA: reply-first, "talk to founders", or a specific booking/demo link.
+- Private proof policy: default is internal strategy only unless explicitly approved for outbound copy.
+- Top ICP cells for the first 5-10 account shadow sample.
+- Whether LinkedIn stays profile-only or becomes a second approved touch channel.
+
+unknown_blocker:
+
+- Websets and advanced Exa are configured locally but not visible in this already-running Codex session. Production sourcing waits on Codex reload/restart exposing those tools.
+- No confirmed demo/founder-call URL. Do not put a link in outbound copy yet.
 
 ## Campaign Hypothesis
 
@@ -21,11 +43,21 @@ Conversion action: reply-first or founder-call CTA. Do not use a calendar/demo l
 Proof path:
 
 - Website: Memory Store positions itself as "One memory for your team's agents" and says it turns meetings, Claude sessions, and Slack chats into shared context.
-- Setup proof: hosted MCP at `https://memory.store/mcp`, with guides for Claude, ChatGPT, Cursor, Raycast, Manus, and other MCP clients.
+- Product proof: hosted MCP at `https://memory.store/mcp`, with guides for Claude, ChatGPT, Cursor, Raycast, Manus, and other MCP clients.
 - Public credibility: YC company profile says Memory Store is shared context for all of a team's agents.
 - Private strategy proof: Memory Store recall shows usage patterns across GTM/account context, onboarding/wiki context, coding-agent continuity, passive workspace memory, and owned reactivation.
 
 Do not lead with: RAG, knowledge base, CRM, AI sales tool, generic "better memory", generic devtools, or model benchmark claims.
+
+## Connector Status
+
+- Memory Store: production-ready for campaign context and learning records after approval.
+- Exa Search: configured with basic and advanced tool URL; current session needs Codex reload before advanced search is visible.
+- Websets: configured with Exa API-key auth; current session needs Codex reload before Websets tools are visible.
+- Exa Monitors: proposed after Websets IDs exist.
+- Gmail: search/read ready; draft/send/reply-scan actions blocked until explicit approval.
+- Google Calendar: booking context only after qualified replies unless separately approved.
+- Host automations: manual until routine specs are approved and scheduled.
 
 ## Sender
 
@@ -90,7 +122,7 @@ High-intent signals:
 - public usage of Clay, Apollo, Smartlead, Instantly, Notion/CRM/account-brief workflows.
 - founder posts about outbound quality, ICP refinement, or AI sales agents.
 
-Proof path: show GTM campaign setup packet, signal-card quality gate, and how approved replies/objections get recorded into Memory Store for the next batch.
+Proof path: show the GTM plan, signal-card quality gate, and how approved replies/objections get recorded into Memory Store for the next batch.
 
 First batch: 20 accounts after Websets is visible; no sends until shadow sample passes.
 
@@ -168,7 +200,7 @@ No attachments or screenshots in first touch. Screenshots can be collected as in
 
 ## Send Ramp
 
-Default proposed ramp after setup approval and shadow sample:
+Default proposed ramp after plan approval and shadow sample:
 
 - Day 1: max 10 sends.
 - Days 2-3: max 20 sends/day.
@@ -187,7 +219,19 @@ Pause sends if:
 - row lacks company URL, person identity, profile URL, work email/email status, or live signal URL.
 - duplicate recent outreach, existing active thread, unsubscribe, negative reply, or bounce appears.
 
-## Next Setup Gates
+## Autopilot Routines
+
+Proposed routines after plan approval:
+
+1. Shadow sample builder: create 5-10 reviewed account/person signal cards before production sends.
+2. Daily sourcing digest: summarize new qualified accounts, rejected accounts, evidence gaps, and questions.
+3. Gmail reply scan: classify replies, bounces, unsubscribe, objections, referrals, and owner actions after launch.
+4. Weekly learning summary: summarize ICP, signal, copy, objection, proof-path, and suppression learning.
+5. High-intent monitor review: review monitor output for approved ICP cells after Websets IDs exist.
+
+No routine may send, label, archive, create monitors, mutate calendar events, or record campaign learnings unless that action is explicitly approved in the GTM plan.
+
+## Next Plan Gates
 
 1. Confirm active offer: Memory Store core vs GTM Agent as the initial offer.
 2. Confirm sender: Shubham, Ishita, or shared founder account.

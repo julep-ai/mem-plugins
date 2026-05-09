@@ -19,7 +19,7 @@ During setup and execution, identify durable operating memory:
 - `operating_rule` - what the agent must always or never do for this seller/campaign/plugin.
 - `preference` - user taste, workflow preference, channel preference, writing preference, approval preference.
 - `constraint` - excluded ICPs, taboo claims, connector limits, compliance boundaries, do-not-contact categories.
-- `approval_policy` - actions allowed after setup approval, actions requiring explicit approval, stop conditions.
+- `approval_policy` - actions allowed after plan approval, actions requiring explicit approval, stop conditions.
 - `connector_rule` - how Memory Store, Exa, Websets, Gmail, Calendar, monitors, or host automations should be used.
 - `persona_rule` - ICP/persona definitions, excluded personas, unconventional persona hypotheses, owner-of-pain framing.
 - `sourcing_rule` - signal quality gates, required identity fields, email/LinkedIn policy, enrichment expectations.
@@ -32,20 +32,20 @@ Use this shape in prose when recording:
 kind:
 scope: seller | campaign | plugin | channel | ICP | connector | skill
 status: proposed | approved | active | deprecated
-source: conversation | setup_packet | user_feedback | execution_result | campaign_outcome
+source: conversation | gtm_plan | user_feedback | execution_result | campaign_outcome
 rule_or_learning:
 evidence:
 future_behavior:
 ```
 
-Record when the user explicitly sets a rule, corrects the agent, approves a setup packet, changes policy, confirms a result, or says future runs should behave differently. Do not record every brainstorm, unapproved draft, transient idea, or speculative inference. If the rule is important but not yet approved, include `status: proposed` and ask for confirmation before using it for sends or external actions.
+Record when the user explicitly sets a rule, corrects the agent, approves a GTM plan, changes policy, confirms a result, or says future runs should behave differently. Do not record every brainstorm, unapproved draft, transient idea, or speculative inference. If the rule is important but not yet approved, include `status: proposed` and ask for confirmation before using it for sends or external actions.
 
 ## When To Record
 
 Record confirmed events:
 
 - Campaign or ICP plan approved.
-- First-run setup packet approved or changed.
+- First-run GTM plan approved or changed.
 - Campaign mode or context-source base approved or changed.
 - Uploaded/pasted docs approved as campaign source context.
 - ICP cell added, removed, or reframed.
@@ -60,7 +60,7 @@ Record confirmed events:
 - Approved claim, customer name, metric, or taboo topic update.
 - Automation routine approved, paused, changed, or retired.
 - Conversation rule, preference, constraint, or approval policy stated by the user.
-- First-run setup correction that should change future setup behavior.
+- First-run plan correction that should change future planning behavior.
 - Connector expectation such as agent-led monitoring, Exa/Websets depth, Gmail limits, or dashboard/manual fallback policy.
 - Skill-improvement candidate discovered during execution or user feedback.
 
@@ -90,15 +90,15 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 
 > Source context and constraints: `<doc names, memory IDs, URLs, Gmail scope, calendar policy, exclusions, open decisions>`.
 
-### Setup packet approved
+### GTM plan approved
 
 `content`:
 
-> The user approved GTM Agent setup for `<company>` today. Active offer: `<offer>`. Sender: `<sender>`. Demo CTA: `<confirmed link or fallback>`. Autopilot: `<full autopilot | draft-first>` with ramp `<limits>`. Approved ICP cells: `<list>`. Same-company rule: `<rule>`. Followups: `<cadence>`. Stop conditions: `<summary>`.
+> The user approved the GTM plan for `<company>` today. Active offer: `<offer>`. Sender: `<sender>`. Demo CTA: `<confirmed link or fallback>`. Autopilot: `<full autopilot | draft-first>` with ramp `<limits>`. Approved ICP cells: `<list>`. Same-company rule: `<rule>`. Followups: `<cadence>`. Stop conditions: `<summary>`.
 
 `background`:
 
-> Setup packet sources and gaps: website `<URL>`, Gmail scope `<scope>`, Google Calendar policy `<policy>`, exclusions `<summary>`, connector gaps `<summary>`.
+> GTM plan sources and gaps: website `<URL>`, Gmail scope `<scope>`, Google Calendar policy `<policy>`, exclusions `<summary>`, connector gaps `<summary>`.
 
 ### Automation routine approved
 
@@ -118,7 +118,7 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 
 `background`:
 
-> Source: user conversation/setup packet/user feedback. Evidence: `<memory IDs, artifact path, source URL, Gmail thread, Webset ID, or direct user correction summary>`.
+> Source: user conversation/GTM plan/user feedback. Evidence: `<memory IDs, artifact path, source URL, Gmail thread, Webset ID, or direct user correction summary>`.
 
 ### Skill improvement candidate
 

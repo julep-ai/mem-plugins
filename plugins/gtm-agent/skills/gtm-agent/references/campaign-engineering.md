@@ -157,7 +157,7 @@ Keep it compact. The point is not a document; the point is to make the GTM machi
 
 Record only approved or confirmed learnings:
 
-- campaign mode and approved setup packet.
+- campaign mode and approved GTM plan.
 - uploaded/pasted docs that the user approves as source context.
 - ICP cells kept, killed, or changed.
 - signal types accepted or rejected.

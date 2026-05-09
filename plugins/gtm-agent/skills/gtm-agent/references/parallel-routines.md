@@ -34,7 +34,7 @@ Use this dependency order:
 
 ```text
 checkin
-  -> setup packet / approved policy
+  -> GTM plan / approved policy
   -> campaign planner
   -> parallel ICP and signal research
   -> parallel Websets / Exa lead batches
@@ -49,7 +49,7 @@ checkin
   -> scheduled routines
 ```
 
-Only send/follow up after setup approval. Research, sourcing, enrichment, evidence cards, draft generation, and monitor specs can run before send approval only when the needed connector gates pass. Draft generation requires authenticated Exa/Websets evidence rows, planner gates, private-context policy, and connector scope; Gmail absence may produce import-ready drafts only when Gmail is the only execution gap.
+Only send/follow up after plan approval. Research, sourcing, enrichment, evidence cards, draft generation, and monitor specs can run before send approval only when the needed connector gates pass. Draft generation requires authenticated Exa/Websets evidence rows, planner gates, private-context policy, and connector scope; Gmail absence may produce import-ready drafts only when Gmail is the only execution gap.
 
 ## Workstream Matrix
 
@@ -214,7 +214,7 @@ Promote repeated work into routines:
 
 For Exa Monitors, create or propose monitors only after the user approves query, cadence, output schema, and destination. Use manual-only monitors first when uncertain.
 
-For full autopilot, create routines only after the setup packet is approved. Autopilot routines may keep researching while paused, but they must not send if a stop condition is active. Every scheduled routine should carry the exact routine spec from [automation-routines.md](automation-routines.md).
+For full autopilot, create routines only after the GTM plan is approved. Autopilot routines may keep researching while paused, but they must not send if a stop condition is active. Every scheduled routine should carry the exact routine spec from [automation-routines.md](automation-routines.md).
 
 ## Self-Evolving Loop
 

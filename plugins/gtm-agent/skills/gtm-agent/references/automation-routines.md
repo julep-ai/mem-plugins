@@ -1,6 +1,6 @@
 # Automation Routines
 
-Use this reference when turning an approved GTM setup packet into daily, weekly, or event-driven host automations.
+Use this reference when turning an approved GTM plan into daily, weekly, or event-driven host automations.
 
 ## Autopilot Definition
 
@@ -37,7 +37,7 @@ Field rules:
 - `goal` - one measurable outcome, not a bundle of vague tasks.
 - `cadence` - daily, weekly, every N hours, or manual until the host supports scheduling.
 - `trigger` - time-based, monitor event, Gmail reply, Websets idle, or user request.
-- `memory_context` - Memory Store thread ID, campaign name, ICP cell, or approved setup packet reference.
+- `memory_context` - Memory Store thread ID, campaign name, ICP cell, or approved GTM plan reference.
 - `required_tools` - Memory Store, Exa, Websets, Gmail, Google Calendar, or host automation support.
 - `inputs` - Webset IDs, monitor IDs, Gmail labels/searches, ICP cells, campaign rows, or suppression lists.
 - `allowed_actions` - actions the routine may take without more approval.
@@ -50,7 +50,7 @@ Field rules:
 
 ## Core Routines
 
-Start with these routines after setup approval:
+Start with these routines after plan approval:
 
 - **Daily Websets refresh review** - inspect approved Websets, summarize new candidates, score against ICP cells, and keep weak rows out of send-ready state.
 - **Daily high-intent monitor review** - inspect approved monitor results, dedupe against existing accounts, identify high-intent signals, and propose new signal cards.
@@ -93,7 +93,7 @@ host: Codex
 goal: classify new campaign replies and stop or advance followups
 cadence: daily at 09:00 local time
 trigger: scheduled
-memory_context: approved setup packet and active campaign thread
+memory_context: approved GTM plan and active campaign thread
 required_tools: Memory Store, Gmail
 inputs: campaign Gmail label, sent thread IDs, suppression list
 allowed_actions: inspect campaign threads, classify replies, draft owner summary, record confirmed outcomes

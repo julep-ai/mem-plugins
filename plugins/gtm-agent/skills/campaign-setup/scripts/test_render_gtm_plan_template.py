@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for the GTM Agent setup packet template script."""
+"""Tests for the GTM Agent GTM plan template script."""
 
 import subprocess
 import sys
@@ -7,11 +7,11 @@ import unittest
 from pathlib import Path
 
 
-SCRIPT = Path(__file__).with_name("render_setup_packet_template.py")
+SCRIPT = Path(__file__).with_name("render_gtm_plan_template.py")
 
 
-class RenderSetupPacketTemplateTest(unittest.TestCase):
-    def test_outputs_required_setup_packet_keys(self) -> None:
+class RenderGtmPlanTemplateTest(unittest.TestCase):
+    def test_outputs_required_gtm_plan_keys(self) -> None:
         result = subprocess.run(
             [sys.executable, str(SCRIPT)],
             check=True,

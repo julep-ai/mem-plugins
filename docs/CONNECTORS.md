@@ -84,7 +84,7 @@ claude mcp add --transport http exa https://mcp.exa.ai/mcp
 codex mcp add exa --url https://mcp.exa.ai/mcp
 ```
 
-Use free-plan Exa only to inspect public pages and prepare the setup packet. If the user asks to run a campaign, create ICP depth, build lead lists, generate account evidence cards, or draft outbound, stop and ask them to configure the Exa API key first.
+Use free-plan Exa only to inspect public pages and prepare the GTM plan. If the user asks to run a campaign, create ICP depth, build lead lists, generate account evidence cards, or draft outbound, stop and ask them to configure the Exa API key first.
 
 ## Websets MCP
 
@@ -140,7 +140,7 @@ Each automation should have one precise goal, one cadence, one Memory Store thre
 
 The Codex plugin declares the Gmail app connector through `plugins/gtm-agent/.app.json`. The user still has to authorize Gmail in the host because Gmail access is account-scoped.
 
-Campaign Setup uses the existing Gmail inbox and sent mail for sender voice, prior touches, warm paths, objections, demo language, suppressions, and reply learning. Gmail is part of the onboarding evidence, not only the sending channel. After setup approval, GTM Agent can send and follow up through Gmail inside the approved ramp and stop conditions.
+The first-plan flow uses the existing Gmail inbox and sent mail for sender voice, prior touches, warm paths, objections, demo language, suppressions, and reply learning. Gmail is part of the onboarding evidence, not only the sending channel. After plan approval, GTM Agent can send and follow up through Gmail inside the approved ramp and stop conditions.
 
 Claude Code does not get Gmail merely because GTM Agent is installed. If Gmail is unavailable, GTM Agent should produce reviewed drafts, followup timing, and import-ready output instead of claiming it sent or threaded emails.
 

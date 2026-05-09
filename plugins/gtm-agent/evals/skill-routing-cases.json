@@ -9,7 +9,7 @@
     },
     {
       "id": "campaign-setup-missing-policy",
-      "query": "Before we send anything, build the setup packet and tell me what Exa, Websets, Gmail, Calendar, and monitors are allowed to do.",
+      "query": "Before we send anything, build the GTM plan and tell me what Exa, Websets, Gmail, Calendar, and monitors are allowed to do.",
       "expected_skill": "campaign-setup"
     },
     {
@@ -136,12 +136,12 @@
       ]
     },
     {
-      "id": "campaign-setup-first-run-packet",
+      "id": "campaign-setup-first-run-plan",
       "skill": "campaign-setup",
-      "query": "Create the first-run setup packet and proposed autopilot routines.",
+      "query": "Create the first-run GTM plan and proposed autopilot routines.",
       "required_references": [
         "references/onboarding-questions.md",
-        "references/setup-packet.md",
+        "references/gtm-plan.md",
         "references/first-run-autopilot.md",
         "../gtm-agent/references/campaign-engineering.md",
         "../gtm-agent/references/campaign-planner.md",
