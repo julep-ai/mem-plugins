@@ -1,0 +1,106 @@
+{
+  "status": "proposed_not_created",
+  "blocker": "Websets MCP is configured in Codex with Exa API-key auth, but tools are not visible in this already-running session. Restart/reload Codex before creating Websets.",
+  "required_before_creation": [
+    "approve setup packet",
+    "restart/reload Codex and verify Websets tools are visible",
+    "run shadow sample before production sends"
+  ],
+  "proposed_websets": [
+    {
+      "slug": "gtm-context-operators",
+      "entity": "company",
+      "count": 60,
+      "accepted_target": 20,
+      "query": "Founder-led B2B teams, AI GTM teams, GTM engineering teams, and outbound agencies using signal-based outbound, Clay, Apollo, Smartlead, AI SDRs, or account brief workflows where ICP theory and reply learning must persist across batches.",
+      "criteria": [
+        "B2B company or agency",
+        "visible GTM/outbound/sales engineering motion",
+        "recent signal from hiring, launch, post, or public workflow",
+        "buyer persona can be identified"
+      ],
+      "enrichments": [
+        "buyer_persona",
+        "person_name",
+        "title",
+        "work_email_or_status",
+        "linkedin_profile_url",
+        "high_intent_signal",
+        "source_url",
+        "customer_story_pattern",
+        "offer_angle",
+        "proof_path",
+        "next_action",
+        "learning_intent",
+        "exclusion_risk"
+      ]
+    },
+    {
+      "slug": "customer-delivery-memory-teams",
+      "entity": "company",
+      "count": 45,
+      "accepted_target": 15,
+      "query": "Customer-success, FDE, onboarding, solutions, implementation, and customer ops teams at knowledge-heavy B2B companies where customer context lives across calls, Slack, docs, tickets, and email.",
+      "criteria": [
+        "customer-delivery workflow visible",
+        "team sells or implements a non-trivial product/service",
+        "recent hiring, case study, docs, implementation, or customer proof signal",
+        "CS/FDE/onboarding buyer can be identified"
+      ],
+      "enrichments": [
+        "customer_delivery_signal",
+        "buyer_persona",
+        "proof_path",
+        "source_url",
+        "contact_identity",
+        "email_status",
+        "exclusion_risk"
+      ]
+    },
+    {
+      "slug": "coding-agent-continuity-teams",
+      "entity": "company",
+      "count": 60,
+      "accepted_target": 20,
+      "query": "Engineering-heavy startups, devtools companies, MCP/plugin builders, coding-agent products, and AI platform teams using Claude Code, Codex, Cursor, agents, or MCP where project context and decisions must persist across sessions.",
+      "criteria": [
+        "public agent/devtools/MCP/coding workflow signal",
+        "active engineering product",
+        "technical buyer can be identified",
+        "live source URL exists"
+      ],
+      "enrichments": [
+        "agent_workflow_signal",
+        "github_or_docs_url",
+        "buyer_persona",
+        "person_name",
+        "title",
+        "work_email_or_status",
+        "linkedin_profile_url",
+        "offer_angle",
+        "learning_intent"
+      ]
+    },
+    {
+      "slug": "passive-workspace-memory",
+      "entity": "company",
+      "count": 30,
+      "accepted_target": 10,
+      "query": "Remote or meeting-heavy product, support, community, CS, or founder-led teams using Slack, Fathom, Fireflies, Granola, Linear, or Notion where team and agent context is fragmented across meetings and messages.",
+      "criteria": [
+        "meeting-heavy or remote-work signal",
+        "customer/product/support workflow visible",
+        "public tool/workflow signal",
+        "operator buyer can be identified"
+      ],
+      "enrichments": [
+        "workspace_memory_signal",
+        "buyer_persona",
+        "source_url",
+        "proof_path",
+        "next_action",
+        "exclusion_risk"
+      ]
+    }
+  ]
+}
