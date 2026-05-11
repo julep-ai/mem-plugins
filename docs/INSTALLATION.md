@@ -134,12 +134,15 @@ Required Memory Store operations:
 
 - `checkin`
 - `recall`
+- `list-briefs`
 - `record`
 - `report-issue`
 
 `gtm-agent` requires the core `memory-store` plugin to be installed and authenticated. GTM Agent intentionally does not redeclare Memory Store MCP in its own `.mcp.json`, because doing so can create a second Memory Store auth prompt in hosts that scope MCP auth per plugin.
 
-GTM Agent uses Memory Store as a proactive intelligence layer with long-term memory for agents, not just recall. During planning and execution it should distill approved rules, user corrections, approval policies, connector expectations, persona decisions, sourcing gates, outcomes, and skill-improvement candidates into Memory Store records so future runs inherit them, surface relevant context, and continue approved routines.
+GTM Agent uses Memory Store as a proactive intelligence layer with long-term memory for agents, not just recall. During planning and execution it should select sparse canonical briefs, recall supporting evidence, and distill approved rules, user corrections, approval policies, connector expectations, persona decisions, sourcing gates, outcomes, sparse brief deltas, and skill-improvement candidates into Memory Store records so future runs inherit them, surface relevant context, and continue approved routines.
+
+If the host exposes low-level brief-editing tools, GTM Agent should use them only after the sparse-brief gate passes: read selected briefs with `get_brief`, attach pending deltas with `suggest_brief_change`, teach explicit corrections with `teach_brief`, and save canonical brief or section edits only after approval. Most campaign execution events should still become records, not brief edits.
 
 `gtm-agent` can additionally use:
 
@@ -199,7 +202,7 @@ Start small and make every routine precise:
 3. Configure Exa Search and Websets with a real Exa API key.
 4. Authorize Gmail and Google Calendar if the host supports them.
 5. Run `/gtm-agent:campaign-setup` to produce the first GTM plan.
-6. Approve the GTM plan: campaign mode, context sources, funnel system, offer, sender, CTA, ICP cells, claims, send ramp, followups, suppressions, stop conditions, routine specs, memory distillation items, and background-worker graph.
+6. Approve the GTM plan: campaign mode, context sources, canonical briefs used, funnel system, offer, sender, CTA, ICP cells, claims, send ramp, followups, suppressions, stop conditions, routine specs, memory distillation items, sparse brief deltas, and background-worker graph.
 7. Run a small pilot, usually day 1 max 10 sends.
 8. Turn approved recurring work into automations: daily Websets/monitor review, Gmail reply scan, followup check, daily digest, and weekly Memory Store learning summary.
 
@@ -208,6 +211,7 @@ Each automation needs one goal, one cadence, one Memory Store thread/context, re
 After Memory Store is installed, these skills are available:
 
 ```text
+/memory-store:memory-store-basics
 /memory-store:linkedin-studio
 /memory-store:marketplace-operator
 ```

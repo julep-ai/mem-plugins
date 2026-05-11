@@ -33,7 +33,9 @@ This repo represents one marketplace: Memory Store. `.agents/plugins/marketplace
 
 `gtm-agent` is a separate installable plugin that requires Memory Store MCP. It may also use Exa Search MCP, Websets MCP, Exa Monitors API, and Gmail connectors for sourcing, monitoring, outreach, and learning loops.
 
-Required Memory Store operations are `checkin`, `recall`, `record`, and `report-issue`. Tool names may be namespaced by the host.
+Required Memory Store operations are `checkin`, `recall`, `list-briefs`, `record`, and `report-issue`. Tool names may be namespaced by the host. If low-level brief tools are available, use them only for selected brief reads, pending brief deltas, explicit corrections, and approved canonical edits; they do not replace `record`.
+
+Use briefs sparingly: briefs are canonical maintained synthesis, not raw storage. For Memory Store-backed plugin work, prefer `checkin -> list/select relevant briefs -> recall supporting evidence -> act -> record confirmed learning -> propose brief deltas only when operating truth changes`.
 
 Do not claim the system learned from a draft unless feedback was recorded through Memory Store.
 

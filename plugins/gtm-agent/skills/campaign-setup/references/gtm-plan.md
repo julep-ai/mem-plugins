@@ -11,6 +11,7 @@ company_profile:
 campaign_mode:
 context_sources:
 connector_status:
+briefs_used:
 offer_profiles:
 customer_usage_map:
 sender_voice:
@@ -25,6 +26,7 @@ channel_policy:
 send_ramp_policy:
 autopilot_routines:
 memory_distillation:
+brief_delta:
 approval_needed_before_start:
 ```
 
@@ -36,6 +38,7 @@ Do not rename keys. If a value is unavailable, mark it as `unknown`, `missing_co
 - `campaign_mode`: `plan_new_campaign`, `start_new_campaign`, `monitor_campaign`, `campaign_insights`, `update_prior_campaign`, `new_campaign`, `build_on_previous`, `refresh_existing`, `expand_winner`, `rescue_underperformer`, `reactivation`, or `event_or_launch`; include evidence and policy implications.
 - `context_sources`: Memory Store, uploaded/pasted docs, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets, and what each source is allowed to influence.
 - `connector_status`: production/degraded mode for Memory Store, Exa Search, Websets, Exa Monitors, Gmail, Calendar, and host automations. Mark missing Exa as `research_blocked_for_production`, missing Websets as `sourcing_blocked_for_production`, missing Monitors as `monitoring_degraded`, missing Gmail as `sending_blocked_for_production`, and missing Calendar as `booking_context_disabled`. If Exa or Websets credentials are missing, the plan status is `plan_only` until the user configures the Exa API key. If Gmail is missing, sends, reply monitoring, followups, and mailbox learning are blocked.
+- `briefs_used`: 0-3 canonical Memory Store briefs selected for this plan, their status (`active`, `stale`, `conflicted`, or `none`), and what each brief is allowed to influence. If no relevant brief exists, say `none` and use recall.
 - `offer_profiles`: active offer, alternate sellable offers, core claim, do-not-pitch list, proof path, and conversion action.
 - `customer_usage_map`: the seller's existing customers/users when discoverable, plus the usage patterns that should shape ICPs. Include named customers/accounts when public or approved, customer categories, user segments, case studies, testimonials, reviews, active-user cohorts, churn/loss patterns, activation gaps, observed job-to-be-done, source URLs, and private Memory Store/Gmail/CRM evidence IDs where allowed. For Memory Store-owned campaigns, this means Memory Store's own customers/users. For another seller, this means that seller's customers/users. If no customers/users can be found, mark `unknown_or_not_public` and include the Exa/Websets customer-proxy searches used.
 - `sender_voice`: sender identity, tone, phrases to use, phrases to avoid, and whether it came from Memory Store, Gmail, website, or user input.
@@ -50,6 +53,7 @@ Do not rename keys. If a value is unavailable, mark it as `unknown`, `missing_co
 - `send_ramp_policy`: day 1 max 10 sends, days 2-3 max 20/day, then max 50/day until changed; pause conditions; same-company rule.
 - `autopilot_routines`: approved or proposed routine specs for Gmail reply scans, followup checks, daily campaign digest, weekly ICP/signal/copy learning summary, Websets refreshes, high-intent monitor reviews, host automation cadence, background-worker graph, allowed actions, forbidden actions, stop conditions, and expected output.
 - `memory_distillation`: what should be remembered for future runs: operating rules, user preferences, constraints, approval policies, connector expectations, persona/sourcing decisions, campaign-learning intent, and whether each item is `proposed`, `approved`, `active`, or `deprecated`.
+- `brief_delta`: sparse canonical brief updates proposed by the plan. Use only for reusable operating truth, such as GTM policy, ICP/persona map, proof/claims, campaign learning summary, or important account/customer context. Use `none` when records are enough.
 - `approval_needed_before_start`: demo link confirmation, sender identity, send ramp, ICP cells, claims, exclusions, Exa/Websets credential setup, connector gaps, and any unresolved high-risk ambiguity.
 
 ## Plan Decision Groups
@@ -64,4 +68,4 @@ Keep this grouping compact. The plan fields remain the canonical output.
 
 ## Approval Rule
 
-The GTM plan can be used for planning before approval, but not for autonomous sending or scheduled host automations. After the user approves or edits it, record the confirmed decisions and `memory_distillation` items to Memory Store and treat the plan as the active campaign operating policy.
+The GTM plan can be used for planning before approval, but not for autonomous sending or scheduled host automations. After the user approves or edits it, record the confirmed decisions and `memory_distillation` items to Memory Store and treat the plan as the active campaign operating policy. Apply `brief_delta` only after approval and only when the delta changes future agent behavior; otherwise keep the learning as a record.

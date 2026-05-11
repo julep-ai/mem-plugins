@@ -9,7 +9,7 @@ Find likely buyers or public experts for already-qualified accounts. Production 
 
 ## Loop
 
-1. Start with Memory Store `checkin` and recall buyer personas, known contacts, suppressions, relationship context, and account history.
+1. Start with Memory Store `checkin`; use selected canonical brief context if provided by the main GTM agent, otherwise call `list-briefs` and select 0-3 relevant briefs; then recall buyer personas, known contacts, suppressions, relationship context, and account history.
 2. Search people after account fit is clear unless the user asks for expert discovery.
 3. Verify Exa Search is authenticated before production people discovery. If missing, return setup steps and query specs only.
 4. Prefer active Exa Search tools: `web_search_advanced_exa` with `category: "people"`, plus `web_search_exa` and `web_fetch_exa` for verification.
@@ -24,4 +24,4 @@ Return: people read, buyer rows, email/LinkedIn identity map, unavailable-email 
 
 ## Rules
 
-Do not invent emails or infer private emails from weak evidence. If work email is unavailable, mark it unavailable and keep the row out of send-ready state unless another approved channel exists. Do not send Gmail from this skill. Do not put private Memory Store context directly in copy. Do not recommend dual-channel outreach unless the same-person identity match is moderate or high confidence.
+Do not invent emails or infer private emails from weak evidence. If work email is unavailable, mark it unavailable and keep the row out of send-ready state unless another approved channel exists. Do not send Gmail from this skill. Do not put private Memory Store context directly in copy. Do not recommend dual-channel outreach unless the same-person identity match is moderate or high confidence. Do not create briefs for people rows, profile findings, or one-off contact decisions; return evidence and any brief-impact candidate to the main GTM agent.

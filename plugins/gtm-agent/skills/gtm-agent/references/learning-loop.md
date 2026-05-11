@@ -2,7 +2,7 @@
 
 Use this reference when recording GTM outcomes, setup rules, user corrections, approval policies, and self-improvement candidates back to Memory Store.
 
-Memory Store `record` is a natural-language quick jot, not a typed event API. Write specific prose that future agents can recall.
+Memory Store `record` is a natural-language quick jot, not a typed event API. Write specific prose that future agents can recall. Briefs are sparse maintained synthesis; update or propose a brief delta only when the learning changes reusable operating truth.
 
 Always pass the active `thread_id` from `checkin`.
 
@@ -12,6 +12,12 @@ GTM Agent is a long-term-memory agent and proactive intelligence layer, not a st
 
 ```text
 checkin -> recall durable rules -> surface relevant context -> execute under those rules -> observe user feedback/outcomes -> distill operational memory -> record -> improve later runs
+```
+
+When briefs are available, use this expanded loop:
+
+```text
+checkin -> list/select briefs -> recall evidence -> execute -> observe -> record confirmed learning -> propose/update sparse brief delta only if operating truth changed
 ```
 
 During setup and execution, identify durable operating memory:
@@ -24,6 +30,7 @@ During setup and execution, identify durable operating memory:
 - `persona_rule` - ICP/persona definitions, excluded personas, unconventional persona hypotheses, owner-of-pain framing.
 - `sourcing_rule` - signal quality gates, required identity fields, email/LinkedIn policy, enrichment expectations.
 - `campaign_learning` - what changed after replies, bounces, objections, meetings, weak rows, or strong rows.
+- `brief_delta` - a proposed change to a canonical brief because the confirmed learning changes future behavior.
 - `skill_improvement_candidate` - repeated failure, missing eval, confusing instruction, bad default, or workflow gap.
 
 Use this shape in prose when recording:
@@ -39,6 +46,52 @@ future_behavior:
 ```
 
 Record when the user explicitly sets a rule, corrects the agent, approves a GTM plan, changes policy, confirms a result, or says future runs should behave differently. Do not record every brainstorm, unapproved draft, transient idea, or speculative inference. If the rule is important but not yet approved, include `status: proposed` and ask for confirmation before using it for sends or external actions.
+
+## Brief Update Policy
+
+Most confirmed learnings should become records only. Create or update a brief only when the learning is reusable, approved or evidence-backed, and changes how future agents should operate.
+
+Use records for:
+
+- single replies, objections, bounces, suppressions, or meetings.
+- per-account research and row status.
+- draft edits and copy variants.
+- one-off user comments.
+- raw Websets, Exa, Gmail, or monitor events.
+
+Use a brief delta for:
+
+- approved GTM operating policy.
+- ICP/persona definitions and exclusions.
+- approved public claims, proof paths, and private-claim boundaries.
+- repeated campaign learning that changes future sourcing/copy/routines.
+- important customer/account context that future agents will revisit.
+
+When proposing a brief delta, include:
+
+```text
+target_brief:
+section:
+change:
+evidence:
+status: proposed | approved
+supersedes:
+needs_user_approval:
+```
+
+Do not create overlapping briefs. Prefer updating the existing canonical brief when one exists.
+
+## Low-Level Brief Tools
+
+When the host exposes low-level Memory Store brief tools, keep the boundary strict:
+
+- Use `get_brief` only for the selected canonical briefs, not as a bulk context dump.
+- Use `suggest_brief_change` for a proposed `brief_delta` before the user approves it.
+- Use `teach_brief` when the user corrects a brief and that correction should both annotate the brief and become durable memory.
+- Use `save_brief` or `save_brief_section` only after the user approves the canonical update or directly asks to edit the brief.
+- Continue to call `record` for the confirmed learning itself. The brief is the maintained synthesis; the record is the evidence/event that future recall can retrieve.
+
+Before claiming a brief update landed, verify the tool result, receipt, or session status if the host provides one. If a brief tool fails, record the confirmed learning when appropriate, report the tool issue, and leave the `brief_delta` as pending.
 
 ## When To Record
 
@@ -129,6 +182,16 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 `background`:
 
 > Source and reproduction: `<prompt, campaign mode, connector state, artifact path, or user feedback summary>`.
+
+### Brief delta proposed
+
+`content`:
+
+> GTM Agent brief delta proposed for `<company/campaign/plugin>` today. Target brief: `<brief title or new canonical brief name>`. Section: `<section>`. Change: `<specific operating-truth change>`. Evidence: `<memory IDs, campaign artifact, source URL, Gmail thread, Webset/monitor result, or user approval>`. Status: `<proposed | approved>`. Future agents should `<behavior>`.
+
+`background`:
+
+> Brief policy: this is reusable operating truth, not a per-account note. Supersedes: `<older rule/brief/section if any>`. User approval needed: `<yes/no and why>`.
 
 ### ICP refined
 

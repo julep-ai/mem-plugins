@@ -19,6 +19,7 @@ goal:
 cadence:
 trigger:
 memory_context:
+brief_context:
 required_tools:
 inputs:
 allowed_actions:
@@ -27,6 +28,7 @@ send_policy:
 stop_conditions:
 output:
 record_to_memory_store:
+brief_delta_policy:
 owner_review_needed_when:
 ```
 
@@ -38,6 +40,7 @@ Field rules:
 - `cadence` - daily, weekly, every N hours, or manual until the host supports scheduling.
 - `trigger` - time-based, monitor event, Gmail reply, Websets idle, or user request.
 - `memory_context` - Memory Store thread ID, campaign name, ICP cell, or approved GTM plan reference.
+- `brief_context` - the 0-3 canonical briefs the routine should use as operating maps, such as GTM operating policy, ICP/persona map, proof/claims, campaign learning, or important account brief.
 - `required_tools` - Memory Store, Exa, Websets, Gmail, Google Calendar, or host automation support.
 - `inputs` - Webset IDs, monitor IDs, Gmail labels/searches, ICP cells, campaign rows, or suppression lists.
 - `allowed_actions` - actions the routine may take without more approval.
@@ -46,6 +49,7 @@ Field rules:
 - `stop_conditions` - bounce, unsubscribe, duplicate thread, stale evidence, connector ambiguity, or policy mismatch.
 - `output` - digest, draft queue, send summary, followup queue, monitor review, learning proposal, or escalation.
 - `record_to_memory_store` - what confirmed event or learning should be recorded.
+- `brief_delta_policy` - when the routine may propose a canonical brief update. Most routine outputs should be records only.
 - `owner_review_needed_when` - exact situations where the routine must pause and ask.
 
 ## Core Routines
@@ -57,7 +61,7 @@ Start with these routines after plan approval:
 - **Gmail reply scan** - classify campaign replies, stop followups when needed, summarize owner actions, and record confirmed outcomes.
 - **Followup check** - find sent threads eligible for the next followup, enforce stop conditions, and send or draft according to the approved policy.
 - **Daily campaign digest** - report sends, drafts, replies, meetings, bounces, suppressions, risks, and next actions.
-- **Weekly campaign insights** - update ICP, signal, copy, objection, channel, customer-story/persona, and suppression learnings from confirmed events.
+- **Weekly campaign insights** - update ICP, signal, copy, objection, channel, customer-story/persona, and suppression learnings from confirmed events; propose sparse brief deltas only when repeated evidence changes future behavior.
 - **Prior campaign update** - apply approved insights to a prior campaign's ICP cells, signal rules, copy hypotheses, channel policy, and suppressions.
 
 ## Host Mapping
@@ -94,6 +98,7 @@ goal: classify new campaign replies and stop or advance followups
 cadence: daily at 09:00 local time
 trigger: scheduled
 memory_context: approved GTM plan and active campaign thread
+brief_context: GTM operating policy and campaign learning brief, if present
 required_tools: Memory Store, Gmail
 inputs: campaign Gmail label, sent thread IDs, suppression list
 allowed_actions: inspect campaign threads, classify replies, draft owner summary, record confirmed outcomes
@@ -102,5 +107,6 @@ send_policy: no new first touches; followups only if already approved and no sto
 stop_conditions: unsubscribe, bounce, negative reply, duplicate active thread, ambiguous Gmail result
 output: reply classification table, owner actions, records written or proposed
 record_to_memory_store: confirmed replies, objections, bounces, suppressions, meetings
+brief_delta_policy: propose a campaign learning or suppression-policy brief delta only after repeated confirmed patterns, not for one reply
 owner_review_needed_when: high-value reply, ambiguous intent, connector error, or policy conflict
 ```

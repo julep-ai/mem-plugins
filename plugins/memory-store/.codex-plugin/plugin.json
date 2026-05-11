@@ -1,7 +1,7 @@
 {
   "name": "memory-store",
-  "version": "0.6.0",
-  "description": "Memory Store skill pack for agent-native company-memory workflows. Includes LinkedIn Studio and Marketplace Operator.",
+  "version": "0.6.1",
+  "description": "Memory Store skill pack for agent-native company-memory workflows. Includes Memory Store Basics, LinkedIn Studio, and Marketplace Operator.",
   "author": {
     "name": "Memory Store",
     "email": "support@memory.store",
@@ -19,14 +19,16 @@
     "customer-stories",
     "marketplace",
     "plugin-ops",
-    "upgrades"
+    "upgrades",
+    "briefs",
+    "living-docs"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Memory Store",
     "shortDescription": "Memory-native workflow hub",
-    "longDescription": "Use Memory Store MCP as the context layer for agent-native workflows built by Memory Store. Includes LinkedIn Studio for turning company memory into public posts, and Marketplace Operator for maintaining the Memory Store plugin marketplace, scouting new Memory Store-backed plugin opportunities, and auditing whether skills or plugins need upgrades.",
+    "longDescription": "Use Memory Store MCP as the context layer for agent-native workflows built by Memory Store. Includes Memory Store Basics for the checkin, recall, sparse briefs, record, and report-issue loop; LinkedIn Studio for turning company memory into public posts; and Marketplace Operator for maintaining the Memory Store plugin marketplace, scouting new Memory Store-backed plugin opportunities, and auditing whether skills or plugins need upgrades.",
     "developerName": "Memory Store",
     "category": "Productivity",
     "capabilities": [
@@ -37,9 +39,9 @@
     "privacyPolicyURL": "https://memory.store/privacy",
     "termsOfServiceURL": "https://memory.store/terms",
     "defaultPrompt": [
+      "Orient me with Memory Store basics: check in, select relevant briefs, recall evidence, and tell me what should be recorded.",
       "Act as our LinkedIn Studio. Find memory-backed post ideas and draft them in our voice.",
-      "Audit the Memory Store plugin marketplace and tell me what needs updating.",
-      "Record feedback on these drafts so Memory Store learns our brand voice, taste, and what performs."
+      "Audit the Memory Store plugin marketplace and tell me what needs updating."
     ],
     "brandColor": "#0F766E",
     "composerIcon": "./assets/memory-store-icon.png",

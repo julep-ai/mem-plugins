@@ -1,0 +1,94 @@
+{
+  "checks": [
+    {
+      "path": "plugins/gtm-agent/skills/gtm-agent/SKILL.md",
+      "snippets": [
+        "list/select 0-3 relevant canonical briefs",
+        "recall product, ICPs, claims",
+        "Do not let brief edits replace `record`",
+        "brief delta"
+      ]
+    },
+    {
+      "path": "plugins/gtm-agent/skills/campaign-setup/SKILL.md",
+      "snippets": [
+        "Start with Memory Store `checkin`, then `list-briefs`, then targeted recall",
+        "do not create a brief just to make context findable",
+        "Record only after the user approves or edits the plan"
+      ]
+    },
+    {
+      "path": "plugins/gtm-agent/skills/gtm-agent/references/campaign-engineering.md",
+      "snippets": [
+        "Memory Store `list-briefs`",
+        "Memory Store recall",
+        "Briefs are canonical operating maps",
+        "record it as memory and let recall retrieve it later"
+      ]
+    },
+    {
+      "path": "plugins/gtm-agent/skills/gtm-agent/references/learning-loop.md",
+      "snippets": [
+        "record confirmed learning",
+        "suggest_brief_change",
+        "save_brief_section",
+        "The brief is the maintained synthesis; the record is the evidence/event"
+      ]
+    },
+    {
+      "path": "plugins/gtm-agent/skills/gtm-agent/references/campaign-folder.md",
+      "snippets": [
+        "Sparse canonical briefs are the maintained operating maps",
+        "Do not record per-row state to Memory Store",
+        "Do not create a brief per account"
+      ]
+    },
+    {
+      "path": "plugins/gtm-agent/skills/campaign-setup/references/gtm-plan.md",
+      "snippets": [
+        "briefs_used:",
+        "brief_delta:",
+        "Apply `brief_delta` only after approval"
+      ]
+    },
+    {
+      "path": "plugins/gtm-agent/skills/exa-company-research/SKILL.md",
+      "snippets": [
+        "otherwise call `list-briefs` and select 0-3 relevant briefs"
+      ]
+    },
+    {
+      "path": "plugins/gtm-agent/skills/exa-lead-generation/SKILL.md",
+      "snippets": [
+        "otherwise call `list-briefs` and select 0-3 relevant briefs"
+      ]
+    },
+    {
+      "path": "plugins/gtm-agent/skills/exa-people-search/SKILL.md",
+      "snippets": [
+        "otherwise call `list-briefs` and select 0-3 relevant briefs"
+      ]
+    },
+    {
+      "path": "plugins/gtm-agent/skills/websets-sourcing/SKILL.md",
+      "snippets": [
+        "otherwise call `list-briefs` and select 0-3 relevant briefs"
+      ]
+    },
+    {
+      "path": "plugins/memory-store/skills/memory-store-basics/SKILL.md",
+      "snippets": [
+        "checkin -> list/select briefs -> recall evidence -> act -> record confirmed learning",
+        "suggest_brief_change",
+        "Do not claim Memory Store learned unless `record` ran"
+      ]
+    },
+    {
+      "path": "campaigns/memory-store-first-gtm/plan.md",
+      "snippets": [
+        "briefs_used:",
+        "brief_delta:"
+      ]
+    }
+  ]
+}

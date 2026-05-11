@@ -9,13 +9,13 @@ Research companies and markets for Memory Store-backed GTM decisions.
 
 ## Loop
 
-1. Start with Memory Store `checkin` and recall ICPs, exclusions, prior account history, approved claims, and campaign goal.
+1. Start with Memory Store `checkin`; use selected canonical brief context if provided by the main GTM agent, otherwise call `list-briefs` and select 0-3 relevant briefs; then recall ICPs, exclusions, prior account history, approved claims, and campaign goal.
 2. Classify the request: company deep dive, market scan, competitor map, target-account research, news/timing, or profile/team discovery.
 3. Prefer active Exa Search MCP tools at `https://mcp.exa.ai/mcp`: `web_search_advanced_exa`, `web_search_exa`, and `web_fetch_exa`.
 4. Use `web_search_advanced_exa` categories deliberately: `company` for company metadata, `people` for public profiles, and `article` or `news` for timing, launches, announcements, and pain-language sources.
 5. Run query variants in parallel when possible; return distilled rows, source URLs, confidence, and uncertainty notes.
 6. If outbound-bound, include planner fields: why this account/person, why now, persona, offer angle, proof path, next action, remember-after-touch, confidence, and exclusion risk.
-7. Record only confirmed research learnings to Memory Store.
+7. Return any brief-impact candidate to the main GTM agent; do not create or update briefs from this worker skill. Record only confirmed research learnings to Memory Store when this skill is the main agent for the task.
 
 Deprecated Exa tools such as `company_research_exa`, `linkedin_search_exa`, `crawling_exa`, and `deep_search_exa` are backward-compatible fallbacks only.
 
@@ -25,4 +25,4 @@ Return: research read, company/account rows, market notes, Memory Store impact, 
 
 ## Rules
 
-No invented funding, customers, headcount, metrics, buyer names, or source-less claims. A website, category fit, or founder title is not enough for draft-ready outreach.
+No invented funding, customers, headcount, metrics, buyer names, or source-less claims. A website, category fit, or founder title is not enough for draft-ready outreach. Do not create a brief for company research, single-account findings, or one-off source evidence; return source URLs and recall cues instead.

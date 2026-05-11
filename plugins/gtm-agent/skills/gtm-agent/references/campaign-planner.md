@@ -26,6 +26,22 @@ For each account or person, the planner must answer:
 
 If any field is missing, output a planner gap and the exact research query or Memory Store recall needed. Do not produce a polished email to hide weak evidence.
 
+## Briefs And Evidence
+
+Use canonical briefs to understand the current operating map, then use recall to verify evidence. Do not treat a brief as enough evidence for a prospect-specific claim.
+
+For each campaign plan or material update, state:
+
+```text
+briefs_used:
+brief_authority: active | stale | conflicted | none
+recall_queries_needed:
+evidence_ids_or_urls:
+brief_delta:
+```
+
+`brief_delta` is only for reusable operating truth: an ICP definition changed, a proof path became approved, a signal source became unreliable, a new objection pattern changed copy policy, or a campaign outcome changed future sourcing. Single-account research, one-off replies, and draft edits belong in records or campaign artifacts, not new briefs.
+
 ## Customer Usage Map And ICP Evidence
 
 The `customer_usage_map` is not a dump of Memory Store IDs. It is the map of real customers/users for the seller being configured, when discoverable. For Memory Store-owned campaigns, those are Memory Store's own customers/users. For another seller, they are that seller's customers/users. For account-level signal cards, also build a lightweight prospect customer map when useful: the target account's customers, customer categories, testimonials, case studies, reviews, or users found publicly.

@@ -2,7 +2,7 @@
 
 No Memory Store records have been written for this campaign yet.
 
-Reason: the GTM plan is still proposed. Per GTM Agent policy, record only after the user approves or edits the plan.
+Reason: the GTM plan is still proposed. Per GTM Agent policy, record only after the user approves or edits the plan or after confirmed execution outcomes exist.
 
 When approved, append entries in this format:
 

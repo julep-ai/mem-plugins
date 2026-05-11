@@ -9,6 +9,7 @@ company_profile:
 campaign_mode:
 context_sources:
 connector_status:
+briefs_used:
 offer_profiles:
 customer_usage_map:
 sender_voice:
@@ -23,6 +24,7 @@ channel_policy:
 send_ramp_policy:
 autopilot_routines:
 memory_distillation:
+brief_delta:
 approval_needed_before_start:
 """
 

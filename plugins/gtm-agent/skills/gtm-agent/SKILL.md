@@ -13,7 +13,7 @@ This skill engineers the GTM **system** first — funnel stage, ICP shape, signa
 
 GTM Agent is Memory Store-backed, Exa/Websets-powered, Gmail-executed, and monitor-driven. Treat connector gaps as **degraded modes**, not as a different product:
 
-- **Memory Store is required** for normal operation: context, approved claims, exclusions, campaign learnings, and cross-run memory.
+- **Memory Store is required** for normal operation: context, approved claims, exclusions, campaign learnings, sparse canonical briefs, and cross-run memory.
 - **Exa Search is required** for live public-market research, evidence discovery, source fetching, competitor intelligence, and signal discovery.
 - **Websets is required** for production-grade structured sourcing: verified account/person lists, enrichment, imports, dedupe, refresh, and export.
 - **Exa Monitors are required** for always-on GTM: recurring signal streams, competitor watches, new ICP entrants, and trigger refresh.
@@ -24,13 +24,15 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 
 ## Always
 
-- Start with Memory Store `checkin`, then recall product, ICPs, claims, objections, exclusions, prior campaigns, and approved GTM plan.
+- Start with Memory Store `checkin`, then list/select 0-3 relevant canonical briefs, then recall product, ICPs, claims, objections, exclusions, prior campaigns, and approved GTM plan.
+- Treat briefs as sparse operating maps and `recall` as the evidence engine. Do not create a brief for every lead, account, source, reply, draft, brainstorm, or transient campaign note.
+- If low-level Memory Store brief tools are available, use them deliberately: `get_brief` only for selected briefs, `suggest_brief_change` for proposed deltas, and `teach_brief`, `save_brief`, or `save_brief_section` only after approval or direct instruction. Do not let brief edits replace `record`.
 - For Memory Store-owned campaigns, mine existing Memory Store consumers before proposing ICPs: paid customers, power users, triers, internal dogfood users, passive-ingest workspaces, customer failures, and prior GTM plans. Each ICP cell must cite the remembered customer/user pattern that created it. Generic category pools are invalid until mapped to a real usage pattern.
 - If the GTM plan is missing, first-run, or autopilot policy is unclear, route to `campaign-setup`.
 - Before sourcing or copy, load `references/campaign-engineering.md` and `references/campaign-planner.md`.
 - Parallelize by default with `references/parallel-routines.md`; split ICP cells, signal families, Webset batches, people search, evidence cards, copy angles, Gmail batches, monitor specs, and learning synthesis into bounded workers.
 - Treat autopilot as plan-once execution: after approval, run precise async routines from `references/automation-routines.md` with goal, cadence, allowed actions, forbidden actions, stop conditions, output, and Memory Store record policy.
-- Treat Memory Store as proactive intelligence and long-term operating memory: distill user rules, corrections, plan decisions, approval policies, campaign outcomes, and skill-improvement candidates through `references/learning-loop.md`.
+- Treat Memory Store as proactive intelligence and long-term operating memory: distill user rules, corrections, plan decisions, approval policies, campaign outcomes, sparse brief deltas, and skill-improvement candidates through `references/learning-loop.md`.
 - Prefer active Exa tools: `web_search_advanced_exa`, `web_search_exa`, and `web_fetch_exa`. Use deprecated Exa tools only as host fallbacks.
 - Route focused work to sibling skills: `exa-company-research`, `exa-lead-generation`, `exa-people-search`, and `websets-sourcing`.
 - Load `references/failure-modes.md` when a request tries to skip plan approval, source from weak signals, bulk send, expose private context, or claim learning without Memory Store records.
@@ -41,7 +43,7 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 ## Loop
 
 0. **Plan first.** If no campaign folder exists or the user is starting fresh, enter the host's plan mode (Claude Code, Codex, Cowork) and co-write the proposed plan with the user — name, hypothesis, offer, ICPs (including at least one unconventional persona from `references/campaign-planner.md` Persona Discovery), scale, success criteria, exclusions, signal sources, send ramp, stop conditions. Before plan approval, do not create folders or record a campaign thread unless the user explicitly asks to save a draft. After the user approves or asks to persist it, ask where to save (default: `./<slug-from-name>`), create the campaign folder, write `plan.md` first, and record the campaign thread to Memory Store. See `references/campaign-folder.md`.
-1. Check in and recall context.
+1. Check in, list/select 0-3 relevant briefs, read selected briefs only when needed, and recall supporting context.
 2. Classify campaign mode and context sources: plan, start, monitor, insights, update, refresh, expand, rescue, reactivate, or event/launch.
 3. Map funnel, ICP, signal, proof, execution, and learning systems.
 4. Mine customer stories, current consumer patterns, prior outcomes, activation gaps, and failed/weak accounts for persona hypotheses, proof paths, useful objections, and segment language. For Memory Store itself, start from actual consumers/customers before public-market extrapolation.
@@ -51,11 +53,11 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 8. Draft only rows that pass the planner gate; write to `copy/<account>.md`.
 9. Apply plan approval, send ramp, followup cadence, channel policy, suppressions, and stop conditions; track in `sends.csv`.
 10. Create or propose routines for monitors, Websets refreshes, Gmail scans, followups, digests, and weekly learning. Persist `monitors.json` and `events.jsonl`.
-11. Distill durable rules and outcomes through `references/learning-loop.md`, then record only approved or confirmed learnings through Memory Store at the main-agent layer (workers do not record). Append each call to `learnings.md`.
+11. Distill durable rules, outcomes, and any sparse canonical brief deltas through `references/learning-loop.md`, then record only approved or confirmed learnings through Memory Store at the main-agent layer (workers do not record). Append each call to `learnings.md`.
 
 ## Output
 
-Return, in order: campaign read, plan status, campaign mode, campaign system, planner, ICP matrix, high-intent signal plan, work plan, signal cards, copy package, channel policy, autopilot policy, routine candidates, review queue, learning prompt.
+Return, in order: campaign read, briefs used, plan status, campaign mode, campaign system, planner, ICP matrix, high-intent signal plan, work plan, signal cards, copy package, channel policy, autopilot policy, routine candidates, review queue, learning prompt, brief delta.
 
 ## Minimum Inputs
 
@@ -71,6 +73,8 @@ Infer first, ask only blockers: company/product, campaign mode, context sources,
 - Exa, Websets, Gmail, and Monitors are first-class production layers. If Exa or Websets credentials are unavailable, continue only in planning mode, ask for the Exa API key setup, and say exactly what is blocked. If Gmail is unavailable, no send/followup/reply-learning action is production-ready.
 - Do not expose private Memory Store context in outbound copy unless approved.
 - Do not claim the system learned unless `record` wrote the confirmed learning.
+- Do not create or update a brief unless the learning is reusable, approved or evidence-backed, and changes how future agents should operate. Otherwise record it as memory and let recall retrieve it.
+- Do not claim a brief changed unless a brief-editing tool succeeded or the user approved a pending brief delta.
 
 ## Reference Loading Map
 
@@ -80,3 +84,4 @@ Infer first, ask only blockers: company/product, campaign mode, context sources,
 - Copy or sequences: `references/campaign-planner.md`, `references/copy-and-sequences.md`, and `references/failure-modes.md`.
 - Monitoring or recurring work: `references/automation-routines.md`, `references/monitors.md`, and `references/parallel-routines.md`.
 - Conversational rules, plan corrections, replies, outcomes, weekly insights, or skill-improvement candidates: `references/engagement-model.md`, `references/learning-loop.md`, and `references/failure-modes.md`.
+- Sparse canonical brief decisions: `references/campaign-engineering.md`, `references/campaign-folder.md`, and `references/learning-loop.md`.

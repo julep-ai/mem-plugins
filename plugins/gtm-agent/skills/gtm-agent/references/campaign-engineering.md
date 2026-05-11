@@ -33,25 +33,45 @@ Planning mode is encouraged. If the user is creating or materially changing a ca
 
 Ingest context in this order:
 
-1. Memory Store recall: product, ICPs, customers, objections, approved claims, prior campaigns, exclusions, user preferences.
-2. Uploaded or pasted docs: decks, notes, CSVs, account lists, positioning docs, sales scripts, call notes, prior campaign exports.
-3. Website and public proof: homepage, product, docs, pricing, customers, blog, changelog, demo/contact path.
-4. Gmail: prior touches, warm paths, sender voice, objections, replies, suppressions, active threads.
-5. Calendar: booking context after qualified replies, not the first CTA source.
-6. Exa/Websets/Monitors: public-market discovery, structured sourcing, enrichment, recurring signal streams.
+1. Memory Store `list-briefs`: select at most 1-3 relevant canonical briefs, such as GTM operating policy, ICP/persona map, proof/claims, campaign learning, customer/account brief, or current priorities.
+2. Memory Store recall: retrieve evidence behind those briefs plus product, ICPs, customers, objections, approved claims, prior campaigns, exclusions, user preferences, and current facts.
+3. Uploaded or pasted docs: decks, notes, CSVs, account lists, positioning docs, sales scripts, call notes, prior campaign exports.
+4. Website and public proof: homepage, product, docs, pricing, customers, blog, changelog, demo/contact path.
+5. Gmail: prior touches, warm paths, sender voice, objections, replies, suppressions, active threads.
+6. Calendar: booking context after qualified replies, not the first CTA source.
+7. Exa/Websets/Monitors: public-market discovery, structured sourcing, enrichment, recurring signal streams.
 
 For each source, track:
 
 ```text
 source:
 what_it_tells_us:
+briefs_used:
+recall_needed_for_detail:
 confidence:
 usable_in_copy:
 needs_confirmation:
 should_record_to_memory_store:
+should_update_brief:
 ```
 
 Do not claim uploaded/pasted context has been learned until it is recorded through Memory Store after approval.
+
+## Sparse Briefs
+
+Briefs are canonical operating maps, not a second campaign folder. Use them to orient the run, then use recall for supporting evidence.
+
+Create or update a brief only when the new information is reusable, approved or evidence-backed, and changes how future agents should operate. Otherwise, record it as memory and let recall retrieve it later.
+
+For GTM, strong brief candidates are:
+
+- **GTM operating brief** - campaign modes, approval gates, connector gates, send policy, routine policy.
+- **ICP/persona brief** - current ICP cells, source customer patterns, excluded personas, unconventional bets.
+- **Proof and claims brief** - approved public claims, private claims, proof paths, usable customer stories.
+- **Campaign learning brief** - winning signals, dead signals, objections, copy lessons, next experiments.
+- **Important account/customer brief** - only for accounts that matter beyond one row or one touch.
+
+Avoid briefs for individual lead rows, raw search results, one-off replies, draft variants, unapproved brainstorms, and temporary campaign notes.
 
 ## Funnel System
 
@@ -119,12 +139,14 @@ Before large sourcing or copy, output this compact campaign-system read:
 ```text
 campaign_mode:
 context_sources:
+brief_context:
 funnel_stage_map:
 ICP_system:
 signal_system:
 proof_system:
 execution_system:
 learning_system:
+brief_delta:
 open_decisions:
 ```
 
@@ -166,3 +188,5 @@ Record only approved or confirmed learnings:
 - replies, objections, meetings, suppressions, and performance.
 
 This is how the next run knows whether it is a new campaign, a continuation, an expansion, or a rescue.
+
+If a confirmed learning changes a canonical brief, return a compact `brief_delta` with target brief, changed section, evidence IDs, and whether the user must approve the update. Do not create a new brief when updating an existing canonical brief would preserve authority.

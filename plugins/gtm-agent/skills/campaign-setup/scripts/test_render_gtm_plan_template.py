@@ -27,6 +27,7 @@ class RenderGtmPlanTemplateTest(unittest.TestCase):
             "campaign_mode:",
             "context_sources:",
             "connector_status:",
+            "briefs_used:",
             "offer_profiles:",
             "customer_usage_map:",
             "sender_voice:",
@@ -41,6 +42,7 @@ class RenderGtmPlanTemplateTest(unittest.TestCase):
             "send_ramp_policy:",
             "autopilot_routines:",
             "memory_distillation:",
+            "brief_delta:",
             "approval_needed_before_start:",
         ]
 
