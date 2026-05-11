@@ -1,6 +1,6 @@
 # Campaign Folder
 
-Every GTM campaign lives in its own folder. The folder is the campaign's working state — plan, ICPs, accounts, signal cards, copy, sends, events, monitors, learnings. Memory Store is the durable cross-campaign brain. The folder is current-campaign execution.
+Every GTM campaign lives in its own folder. The folder is the campaign's working state — plan, ICPs, accounts, signal cards, copy, sends, events, monitors, learnings. Memory Store is the durable cross-campaign brain. Sparse canonical briefs are the maintained operating maps. The folder is current-campaign execution.
 
 ## Plan-First Flow
 
@@ -36,10 +36,10 @@ A campaign always starts with a plan, never with sourcing. Use the host's plan m
    plan.md written first as the frozen artifact of the planning conversation
 
 6. Memory Store record() with the new campaign thread_id, referencing
-   plan.md and the campaign slug
+   plan.md, the campaign slug, and any canonical briefs used
 ```
 
-The plan is the contract. Everything downstream reads it. If sourcing or copy drifts, compare back to the plan. To fork a campaign, copy the folder and edit `plan.md`.
+The plan is the local campaign contract. Everything downstream reads it. If sourcing or copy drifts, compare back to the plan and the selected canonical briefs. To fork a campaign, copy the folder and edit `plan.md`.
 
 ## Folder Layout
 
@@ -65,6 +65,8 @@ The plan is the contract. Everything downstream reads it. If sourcing or copy dr
                            # cron, query, behavior, last_run, next_run_at
   learnings.md             # dated log of Memory Store records: thread_id,
                            # mem_id, what changed, why
+  briefs.md                # optional: canonical briefs used, proposed deltas,
+                           # and links/IDs only; not copied brief contents
 ```
 
 ## Naming
@@ -124,21 +126,22 @@ A row without `personal_email`, `linkedin_profile_url`, or `company_url` is not 
 - `events.jsonl` — append-only. Never edited.
 - `monitors.json` — written when a monitor is created. Updated when cadence/query changes or it's deleted.
 - `learnings.md` — appended every time the main agent calls Memory Store `record`. Format: `## YYYY-MM-DD HH:MM mem_id=M-XXXXXX thread=T-XXXXXX` then a one-paragraph summary.
+- `briefs.md` — optional index of canonical briefs used by the campaign and proposed brief deltas. Do not copy full brief contents into the folder unless the user explicitly wants a portable export.
 
 ## Memory Store Boundary
 
-The folder is regenerable. Memory Store is durable. The split:
+The folder is regenerable. Memory Store is durable. Briefs are sparse synthesis. The split:
 
-| Lives in folder | Lives in Memory Store |
-|-----------------|-----------------------|
-| Per-account rows, scores, statuses | Approved ICP rules, persona learnings |
-| Specific draft copy | Winning copy angles, voice patterns |
-| Today's signals | Signal source quality over time |
-| Send queue, event log | Objection patterns, suppression policy |
-| Webset/monitor IDs (for round-trip) | Which Websets/monitors paid off |
-| GTM plan | Campaign outcomes vs. plan hypothesis |
+| Lives in folder | Lives as records in Memory Store | Lives in canonical briefs |
+|-----------------|----------------------------------|---------------------------|
+| Per-account rows, scores, statuses | Approved ICP changes, persona learnings | Current ICP/persona map |
+| Specific draft copy | Winning copy angles, voice patterns | Current copy/proof policy when stable |
+| Today's signals | Signal source quality over time | Trusted/blocked signal-source rules |
+| Send queue, event log | Objection patterns, suppressions, outcomes | Current suppression and objection policy |
+| Webset/monitor IDs (for round-trip) | Which Websets/monitors paid off | Connector/autopilot operating policy |
+| GTM plan | Campaign outcomes vs. plan hypothesis | GTM operating brief or campaign learning brief |
 
-If the folder is deleted, the campaign is gone but the learnings remain. If Memory Store loses a thread, the folder still has the working state to rebuild from. Both layers are durable in different ways.
+If the folder is deleted, the campaign working state is gone but the learnings remain. If Memory Store loses a thread, the folder still has enough execution state to rebuild. If a canonical brief becomes stale, recall the records and update the brief rather than creating a competing brief.
 
 ## Sharing
 
@@ -150,5 +153,6 @@ If the folder is deleted, the campaign is gone but the learnings remain. If Memo
 - Do not start copy before `plan.md` is approved and required connector gates are green.
 - Do not mark a row `send_ready` if it lacks `personal_email`, `linkedin_profile_url`, or a live `signal_source_url`.
 - Do not record per-row state to Memory Store. Record durable learnings only.
+- Do not create a brief per account, source, reply, copy variant, or ICP experiment. Use records and campaign files for those.
 - Do not edit `events.jsonl` retroactively. Append corrections as new events.
 - Do not delete a campaign folder without first recording its postmortem to Memory Store.

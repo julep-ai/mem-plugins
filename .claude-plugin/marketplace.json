@@ -14,8 +14,8 @@
     {
       "name": "memory-store",
       "source": "./plugins/memory-store",
-      "version": "0.6.0",
-      "description": "Memory Store skill pack for agent-native company-memory workflows. Includes LinkedIn Studio and Marketplace Operator.",
+      "version": "0.6.1",
+      "description": "Memory Store skill pack for agent-native company-memory workflows. Includes Memory Store Basics, LinkedIn Studio, and Marketplace Operator.",
       "author": {
         "name": "Memory Store",
         "email": "support@memory.store",
@@ -33,15 +33,17 @@
         "customer-stories",
         "marketplace",
         "plugin-ops",
-        "upgrades"
+        "upgrades",
+        "briefs",
+        "living-docs"
       ],
       "category": "Productivity"
     },
     {
       "name": "gtm-agent",
       "source": "./plugins/gtm-agent",
-      "version": "0.3.1",
-      "description": "Memory Store-powered GTM autopilot for engineering signal-based campaigns, Exa/Websets sourcing, Gmail execution, recurring routines, and campaign learning.",
+      "version": "0.3.2",
+      "description": "Memory Store-powered GTM autopilot for engineering signal-based campaigns, sparse canonical briefs, Exa/Websets sourcing, Gmail execution, recurring routines, and campaign learning.",
       "author": {
         "name": "Memory Store",
         "email": "support@memory.store",
@@ -62,7 +64,8 @@
         "company-research",
         "monitors",
         "gmail",
-        "memory-store"
+        "memory-store",
+        "briefs"
       ],
       "category": "Sales"
     }

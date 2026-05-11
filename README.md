@@ -4,7 +4,7 @@ Public Memory Store plugin marketplace for agent-native workflows built by Memor
 
 Add this marketplace once, then install the plugin you need. The source repo is `julep-ai/mem-plugins`, but the marketplace identity is Memory Store. The repo exposes multiple installable Memory Store-built plugins from one marketplace.
 
-The core `memory-store` plugin provides Memory Store-native workflows such as LinkedIn Studio and owns Memory Store MCP auth. `gtm-agent` is a separate installable **GTM engineering agent** — it engineers GTM campaigns and runs them autonomously for **any seller** (software, infrastructure, services, real estate, consumer goods, vertical SaaS, agencies, consulting). The seller's Memory Store is the proactive intelligence layer for agents: it remembers offer, ICPs, customers, competitors, objections, claims, outcomes, obligations, and approved rules so each new batch is smarter than the last. Install `memory-store` once, then GTM Agent reuses that Memory Store auth instead of prompting again.
+The core `memory-store` plugin provides Memory Store-native workflows, teaches the Memory Store basics loop, and owns Memory Store MCP auth. `gtm-agent` is a separate installable **GTM engineering agent** — it engineers GTM campaigns and runs them autonomously for **any seller** (software, infrastructure, services, real estate, consumer goods, vertical SaaS, agencies, consulting). The seller's Memory Store is the proactive intelligence layer for agents: it remembers offer, ICPs, customers, competitors, objections, claims, outcomes, obligations, approved rules, and sparse canonical briefs so each new batch is smarter than the last. Install `memory-store` once, then GTM Agent reuses that Memory Store auth instead of prompting again.
 
 GTM Agent treats Exa as the only supported web/research backend in v1. Both Exa Search MCP and Exa Websets MCP use a single Exa API key — get one at [https://dashboard.exa.ai/api-keys](https://dashboard.exa.ai/api-keys) and paste it into your host MCP settings. No-key Exa is exploratory only; a real campaign must stop and ask for Exa/Websets configuration before production ICP discovery, sourcing, signal cards, persona discovery, email enrichment, or outbound drafts. Exa Monitors (cron-scheduled Webset refresh) are not exposed as MCP tools yet; GTM Agent should create them through an approved REST call or host automation where possible, with dashboard setup as a fallback only. For a step-by-step setup walkthrough see [docs/EXA_SETUP.md](docs/EXA_SETUP.md).
 
@@ -213,11 +213,11 @@ For the full plugin experience, use Claude Code or Codex CLI.
 https://memory.store/mcp
 ```
 
-The MCP server provides the required `checkin`, `recall`, `record`, and `report-issue` operations. Tool names may be namespaced by the host, but those operations must be available.
+The MCP server provides the required `checkin`, `recall`, `list-briefs`, `record`, and `report-issue` operations. Tool names may be namespaced by the host, but those operations must be available.
 
 Without Memory Store MCP, the agent can only draft from pasted context. It cannot recall brand memory, find company stories, or record feedback for the next run.
 
-`gtm-agent` requires the core `memory-store` plugin to be installed and authenticated, but it does not redeclare Memory Store MCP in its own `.mcp.json`. That avoids duplicate Memory Store auth prompts in hosts that scope MCP auth per plugin. GTM Agent uses Memory Store as a proactive intelligence layer and long-term operating memory for agents: plan rules, user corrections, approval policies, persona decisions, connector expectations, campaign outcomes, and skill-improvement candidates should be distilled and recorded so future runs can surface context, continue work, and improve without re-asking.
+`gtm-agent` requires the core `memory-store` plugin to be installed and authenticated, but it does not redeclare Memory Store MCP in its own `.mcp.json`. That avoids duplicate Memory Store auth prompts in hosts that scope MCP auth per plugin. GTM Agent uses Memory Store as a proactive intelligence layer and long-term operating memory for agents: plan rules, user corrections, approval policies, persona decisions, connector expectations, campaign outcomes, sparse canonical brief deltas, and skill-improvement candidates should be distilled and recorded so future runs can surface context, continue work, and improve without re-asking. If low-level brief tools are available, use them for controlled brief reads, proposed deltas, explicit corrections, and approved canonical edits; do not use them to turn every campaign event into a brief.
 
 High-quality sourcing expects Exa MCP and Websets MCP when available:
 
@@ -251,6 +251,7 @@ Path: `plugins/memory-store`
 
 Includes these skills:
 
+- `memory-store-basics`: teaches the Memory Store operating loop: `checkin`, sparse `list-briefs`, targeted `recall`, confirmed `record`, controlled low-level brief edits when available, and `report-issue`. It keeps briefs as canonical living maps, uses recall for evidence, and avoids turning briefs into another raw-memory dump.
 - `linkedin-studio`: acts as a Memory Store-powered content strategist and copywriter. It starts with Memory Store `checkin`, recalls brand voice, author voice, prior performance, and source material, identifies publishable memory opportunities from customer context, shipped work, team discussions, internal artifacts, and prior content learnings, drafts grounded LinkedIn posts with a fitting CTA, and records feedback — approvals, edits, rejections, published text, and 24h/7d performance — so future runs improve.
 - `marketplace-operator`: maintains the Memory Store marketplace. It starts with Memory Store `checkin`, recalls marketplace decisions and plugin feedback, inspects manifests/docs/skills, scouts new Memory Store-backed plugin opportunities, audits upgrade needs, recommends file-level changes, and records confirmed marketplace decisions.
 
@@ -259,12 +260,13 @@ Includes these skills:
 Product loop:
 
 ```text
-checkin -> recall -> draft -> feedback -> record -> better recall
+checkin -> list/select briefs -> recall evidence -> act -> record confirmed learning -> brief delta only when operating truth changes
 ```
 
 Run it:
 
 ```text
+/memory-store:memory-store-basics
 /memory-store:linkedin-studio
 /memory-store:marketplace-operator
 ```
@@ -291,14 +293,14 @@ Includes these skills:
 GTM loop:
 
 ```text
-checkin -> recall durable rules -> context ingestion -> campaign mode -> funnel/ICP system -> campaign planner -> Exa/Websets sourcing -> people search -> signal cards -> approved automation routines -> Gmail autopilot -> Calendar booking context -> engagement -> distill rules/outcomes -> record -> better targeting
+checkin -> list/select canonical briefs -> recall durable rules/evidence -> context ingestion -> campaign mode -> funnel/ICP system -> campaign planner -> Exa/Websets sourcing -> people search -> signal cards -> approved automation routines -> Gmail autopilot -> Calendar booking context -> engagement -> distill rules/outcomes -> record -> sparse brief deltas -> better targeting
 ```
 
 The campaign engineering layer runs before copy. It classifies whether this is a new campaign, a continuation, a refresh, an expansion, a rescue, a reactivation, or an event/launch campaign; ingests Memory Store, uploaded/pasted docs, prior campaign artifacts, website, Gmail, Calendar, and public context; and maps the funnel system. The planner unit is still `persona + live signal + offer angle + proof path + next action`. A homepage, generic company category, founder title, or website-only scrape is not enough signal to draft.
 
 The first GTM plan is the repeatable GTM engineer onboarding script. It infers from Memory Store, website research, Gmail, and Google Calendar first, then asks only unresolved blockers. The reusable planning questions live in `plugins/gtm-agent/skills/campaign-setup/references/onboarding-questions.md`, the GTM plan contract lives in `plugins/gtm-agent/skills/campaign-setup/references/gtm-plan.md`, and agents can print the GTM plan skeleton with `plugins/gtm-agent/skills/campaign-setup/scripts/render_gtm_plan_template.py`.
 
-Autopilot is the point of GTM Agent, but it is precise rather than vague. A user engineers the campaign once: offer, sender, ICP cells, signal sources, proof path, CTA, send ramp, stop conditions, routine specs, and background-worker graph. During that conversation, GTM Agent also distills durable operating memory: rules, preferences, constraints, approval policies, connector expectations, persona decisions, sourcing gates, and skill-improvement candidates. After approval, the host can run recurring goal-scoped automations that spawn bounded workers: daily Websets/monitor review, Gmail reply scan, followup check, daily digest, and weekly Memory Store learning summary. Start with a small ramp, record outcomes, and let future runs use those learnings instead of re-asking or re-sourcing from scratch.
+Autopilot is the point of GTM Agent, but it is precise rather than vague. A user engineers the campaign once: offer, sender, ICP cells, signal sources, proof path, CTA, send ramp, stop conditions, routine specs, canonical briefs, and background-worker graph. During that conversation, GTM Agent also distills durable operating memory: rules, preferences, constraints, approval policies, connector expectations, persona decisions, sourcing gates, sparse brief deltas, and skill-improvement candidates. After approval, the host can run recurring goal-scoped automations that spawn bounded workers: daily Websets/monitor review, Gmail reply scan, followup check, daily digest, and weekly Memory Store learning summary. Start with a small ramp, record outcomes, and let future runs use those learnings instead of re-asking or re-sourcing from scratch.
 
 Run it:
 

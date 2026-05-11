@@ -1,7 +1,7 @@
 {
   "name": "memory-store",
-  "version": "0.6.0",
-  "description": "Memory Store skill pack for agent-native company-memory workflows. Includes LinkedIn Studio and Marketplace Operator.",
+  "version": "0.6.1",
+  "description": "Memory Store skill pack for agent-native company-memory workflows. Includes Memory Store Basics, LinkedIn Studio, and Marketplace Operator.",
   "author": {
     "name": "Memory Store",
     "email": "support@memory.store",
@@ -19,7 +19,9 @@
     "customer-stories",
     "marketplace",
     "plugin-ops",
-    "upgrades"
+    "upgrades",
+    "briefs",
+    "living-docs"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json"

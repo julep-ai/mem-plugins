@@ -1,11 +1,14 @@
 {
   "status": "proposed_not_created",
-  "blocker": "Websets MCP is configured in Codex with Exa API-key auth, but tools are not visible in this already-running session. Restart/reload Codex before creating Websets.",
+  "blocker": "Websets MCP is visible in this Codex session, and the user-provided Exa key is configured. Direct Websets API verification still returned 401: the key's Exa team does not have Websets API access and needs an Exa Pro/API-enabled plan.",
   "required_before_creation": [
     "approve GTM plan",
-    "restart/reload Codex and verify Websets tools are visible",
+    "enable Websets API access for the current Exa team/API key",
     "run shadow sample before production sends"
   ],
+  "last_checked": "2026-05-09",
+  "verification": "Codex MCP entries are enabled; direct GET to the Websets API returned 401 for plan/access, not missing local configuration.",
+  "creation_policy": "create Websets only after plan approval and after Websets API access succeeds",
   "proposed_websets": [
     {
       "slug": "gtm-context-operators",
@@ -95,6 +98,174 @@
       ],
       "enrichments": [
         "workspace_memory_signal",
+        "buyer_persona",
+        "source_url",
+        "proof_path",
+        "next_action",
+        "exclusion_risk"
+      ]
+    },
+    {
+      "slug": "founder-operator-context-owners",
+      "entity": "company",
+      "count": 45,
+      "accepted_target": 15,
+      "query": "Early-stage AI and B2B founders or operators using agents, Slack, meetings, Linear, Notion, Claude, Codex, or Cursor where customer promises, investor context, hiring, and product priorities are fragmented across tools.",
+      "criteria": [
+        "early-stage AI or B2B company",
+        "founder or operator owns multiple workstreams",
+        "public signal shows agent usage, context fragmentation, rapid growth, or cross-functional coordination load",
+        "founder/operator buyer can be identified"
+      ],
+      "enrichments": [
+        "founder_operator_signal",
+        "buyer_persona",
+        "tools_or_work_surfaces",
+        "source_url",
+        "proof_path",
+        "next_action",
+        "exclusion_risk"
+      ]
+    },
+    {
+      "slug": "product-customer-insight-teams",
+      "entity": "company",
+      "count": 45,
+      "accepted_target": 15,
+      "query": "B2B product, product ops, customer research, support-product, or product marketing teams with visible customer feedback, docs churn, changelog velocity, support themes, or roadmap activity where customer language and decisions need to persist across tools.",
+      "criteria": [
+        "product or customer-insight workflow visible",
+        "team has repeated customer touchpoints",
+        "recent signal around feedback, roadmap, support, docs, or customer learning",
+        "product/customer-insight buyer can be identified"
+      ],
+      "enrichments": [
+        "customer_insight_signal",
+        "buyer_persona",
+        "feedback_sources",
+        "source_url",
+        "proof_path",
+        "learning_intent",
+        "exclusion_risk"
+      ]
+    },
+    {
+      "slug": "support-community-memory-teams",
+      "entity": "company",
+      "count": 45,
+      "accepted_target": 15,
+      "query": "Developer tools, AI products, open-source projects, or B2B SaaS teams with active Discord, Slack, GitHub issues, docs, support, or community workflows where repeated answers and user context need to survive across agents.",
+      "criteria": [
+        "active support, devrel, open-source, or community surface",
+        "public docs, onboarding, repeated-question, issue, or community-growth signal",
+        "support/community owner can be identified"
+      ],
+      "enrichments": [
+        "support_or_community_surface",
+        "repeated_question_signal",
+        "buyer_persona",
+        "source_url",
+        "proof_path",
+        "next_action",
+        "exclusion_risk"
+      ]
+    },
+    {
+      "slug": "internal-ai-platform-teams",
+      "entity": "company",
+      "count": 30,
+      "accepted_target": 10,
+      "query": "Companies hiring internal AI, AI automation, platform, AI enablement, RevOps automation, or agent workflow roles where internal agents need approved company context, rules, handoffs, and decisions across tools.",
+      "criteria": [
+        "visible internal AI, automation, platform, or agent workflow initiative",
+        "buyer or owner can be identified",
+        "signal shows agents or automation crossing tools or teams"
+      ],
+      "enrichments": [
+        "internal_ai_signal",
+        "buyer_persona",
+        "workflow_surface",
+        "source_url",
+        "proof_path",
+        "exclusion_risk"
+      ]
+    },
+    {
+      "slug": "vertical-ai-app-builders",
+      "entity": "company",
+      "count": 30,
+      "accepted_target": 10,
+      "query": "Vertical AI app builders in legal, healthcare, finance, real estate, procurement, recruiting, education, or customer operations where user or team memory, personalization, long-running workflows, or agent context persistence is part of the product experience.",
+      "criteria": [
+        "building an AI product in a vertical workflow",
+        "user or team memory is plausibly part of the product experience",
+        "public signal around personalization, user history, agents, memory, or long-running workflows"
+      ],
+      "enrichments": [
+        "vertical_workflow",
+        "memory_or_personalization_signal",
+        "buyer_persona",
+        "source_url",
+        "proof_path",
+        "exclusion_risk"
+      ]
+    },
+    {
+      "slug": "content-devrel-distribution-teams",
+      "entity": "company",
+      "count": 30,
+      "accepted_target": 10,
+      "query": "Founder-led distribution teams, devrel teams, content operators, community-led growth teams, or product marketers with frequent launches, technical blogs, customer stories, webinars, podcasts, or community activity where market language and voice need to persist across tools.",
+      "criteria": [
+        "public content, devrel, launch, founder-led writing, or community-led growth motion",
+        "team has repeated source material from customers, community, docs, or launches",
+        "buyer or sender can be identified"
+      ],
+      "enrichments": [
+        "distribution_signal",
+        "source_material",
+        "buyer_persona",
+        "source_url",
+        "proof_path",
+        "learning_intent",
+        "exclusion_risk"
+      ]
+    },
+    {
+      "slug": "research-knowledge-workers",
+      "entity": "person",
+      "count": 30,
+      "accepted_target": 10,
+      "query": "AI researchers, analysts, consultants, strategy teams, legal or finance operators, and high-context independent experts using AI, notebooks, source-heavy workflows, or knowledge systems where reasoning chains, sources, decisions, and open questions must persist across sessions.",
+      "criteria": [
+        "high-context long-running source-heavy work is visible",
+        "person or team uses AI, agents, notebooks, research workflows, or knowledge tools",
+        "public signal is specific enough to avoid generic knowledge-worker targeting"
+      ],
+      "enrichments": [
+        "research_or_knowledge_work_signal",
+        "person_name",
+        "title",
+        "company_or_affiliation",
+        "source_url",
+        "proof_path",
+        "exclusion_risk"
+      ]
+    },
+    {
+      "slug": "agencies-consultancies-multi-client-memory",
+      "entity": "company",
+      "count": 45,
+      "accepted_target": 15,
+      "query": "AI agencies, GTM agencies, implementation consultancies, product studios, RevOps consultancies, or solutions consulting teams serving multiple clients where client-specific context, promises, deliverables, approvals, and next actions need to persist across agents.",
+      "criteria": [
+        "multi-client service or consulting model is visible",
+        "team sells AI, GTM, implementation, product, RevOps, or customer-delivery services",
+        "public case studies, client roster, service pages, or client-workflow evidence exist"
+      ],
+      "enrichments": [
+        "multi_client_signal",
+        "service_model",
         "buyer_persona",
         "source_url",
         "proof_path",

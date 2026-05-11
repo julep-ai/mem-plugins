@@ -1,7 +1,7 @@
 {
   "name": "gtm-agent",
-  "version": "0.3.1",
-  "description": "Memory Store-powered GTM autopilot for engineering signal-based campaigns, Exa/Websets sourcing, Gmail execution, recurring routines, and campaign learning.",
+  "version": "0.3.2",
+  "description": "Memory Store-powered GTM autopilot for engineering signal-based campaigns, sparse canonical briefs, Exa/Websets sourcing, Gmail execution, recurring routines, and campaign learning.",
   "author": {
     "name": "Memory Store",
     "email": "support@memory.store",
@@ -22,7 +22,8 @@
     "company-research",
     "monitors",
     "gmail",
-    "memory-store"
+    "memory-store",
+    "briefs"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json"

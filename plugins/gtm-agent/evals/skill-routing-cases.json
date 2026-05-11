@@ -43,6 +43,16 @@
       "expected_skill": "gtm-agent"
     },
     {
+      "id": "gtm-agent-canonical-briefs",
+      "query": "Plan this GTM campaign using canonical briefs as maps, then use recall for evidence and avoid creating a brief for every lead or reply.",
+      "expected_skill": "gtm-agent"
+    },
+    {
+      "id": "campaign-setup-sparse-brief-policy",
+      "query": "During first-run GTM planning, decide which existing briefs matter, what should only be recorded, and which approved changes deserve a sparse brief delta.",
+      "expected_skill": "campaign-setup"
+    },
+    {
       "id": "exa-company-research-competitor-map",
       "query": "Use Exa to research competitors, recent launches, buyer proof, and account context before we choose target accounts.",
       "expected_skill": "exa-company-research"
@@ -176,6 +186,16 @@
       "skill": "gtm-agent",
       "query": "During this setup conversation, distill the durable rules and store them so the GTM agent has long-term memory next time.",
       "required_references": [
+        "references/learning-loop.md"
+      ]
+    },
+    {
+      "id": "gtm-agent-sparse-brief-delta",
+      "skill": "gtm-agent",
+      "query": "We learned enough from this campaign to update the ICP and proof-path briefs without creating a bunch of new briefs.",
+      "required_references": [
+        "references/campaign-engineering.md",
+        "references/campaign-folder.md",
         "references/learning-loop.md"
       ]
     }

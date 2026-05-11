@@ -10,8 +10,10 @@ from pathlib import Path
 
 
 PLUGIN_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = PLUGIN_ROOT.parents[1]
 SKILLS_ROOT = PLUGIN_ROOT / "skills"
 EVAL_FILE = PLUGIN_ROOT / "evals" / "skill-routing-cases.json"
+CONTRACT_FILE = PLUGIN_ROOT / "evals" / "memory-contract-checks.json"
 DESCRIPTION_WORD_RE = re.compile(r"[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)?")
 
 
@@ -45,17 +47,38 @@ def resolve_reference(skill_name: str, reference: str) -> Path:
     return (SKILLS_ROOT / skill_name / reference).resolve()
 
 
-def main() -> None:
+def assert_contract_snippets() -> int:
+    if not CONTRACT_FILE.exists():
+        fail(f"missing contract fixture: {CONTRACT_FILE}")
+
+    contract = json.loads(CONTRACT_FILE.read_text(encoding="utf-8"))
+    checked = 0
+    for check in contract.get("checks", []):
+        path = REPO_ROOT / check.get("path", "")
+        if not path.exists():
+            fail(f"contract check target is missing: {path}")
+        content = path.read_text(encoding="utf-8")
+        for snippet in check.get("snippets", []):
+            if snippet not in content:
+                fail(f"{path}: missing contract snippet {snippet!r}")
+            checked += 1
+    return checked
+
+
+def load_evals() -> dict:
     if not EVAL_FILE.exists():
         fail(f"missing eval fixture: {EVAL_FILE}")
+    return json.loads(EVAL_FILE.read_text(encoding="utf-8"))
 
-    evals = json.loads(EVAL_FILE.read_text(encoding="utf-8"))
-    budget = int(evals.get("description_budget_words", 50))
 
+def discover_skills() -> list[str]:
     skills = sorted(path.name for path in SKILLS_ROOT.iterdir() if (path / "SKILL.md").exists())
     if not skills:
         fail("no skills found")
+    return skills
 
+
+def validate_skill_frontmatter(skills: list[str], budget: int) -> None:
     for skill_name in skills:
         frontmatter = read_frontmatter(SKILLS_ROOT / skill_name / "SKILL.md")
         if frontmatter.get("name") != skill_name:
@@ -68,6 +91,8 @@ def main() -> None:
         if words > budget:
             fail(f"{skill_name}: description has {words} words, budget is {budget}")
 
+
+def require_cases(evals: dict) -> tuple[list[dict], list[dict], list[dict]]:
     positive_cases = evals.get("positive_cases", [])
     negative_cases = evals.get("negative_cases", [])
     reference_cases = evals.get("reference_read_cases", [])
@@ -75,9 +100,12 @@ def main() -> None:
         fail("positive_cases must not be empty")
     if not negative_cases:
         fail("negative_cases must not be empty")
+    return positive_cases, negative_cases, reference_cases
 
+
+def validate_positive_cases(cases: list[dict], skills: list[str]) -> None:
     positive_by_skill = {skill: 0 for skill in skills}
-    for case in positive_cases:
+    for case in cases:
         expected = case.get("expected_skill")
         if expected not in positive_by_skill:
             fail(f"{case.get('id')}: unknown expected_skill {expected!r}")
@@ -89,8 +117,9 @@ def main() -> None:
     if missing_positive:
         fail(f"missing positive routing cases for: {', '.join(missing_positive)}")
 
-    known_skills = set(skills)
-    for case in negative_cases:
+
+def validate_negative_cases(cases: list[dict], known_skills: set[str]) -> None:
+    for case in cases:
         forbidden = case.get("forbidden_skills", [])
         if not case.get("query"):
             fail(f"{case.get('id')}: query is required")
@@ -100,7 +129,9 @@ def main() -> None:
         if unknown:
             fail(f"{case.get('id')}: unknown forbidden skills: {', '.join(unknown)}")
 
-    for case in reference_cases:
+
+def validate_reference_cases(cases: list[dict], known_skills: set[str]) -> None:
+    for case in cases:
         skill = case.get("skill")
         if skill not in known_skills:
             fail(f"{case.get('id')}: unknown skill {skill!r}")
@@ -112,12 +143,27 @@ def main() -> None:
             if not path.exists():
                 fail(f"{case.get('id')}: missing reference {reference!r} from {skill}")
 
+
+def main() -> None:
+    evals = load_evals()
+    skills = discover_skills()
+    validate_skill_frontmatter(skills, int(evals.get("description_budget_words", 50)))
+
+    positive_cases, negative_cases, reference_cases = require_cases(evals)
+    known_skills = set(skills)
+    validate_positive_cases(positive_cases, skills)
+    validate_negative_cases(negative_cases, known_skills)
+    validate_reference_cases(reference_cases, known_skills)
+
+    contract_checks = assert_contract_snippets()
+
     print(
         "OK: "
         f"{len(skills)} skills, "
         f"{len(positive_cases)} positive cases, "
         f"{len(negative_cases)} negative cases, "
-        f"{len(reference_cases)} reference-read cases"
+        f"{len(reference_cases)} reference-read cases, "
+        f"{contract_checks} contract snippets"
     )
 
 

@@ -1,6 +1,8 @@
 {
   "status": "proposed_not_created",
-  "blocker": "Monitors require approved Webset IDs and REST/API approval.",
+  "blocker": "Monitors require approved Webset IDs, working Websets API access, and explicit REST/API or host-automation approval. The configured Exa key currently fails Websets API access with 401, so no parent Websets can be created yet.",
+  "last_checked": "2026-05-09",
+  "creation_policy": "do not create monitors until at least one parent Webset exists and a manual run produces acceptable signal quality",
   "proposed_monitors": [
     {
       "name": "GTM context operators weekly signal review",
@@ -42,6 +44,96 @@
       "behavior": {
         "type": "search",
         "query": "B2B company hiring FDE solutions engineer onboarding customer success implementation AI",
+        "entity": "company",
+        "count": 25,
+        "behavior": "append"
+      }
+    },
+    {
+      "name": "Founder operator context weekly signal review",
+      "parent_webset_slug": "founder-operator-context-owners",
+      "cadence": {
+        "cron": "0 9 * * 4",
+        "timezone": "America/New_York"
+      },
+      "behavior": {
+        "type": "search",
+        "query": "early-stage AI founder using agents Slack Linear Notion Claude Codex context customer promises hiring product priorities",
+        "entity": "company",
+        "count": 25,
+        "behavior": "append"
+      }
+    },
+    {
+      "name": "Product customer insight weekly signal review",
+      "parent_webset_slug": "product-customer-insight-teams",
+      "cadence": {
+        "cron": "0 9 * * 4",
+        "timezone": "America/New_York"
+      },
+      "behavior": {
+        "type": "search",
+        "query": "B2B company hiring product ops customer insights user research support ops changelog feedback roadmap",
+        "entity": "company",
+        "count": 25,
+        "behavior": "append"
+      }
+    },
+    {
+      "name": "Support community memory weekly signal review",
+      "parent_webset_slug": "support-community-memory-teams",
+      "cadence": {
+        "cron": "0 9 * * 5",
+        "timezone": "America/New_York"
+      },
+      "behavior": {
+        "type": "search",
+        "query": "developer tool AI product active Discord Slack GitHub issues docs community support repeated questions",
+        "entity": "company",
+        "count": 25,
+        "behavior": "append"
+      }
+    },
+    {
+      "name": "Internal AI platform weekly signal review",
+      "parent_webset_slug": "internal-ai-platform-teams",
+      "cadence": {
+        "cron": "0 9 * * 5",
+        "timezone": "America/New_York"
+      },
+      "behavior": {
+        "type": "search",
+        "query": "company hiring internal AI platform AI enablement automation agents workflow governance copilots",
+        "entity": "company",
+        "count": 20,
+        "behavior": "append"
+      }
+    },
+    {
+      "name": "Vertical AI app memory weekly signal review",
+      "parent_webset_slug": "vertical-ai-app-builders",
+      "cadence": {
+        "cron": "0 9 * * 1",
+        "timezone": "America/New_York"
+      },
+      "behavior": {
+        "type": "search",
+        "query": "vertical AI app personalization memory user history agent context long-running workflow legal healthcare finance recruiting",
+        "entity": "company",
+        "count": 20,
+        "behavior": "append"
+      }
+    },
+    {
+      "name": "Agency consultancy multi-client weekly signal review",
+      "parent_webset_slug": "agencies-consultancies-multi-client-memory",
+      "cadence": {
+        "cron": "0 9 * * 2",
+        "timezone": "America/New_York"
+      },
+      "behavior": {
+        "type": "search",
+        "query": "AI agency GTM agency implementation consultancy RevOps consultancy client context handoff onboarding AI agents",
         "entity": "company",
         "count": 25,
         "behavior": "append"

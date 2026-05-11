@@ -9,7 +9,7 @@ Generate account or recipient lists from a confirmed campaign model. Use Websets
 
 ## Loop
 
-1. Start with Memory Store `checkin` and recall ICPs, exclusions, winning segments, objections, and prior campaign outcomes.
+1. Start with Memory Store `checkin`; use selected canonical brief context if provided by the main GTM agent, otherwise call `list-briefs` and select 0-3 relevant briefs; then recall ICPs, exclusions, winning segments, objections, and prior campaign outcomes.
 2. Confirm campaign mode, ICP cells, target counts, and exclusions before bulk generation.
 3. Verify Exa Search and Websets are authenticated. If not, stop production generation and ask for Exa API key setup.
 4. Use active Exa Search MCP tools: `web_search_advanced_exa`, `web_search_exa`, `web_fetch_exa`. Use advanced categories deliberately for company discovery, people discovery, and article/news evidence. Use `deep_search_exa` or `company_research_exa` only as old-host fallbacks.
@@ -17,7 +17,7 @@ Generate account or recipient lists from a confirmed campaign model. Use Websets
 6. Keep schemas compact: company, website, ICP fit, fit reasoning, high-intent signal, source URL, persona, customer-story pattern, offer angle, proof path, next action, learning intent, confidence, exclusion risk.
 7. When the campaign target is around 1000 leads/emails per day, batch by ICP cell, signal family, and micro-vertical; return counts, accepted/rejected reasons, artifact paths/IDs, and top findings, not raw 1000-row dumps.
 8. Dedupe by normalized domain, person identity, work email, and LinkedIn profile URL; apply Memory Store and Gmail suppressions before copy handoff.
-9. Record approved ICP rules, exclusion rules, Webset IDs, and outcomes.
+9. Return any brief-impact candidate to the main GTM agent; do not create or update briefs from this worker skill. Record approved ICP rules, exclusion rules, Webset IDs, and outcomes only when this skill is the main agent for the task.
 
 ## Output
 
@@ -25,4 +25,4 @@ Return: ICP read, high-intent signal plan, micro-vertical plan, schema, daily ba
 
 ## Rules
 
-Do not send from this skill. Do not hand off to copy unless rows include persona, high-intent signal, source, customer-story/persona pattern when available, offer angle, proof path, next action, learning intent, confidence, and exclusion risk.
+Do not send from this skill. Do not hand off to copy unless rows include persona, high-intent signal, source, customer-story/persona pattern when available, offer angle, proof path, next action, learning intent, confidence, and exclusion risk. Do not create briefs for lead rows, source batches, rejected rows, or one-off ICP experiments; use campaign artifacts and records.
