@@ -3,6 +3,7 @@
     {
       "path": "plugins/gtm-agent/skills/gtm-agent/SKILL.md",
       "snippets": [
+        "references/brief-operating-surface.md",
         "list/select 0-3 relevant canonical briefs",
         "recall product, ICPs, claims",
         "Do not let brief edits replace `record`",
@@ -15,6 +16,14 @@
         "Start with Memory Store `checkin`, then `list-briefs`, then targeted recall",
         "do not create a brief just to make context findable",
         "Record only after the user approves or edits the plan"
+      ]
+    },
+    {
+      "path": "plugins/gtm-agent/skills/gtm-agent/references/brief-operating-surface.md",
+      "snippets": [
+        "The GTM product surface is not a repo campaign folder",
+        "briefs = current operating truth",
+        "Create a folder only when the user asks for local files"
       ]
     },
     {
@@ -38,9 +47,9 @@
     {
       "path": "plugins/gtm-agent/skills/gtm-agent/references/campaign-folder.md",
       "snippets": [
-        "Sparse canonical briefs are the maintained operating maps",
+        "Not every GTM campaign needs a repo folder",
         "Do not record per-row state to Memory Store",
-        "Do not create a brief per account"
+        "Do not commit seller-specific campaign workspaces"
       ]
     },
     {
@@ -81,13 +90,6 @@
         "checkin -> list/select briefs -> recall evidence -> act -> record confirmed learning",
         "suggest_brief_change",
         "Do not claim Memory Store learned unless `record` ran"
-      ]
-    },
-    {
-      "path": "campaigns/memory-store-first-gtm/plan.md",
-      "snippets": [
-        "briefs_used:",
-        "brief_delta:"
       ]
     }
   ]

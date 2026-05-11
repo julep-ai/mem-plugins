@@ -9,7 +9,7 @@
     },
     {
       "id": "campaign-setup-missing-policy",
-      "query": "Before we send anything, build the GTM plan and tell me what Exa, Websets, Gmail, Calendar, and monitors are allowed to do.",
+      "query": "Before we send anything, build the GTM operating profile and tell me what Exa, Websets, Gmail, Calendar, and monitors are allowed to do.",
       "expected_skill": "campaign-setup"
     },
     {
@@ -120,6 +120,7 @@
       "skill": "gtm-agent",
       "query": "Source accounts and draft copy for a new campaign.",
       "required_references": [
+        "references/brief-operating-surface.md",
         "references/campaign-engineering.md",
         "references/campaign-planner.md",
         "references/failure-modes.md"
@@ -146,13 +147,14 @@
       ]
     },
     {
-      "id": "campaign-setup-first-run-plan",
+      "id": "campaign-setup-first-run-profile",
       "skill": "campaign-setup",
-      "query": "Create the first-run GTM plan and proposed autopilot routines.",
+      "query": "Create the first-run GTM operating profile and proposed autopilot routines.",
       "required_references": [
         "references/onboarding-questions.md",
         "references/gtm-plan.md",
         "references/first-run-autopilot.md",
+        "../gtm-agent/references/brief-operating-surface.md",
         "../gtm-agent/references/campaign-engineering.md",
         "../gtm-agent/references/campaign-planner.md",
         "../gtm-agent/references/parallel-routines.md",

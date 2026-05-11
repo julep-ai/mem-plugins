@@ -12,7 +12,7 @@ AI is good at filling structured systems. The skill should provide the system; t
 
 Classify the run first:
 
-- `plan_new_campaign` - co-design the campaign plan with the user before creating folders, sourcing, drafting, or automations.
+- `plan_new_campaign` - co-design the campaign operating profile with the user before creating execution workspaces, sourcing, drafting, or automations.
 - `start_new_campaign` - create or activate a new approved campaign; begin sourcing, signal cards, representative copy, and routines.
 - `monitor_campaign` - inspect active campaign health, Websets/monitor changes, Gmail replies/followups, bounces, suppressions, and stop conditions.
 - `campaign_insights` - summarize performance and extract learnings by ICP, signal, copy angle, channel, persona, and objection.

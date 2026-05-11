@@ -34,7 +34,7 @@ Track these concepts in the working output even if the host does not have a data
 
 Minimum gates before autopilot starts:
 
-- GTM plan approved.
+- GTM operating profile approved.
 - Demo CTA confirmed or reply-first fallback approved.
 - Sender identity and brand voice approved.
 - ICP list and company-size range approved.

@@ -217,15 +217,15 @@ Exa handles research and sourcing. Outreach and booking context need separate co
 
 Both are account-scoped; the plugin cannot ship them ready-to-run.
 
-## 10. Build the first GTM plan
+## 10. Build the first GTM operating profile
 
 ```text
 /gtm-agent:campaign-setup
 
-Start GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, define daily/weekly automation routines, build the GTM plan, and ask for plan approval before sending.
+Start GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, define daily/weekly automation routines, build the GTM operating profile, and ask for approval before sending.
 ```
 
-The skill returns a GTM plan — review it, approve it, and the orchestrator can start sourcing and drafting on real Exa data. No sends happen before plan approval.
+The skill returns a GTM operating profile. Review it, approve it, and the orchestrator can start sourcing and drafting on real Exa data. No sends happen before profile approval.
 
 ## Troubleshooting
 

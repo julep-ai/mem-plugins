@@ -117,7 +117,7 @@ risks:
 dedupe_keys:
 ```
 
-`output_artifact` is a path inside the campaign folder (`campaigns/<slug>/...`), a Webset/search/enrichment ID, a Gmail draft ID, or a monitor ID. No raw dumps in the return. The main agent reads from the artifact, not from the worker's text.
+`output_artifact` is a Webset/search/enrichment ID, Gmail draft ID, monitor ID, Memory Store record/brief-delta proposal, or a path inside a temporary execution workspace when files are necessary. No raw dumps in the return. The main agent reads from the artifact or connector, not from the worker's text.
 
 ### Recording is the main agent's job
 
@@ -214,7 +214,7 @@ Promote repeated work into routines:
 
 For Exa Monitors, create or propose monitors only after the user approves query, cadence, output schema, and destination. Use manual-only monitors first when uncertain.
 
-For full autopilot, create routines only after the GTM plan is approved. Autopilot routines may keep researching while paused, but they must not send if a stop condition is active. Every scheduled routine should carry the exact routine spec from [automation-routines.md](automation-routines.md).
+For full autopilot, create routines only after the GTM operating profile is approved. Autopilot routines may keep researching while paused, but they must not send if a stop condition is active. Every scheduled routine should carry the exact routine spec from [automation-routines.md](automation-routines.md).
 
 ## Self-Evolving Loop
 

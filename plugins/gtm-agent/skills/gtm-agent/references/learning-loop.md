@@ -98,7 +98,7 @@ Before claiming a brief update landed, verify the tool result, receipt, or sessi
 Record confirmed events:
 
 - Campaign or ICP plan approved.
-- First-run GTM plan approved or changed.
+- First-run GTM operating profile approved or changed.
 - Campaign mode or context-source base approved or changed.
 - Uploaded/pasted docs approved as campaign source context.
 - ICP cell added, removed, or reframed.
@@ -137,21 +137,21 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 
 `content`:
 
-> The user approved the GTM campaign system for `<company>` today. Campaign mode: `<plan_new_campaign | start_new_campaign | monitor_campaign | campaign_insights | update_prior_campaign | new_campaign | build_on_previous | refresh_existing | expand_winner | rescue_underperformer | reactivation | event_or_launch>`. Context sources approved: `<Memory Store, uploaded docs, pasted notes, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets>`. Funnel stages being engineered: `<summary>`. ICP system: `<summary>`. Signal system: `<summary>`. Channel system: `<email/LinkedIn policy>`. Learning system: `<summary>`.
+> The user approved the GTM campaign system for `<company>` today. Campaign mode: `<plan_new_campaign | start_new_campaign | monitor_campaign | campaign_insights | update_prior_campaign | new_campaign | build_on_previous | refresh_existing | expand_winner | rescue_underperformer | reactivation | event_or_launch>`. Context sources approved: `<Memory Store, uploaded docs, pasted notes, website, Gmail, Calendar, prior records or connector/workspace exports, Exa/Websets>`. Funnel stages being engineered: `<summary>`. ICP system: `<summary>`. Signal system: `<summary>`. Channel system: `<email/LinkedIn policy>`. Learning system: `<summary>`.
 
 `background`:
 
 > Source context and constraints: `<doc names, memory IDs, URLs, Gmail scope, calendar policy, exclusions, open decisions>`.
 
-### GTM plan approved
+### GTM operating profile approved
 
 `content`:
 
-> The user approved the GTM plan for `<company>` today. Active offer: `<offer>`. Sender: `<sender>`. Demo CTA: `<confirmed link or fallback>`. Autopilot: `<full autopilot | draft-first>` with ramp `<limits>`. Approved ICP cells: `<list>`. Same-company rule: `<rule>`. Followups: `<cadence>`. Stop conditions: `<summary>`.
+> The user approved the GTM operating profile for `<company>` today. Active offer: `<offer>`. Sender: `<sender>`. Demo CTA: `<confirmed link or fallback>`. Autopilot: `<full autopilot | draft-first>` with ramp `<limits>`. Approved ICP cells: `<list>`. Same-company rule: `<rule>`. Followups: `<cadence>`. Stop conditions: `<summary>`.
 
 `background`:
 
-> GTM plan sources and gaps: website `<URL>`, Gmail scope `<scope>`, Google Calendar policy `<policy>`, exclusions `<summary>`, connector gaps `<summary>`.
+> GTM operating-profile sources and gaps: website `<URL>`, Gmail scope `<scope>`, Google Calendar policy `<policy>`, exclusions `<summary>`, connector gaps `<summary>`.
 
 ### Automation routine approved
 
