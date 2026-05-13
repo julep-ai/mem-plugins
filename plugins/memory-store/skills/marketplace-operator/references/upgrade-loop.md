@@ -7,6 +7,7 @@ Use this reference when a user asks whether the Memory Store marketplace, plugin
 Check these inputs:
 
 - Memory Store recalls for prior marketplace decisions, plugin feedback, install issues, and rejected ideas
+- Marketplace architecture/install/release-policy briefs (via `list-briefs`/`get-brief`)
 - repo manifests and marketplace files
 - skill descriptions and reference files
 - plugin-eval reports
@@ -73,5 +74,7 @@ Before saying an upgrade is ready:
 - run `plugin-eval` on changed plugins or skills when available
 - run `git diff --check`
 - search for stale plugin paths and old invocation names
+- MCP tool name drift checked against actual available tools
 - confirm version bumps for changed Claude plugins
 - record confirmed marketplace decisions in Memory Store
+- Use `propose-brief` for durable marketplace policy changes, `confirm-brief` only after approval.

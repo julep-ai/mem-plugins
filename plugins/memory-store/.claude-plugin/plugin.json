@@ -8,7 +8,7 @@
     "url": "https://memory.store"
   },
   "homepage": "https://memory.store",
-  "repository": "https://github.com/julep-ai/mem-plugins",
+  "repository": "https://github.com/MemoryStore/plugins",
   "license": "Apache-2.0",
   "keywords": [
     "memory-store",

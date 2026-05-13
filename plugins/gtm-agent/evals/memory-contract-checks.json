@@ -39,8 +39,8 @@
       "path": "plugins/gtm-agent/skills/gtm-agent/references/learning-loop.md",
       "snippets": [
         "record confirmed learning",
-        "suggest_brief_change",
-        "save_brief_section",
+        "propose-brief",
+        "confirm-brief",
         "The brief is the maintained synthesis; the record is the evidence/event"
       ]
     },
@@ -88,7 +88,7 @@
       "path": "plugins/memory-store/skills/memory-store-basics/SKILL.md",
       "snippets": [
         "checkin -> list/select briefs -> recall evidence -> act -> record confirmed learning",
-        "suggest_brief_change",
+        "propose-brief",
         "Do not claim Memory Store learned unless `record` ran"
       ]
     }

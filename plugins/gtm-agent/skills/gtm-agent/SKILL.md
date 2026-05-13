@@ -26,7 +26,7 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 
 - Start with Memory Store `checkin`, then list/select 0-3 relevant canonical briefs, then recall product, ICPs, claims, objections, exclusions, prior campaigns, and approved GTM plan.
 - Treat briefs as sparse operating maps and `recall` as the evidence engine. Do not create a brief for every lead, account, source, reply, draft, brainstorm, or transient campaign note.
-- If low-level Memory Store brief tools are available, use them deliberately: `get_brief` only for selected briefs, `suggest_brief_change` for proposed deltas, and `teach_brief`, `save_brief`, or `save_brief_section` only after approval or direct instruction. Do not let brief edits replace `record`.
+- If low-level Memory Store brief tools are available, use them deliberately: `get-brief` only for selected briefs, `propose-brief` for proposed deltas, and `confirm-brief` only after approval or direct instruction. Do not let brief edits replace `record`.
 - For Memory Store-owned campaigns, mine existing Memory Store consumers before proposing ICPs: paid customers, power users, triers, internal dogfood users, passive-ingest workspaces, customer failures, and prior GTM plans. Each ICP cell must cite the remembered customer/user pattern that created it. Generic category pools are invalid until mapped to a real usage pattern.
 - If the GTM plan is missing, first-run, or autopilot policy is unclear, route to `campaign-setup`.
 - Before sourcing or copy, load `references/brief-operating-surface.md`, `references/campaign-engineering.md`, and `references/campaign-planner.md`.

@@ -200,6 +200,78 @@
         "references/campaign-folder.md",
         "references/learning-loop.md"
       ]
+    },
+    {
+      "id": "exa-company-research-direct-invocation",
+      "skill": "exa-company-research",
+      "skills": [
+        "exa-company-research"
+      ],
+      "query": "Research target accounts directly with Exa company and market context.",
+      "required_references": [
+        "../gtm-agent/references/exa-workflows.md",
+        "../gtm-agent/references/failure-modes.md"
+      ],
+      "expected_references": [
+        "../gtm-agent/references/exa-workflows.md",
+        "../gtm-agent/references/failure-modes.md"
+      ]
+    },
+    {
+      "id": "exa-lead-generation-direct-invocation",
+      "skill": "exa-lead-generation",
+      "skills": [
+        "exa-lead-generation"
+      ],
+      "query": "Generate a direct Exa lead list from the confirmed ICP.",
+      "required_references": [
+        "../gtm-agent/references/signal-sourcing.md",
+        "../gtm-agent/references/enrichment-catalog.md",
+        "../gtm-agent/references/failure-modes.md"
+      ],
+      "expected_references": [
+        "../gtm-agent/references/signal-sourcing.md",
+        "../gtm-agent/references/enrichment-catalog.md",
+        "../gtm-agent/references/failure-modes.md"
+      ]
+    },
+    {
+      "id": "exa-people-search-direct-invocation",
+      "skill": "exa-people-search",
+      "skills": [
+        "exa-people-search"
+      ],
+      "query": "Find buyer identities directly for qualified accounts.",
+      "required_references": [
+        "../gtm-agent/references/signal-sourcing.md",
+        "../gtm-agent/references/enrichment-catalog.md",
+        "../gtm-agent/references/failure-modes.md"
+      ],
+      "expected_references": [
+        "../gtm-agent/references/signal-sourcing.md",
+        "../gtm-agent/references/enrichment-catalog.md",
+        "../gtm-agent/references/failure-modes.md"
+      ]
+    },
+    {
+      "id": "websets-sourcing-direct-invocation",
+      "skill": "websets-sourcing",
+      "skills": [
+        "websets-sourcing"
+      ],
+      "query": "Create a persistent Webset directly for this ICP and monitoring workflow.",
+      "required_references": [
+        "../gtm-agent/references/signal-sourcing.md",
+        "../gtm-agent/references/enrichment-catalog.md",
+        "../gtm-agent/references/failure-modes.md",
+        "../gtm-agent/references/monitors.md"
+      ],
+      "expected_references": [
+        "../gtm-agent/references/signal-sourcing.md",
+        "../gtm-agent/references/enrichment-catalog.md",
+        "../gtm-agent/references/failure-modes.md",
+        "../gtm-agent/references/monitors.md"
+      ]
     }
   ]
 }

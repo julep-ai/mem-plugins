@@ -10,6 +10,7 @@ Find likely buyers or public experts for already-qualified accounts. Production 
 ## Loop
 
 1. Start with Memory Store `checkin`; use selected canonical brief context if provided by the main GTM agent, otherwise call `list-briefs` and select 0-3 relevant briefs; then recall buyer personas, known contacts, suppressions, relationship context, and account history.
+   When invoked directly (not routed by the main GTM Agent skill), also load ../gtm-agent/references/signal-sourcing.md, ../gtm-agent/references/enrichment-catalog.md, and ../gtm-agent/references/failure-modes.md for production context.
 2. Search people after account fit is clear unless the user asks for expert discovery.
 3. Verify Exa Search is authenticated before production people discovery. If missing, return setup steps and query specs only.
 4. Prefer active Exa Search tools: `web_search_advanced_exa` with `category: "people"`, plus `web_search_exa` and `web_fetch_exa` for verification.

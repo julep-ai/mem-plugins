@@ -13,6 +13,8 @@ The marketplace currently contains these installable plugins:
 
 Install the marketplace once. Then install the plugin you want from that marketplace.
 
+The source repository is `MemoryStore/plugins`. For external distribution, that repository must either be public or the installing user must have GitHub access. Private installs should set `GITHUB_TOKEN` or `GH_TOKEN` before relying on background updates.
+
 ## Claude Code
 
 ### First-Time Install
@@ -20,7 +22,7 @@ Install the marketplace once. Then install the plugin you want from that marketp
 Add or refresh the marketplace:
 
 ```bash
-claude plugin marketplace add julep-ai/mem-plugins@main
+claude plugin marketplace add MemoryStore/plugins@main
 claude plugin marketplace update mem-plugins
 ```
 
@@ -96,7 +98,7 @@ Current Codex CLI builds manage marketplaces from the terminal, but plugin insta
 ### First-Time Marketplace Add
 
 ```bash
-codex plugin marketplace add julep-ai/mem-plugins --ref main
+codex plugin marketplace add MemoryStore/plugins
 ```
 
 Then restart/reload Codex, open the plugin UI, choose the `Memory Store` marketplace, and install or enable:
@@ -142,7 +144,7 @@ Required Memory Store operations:
 
 GTM Agent uses Memory Store as a proactive intelligence layer with long-term memory for agents, not just recall. During planning and execution it should select sparse canonical briefs, recall supporting evidence, and distill approved rules, user corrections, approval policies, connector expectations, persona decisions, sourcing gates, outcomes, sparse brief deltas, and skill-improvement candidates into Memory Store records so future runs inherit them, surface relevant context, and continue approved routines.
 
-If the host exposes low-level brief-editing tools, GTM Agent should use them only after the sparse-brief gate passes: read selected briefs with `get_brief`, attach pending deltas with `suggest_brief_change`, teach explicit corrections with `teach_brief`, and save canonical brief or section edits only after approval. Most campaign execution events should still become records, not brief edits.
+If the host exposes low-level brief-editing tools, GTM Agent should use them only after the sparse-brief gate passes: read selected briefs with `get-brief`, attach pending deltas with `propose-brief`, and confirm approved brief changes with `confirm-brief`. Most campaign execution events should still become records, not brief edits.
 
 `gtm-agent` can additionally use:
 

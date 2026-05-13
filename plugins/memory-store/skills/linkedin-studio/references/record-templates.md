@@ -203,3 +203,13 @@ Record when a topic is placed off-limits for public posts.
 - **Voice rules attributed to the wrong author.** Voice is per-author unless the user explicitly says company-wide.
 - **Internal-only memories** quoted into the public draft record.
 - **Composite quotes.** If a quote did not come from a memory verbatim, do not record it as a quote.
+
+## When to Propose a Brief After Recording
+
+- Brand profile created or updated → `propose-brief` for brand positioning/approved-claims brief
+- Voice profile created or updated → `propose-brief` for author voice brief
+- Approved claims list changed → `propose-brief` for approved-claims brief update
+- Taboo topic added → `propose-brief` for brand boundary update
+- Repeated performance learning changes editorial policy → `propose-brief` for editorial policy brief
+
+Use labels like "Voice rule update" as prose headings, not typed event names.

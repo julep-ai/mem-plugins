@@ -11,6 +11,8 @@ For a solo creator writing under their own brand, the two overlap but should sti
 
 ## When to bootstrap
 
+Before bootstrapping, use `list-briefs` and `get-brief` to check if a brand/positioning/approved-claims brief already exists.
+
 - No brand memory exists for the company.
 - Brand memory exists but covers only one dimension (e.g. a tagline and nothing else).
 - The company has pivoted, repositioned, or shifted pillars recently and the stored profile is stale.
@@ -69,6 +71,8 @@ Iterate until the user confirms. A confirmed profile is better than an aspiratio
 ## Record
 
 Once confirmed, call `record` using the `Brand profile created` template in [record-templates.md](record-templates.md). Pass the active `thread_id`. This becomes the company's brand memory for every future run.
+
+After recording the confirmed brand profile, consider `propose-brief` for a durable brand positioning brief.
 
 Then resume the operating loop — voice recall next, then source material.
 

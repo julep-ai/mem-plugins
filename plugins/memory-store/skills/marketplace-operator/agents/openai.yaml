@@ -1,4 +1,4 @@
 interface:
   display_name: "Marketplace Operator"
   short_description: "Audit and grow the Memory Store plugin marketplace"
-  default_prompt: "Check the Memory Store marketplace for new plugin opportunities, stale skills, manifest drift, and upgrade work."
+  default_prompt: "Check the Memory Store marketplace for new plugin opportunities, stale skills, manifest/version drift, MCP/tool contract drift, and upgrade work. Recall prior marketplace decisions and identify what should be recorded."

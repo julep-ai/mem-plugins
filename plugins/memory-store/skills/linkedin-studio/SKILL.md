@@ -36,21 +36,23 @@ Do not trigger for generic copywriting, non-LinkedIn channels, or drafts that do
 
 1. **Checkin.** Call Memory Store `checkin` with the company, the author (whose voice is used), the pillar or topic intent, and the date range. Capture `thread_id` and pass it to every subsequent `record` call in the session.
 
-2. **Recall shapers.** Pull what will shape the draft: brand profile, author voice, and prior content performance or edit history. Use [references/recall-cues.md](references/recall-cues.md). If brand or voice is thin, infer from adjacent memory before asking; use [references/brand-bootstrap.md](references/brand-bootstrap.md) and [references/voice-bootstrap.md](references/voice-bootstrap.md) only when inference cannot cover enough.
+2. **List briefs.** Call Memory Store `list-briefs` when brand, voice, approved claims, content pillars, or editorial policy briefs may exist. Select only relevant briefs. Use `get-brief` to read selected briefs when summaries are insufficient.
 
-3. **Discover publishable memory opportunities.** Do not begin with a LinkedIn template. Recall across customer context, shipped work, support themes, team discussions, internal artifacts, product decisions, founder beliefs, prior posts, edits, and performance. Classify candidates using [references/memory-opportunities.md](references/memory-opportunities.md).
+3. **Recall shapers.** Pull what will shape the draft: brand profile, author voice, approved claims, content pillars, editorial policy, and prior content performance or edit history. Use selected briefs as canonical shapers, then use targeted recall for supporting evidence and fresh context. Use [references/recall-cues.md](references/recall-cues.md). If brand or voice is thin, infer from adjacent memory before asking; use [references/brand-bootstrap.md](references/brand-bootstrap.md) and [references/voice-bootstrap.md](references/voice-bootstrap.md) only when inference cannot cover enough.
 
-4. **Score and shortlist.** Create compact opportunity cards for 5-10 candidates. Keep candidates with concrete source memory IDs, a specific audience, proof, tension, brand fit or a defensible emerging-signal reason, and a clear CTA job. Score angle strength using [references/memory-opportunities.md](references/memory-opportunities.md); drop weak generic candidates.
+4. **Discover publishable memory opportunities.** Do not begin with a LinkedIn template. Recall across customer context, shipped work, support themes, team discussions, internal artifacts, product decisions, founder beliefs, prior posts, edits, and performance. Classify candidates using [references/memory-opportunities.md](references/memory-opportunities.md).
 
-5. **Choose content type and CTA.** Map each strong opportunity to the right LinkedIn shape using [references/format-templates.md](references/format-templates.md). Prefer `user_insight` when multiple memories reveal the same pattern, but do not force every post into that format. Choose one CTA job from [references/memory-opportunities.md](references/memory-opportunities.md).
+5. **Score and shortlist.** Create compact opportunity cards for 5-10 candidates. Keep candidates with concrete source memory IDs, a specific audience, proof, tension, brand fit or a defensible emerging-signal reason, and a clear CTA job. Score angle strength using [references/memory-opportunities.md](references/memory-opportunities.md); drop weak generic candidates.
 
-6. **Draft.** For each picked opportunity, apply the craft in [references/linkedin-craft.md](references/linkedin-craft.md), the selected format, the recalled voice rules, brand constraints, and prior performance learnings. Write three hook variants; keep the strongest. Let length serve the opportunity: short if the insight lands fast, longer when proof, narrative, or decision archaeology needs room.
+6. **Choose content type and CTA.** Map each strong opportunity to the right LinkedIn shape using [references/format-templates.md](references/format-templates.md). Prefer `user_insight` when multiple memories reveal the same pattern, but do not force every post into that format. Choose one CTA job from [references/memory-opportunities.md](references/memory-opportunities.md).
 
-7. **Self-check.** Validate each draft against the invariants below, the craft checklist in [references/linkedin-craft.md](references/linkedin-craft.md), and the brand checks in [references/brand-bootstrap.md](references/brand-bootstrap.md). Flag unsourced claims for approval.
+7. **Draft.** For each picked opportunity, apply the craft in [references/linkedin-craft.md](references/linkedin-craft.md), the selected format, the recalled voice rules, selected brief constraints, brand constraints, and prior performance learnings. Write three hook variants; keep the strongest. Let length serve the opportunity: short if the insight lands fast, longer when proof, narrative, or decision archaeology needs room.
 
-8. **Present.** Return the draft package (see Output contract).
+8. **Self-check.** Validate each draft against the invariants below, the craft checklist in [references/linkedin-craft.md](references/linkedin-craft.md), selected briefs, and the brand checks in [references/brand-bootstrap.md](references/brand-bootstrap.md). Flag unsourced claims for approval.
 
-9. **Record.** When the user approves, rejects, edits, or posts, call `record` using the prose templates in [references/record-templates.md](references/record-templates.md). `record` is a quick-jot — natural-language prose, not JSON. Always pass the active `thread_id`.
+9. **Present.** Return the draft package (see Output contract).
+
+10. **Record.** When the user approves, rejects, edits, or posts, call `record` using the prose templates in [references/record-templates.md](references/record-templates.md). `record` is a quick-jot — natural-language prose, not JSON. Always pass the active `thread_id`. After recording durable brand, voice, approved-claim, content-pillar, or editorial-policy learnings, optionally call `propose-brief` for canonical updates and use `confirm-brief` only when the user approves the proposed brief change.
 
 ## Output contract
 

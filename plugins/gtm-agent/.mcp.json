@@ -6,7 +6,7 @@
       "headers": {
         "x-api-key": "YOUR_EXA_API_KEY"
       },
-      "note": "Exa Search MCP. Default-on tools: web_search_exa, web_fetch_exa. Optional: web_search_advanced_exa (category/domain/date/highlights/subpage filters). GTM Agent should prefer web_search_advanced_exa for company, people, and lead-generation research. Deprecated but still callable for backward compatibility: company_research_exa, people_search_exa, crawling_exa, linkedin_search_exa, get_code_context_exa, deep_search_exa. Free plan works without a key (rate-limited). Get an API key at https://dashboard.exa.ai/api-keys and replace YOUR_EXA_API_KEY in host MCP settings before production runs."
+      "note": "Exa Search MCP. Default-on tools: web_search_exa, web_fetch_exa. web_search_advanced_exa (category/domain/date/highlights/subpage filters) is required for production GTM company, people, and lead-generation research. Optional only for exploratory/free-plan lookup. Deprecated but still callable for backward compatibility: company_research_exa, people_search_exa, crawling_exa, linkedin_search_exa, get_code_context_exa, deep_search_exa. Free plan works without a key (rate-limited). Get an API key at https://dashboard.exa.ai/api-keys and replace YOUR_EXA_API_KEY in host MCP settings before production runs."
     },
     "websets": {
       "type": "http",

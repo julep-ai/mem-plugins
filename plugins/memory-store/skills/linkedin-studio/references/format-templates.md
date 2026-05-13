@@ -187,7 +187,7 @@ If you are running a services team, how are you forecasting capacity this week?
 **Structure:**
 
 ```
-[Uncomfortable-truth or unopular-opinion hook — one line]
+[Uncomfortable-truth or unpopular-opinion hook — one line]
 
 [Two or three lines expanding the view: what you believe and why the mainstream disagrees]
 
@@ -263,6 +263,8 @@ Unless a memory says a customer name is approved for public use:
 - Do not invent or generalize details that are not in the memory. If the memory only says "a customer", the post says "a customer".
 - When quoting, quote only what the memory quotes. Paraphrase is fine; invented quotes are not.
 - If the author wants to name the customer, call `record` to mark that specific customer as publicly approved for future runs.
+
+After recording a customer-public-use approval, consider `propose-brief` for an approved-claims or customer-public-use brief if the approval should guide future agents.
 
 ## Picking a format
 

@@ -45,7 +45,7 @@ export EXA_API_KEY=your-key-here
 ## 3. Install GTM Agent (if you haven't)
 
 ```bash
-claude plugin marketplace add julep-ai/mem-plugins@main
+claude plugin marketplace add MemoryStore/plugins@main
 claude plugin install memory-store@mem-plugins
 claude plugin install gtm-agent@mem-plugins
 ```

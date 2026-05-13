@@ -111,7 +111,13 @@ employee_range, funding_stage, tech_stack_overlap, competitor_overlap,
 prior_thread, suppressed_by, memory_store_thread_id, memory_store_mem_ids
 ```
 
-A row without `personal_email`, `linkedin_profile_url`, or `company_url` is not draft-eligible.
+A row's draft eligibility is channel-specific:
+
+- `draft_eligible_email` requires `personal_email`, `signal_source_url`, `company_url`, and persona/proof/next_action.
+- `draft_eligible_linkedin` requires `linkedin_profile_url`, `signal_source_url`, `company_url`, and persona/proof/next_action.
+- `send_ready` requires at least one eligible channel and the row must pass the planner quality gate.
+
+A row can be `send_ready` via LinkedIn without having a `personal_email`.
 
 ## File Lifecycles
 
@@ -149,7 +155,7 @@ If the workspace is deleted, connector IDs and records should still preserve the
 
 - Do not start sourcing before the campaign operating profile is approved.
 - Do not start copy before the campaign operating profile is approved and required connector gates are green.
-- Do not mark a row `send_ready` if it lacks `personal_email`, `linkedin_profile_url`, or a live `signal_source_url`.
+- Do not mark a row `send_ready` unless at least one channel is eligible (`draft_eligible_email` or `draft_eligible_linkedin`) and the row passes the planner quality gate.
 - Do not record per-row state to Memory Store. Record durable learnings only.
 - Do not create a brief per account, source, reply, copy variant, or ICP experiment. Use records and execution workspace files for those.
 - Do not edit `events.jsonl` retroactively. Append corrections as new events.

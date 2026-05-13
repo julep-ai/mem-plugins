@@ -85,10 +85,9 @@ Do not create overlapping briefs. Prefer updating the existing canonical brief w
 
 When the host exposes low-level Memory Store brief tools, keep the boundary strict:
 
-- Use `get_brief` only for the selected canonical briefs, not as a bulk context dump.
-- Use `suggest_brief_change` for a proposed `brief_delta` before the user approves it.
-- Use `teach_brief` when the user corrects a brief and that correction should both annotate the brief and become durable memory.
-- Use `save_brief` or `save_brief_section` only after the user approves the canonical update or directly asks to edit the brief.
+- Use `get-brief` only for the selected canonical briefs, not as a bulk context dump.
+- Use `propose-brief` for a proposed `brief_delta` before the user approves it.
+- Use `confirm-brief` when the user approves a proposed brief delta or directly asks to update a brief.
 - Continue to call `record` for the confirmed learning itself. The brief is the maintained synthesis; the record is the evidence/event that future recall can retrieve.
 
 Before claiming a brief update landed, verify the tool result, receipt, or session status if the host provides one. If a brief tool fails, record the confirmed learning when appropriate, report the tool issue, and leave the `brief_delta` as pending.
