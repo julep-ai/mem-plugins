@@ -53,6 +53,8 @@ Score each candidate 0-5 on six dimensions. Draft the highest-scoring opportunit
 - **Usefulness** — the reader can save, forward, apply, or argue with it.
 - **Author credibility** — this author or company has standing to say it.
 
+If selected briefs define brand pillars, approved claims, or taboo topics, include them in the Brand fit and Risk dimensions.
+
 Guidance:
 
 - 26-30: publish candidate.

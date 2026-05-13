@@ -1,10 +1,10 @@
-# Campaign Folder
+# Execution Workspace
 
-Every GTM campaign lives in its own folder. The folder is the campaign's working state — plan, ICPs, accounts, signal cards, copy, sends, events, monitors, learnings. Memory Store is the durable cross-campaign brain. Sparse canonical briefs are the maintained operating maps. The folder is current-campaign execution.
+Not every GTM campaign needs a repo folder. Memory Store briefs are the operating surface; records are the learning/event stream. A local folder is only an execution workspace for large batches, connector import/export, human review, or handoff.
 
-## Plan-First Flow
+## Brief-First Flow
 
-A campaign always starts with a plan, never with sourcing. Use the host's plan mode (Claude Code, Codex, Cowork) to co-write the plan with the user before any folder is created.
+A campaign starts with a brief-informed operating profile, never with sourcing. Use the host's plan mode (Claude Code, Codex, Cowork) to co-write the policy with the user before any execution workspace is created.
 
 ```
 1. user: "plan a campaign for X"
@@ -27,25 +27,23 @@ A campaign always starts with a plan, never with sourcing. Use the host's plan m
 
 3. user reviews, exits plan mode
 
-4. agent: "Save the campaign?
-            Default path: ./<slug-from-name>
-            Override:"
-   user accepts default or provides path
+4. user approves policy-changing decisions
 
-5. folder created
-   plan.md written first as the frozen artifact of the planning conversation
+5. Memory Store record() captures the approved campaign operating profile
 
-6. Memory Store record() with the new campaign thread_id, referencing
-   plan.md, the campaign slug, and any canonical briefs used
+6. agent proposes brief deltas for reusable operating truth
+
+7. create an execution workspace only if the user asks for files, a connector
+   needs import/export, or high-volume review needs a ledger
 ```
 
-The plan is the local campaign contract. Everything downstream reads it. If sourcing or copy drifts, compare back to the plan and the selected canonical briefs. To fork a campaign, copy the folder and edit `plan.md`.
+The canonical state is the selected brief set plus the records that support it. If sourcing or copy drifts, compare back to the GTM Operating Brief, ICP/Persona Brief, Proof and Claims Brief, and Campaign Learning Brief. Use a folder only to run work.
 
-## Folder Layout
+## Workspace Layout
 
 ```
 <campaign-slug>/
-  plan.md                  # approved GTM plan: hypothesis, ICPs,
+  operating-profile.md     # approved GTM policy: hypothesis, ICPs,
                            # connector readiness, policy, routines
   icps/
     <cell-slug>.md         # one ICP cell: persona, criteria, trigger,
@@ -71,8 +69,8 @@ The plan is the local campaign contract. Everything downstream reads it. If sour
 
 ## Naming
 
-- Slug: derive from plan's campaign name. Lowercase, hyphenate, strip non-ASCII. Example: `Memory Store v0.4 — AI GTM teams` → `memory-store-v04-ai-gtm-teams`.
-- Default path: `./<slug>` relative to the user's current working directory at plan-approval time.
+- Slug: derive from the operating profile's campaign name. Lowercase, hyphenate, strip non-ASCII. Example: `Memory Store v0.4 — AI GTM teams` -> `memory-store-v04-ai-gtm-teams`.
+- Default path, if a workspace is needed: `./<slug>` relative to the user's current working directory at approval time.
 - The user may override on first save. Common overrides: `~/memory-store/gtm/<slug>`, a project workspace, or a shared team folder. Whatever they pick, record the absolute path back to Memory Store with the campaign thread_id so future runs can find it.
 
 ## `accounts.csv` Schema
@@ -113,11 +111,17 @@ employee_range, funding_stage, tech_stack_overlap, competitor_overlap,
 prior_thread, suppressed_by, memory_store_thread_id, memory_store_mem_ids
 ```
 
-A row without `personal_email`, `linkedin_profile_url`, or `company_url` is not draft-eligible.
+A row's draft eligibility is channel-specific:
+
+- `draft_eligible_email` requires `personal_email`, `signal_source_url`, `company_url`, and persona/proof/next_action.
+- `draft_eligible_linkedin` requires `linkedin_profile_url`, `signal_source_url`, `company_url`, and persona/proof/next_action.
+- `send_ready` requires at least one eligible channel and the row must pass the planner quality gate.
+
+A row can be `send_ready` via LinkedIn without having a `personal_email`.
 
 ## File Lifecycles
 
-- `plan.md` — written once at folder creation as the approved GTM plan. Updated only when the user re-approves a change; fork the campaign for major pivots.
+- `operating-profile.md` — written once when the workspace is created from the approved GTM operating profile. Updated only when the user re-approves a policy change; fork the campaign for major pivots.
 - `icps/<cell>.md` — written when the ICP cell is approved. Updated as Memory Store learnings refine criteria.
 - `accounts.csv` — appended/updated continuously by Webset and Exa workers. Status column is the source of truth.
 - `signal-cards/<account>.md` — written when row reaches `qualified`. One file per account.
@@ -130,18 +134,18 @@ A row without `personal_email`, `linkedin_profile_url`, or `company_url` is not 
 
 ## Memory Store Boundary
 
-The folder is regenerable. Memory Store is durable. Briefs are sparse synthesis. The split:
+The execution workspace is disposable. Memory Store is durable. Briefs are sparse synthesis. The split:
 
-| Lives in folder | Lives as records in Memory Store | Lives in canonical briefs |
+| Lives in workspace | Lives as records in Memory Store | Lives in canonical briefs |
 |-----------------|----------------------------------|---------------------------|
 | Per-account rows, scores, statuses | Approved ICP changes, persona learnings | Current ICP/persona map |
 | Specific draft copy | Winning copy angles, voice patterns | Current copy/proof policy when stable |
 | Today's signals | Signal source quality over time | Trusted/blocked signal-source rules |
 | Send queue, event log | Objection patterns, suppressions, outcomes | Current suppression and objection policy |
 | Webset/monitor IDs (for round-trip) | Which Websets/monitors paid off | Connector/autopilot operating policy |
-| GTM plan | Campaign outcomes vs. plan hypothesis | GTM operating brief or campaign learning brief |
+| GTM operating profile | Campaign outcomes vs. profile hypothesis | GTM operating brief or campaign learning brief |
 
-If the folder is deleted, the campaign working state is gone but the learnings remain. If Memory Store loses a thread, the folder still has enough execution state to rebuild. If a canonical brief becomes stale, recall the records and update the brief rather than creating a competing brief.
+If the workspace is deleted, connector IDs and records should still preserve the important state. If a canonical brief becomes stale, recall the records and update the brief rather than creating a competing brief.
 
 ## Sharing
 
@@ -149,10 +153,11 @@ If the folder is deleted, the campaign working state is gone but the learnings r
 
 ## Do Not
 
-- Do not start sourcing before `plan.md` exists.
-- Do not start copy before `plan.md` is approved and required connector gates are green.
-- Do not mark a row `send_ready` if it lacks `personal_email`, `linkedin_profile_url`, or a live `signal_source_url`.
+- Do not start sourcing before the campaign operating profile is approved.
+- Do not start copy before the campaign operating profile is approved and required connector gates are green.
+- Do not mark a row `send_ready` unless at least one channel is eligible (`draft_eligible_email` or `draft_eligible_linkedin`) and the row passes the planner quality gate.
 - Do not record per-row state to Memory Store. Record durable learnings only.
-- Do not create a brief per account, source, reply, copy variant, or ICP experiment. Use records and campaign files for those.
+- Do not create a brief per account, source, reply, copy variant, or ICP experiment. Use records and execution workspace files for those.
 - Do not edit `events.jsonl` retroactively. Append corrections as new events.
-- Do not delete a campaign folder without first recording its postmortem to Memory Store.
+- Do not delete an execution workspace without first recording its postmortem to Memory Store.
+- Do not commit seller-specific campaign workspaces to the plugin repo unless they are deliberately curated examples.

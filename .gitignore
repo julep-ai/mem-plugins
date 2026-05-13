@@ -1,3 +1,4 @@
 .DS_Store
 .plugin-eval/
 node_modules/
+campaign-exports/

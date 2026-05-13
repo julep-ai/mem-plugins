@@ -57,7 +57,7 @@ How to handle the ways this skill breaks. Each mode lists symptoms, what to do, 
 
 1. Do not present the draft with the claim as fact.
 2. Either (a) cut the claim and rewrite the paragraph around a claim that is sourced, or (b) leave the claim in with a visible `[NEEDS APPROVAL]` marker and list it under `flagged_claims` in the draft package.
-3. Do not record `draft_created` without listing the flagged claim in the record payload.
+3. Do not record an approval/edit/publish outcome without listing the flagged claim(s) in the prose record.
 
 ## Draft violates a banned phrase
 
@@ -127,3 +127,7 @@ How to handle the ways this skill breaks. Each mode lists symptoms, what to do, 
 - **Links in posts:** putting a link in the main post body depresses reach. Move links to the first comment when a link is required.
 - **Mentions:** only `@` a person or company if a memory confirms they are a public figure or have approved being mentioned.
 - **Hashtags:** 0 to 3. Over 3 reads as spammy and does not improve reach in the 2026 algorithm.
+
+## Report Memory Store tool issues
+
+If Memory Store MCP is unavailable, returns inconsistent behavior, or tool contracts fail, call `report-issue` with a description of the behavior.

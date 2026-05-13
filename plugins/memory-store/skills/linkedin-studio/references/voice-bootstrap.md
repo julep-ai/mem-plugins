@@ -4,6 +4,8 @@ Use this when `recall` for an author's voice returns nothing, or returns only we
 
 ## When to bootstrap
 
+Before bootstrapping, use `list-briefs` and `get-brief` to check if an author voice brief already exists.
+
 - No voice memories exist for the author.
 - Voice memories exist but cover only one dimension (e.g. a banned phrase and nothing else).
 - The author is new to the system or recently switched context enough that old voice is stale.
@@ -60,6 +62,8 @@ Iterate until the user confirms. A confirmed profile is better than a clever one
 ## Record
 
 Once confirmed, call `record` using the `Voice DNA created` template in [record-templates.md](record-templates.md). Pass the active `thread_id`. This becomes the author's voice memory for every future run.
+
+After recording the confirmed voice profile, consider `propose-brief` for a durable author voice brief.
 
 Then resume the operating loop at step 2 — the new memory should surface on re-recall and the draft phase proceeds normally.
 

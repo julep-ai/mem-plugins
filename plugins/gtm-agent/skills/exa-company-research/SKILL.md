@@ -10,6 +10,7 @@ Research companies and markets for Memory Store-backed GTM decisions.
 ## Loop
 
 1. Start with Memory Store `checkin`; use selected canonical brief context if provided by the main GTM agent, otherwise call `list-briefs` and select 0-3 relevant briefs; then recall ICPs, exclusions, prior account history, approved claims, and campaign goal.
+   When invoked directly (not routed by the main GTM Agent skill), also load ../gtm-agent/references/exa-workflows.md, ../gtm-agent/references/signal-sourcing.md, and ../gtm-agent/references/failure-modes.md for production context.
 2. Classify the request: company deep dive, market scan, competitor map, target-account research, news/timing, or profile/team discovery.
 3. Prefer active Exa Search MCP tools at `https://mcp.exa.ai/mcp`: `web_search_advanced_exa`, `web_search_exa`, and `web_fetch_exa`.
 4. Use `web_search_advanced_exa` categories deliberately: `company` for company metadata, `people` for public profiles, and `article` or `news` for timing, launches, announcements, and pain-language sources.

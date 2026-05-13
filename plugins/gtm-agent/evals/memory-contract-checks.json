@@ -3,6 +3,7 @@
     {
       "path": "plugins/gtm-agent/skills/gtm-agent/SKILL.md",
       "snippets": [
+        "references/brief-operating-surface.md",
         "list/select 0-3 relevant canonical briefs",
         "recall product, ICPs, claims",
         "Do not let brief edits replace `record`",
@@ -18,6 +19,14 @@
       ]
     },
     {
+      "path": "plugins/gtm-agent/skills/gtm-agent/references/brief-operating-surface.md",
+      "snippets": [
+        "The GTM product surface is not a repo campaign folder",
+        "briefs = current operating truth",
+        "Create a folder only when the user asks for local files"
+      ]
+    },
+    {
       "path": "plugins/gtm-agent/skills/gtm-agent/references/campaign-engineering.md",
       "snippets": [
         "Memory Store `list-briefs`",
@@ -30,17 +39,17 @@
       "path": "plugins/gtm-agent/skills/gtm-agent/references/learning-loop.md",
       "snippets": [
         "record confirmed learning",
-        "suggest_brief_change",
-        "save_brief_section",
+        "propose-brief",
+        "confirm-brief",
         "The brief is the maintained synthesis; the record is the evidence/event"
       ]
     },
     {
       "path": "plugins/gtm-agent/skills/gtm-agent/references/campaign-folder.md",
       "snippets": [
-        "Sparse canonical briefs are the maintained operating maps",
+        "Not every GTM campaign needs a repo folder",
         "Do not record per-row state to Memory Store",
-        "Do not create a brief per account"
+        "Do not commit seller-specific campaign workspaces"
       ]
     },
     {
@@ -79,15 +88,8 @@
       "path": "plugins/memory-store/skills/memory-store-basics/SKILL.md",
       "snippets": [
         "checkin -> list/select briefs -> recall evidence -> act -> record confirmed learning",
-        "suggest_brief_change",
+        "propose-brief",
         "Do not claim Memory Store learned unless `record` ran"
-      ]
-    },
-    {
-      "path": "campaigns/memory-store-first-gtm/plan.md",
-      "snippets": [
-        "briefs_used:",
-        "brief_delta:"
       ]
     }
   ]

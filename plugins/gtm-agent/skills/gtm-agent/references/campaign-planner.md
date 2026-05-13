@@ -98,7 +98,7 @@ The planner is **seller-agnostic**. Memory Store is the context and learning sub
 Before sourcing, define the active offer profile:
 
 - **campaign mode** - whether this is new, building on previous work, refresh, expansion, rescue, reactivation, or launch/event-driven.
-- **context source base** - Memory Store, uploaded/pasted docs, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets.
+- **context source base** - Memory Store, uploaded/pasted docs, website, Gmail, Calendar, prior records or connector/workspace exports, Exa/Websets.
 - **offer being sold** - exact product, service, package, listing, or thesis.
 - **seller identity** - what the seller is, what motion they run (sales-led, product-led, founder-led, agency, broker, services), and what kind of credibility they bring.
 - **sender persona** - who is speaking and why they have credibility.

@@ -10,6 +10,7 @@ Generate account or recipient lists from a confirmed campaign model. Use Websets
 ## Loop
 
 1. Start with Memory Store `checkin`; use selected canonical brief context if provided by the main GTM agent, otherwise call `list-briefs` and select 0-3 relevant briefs; then recall ICPs, exclusions, winning segments, objections, and prior campaign outcomes.
+   When invoked directly (not routed by the main GTM Agent skill), also load ../gtm-agent/references/signal-sourcing.md, ../gtm-agent/references/enrichment-catalog.md, ../gtm-agent/references/failure-modes.md, and route persistent lists to websets-sourcing for production context.
 2. Confirm campaign mode, ICP cells, target counts, and exclusions before bulk generation.
 3. Verify Exa Search and Websets are authenticated. If not, stop production generation and ask for Exa API key setup.
 4. Use active Exa Search MCP tools: `web_search_advanced_exa`, `web_search_exa`, `web_fetch_exa`. Use advanced categories deliberately for company discovery, people discovery, and article/news evidence. Use `deep_search_exa` or `company_research_exa` only as old-host fallbacks.

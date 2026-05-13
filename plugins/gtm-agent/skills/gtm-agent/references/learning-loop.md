@@ -85,10 +85,9 @@ Do not create overlapping briefs. Prefer updating the existing canonical brief w
 
 When the host exposes low-level Memory Store brief tools, keep the boundary strict:
 
-- Use `get_brief` only for the selected canonical briefs, not as a bulk context dump.
-- Use `suggest_brief_change` for a proposed `brief_delta` before the user approves it.
-- Use `teach_brief` when the user corrects a brief and that correction should both annotate the brief and become durable memory.
-- Use `save_brief` or `save_brief_section` only after the user approves the canonical update or directly asks to edit the brief.
+- Use `get-brief` only for the selected canonical briefs, not as a bulk context dump.
+- Use `propose-brief` for a proposed `brief_delta` before the user approves it.
+- Use `confirm-brief` when the user approves a proposed brief delta or directly asks to update a brief.
 - Continue to call `record` for the confirmed learning itself. The brief is the maintained synthesis; the record is the evidence/event that future recall can retrieve.
 
 Before claiming a brief update landed, verify the tool result, receipt, or session status if the host provides one. If a brief tool fails, record the confirmed learning when appropriate, report the tool issue, and leave the `brief_delta` as pending.
@@ -98,7 +97,7 @@ Before claiming a brief update landed, verify the tool result, receipt, or sessi
 Record confirmed events:
 
 - Campaign or ICP plan approved.
-- First-run GTM plan approved or changed.
+- First-run GTM operating profile approved or changed.
 - Campaign mode or context-source base approved or changed.
 - Uploaded/pasted docs approved as campaign source context.
 - ICP cell added, removed, or reframed.
@@ -137,21 +136,21 @@ Do not record drafts the user never saw, outcomes inferred from silence, guessed
 
 `content`:
 
-> The user approved the GTM campaign system for `<company>` today. Campaign mode: `<plan_new_campaign | start_new_campaign | monitor_campaign | campaign_insights | update_prior_campaign | new_campaign | build_on_previous | refresh_existing | expand_winner | rescue_underperformer | reactivation | event_or_launch>`. Context sources approved: `<Memory Store, uploaded docs, pasted notes, website, Gmail, Calendar, prior campaign artifacts, Exa/Websets>`. Funnel stages being engineered: `<summary>`. ICP system: `<summary>`. Signal system: `<summary>`. Channel system: `<email/LinkedIn policy>`. Learning system: `<summary>`.
+> The user approved the GTM campaign system for `<company>` today. Campaign mode: `<plan_new_campaign | start_new_campaign | monitor_campaign | campaign_insights | update_prior_campaign | new_campaign | build_on_previous | refresh_existing | expand_winner | rescue_underperformer | reactivation | event_or_launch>`. Context sources approved: `<Memory Store, uploaded docs, pasted notes, website, Gmail, Calendar, prior records or connector/workspace exports, Exa/Websets>`. Funnel stages being engineered: `<summary>`. ICP system: `<summary>`. Signal system: `<summary>`. Channel system: `<email/LinkedIn policy>`. Learning system: `<summary>`.
 
 `background`:
 
 > Source context and constraints: `<doc names, memory IDs, URLs, Gmail scope, calendar policy, exclusions, open decisions>`.
 
-### GTM plan approved
+### GTM operating profile approved
 
 `content`:
 
-> The user approved the GTM plan for `<company>` today. Active offer: `<offer>`. Sender: `<sender>`. Demo CTA: `<confirmed link or fallback>`. Autopilot: `<full autopilot | draft-first>` with ramp `<limits>`. Approved ICP cells: `<list>`. Same-company rule: `<rule>`. Followups: `<cadence>`. Stop conditions: `<summary>`.
+> The user approved the GTM operating profile for `<company>` today. Active offer: `<offer>`. Sender: `<sender>`. Demo CTA: `<confirmed link or fallback>`. Autopilot: `<full autopilot | draft-first>` with ramp `<limits>`. Approved ICP cells: `<list>`. Same-company rule: `<rule>`. Followups: `<cadence>`. Stop conditions: `<summary>`.
 
 `background`:
 
-> GTM plan sources and gaps: website `<URL>`, Gmail scope `<scope>`, Google Calendar policy `<policy>`, exclusions `<summary>`, connector gaps `<summary>`.
+> GTM operating-profile sources and gaps: website `<URL>`, Gmail scope `<scope>`, Google Calendar policy `<policy>`, exclusions `<summary>`, connector gaps `<summary>`.
 
 ### Automation routine approved
 

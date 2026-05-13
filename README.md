@@ -1,8 +1,8 @@
 # Memory Store Marketplace
 
-Public Memory Store plugin marketplace for agent-native workflows built by Memory Store. Apache-2.0 licensed and open source — fork it, ship plugins on top of it, learn from it.
+Memory Store plugin marketplace for agent-native workflows built by Memory Store. Apache-2.0 licensed so it can be forked, extended, and used as the reference shape for new Memory Store-backed plugins.
 
-Add this marketplace once, then install the plugin you need. The source repo is `julep-ai/mem-plugins`, but the marketplace identity is Memory Store. The repo exposes multiple installable Memory Store-built plugins from one marketplace.
+Add this marketplace once, then install the plugin you need. The source repo is `MemoryStore/plugins`, but the marketplace identity is Memory Store. The repo exposes multiple installable Memory Store-built plugins from one marketplace.
 
 The core `memory-store` plugin provides Memory Store-native workflows, teaches the Memory Store basics loop, and owns Memory Store MCP auth. `gtm-agent` is a separate installable **GTM engineering agent** — it engineers GTM campaigns and runs them autonomously for **any seller** (software, infrastructure, services, real estate, consumer goods, vertical SaaS, agencies, consulting). The seller's Memory Store is the proactive intelligence layer for agents: it remembers offer, ICPs, customers, competitors, objections, claims, outcomes, obligations, approved rules, and sparse canonical briefs so each new batch is smarter than the last. Install `memory-store` once, then GTM Agent reuses that Memory Store auth instead of prompting again.
 
@@ -37,7 +37,7 @@ Each plugin should read as built by Memory Store. Do not create a new marketplac
 
 ## Installation
 
-Full installation and troubleshooting details are in [docs/INSTALLATION.md](docs/INSTALLATION.md). Connector setup for Memory Store, Exa, Websets, Gmail, and Google Calendar is in [docs/CONNECTORS.md](docs/CONNECTORS.md).
+Full installation and troubleshooting details are in [docs/INSTALLATION.md](docs/INSTALLATION.md). Connector setup for Memory Store, Exa, Websets, Gmail, and Google Calendar is in [docs/CONNECTORS.md](docs/CONNECTORS.md). For a shareable install and builder reproduction guide, see [docs/PLUGIN_INSTALL_AND_REPRODUCTION.md](docs/PLUGIN_INSTALL_AND_REPRODUCTION.md). The operator guide for running GTM Agent with Memory Store, Websets, Attio-style campaign panels, sending rails, and Hermes background routines is in [docs/GTM_AGENT_OPERATING_GUIDE.md](docs/GTM_AGENT_OPERATING_GUIDE.md).
 
 The short version:
 
@@ -53,7 +53,7 @@ If you see `Plugin "gtm-agent" is not installed`, run `claude plugin install gtm
 ### Claude Code
 
 ```bash
-claude plugin marketplace add julep-ai/mem-plugins@main
+claude plugin marketplace add MemoryStore/plugins@main
 claude plugin marketplace update mem-plugins
 claude plugin install memory-store@mem-plugins
 claude plugin install gtm-agent@mem-plugins
@@ -70,7 +70,7 @@ claude plugin list
 ### Codex CLI
 
 ```bash
-codex plugin marketplace add julep-ai/mem-plugins --ref main
+codex plugin marketplace add MemoryStore/plugins
 ```
 
 Then restart Codex or reload plugins. Current Codex CLI builds expose marketplace management from the terminal, but plugin install/enable happens in the Codex plugin UI. Open the plugin directory, select the `Memory Store` marketplace, then install or enable `Memory Store` and `GTM Agent`.
@@ -89,7 +89,7 @@ Cowork has no CLI. Install via the plugin directory:
    ![Cowork: + menu → Plugins → Add plugin](docs/images/cowork-add-plugin-menu.png)
 
 3. In the **Directory** modal, switch to the **Plugins** tab, then the **Personal** sub-tab
-4. Click the **+** next to **Local uploads** and add the marketplace: `julep-ai/mem-plugins`
+4. Click the **+** next to **Local uploads** and add the marketplace: `MemoryStore/plugins`
 5. The `Memory Store` plugin appears in the list — click to install
 
    ![Cowork: Directory showing mem-plugins + sync controls](docs/images/cowork-directory-mem-plugins.png)
@@ -136,9 +136,9 @@ Then restart/reload Codex. The upgraded marketplace root will contain the latest
 
 ## Auto-Updates
 
-Claude Code runs background auto-updates at startup against every registered marketplace. Once you've added `julep-ai/mem-plugins@main`, new plugin versions flow in automatically — no action required from installed users.
+Claude Code runs background auto-updates at startup against every registered marketplace. Once you've added `MemoryStore/plugins@main`, new plugin versions flow in automatically — no action required from installed users.
 
-Because this marketplace is public, no token is needed. If you ever install against a private fork or mirror, export a token so the background update path can authenticate non-interactively:
+For external distribution, `MemoryStore/plugins` must either be public or the installing user must have GitHub access. Private installs, private forks, and private mirrors should export a token so the background update path can authenticate non-interactively:
 
 ```bash
 export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
@@ -163,7 +163,7 @@ Background auto-updates at every client startup will pick up the bump. Manual re
 {
   "extraKnownMarketplaces": {
     "mem-plugins": {
-      "source": { "source": "github", "repo": "julep-ai/mem-plugins" }
+      "source": { "source": "github", "repo": "MemoryStore/plugins" }
     }
   }
 }
@@ -199,7 +199,7 @@ This can be run manually before releases or scheduled as a Codex automation. The
 
 ## Claude Desktop (Not Supported)
 
-Claude Desktop (the claude.ai app) does not have a plugin system. It supports MCP connectors only. Installing this marketplace from Claude Desktop by asking it to "install Memory Store from julep-ai/mem-plugins" will not work — the app will try to fetch the repo and stop there.
+Claude Desktop (the claude.ai app) does not have a plugin system. It supports MCP connectors only. Installing this marketplace from Claude Desktop by asking it to "install Memory Store from MemoryStore/plugins" will not work — the app will try to fetch the repo and stop there.
 
 If you are on Claude Desktop, connect the Memory Store MCP server at `https://memory.store/mcp` as a connector. The agent can then drive the memory loop (`checkin`, `recall`, `record`, `report-issue`), but the `memory-store` plugin skills are not loaded — drafting quality will be lower than in Claude Code or Codex.
 
@@ -296,11 +296,11 @@ GTM loop:
 checkin -> list/select canonical briefs -> recall durable rules/evidence -> context ingestion -> campaign mode -> funnel/ICP system -> campaign planner -> Exa/Websets sourcing -> people search -> signal cards -> approved automation routines -> Gmail autopilot -> Calendar booking context -> engagement -> distill rules/outcomes -> record -> sparse brief deltas -> better targeting
 ```
 
-The campaign engineering layer runs before copy. It classifies whether this is a new campaign, a continuation, a refresh, an expansion, a rescue, a reactivation, or an event/launch campaign; ingests Memory Store, uploaded/pasted docs, prior campaign artifacts, website, Gmail, Calendar, and public context; and maps the funnel system. The planner unit is still `persona + live signal + offer angle + proof path + next action`. A homepage, generic company category, founder title, or website-only scrape is not enough signal to draft.
+The campaign engineering layer runs before copy. It classifies whether this is a new campaign, a continuation, a refresh, an expansion, a rescue, a reactivation, or an event/launch campaign; ingests Memory Store briefs, uploaded/pasted docs, prior records/artifacts, website, Gmail, Calendar, and public context; and maps the funnel system. The planner unit is still `persona + live signal + offer angle + proof path + next action`. A homepage, generic company category, founder title, or website-only scrape is not enough signal to draft.
 
-The first GTM plan is the repeatable GTM engineer onboarding script. It infers from Memory Store, website research, Gmail, and Google Calendar first, then asks only unresolved blockers. The reusable planning questions live in `plugins/gtm-agent/skills/campaign-setup/references/onboarding-questions.md`, the GTM plan contract lives in `plugins/gtm-agent/skills/campaign-setup/references/gtm-plan.md`, and agents can print the GTM plan skeleton with `plugins/gtm-agent/skills/campaign-setup/scripts/render_gtm_plan_template.py`.
+The first GTM operating profile is the repeatable GTM engineer onboarding script. It infers from Memory Store, website research, Gmail, and Google Calendar first, then asks only unresolved blockers. The reusable planning questions live in `plugins/gtm-agent/skills/campaign-setup/references/onboarding-questions.md`, the GTM plan contract lives in `plugins/gtm-agent/skills/campaign-setup/references/gtm-plan.md`, and agents can print the profile skeleton with `plugins/gtm-agent/skills/campaign-setup/scripts/render_gtm_plan_template.py`.
 
-Autopilot is the point of GTM Agent, but it is precise rather than vague. A user engineers the campaign once: offer, sender, ICP cells, signal sources, proof path, CTA, send ramp, stop conditions, routine specs, canonical briefs, and background-worker graph. During that conversation, GTM Agent also distills durable operating memory: rules, preferences, constraints, approval policies, connector expectations, persona decisions, sourcing gates, sparse brief deltas, and skill-improvement candidates. After approval, the host can run recurring goal-scoped automations that spawn bounded workers: daily Websets/monitor review, Gmail reply scan, followup check, daily digest, and weekly Memory Store learning summary. Start with a small ramp, record outcomes, and let future runs use those learnings instead of re-asking or re-sourcing from scratch.
+Autopilot is the point of GTM Agent, but it is precise rather than vague. A user engineers the campaign once: offer, sender, ICP cells, signal sources, proof path, CTA, send ramp, stop conditions, routine specs, canonical briefs, and background-worker graph. During that conversation, GTM Agent distills durable operating memory into records and sparse brief deltas. After approval, the host can run recurring goal-scoped automations that spawn bounded workers: daily Websets/monitor review, Gmail reply scan, followup check, daily digest, and weekly Memory Store learning summary. Local folders are optional execution ledgers for review/import/export, not the product surface. Start with a small ramp, record outcomes, and let future runs use those learnings instead of re-asking or re-sourcing from scratch.
 
 Run it:
 
@@ -319,13 +319,15 @@ Or in free text:
 Set up and run a 1000-recipient GTM autopilot with 20 ICPs, 50 targets each, Exa/Websets sourcing, monitors, Gmail sending/followups, and Memory Store learning.
 ```
 
-For the first GTM plan:
+For the first GTM operating profile:
 
 ```text
-Start GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, define daily/weekly automation routines, build the GTM plan, and ask for plan approval before sending.
+Start GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, define daily/weekly automation routines, build the GTM operating profile, and ask for approval before sending.
 ```
 
-GTM Agent expects Memory Store MCP first. Exa, Websets, Exa Monitors, Gmail, Google Calendar, and host automations make it operational: Exa researches companies and people, Exa advanced search generates structured lead pools, Websets persists verified lists, Monitors keep new high-intent signals flowing, Gmail learns from the current inbox and sends/follows up after plan approval, Google Calendar provides booking context after qualified replies, host automations run the approved routines, and Memory Store records the learning loop. High-scale campaigns may source around 1000 leads/emails per day, but sends remain gated by signal-card quality, suppressions, Gmail health, and the approved ramp.
+GTM Agent expects Memory Store MCP first. Exa, Websets, Exa Monitors, Gmail, Google Calendar, and host automations make it operational: Exa researches companies and people, Exa advanced search generates structured lead pools, Websets persists verified lists, Monitors keep new high-intent signals flowing, Gmail learns from the current inbox and sends/follows up after operating-profile approval, Google Calendar provides booking context after qualified replies, host automations run the approved routines, and Memory Store records the learning loop. High-scale campaigns may source around 1000 leads/emails per day, but sends remain gated by signal-card quality, suppressions, Gmail health, and the approved ramp.
+
+For the operating model across campaign panels, PLG signals, Hermes background goals, and alternate sending rails such as Agent Mail or Resend, see [docs/GTM_AGENT_OPERATING_GUIDE.md](docs/GTM_AGENT_OPERATING_GUIDE.md).
 
 ## Local Testing
 

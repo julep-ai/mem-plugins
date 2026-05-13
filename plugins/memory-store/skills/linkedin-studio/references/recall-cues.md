@@ -2,6 +2,8 @@
 
 Memory Store abstracts upstreams. Treat `recall` as the sole interface to company context. Do not assume Slack, Granola, Fireflies, or any specific source — a recall result is just a memory.
 
+Before recalling raw evidence, check whether selected brand/voice/editorial briefs already provide canonical synthesis. Use `list-briefs` and `get-brief` for that.
+
 ## Cue patterns
 
 Use narrow, concrete cues. Each recall call should aim at one thing, not five. Combine cues across two or three calls rather than stuffing one.
@@ -103,7 +105,7 @@ If a voice recall returns nothing:
 If a source recall returns nothing:
 
 1. Broaden the time window once.
-2. Swap the format cue: if `customer story` returned nothing, try `customer quote`, `customer conversation`, or `customer Slack`.
+2. Swap the format cue: if `customer story` returned nothing, try `customer quote`, `customer conversation`, or `customer thread`.
 3. If still empty for every candidate format, tell the user recall is dry and ask for a seed (a customer name, a feature, a recent conversation). Do not invent source material.
 
 If `checkin` itself fails:

@@ -26,10 +26,10 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 
 - Start with Memory Store `checkin`, then list/select 0-3 relevant canonical briefs, then recall product, ICPs, claims, objections, exclusions, prior campaigns, and approved GTM plan.
 - Treat briefs as sparse operating maps and `recall` as the evidence engine. Do not create a brief for every lead, account, source, reply, draft, brainstorm, or transient campaign note.
-- If low-level Memory Store brief tools are available, use them deliberately: `get_brief` only for selected briefs, `suggest_brief_change` for proposed deltas, and `teach_brief`, `save_brief`, or `save_brief_section` only after approval or direct instruction. Do not let brief edits replace `record`.
+- If low-level Memory Store brief tools are available, use them deliberately: `get-brief` only for selected briefs, `propose-brief` for proposed deltas, and `confirm-brief` only after approval or direct instruction. Do not let brief edits replace `record`.
 - For Memory Store-owned campaigns, mine existing Memory Store consumers before proposing ICPs: paid customers, power users, triers, internal dogfood users, passive-ingest workspaces, customer failures, and prior GTM plans. Each ICP cell must cite the remembered customer/user pattern that created it. Generic category pools are invalid until mapped to a real usage pattern.
 - If the GTM plan is missing, first-run, or autopilot policy is unclear, route to `campaign-setup`.
-- Before sourcing or copy, load `references/campaign-engineering.md` and `references/campaign-planner.md`.
+- Before sourcing or copy, load `references/brief-operating-surface.md`, `references/campaign-engineering.md`, and `references/campaign-planner.md`.
 - Parallelize by default with `references/parallel-routines.md`; split ICP cells, signal families, Webset batches, people search, evidence cards, copy angles, Gmail batches, monitor specs, and learning synthesis into bounded workers.
 - Treat autopilot as plan-once execution: after approval, run precise async routines from `references/automation-routines.md` with goal, cadence, allowed actions, forbidden actions, stop conditions, output, and Memory Store record policy.
 - Treat Memory Store as proactive intelligence and long-term operating memory: distill user rules, corrections, plan decisions, approval policies, campaign outcomes, sparse brief deltas, and skill-improvement candidates through `references/learning-loop.md`.
@@ -42,18 +42,18 @@ A campaign can initialize without Exa, Websets, Gmail, or Monitors so the user c
 
 ## Loop
 
-0. **Plan first.** If no campaign folder exists or the user is starting fresh, enter the host's plan mode (Claude Code, Codex, Cowork) and co-write the proposed plan with the user — name, hypothesis, offer, ICPs (including at least one unconventional persona from `references/campaign-planner.md` Persona Discovery), scale, success criteria, exclusions, signal sources, send ramp, stop conditions. Before plan approval, do not create folders or record a campaign thread unless the user explicitly asks to save a draft. After the user approves or asks to persist it, ask where to save (default: `./<slug-from-name>`), create the campaign folder, write `plan.md` first, and record the campaign thread to Memory Store. See `references/campaign-folder.md`.
+0. **Plan first.** If the user is starting fresh or changing campaign policy, co-write the GTM operating profile with the user — name, hypothesis, offer, ICPs (including at least one unconventional persona from `references/campaign-planner.md` Persona Discovery), scale, success criteria, exclusions, signal sources, send ramp, stop conditions, record policy, and brief delta policy. Before approval, do not record a campaign thread or create execution artifacts unless the user explicitly asks to save a draft. After approval, record the campaign policy to Memory Store and propose sparse brief deltas for reusable operating truth. Create a local execution workspace only when the user asks for files, a connector needs import/export files, or high-volume review requires a ledger. See `references/brief-operating-surface.md` and `references/campaign-folder.md`.
 1. Check in, list/select 0-3 relevant briefs, read selected briefs only when needed, and recall supporting context.
 2. Classify campaign mode and context sources: plan, start, monitor, insights, update, refresh, expand, rescue, reactivate, or event/launch.
 3. Map funnel, ICP, signal, proof, execution, and learning systems.
 4. Mine customer stories, current consumer patterns, prior outcomes, activation gaps, and failed/weak accounts for persona hypotheses, proof paths, useful objections, and segment language. For Memory Store itself, start from actual consumers/customers before public-market extrapolation.
 5. Build the campaign unit: `persona + high-intent signal + offer angle + proof path + next action + learning intent`.
 6. Create the worker graph and connector plan, including production/degraded mode status for Exa, Websets, Gmail, Monitors, and Calendar.
-7. Source, enrich, score, and dedupe evidence cards into `campaigns/<slug>/accounts.csv` and `signal-cards/`.
-8. Draft only rows that pass the planner gate; write to `copy/<account>.md`.
-9. Apply plan approval, send ramp, followup cadence, channel policy, suppressions, and stop conditions; track in `sends.csv`.
-10. Create or propose routines for monitors, Websets refreshes, Gmail scans, followups, digests, and weekly learning. Persist `monitors.json` and `events.jsonl`.
-11. Distill durable rules, outcomes, and any sparse canonical brief deltas through `references/learning-loop.md`, then record only approved or confirmed learnings through Memory Store at the main-agent layer (workers do not record). Append each call to `learnings.md`.
+7. Source, enrich, score, and dedupe into Websets, connector-native queues, or a temporary execution workspace when volume requires files.
+8. Draft only rows that pass the planner gate; keep drafts in Gmail, the host review queue, or a temporary copy workspace.
+9. Apply plan approval, send ramp, followup cadence, channel policy, suppressions, and stop conditions; track execution in the connector or workspace ledger.
+10. Create or propose routines for monitors, Websets refreshes, Gmail scans, followups, digests, and weekly learning. Persist IDs in records and briefs only when they become reusable operating state.
+11. Distill durable rules, outcomes, and any sparse canonical brief deltas through `references/learning-loop.md`, then record only approved or confirmed learnings through Memory Store at the main-agent layer (workers do not record).
 
 ## Output
 
@@ -79,7 +79,7 @@ Infer first, ask only blockers: company/product, campaign mode, context sources,
 ## Reference Loading Map
 
 - GTM plan missing or approval unclear: use `campaign-setup` plus `references/failure-modes.md`.
-- New plan or saved campaign artifacts: `references/campaign-engineering.md`, `references/campaign-planner.md`, `references/campaign-folder.md`.
+- New plan or execution workspace: `references/brief-operating-surface.md`, `references/campaign-engineering.md`, `references/campaign-planner.md`, and `references/campaign-folder.md`.
 - Sourcing, lead generation, enrichment, or signals: `references/exa-workflows.md`, `references/signal-sourcing.md`, `references/enrichment-catalog.md`; route persistent lists to `websets-sourcing`.
 - Copy or sequences: `references/campaign-planner.md`, `references/copy-and-sequences.md`, and `references/failure-modes.md`.
 - Monitoring or recurring work: `references/automation-routines.md`, `references/monitors.md`, and `references/parallel-routines.md`.

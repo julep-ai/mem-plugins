@@ -22,7 +22,7 @@ GTM Agent does **not** redeclare Memory Store MCP in its own `.mcp.json`. That a
 
 Memory Store is the proactive intelligence layer and long-term operating memory for the GTM plugin. GTM Agent should use `checkin`, `list-briefs`, and `recall` before acting: briefs provide sparse canonical maps, while recall retrieves supporting evidence. After approval or confirmed execution, use `record` to persist setup rules, preferences, constraints, connector policy, persona/sourcing decisions, outcomes, sparse brief deltas, and skill-improvement candidates. Future runs should use those records and briefs to surface relevant context, continue approved routines, and avoid re-asking.
 
-When a host also exposes low-level brief tools, use them as controlled brief-edit operations: `get_brief` for selected briefs, `suggest_brief_change` for pending deltas, `teach_brief` for explicit brief corrections, and `save_brief` or `save_brief_section` only after approval. These tools do not replace `record`; the record remains the durable evidence stream beneath the brief.
+When a host also exposes low-level brief tools, use them as controlled brief-edit operations: `get-brief` for selected briefs, `propose-brief` for pending deltas, and `confirm-brief` for approved brief updates. These tools do not replace `record`; the record remains the durable evidence stream beneath the brief.
 
 ## Get an Exa API key
 

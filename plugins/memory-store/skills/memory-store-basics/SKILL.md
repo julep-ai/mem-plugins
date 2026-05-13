@@ -20,16 +20,19 @@ Memory Store MCP provides:
 - `list-briefs` - see maintained synthesis documents available to the agent.
 - `record` - store confirmed learnings, rules, decisions, corrections, and outcomes.
 - `report-issue` - report broken Memory Store behavior when the user asks or the tool behaves unexpectedly.
+- `get-brief` - read one selected brief when its summary is not enough.
+- `propose-brief` - stage a proposed brief delta without claiming the brief changed.
+- `confirm-brief` - apply an approved brief proposal or direct approved canonical edit.
 
 Tool names may be namespaced by the host. Use the operation names, not exact host-specific names, in user-facing explanations.
 
-Some hosts also expose lower-level brief tools. Treat them as edit controls over the brief layer, not as substitutes for `record`:
+Some hosts also expose brief tools. Treat them as edit controls over the brief layer, not as substitutes for `record`:
 
-- `get_brief` - read one selected brief when its summary is not enough.
-- `suggest_brief_change` - attach a proposed delta without claiming the brief changed.
-- `teach_brief` - save an explicit correction on a brief and teach it back to memory.
-- `save_brief` or `save_brief_section` - create or edit a canonical brief only after approval or when the user directly asked for the edit.
-- `set_brief_pin`, `share_brief`, `archive_brief`, and related controls - use only when the user asks to change surfacing, sharing, or lifecycle.
+- `get-brief` - read one selected brief when its summary is not enough.
+- `propose-brief` - stage a proposed delta without claiming the brief changed.
+- `confirm-brief` - apply an approved proposal after user approval or direct instruction.
+
+The brief editing lifecycle is propose -> approve -> confirm: use `propose-brief` for unapproved deltas, then use `confirm-brief` only after the user approves the proposal or directly asks for the canonical edit.
 
 If a low-level brief tool stages work behind receipts or sessions, verify the receipt/session status before saying the edit landed. If it fails, continue with `record`/`recall` when possible and report the issue when appropriate.
 
@@ -98,7 +101,7 @@ Keep the brief compact. It should point to evidence instead of copying every det
 5. **Recall evidence.** Use focused `recall` calls for supporting memories, exact decisions, source IDs, customer language, or current facts.
 6. **Act.** Do the requested work using the selected brief(s) plus recalled evidence.
 7. **Record confirmed learning.** Call `record` only for confirmed rules, decisions, corrections, outcomes, or reusable learnings. Pass the active `thread_id`.
-8. **Propose brief updates sparingly.** If the new learning changes operating truth, propose the specific brief delta. If the host exposes brief-editing tools, prefer `suggest_brief_change` for unapproved deltas and use `save_brief`, `save_brief_section`, or `teach_brief` only after approval or direct instruction.
+8. **Propose brief updates sparingly.** If the new learning changes operating truth, propose the specific brief delta. If the host exposes brief-editing tools, use `propose-brief` for unapproved deltas and use `confirm-brief` only after approval or direct instruction.
 9. **Report issues.** If Memory Store tools return inconsistent or broken behavior and the user wants it reported, call `report-issue`.
 
 ## Brief Selection Heuristic

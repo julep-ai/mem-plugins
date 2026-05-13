@@ -13,6 +13,8 @@ The marketplace currently contains these installable plugins:
 
 Install the marketplace once. Then install the plugin you want from that marketplace.
 
+The source repository is `MemoryStore/plugins`. For external distribution, that repository must either be public or the installing user must have GitHub access. Private installs should set `GITHUB_TOKEN` or `GH_TOKEN` before relying on background updates.
+
 ## Claude Code
 
 ### First-Time Install
@@ -20,7 +22,7 @@ Install the marketplace once. Then install the plugin you want from that marketp
 Add or refresh the marketplace:
 
 ```bash
-claude plugin marketplace add julep-ai/mem-plugins@main
+claude plugin marketplace add MemoryStore/plugins@main
 claude plugin marketplace update mem-plugins
 ```
 
@@ -96,7 +98,7 @@ Current Codex CLI builds manage marketplaces from the terminal, but plugin insta
 ### First-Time Marketplace Add
 
 ```bash
-codex plugin marketplace add julep-ai/mem-plugins --ref main
+codex plugin marketplace add MemoryStore/plugins
 ```
 
 Then restart/reload Codex, open the plugin UI, choose the `Memory Store` marketplace, and install or enable:
@@ -142,7 +144,7 @@ Required Memory Store operations:
 
 GTM Agent uses Memory Store as a proactive intelligence layer with long-term memory for agents, not just recall. During planning and execution it should select sparse canonical briefs, recall supporting evidence, and distill approved rules, user corrections, approval policies, connector expectations, persona decisions, sourcing gates, outcomes, sparse brief deltas, and skill-improvement candidates into Memory Store records so future runs inherit them, surface relevant context, and continue approved routines.
 
-If the host exposes low-level brief-editing tools, GTM Agent should use them only after the sparse-brief gate passes: read selected briefs with `get_brief`, attach pending deltas with `suggest_brief_change`, teach explicit corrections with `teach_brief`, and save canonical brief or section edits only after approval. Most campaign execution events should still become records, not brief edits.
+If the host exposes low-level brief-editing tools, GTM Agent should use them only after the sparse-brief gate passes: read selected briefs with `get-brief`, attach pending deltas with `propose-brief`, and confirm approved brief changes with `confirm-brief`. Most campaign execution events should still become records, not brief edits.
 
 `gtm-agent` can additionally use:
 
@@ -182,12 +184,12 @@ Recommended first run:
 ```text
 /gtm-agent:campaign-setup
 
-Start GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, define daily/weekly automation routines, build the GTM plan, and ask for plan approval before sending.
+Start GTM Agent autopilot. Recall Memory Store context, research our website and demo CTA, learn from Gmail, define Google Calendar booking policy, define daily/weekly automation routines, build the GTM operating profile, and ask for approval before sending.
 ```
 
-GTM Agent should send only after the GTM plan is approved. Autopilot means approved, goal-scoped asynchronous routines; it does not mean hidden bulk sending. The planner still needs a complete campaign unit: `persona + live signal + offer angle + proof path + next action`.
+GTM Agent should send only after the GTM operating profile is approved. Autopilot means approved, goal-scoped asynchronous routines; it does not mean hidden bulk sending. The planner still needs a complete campaign unit: `persona + live signal + offer angle + proof path + next action`.
 
-The first-plan flow is reusable, not ad hoc. GTM Agent should infer from Memory Store, website research, Gmail, and Google Calendar first, then ask only unresolved blockers. The onboarding questions live in `plugins/gtm-agent/skills/campaign-setup/references/onboarding-questions.md`, the GTM plan contract lives in `plugins/gtm-agent/skills/campaign-setup/references/gtm-plan.md`, and the GTM plan skeleton can be printed with:
+The first operating-profile flow is reusable, not ad hoc. GTM Agent should infer from Memory Store, website research, Gmail, and Google Calendar first, then ask only unresolved blockers. The onboarding questions live in `plugins/gtm-agent/skills/campaign-setup/references/onboarding-questions.md`, the GTM plan contract lives in `plugins/gtm-agent/skills/campaign-setup/references/gtm-plan.md`, and the profile skeleton can be printed with:
 
 ```bash
 python3 plugins/gtm-agent/skills/campaign-setup/scripts/render_gtm_plan_template.py
@@ -201,12 +203,12 @@ Start small and make every routine precise:
 2. Install `gtm-agent`.
 3. Configure Exa Search and Websets with a real Exa API key.
 4. Authorize Gmail and Google Calendar if the host supports them.
-5. Run `/gtm-agent:campaign-setup` to produce the first GTM plan.
-6. Approve the GTM plan: campaign mode, context sources, canonical briefs used, funnel system, offer, sender, CTA, ICP cells, claims, send ramp, followups, suppressions, stop conditions, routine specs, memory distillation items, sparse brief deltas, and background-worker graph.
+5. Run `/gtm-agent:campaign-setup` to produce the first GTM operating profile.
+6. Approve the GTM operating profile: campaign mode, context sources, canonical briefs used, funnel system, offer, sender, CTA, ICP cells, claims, send ramp, followups, suppressions, stop conditions, routine specs, memory distillation items, sparse brief deltas, and background-worker graph.
 7. Run a small pilot, usually day 1 max 10 sends.
 8. Turn approved recurring work into automations: daily Websets/monitor review, Gmail reply scan, followup check, daily digest, and weekly Memory Store learning summary.
 
-Each automation needs one goal, one cadence, one Memory Store thread/context, required tools, allowed actions, forbidden actions, stop conditions, expected output, and the background workers it should spawn. Codex can run these as recurring automations; Claude Code, Claude Cowork, and OpenCode should use their host scheduling mechanism when available or run the same routine prompt manually until scheduling is exposed.
+Each automation needs one goal, one cadence, one Memory Store thread/context, required tools, allowed actions, forbidden actions, stop conditions, expected output, and the background workers it should spawn. Local folders are optional execution ledgers for review/import/export, not the GTM Agent product surface. Codex can run these as recurring automations; Claude Code, Claude Cowork, and OpenCode should use their host scheduling mechanism when available or run the same routine prompt manually until scheduling is exposed.
 
 After Memory Store is installed, these skills are available:
 

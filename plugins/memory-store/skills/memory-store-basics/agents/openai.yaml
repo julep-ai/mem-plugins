@@ -1,4 +1,4 @@
 interface:
   display_name: "Memory Store Basics"
   short_description: "Use Memory Store with sparse briefs and recall"
-  default_prompt: "Check in with Memory Store, select relevant canonical briefs, recall supporting evidence, and tell me what should be recorded or updated."
+  default_prompt: "Check in with Memory Store, select relevant canonical briefs, recall supporting evidence, and tell me what should be recorded or proposed as a brief update."
